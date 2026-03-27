@@ -1,6 +1,6 @@
 # Suggested Supabase / Postgres Schema (MVP)
 
-This document proposes a simple, dashboard-centric schema for the MVP entities:
+This document proposes a simple, dashboard-centric schema for the MVP entities FOR NOW:
 `Employee`, `OnboardingTask`, `TrainingRecord`, `Trigger`, `GeneratedDocument`.
 
 ## Conventions
