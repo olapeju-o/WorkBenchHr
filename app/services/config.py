@@ -18,7 +18,7 @@ class Settings(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    anthropic_api_key: str = Field(..., min_length=1)
+    anthropic_api_key: str | None = None
     supabase_url: str = Field(..., min_length=1)
     supabase_key: str = Field(..., min_length=1)
 
@@ -36,8 +36,6 @@ def get_settings() -> Settings:
     supabase_key = os.getenv("SUPABASE_KEY", "").strip()
 
     missing = []
-    if not anthropic_api_key:
-        missing.append("ANTHROPIC_API_KEY")
     if not supabase_url:
         missing.append("SUPABASE_URL")
     if not supabase_key:
@@ -50,7 +48,7 @@ def get_settings() -> Settings:
         )
 
     return Settings(
-        anthropic_api_key=anthropic_api_key,
+        anthropic_api_key=anthropic_api_key or None,
         supabase_url=supabase_url,
         supabase_key=supabase_key,
     )
