@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { publicAsset } from "@/lib/publicAsset";
 
 type Props = {
   /** Pass `null` for a static (non-link) brand row */
@@ -17,7 +18,7 @@ export function BrandMark({
   const inner = (
     <>
       <img
-        src="/branding/logo.png"
+        src={publicAsset("/branding/logo.png")}
         width={size}
         height={size}
         alt=""

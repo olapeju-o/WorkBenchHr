@@ -7,6 +7,7 @@ import {
   type CreateDocCategoryId,
   type CreateDocFilter,
 } from "../data/createDocumentCategories";
+import { publicAsset } from "../lib/publicAsset";
 
 export function CreateDocumentSelectTemplatePage() {
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ export function CreateDocumentSelectTemplatePage() {
                 >
                   <span className="wb-create-doc__card-icon" aria-hidden>
                     <img
-                      src={iconSrc}
+                      src={publicAsset(iconSrc)}
                       alt=""
                       width={24}
                       height={24}

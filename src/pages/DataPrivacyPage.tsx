@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { SkipForNow } from "../components/SkipForNow";
+import { publicAsset } from "../lib/publicAsset";
 
 const items = [
   {
@@ -47,7 +48,7 @@ export function DataPrivacyPage() {
         {items.map((item) => (
           <li key={item.title} className="wb-privacy-card">
             <div className="wb-privacy-card__icon" aria-hidden>
-              <img src={item.image} alt="" width={40} height={40} decoding="async" />
+              <img src={publicAsset(item.image)} alt="" width={40} height={40} decoding="async" />
             </div>
             <div>
               <h3 className="wb-privacy-card__title">{item.title}</h3>

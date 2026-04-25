@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { publicAsset } from "../lib/publicAsset";
 
 const optOutCards = [
   {
@@ -46,7 +47,7 @@ export function OnboardingOptOutConfirmPage() {
         {optOutCards.map((card) => (
           <li key={card.image} className="wb-optout__card">
             <div className="wb-optout__card-icon" aria-hidden>
-              <img src={card.image} alt="" width={28} height={28} decoding="async" />
+              <img src={publicAsset(card.image)} alt="" width={28} height={28} decoding="async" />
             </div>
             <p className="wb-optout__card-text">{card.body}</p>
           </li>
