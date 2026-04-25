@@ -555,6 +555,61 @@ export function DashboardPage() {
           </div>
       </section>
 
+      <section className="wb-dash-home wb-dash-home--overview" aria-labelledby="dash-overview-heading">
+          <h2 className="wb-dash-home__overview-title" id="dash-overview-heading">
+            Overview
+          </h2>
+          <div className="wb-dash-home__stat-grid">
+            <article className="wb-dash-stat">
+              <div className="wb-dash-stat__top">
+                <span className="wb-dash-stat__label">Active employees</span>
+                <span className="wb-dash-stat__pill wb-dash-stat__pill--up">+3 this month</span>
+              </div>
+              <p className="wb-dash-stat__value">21</p>
+              <svg className="wb-dash-stat__spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden>
+                <path
+                  d="M0 28 L20 24 L40 26 L60 14 L80 18 L100 8 L120 4"
+                  fill="none"
+                  stroke="var(--dash-accent)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <p className="wb-dash-stat__foot">14 full-time · 5 part-time · 2 interns</p>
+            </article>
+
+            <article className="wb-dash-stat">
+              <div className="wb-dash-stat__top">
+                <span className="wb-dash-stat__label">Active job listings</span>
+              </div>
+              <p className="wb-dash-stat__value">4</p>
+              <p className="wb-dash-stat__hint">2 new applicants today.</p>
+              <p className="wb-dash-stat__foot">Head Chef · 2 Cashiers · Kitchen Staff</p>
+            </article>
+
+            <article className="wb-dash-stat">
+              <div className="wb-dash-stat__top">
+                <span className="wb-dash-stat__label">Avg. time to hire</span>
+                <span className="wb-dash-stat__pill wb-dash-stat__pill--up">
+                  <span aria-hidden>↓</span> 4 days faster
+                </span>
+              </div>
+              <p className="wb-dash-stat__value">18 days</p>
+              <p className="wb-dash-stat__foot">Industry benchmark: 24 days</p>
+            </article>
+
+            <article className="wb-dash-stat">
+              <div className="wb-dash-stat__top">
+                <span className="wb-dash-stat__label">Upcoming time off</span>
+                <span className="wb-dash-stat__pill wb-dash-stat__pill--alert">Coverage gap Apr 28</span>
+              </div>
+              <p className="wb-dash-stat__value">7</p>
+              <p className="wb-dash-stat__foot">3 pending · 4 approved this week</p>
+            </article>
+          </div>
+      </section>
+
       <section className="wb-dash-panel" aria-labelledby="dash-hiring-heading">
           <div className="wb-dash-panel__head">
             <h2 className="wb-dash-panel__title" id="dash-hiring-heading">
@@ -660,61 +715,6 @@ export function DashboardPage() {
               </li>
             ))}
           </ul>
-      </section>
-
-      <section className="wb-dash-home wb-dash-home--overview" aria-labelledby="dash-overview-heading">
-          <h2 className="wb-dash-home__overview-title" id="dash-overview-heading">
-            Overview
-          </h2>
-          <div className="wb-dash-home__stat-grid">
-            <article className="wb-dash-stat">
-              <div className="wb-dash-stat__top">
-                <span className="wb-dash-stat__label">Active employees</span>
-                <span className="wb-dash-stat__pill wb-dash-stat__pill--up">+3 this month</span>
-              </div>
-              <p className="wb-dash-stat__value">21</p>
-              <svg className="wb-dash-stat__spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden>
-                <path
-                  d="M0 28 L20 24 L40 26 L60 14 L80 18 L100 8 L120 4"
-                  fill="none"
-                  stroke="var(--dash-accent)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <p className="wb-dash-stat__foot">14 full-time · 5 part-time · 2 interns</p>
-            </article>
-
-            <article className="wb-dash-stat">
-              <div className="wb-dash-stat__top">
-                <span className="wb-dash-stat__label">Active job listings</span>
-              </div>
-              <p className="wb-dash-stat__value">4</p>
-              <p className="wb-dash-stat__hint">2 new applicants today.</p>
-              <p className="wb-dash-stat__foot">Head Chef · 2 Cashiers · Kitchen Staff</p>
-            </article>
-
-            <article className="wb-dash-stat">
-              <div className="wb-dash-stat__top">
-                <span className="wb-dash-stat__label">Avg. time to hire</span>
-                <span className="wb-dash-stat__pill wb-dash-stat__pill--up">
-                  <span aria-hidden>↓</span> 4 days faster
-                </span>
-              </div>
-              <p className="wb-dash-stat__value">18 days</p>
-              <p className="wb-dash-stat__foot">Industry benchmark: 24 days</p>
-            </article>
-
-            <article className="wb-dash-stat">
-              <div className="wb-dash-stat__top">
-                <span className="wb-dash-stat__label">Upcoming time off</span>
-                <span className="wb-dash-stat__pill wb-dash-stat__pill--alert">Coverage gap Apr 28</span>
-              </div>
-              <p className="wb-dash-stat__value">7</p>
-              <p className="wb-dash-stat__foot">3 pending · 4 approved this week</p>
-            </article>
-          </div>
       </section>
     </>
   );

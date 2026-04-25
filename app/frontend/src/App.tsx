@@ -7,6 +7,7 @@ import { DataManagementSyncPage } from "./pages/DataManagementSyncPage";
 import { RolesPermissionsPage } from "./pages/RolesPermissionsPage";
 import { SettingsTriggerNotificationsPage } from "./pages/SettingsTriggerNotificationsPage";
 import { SettingsPlaceholderPage } from "./pages/SettingsPlaceholderPage";
+import { SettingsHelpSupportPage } from "./pages/SettingsHelpSupportPage";
 import { SettingsProfilePage } from "./pages/SettingsProfilePage";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { LoginPage } from "./pages/LoginPage";
@@ -91,6 +92,7 @@ export default function App() {
           path="security"
           element={<SettingsPlaceholderPage title="Password & Security" />}
         />
+        <Route path="help" element={<SettingsHelpSupportPage />} />
         <Route index element={<Navigate to="profile" replace />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

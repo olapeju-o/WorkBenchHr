@@ -1,5 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { BrandMark } from "../components/BrandMark";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const nav = [
   { to: "/settings/profile", label: "Profile", end: true, badge: 2 },
@@ -30,7 +29,12 @@ export function SettingsLayout() {
     <div className="wb-settings-shell">
       <aside className="wb-settings-nav">
         <div className="wb-settings-nav__head">
-          <BrandMark to="/" size={36} wordmarkClassName="wb-settings-nav__brand-text" />
+          <Link to="/dashboard" className="wb-settings-back-dashboard">
+            <span className="wb-settings-back-dashboard__arrow" aria-hidden>
+              ←
+            </span>
+            <span>Back to dashboard</span>
+          </Link>
         </div>
         <p className="wb-settings-nav__section-label">Settings</p>
         <nav className="wb-settings-nav__list" aria-label="Settings">
@@ -51,9 +55,14 @@ export function SettingsLayout() {
           ))}
         </nav>
         <div className="wb-settings-nav__foot">
-          <a href="#help" className="wb-settings-link wb-settings-link--ghost">
+          <NavLink
+            to="/settings/help"
+            className={({ isActive }) =>
+              `wb-settings-link wb-settings-link--ghost${isActive ? " wb-settings-link--active" : ""}`
+            }
+          >
             Help &amp; Support
-          </a>
+          </NavLink>
         </div>
       </aside>
       <div className="wb-settings-main">

@@ -1,4 +1,6 @@
-import { useId, useState } from "react";
+import { FormEvent, useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
 
 const PHONE_COUNTRIES = [
   { id: "us", dial: "+1", flag: "🇺🇸", name: "United States" },
@@ -13,7 +15,124 @@ const PHONE_COUNTRIES = [
   { id: "br", dial: "+55", flag: "🇧🇷", name: "Brazil" },
 ] as const;
 
+function DeleteAccountConfirmModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const navigate = useNavigate();
+  const titleId = useId();
+  const passwordId = useId();
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    setPassword("");
+    setError(null);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const p = password.trim();
+    if (!p) {
+      setError("Enter your password to confirm account deletion.");
+      return;
+    }
+    setError(null);
+    onClose();
+    navigate("/login", { replace: true });
+  };
+
+  if (!open || typeof document === "undefined") return null;
+
+  return createPortal(
+    <div className="wb-dash-reminder wb-profile-delete-modal" role="presentation">
+      <button type="button" className="wb-dash-reminder__backdrop" onClick={onClose} aria-label="Close" />
+      <div
+        className="wb-dash-reminder__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={`${titleId}-desc`}
+      >
+        <div className="wb-dash-reminder__head">
+          <h2 className="wb-dash-reminder__title" id={titleId}>
+            Delete your account?
+          </h2>
+          <button type="button" className="wb-dash-reminder__close" onClick={onClose} aria-label="Close dialog">
+            ×
+          </button>
+        </div>
+        <p className="wb-dash-reminder__lede" id={`${titleId}-desc`}>
+          This action is permanent. Please read the following before you continue.
+        </p>
+        <div className="wb-profile-delete-warning" role="alert">
+          <strong>Warning</strong>
+          <ul>
+            <li>Your Workbench HR access for this organization will end immediately.</li>
+            <li>Personal settings, notifications, and activity tied to this login may be removed.</li>
+            <li>This cannot be undone from your side once the account is deleted.</li>
+          </ul>
+        </div>
+        <p className="wb-dash-reminder__lede wb-profile-delete-modal__hint">
+          If you still want to delete your account, type your <strong>password</strong> below to confirm it is really
+          you.
+        </p>
+        <form onSubmit={handleSubmit}>
+          <div className="wb-profile-delete-modal__field">
+            <label className="wb-profile-delete-modal__label" htmlFor={passwordId}>
+              Password
+            </label>
+            <input
+              id={passwordId}
+              type="password"
+              className="wb-input"
+              autoComplete="current-password"
+              value={password}
+              onChange={(ev) => {
+                setPassword(ev.target.value);
+                if (error) setError(null);
+              }}
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? `${passwordId}-err` : undefined}
+            />
+            {error ? (
+              <p className="wb-profile-delete-modal__error" id={`${passwordId}-err`} role="alert">
+                {error}
+              </p>
+            ) : null}
+          </div>
+          <div className="wb-profile-delete-modal__actions">
+            <button type="button" className="wb-btn wb-btn--muted" onClick={onClose}>
+              Cancel
+            </button>
+            <button type="submit" className="wb-btn wb-btn--danger-outline">
+              Delete my account
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 export function SettingsProfilePage() {
+  const navigate = useNavigate();
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
   return (
     <div className="wb-profile">
       <div className="wb-profile__banner">
@@ -62,15 +181,25 @@ export function SettingsProfilePage() {
 
       <footer className="wb-profile__footer">
         <div className="wb-profile__danger">
-          <button type="button" className="wb-btn wb-btn--outline">
-            Logout
+          <button
+            type="button"
+            className="wb-btn wb-btn--outline"
+            onClick={() => navigate("/login", { replace: true })}
+          >
+            Sign out
           </button>
-          <button type="button" className="wb-btn wb-btn--danger-outline">
+          <button
+            type="button"
+            className="wb-btn wb-btn--danger-outline"
+            onClick={() => setDeleteModalOpen(true)}
+          >
             Delete Account
           </button>
         </div>
         <p className="wb-profile__last-login">Last Login: 03/29/2026 7:10AM EST</p>
       </footer>
+
+      <DeleteAccountConfirmModal open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)} />
     </div>
   );
 }

@@ -1,14 +1,3 @@
-function EatuniqueBrand() {
-  return (
-    <header className="wb-roles-page__hero">
-      <div className="wb-company-mark" aria-hidden>
-        <span className="wb-company-mark__text">eatunique</span>
-      </div>
-      <span className="wb-roles-page__brand-name">eatunique</span>
-    </header>
-  );
-}
-
 const fullAccessUsers = [
   {
     id: "1",
@@ -42,8 +31,6 @@ const viewOnlyUsers = [
 export function RolesPermissionsPage() {
   return (
     <div className="wb-roles-page">
-      <EatuniqueBrand />
-
       <div className="wb-roles-page__intro">
         <h1 className="wb-roles-page__title">Roles &amp; Permissions</h1>
         <p className="wb-roles-page__sub">Manage user access levels</p>

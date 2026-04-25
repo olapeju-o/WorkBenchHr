@@ -1,16 +1,5 @@
 import { useCallback, useId, useRef, useState, type ReactNode } from "react";
 
-function EatuniqueBrand() {
-  return (
-    <header className="wb-data-page__hero">
-      <div className="wb-company-mark" aria-hidden>
-        <span className="wb-company-mark__text">eatunique</span>
-      </div>
-      <span className="wb-data-page__brand-name">eatunique</span>
-    </header>
-  );
-}
-
 export function DataManagementSyncPage() {
   const [slackOn, setSlackOn] = useState(true);
   const [googleOn, setGoogleOn] = useState(true);
@@ -28,8 +17,6 @@ export function DataManagementSyncPage() {
 
   return (
     <div className="wb-data-page">
-      <EatuniqueBrand />
-
       <div className="wb-data-page__intro">
         <h1 className="wb-data-page__title">Data Management &amp; Sync</h1>
         <p className="wb-data-page__sub">
