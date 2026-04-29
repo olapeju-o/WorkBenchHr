@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wb-app" data-static-view="workspace" hidden>
+      <div class="wb-dash">
+        <aside class="wb-dash__sidebar" aria-label="Workspace navigation">
+          <div class="wb-dash__brand">
+            <a href="index.html#/" class="brand-mark">
+              <img src="assets/logo.png" width="34" height="34" alt="" class="brand-mark__img" />
+              <span class="brand-mark__text wb-dash__brand-text">Workbench HR</span>
+            </a>
+          </div>
+          <div class="wb-dash__cta-row">
+            <a href="create-document-template.html#/create-document/template" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+          </div>
+          <div class="wb-dash__nav-section">
+            <p class="wb-dash__nav-label">Workspace</p>
+            <nav class="wb-dash__nav" aria-label="Workspace">
+              <a href="dashboard.html#/dashboard" class="wb-dash__nav-link" data-ws-nav="/dashboard"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Dashboard</span></a
+              >
+              <a href="employees.html#/employees" class="wb-dash__nav-link" data-ws-nav="/employees"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><circle cx="12" cy="8" r="3.2" fill="currentColor" opacity="0.92" /><path
+                    fill="currentColor"
+                    d="M5 20v-1c0-2.2 3.1-4 7-4s7 1.8 7 4v1"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Employees</span></a
+              >
+              <a href="documents.html#/documents" class="wb-dash__nav-link" data-ws-nav="/documents"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Documents</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__nav-section wb-dash__nav-section--recruiting">
+            <p class="wb-dash__nav-label">Recruiting</p>
+            <nav class="wb-dash__nav" aria-label="Recruiting">
+              <a href="hiring.html#/hiring" class="wb-dash__nav-link" data-ws-nav="/hiring"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M12 2l2.4 7.4h7.8l-6.3 4.6 2.4 7.4L12 16.8 5.7 21.4 8.1 14 1.8 9.4h7.8L12 2z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Hiring</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__sidebar-spacer"></div>
+          <div class="wb-dash__sidebar-footer">
+            <a href="dashboard.html#/assistant" class="wb-dash__btn wb-dash__btn--primary wb-dash__btn--assistant-bar"
+              >AI Assistant
+              <span class="wb-dash__assistant-icon" aria-hidden="true"
+                ><img src="assets/robot.png" alt="" width="20" height="20" class="wb-dash__assistant-img" decoding="async"
+              /></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="wb-dash__main" data-ws-main="/assistant" hidden>
+          <header class="wb-dash__header">
+            <h1 class="wb-dash__title">AI Assistant</h1>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              ><span class="wb-dash__avatar" aria-hidden="true"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></span>
+            </div>
+          </header>
+          <section class="wb-ai-assistant" aria-labelledby="ai-assistant-heading">
+            <p class="wb-help-page__note" role="status">
+              Preview — the intelligent assistant is not connected to a model or your data in this static demo build.
+            </p>
+            <h2 id="ai-assistant-heading" class="wb-ai-assistant__title">Chat, draft, and automate</h2>
+            <p class="wb-ai-assistant__lede">
+              This area will host contextual answers, document drafts, and HR playbooks grounded in the policies and people
+              records you are allowed to see.
+            </p>
+            <ul class="wb-ai-assistant__bullets">
+              <li>Ask questions in plain language about handbooks, workflows, and open tasks.</li>
+              <li>Generate first drafts of emails and summaries with citations back to source documents.</li>
+              <li>Suggest next steps when hiring, onboarding, or compliance deadlines are approaching.</li>
+            </ul>
+            <div class="wb-ai-assistant__actions">
+              <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--primary">Back to dashboard</a>
+            </div>
+          </section>
+        </main>
+
+        <main class="wb-dash__main wb-dash__main--dashboard" data-ws-main="/dashboard" hidden>
+          <header class="wb-dash__header">
+            <h1 class="wb-dash__title">Dashboard</h1>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              ><span class="wb-dash__avatar" aria-hidden="true"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></span>
+            </div>
+          </header>
+          <section class="wb-dash-home" aria-labelledby="dash-needs-heading">
+            <div class="wb-dash-home__needs-head">
+              <span class="wb-dash-home__needs-count" aria-hidden="true">3</span>
+              <h2 class="wb-dash-home__needs-title" id="dash-needs-heading">Needs Attention</h2>
+            </div>
+            <div class="wb-dash-home__needs-grid">
+              <article class="wb-dash-card wb-dash-card--attention">
+                <div class="wb-dash-card__icon wb-dash-card__icon--doc" aria-hidden="true">
+                  <img src="assets/d1.png" alt="" width="22" height="22" class="wb-dash-card__icon-img" />
+                </div>
+                <div class="wb-dash-card__body">
+                  <div class="wb-dash-card__row-title">
+                    <h3 class="wb-dash-card__headline">2 documents pending signature</h3>
+                    <span class="wb-dash-card__tag wb-dash-card__tag--urgent">Due today</span>
+                  </div>
+                  <p class="wb-dash-card__sub">
+                    Marcus Lee&apos;s offer letter and Priya Patel&apos;s NDA need your signature before EOD.
+                  </p>
+                  <div class="wb-dash-card__actions">
+                    <a href="dashboard.html#/dashboard/sign-documents" class="wb-dash-home__btn-dark wb-dash-home__btn-dark--link"
+                      >Sign now <span aria-hidden="true">→</span></a
+                    ><button type="button" class="wb-dash-card__icon-btn wb-dash-card__icon-btn--clock" aria-label="Set reminder for later">
+                      <img src="assets/clock.png" alt="" width="18" height="18" class="wb-dash-card__clock-img" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <article class="wb-dash-card wb-dash-card--attention">
+                <div class="wb-dash-card__icon wb-dash-card__icon--user" aria-hidden="true">
+                  <img src="assets/d2.png" alt="" width="22" height="22" class="wb-dash-card__icon-img" />
+                </div>
+                <div class="wb-dash-card__body">
+                  <h3 class="wb-dash-card__headline">1 onboarding incomplete</h3>
+                  <p class="wb-dash-card__sub">
+                    Jessica Christie started 4 days ago, still missing tax forms and direct deposit info.
+                  </p>
+                  <div class="wb-dash-card__actions"><button type="button" class="wb-dash-home__btn-dark">Send nudge</button></div>
+                </div>
+              </article>
+            </div>
+          </section>
+          <section class="wb-dash-home wb-dash-home--overview" aria-labelledby="dash-overview-heading">
+            <h2 class="wb-dash-home__overview-title" id="dash-overview-heading">Overview</h2>
+            <div class="wb-dash-home__stat-grid">
+              <article class="wb-dash-stat">
+                <div class="wb-dash-stat__top">
+                  <span class="wb-dash-stat__label-wrap">
+                    <span class="wb-dash-stat__label">Active employees</span>
+                    <button type="button" class="wb-dash-stat__info" aria-label="About this metric">
+                      <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                        <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.25" />
+                        <path
+                          fill="currentColor"
+                          d="M8 11.2c-.35 0-.62-.27-.62-.62 0-.35.27-.63.62-.63s.62.28.62.63c0 .35-.27.62-.62.62zm.05-2.1h-.55L7.2 5.4h1.45z"
+                        />
+                      </svg>
+                    </button>
+                  </span>
+                  <span class="wb-dash-stat__pill wb-dash-stat__pill--up"
+                    ><span class="wb-dash-stat__pill-trend" aria-hidden="true">↑</span> +3 this month</span
+                  >
+                </div>
+                <p class="wb-dash-stat__value">21</p>
+                <svg class="wb-dash-stat__spark" viewBox="0 0 120 36" preserveAspectRatio="none" aria-hidden="true">
+                  <path
+                    d="M0 28 L20 24 L40 26 L60 14 L80 18 L100 8 L120 4"
+                    fill="none"
+                    stroke="var(--dash-accent)"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <p class="wb-dash-stat__foot">14 full-time · 5 part-time · 2 interns</p>
+              </article>
+              <article class="wb-dash-stat">
+                <div class="wb-dash-stat__top"><span class="wb-dash-stat__label">Active job listings</span></div>
+                <p class="wb-dash-stat__value">4</p>
+                <p class="wb-dash-stat__hint">2 new applicants today</p>
+                <p class="wb-dash-stat__foot">Head Chef · 2 Cashiers · Kitchen Staff</p>
+              </article>
+              <article class="wb-dash-stat">
+                <div class="wb-dash-stat__top">
+                  <span class="wb-dash-stat__label">Avg. time to hire</span>
+                  <span class="wb-dash-stat__pill wb-dash-stat__pill--up"
+                    ><span class="wb-dash-stat__pill-trend" aria-hidden="true">↓</span> 4 days faster</span
+                  >
+                </div>
+                <p class="wb-dash-stat__value">18 days</p>
+                <p class="wb-dash-stat__foot">Industry benchmark: 24 days</p>
+              </article>
+              <article class="wb-dash-stat">
+                <div class="wb-dash-stat__top">
+                  <span class="wb-dash-stat__label">Upcoming time off</span>
+                  <span class="wb-dash-stat__pill wb-dash-stat__pill--alert">Coverage gap Apr 28</span>
+                </div>
+                <p class="wb-dash-stat__value">7</p>
+                <p class="wb-dash-stat__foot">3 pending · 4 approved this week</p>
+              </article>
+            </div>
+          </section>
+          <section class="wb-dash-panel" aria-labelledby="dash-hiring-heading">
+            <div class="wb-dash-panel__head">
+              <h2 class="wb-dash-panel__title" id="dash-hiring-heading">Hiring pipeline</h2>
+              <div class="wb-dash-segments" role="group" aria-label="Listing status">
+                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" aria-pressed="true">
+                  Active
+                </button>
+                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">Paused</button>
+                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">Closed</button>
+              </div>
+            </div>
+            <div class="wb-dash-hire-list">
+              <article class="wb-dash-hire-row">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Head Chef</h3>
+                  <p class="wb-dash-hire-row__meta">12 applicants · Posted 9 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--ring"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Interviews</span>
+                  <span class="wb-dash-hire-row__status-sub">3 scheduled</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Cashier · Morning shift</h3>
+                  <p class="wb-dash-hire-row__meta">28 applicants · Posted 14 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--ring"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Offer sent</span>
+                  <span class="wb-dash-hire-row__status-sub">Awaiting reply</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Cashier · Evening shift</h3>
+                  <p class="wb-dash-hire-row__meta">19 applicants · Posted 11 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--ring"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Screening</span>
+                  <span class="wb-dash-hire-row__status-sub">7 to review</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Kitchen Staff</h3>
+                  <p class="wb-dash-hire-row__meta">6 applicants · Posted 3 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Posted</span>
+                  <span class="wb-dash-hire-row__status-sub">Collecting apps</span>
+                </p>
+              </article>
+            </div>
+          </section>
+          <section class="wb-dash-panel" aria-labelledby="dash-upcoming-heading">
+            <div class="wb-dash-panel__head">
+              <h2 class="wb-dash-panel__title" id="dash-upcoming-heading">Upcoming</h2>
+              <div class="wb-dash-segments" role="group" aria-label="Date range">
+                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" aria-pressed="true">
+                  7 days
+                </button>
+                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">30 days</button>
+              </div>
+            </div>
+            <ul class="wb-dash-upcoming-list">
+              <li class="wb-dash-upcoming-row">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">Apr</span>
+                  <span class="wb-dash-upcoming-date__day">22</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Marcus Lee starts</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--onboarding">Onboarding</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">First day — checklist ready</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">Apr</span>
+                  <span class="wb-dash-upcoming-date__day">24</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Andre Silva&apos;s review</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--review">90-day</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">Friday, 2:00 PM</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">Apr</span>
+                  <span class="wb-dash-upcoming-date__day">26</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Carlos Rivera&apos;s birthday</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--birthday">Birthday</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">Sunday</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">Apr</span>
+                  <span class="wb-dash-upcoming-date__day">27</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Maria Lopez — 2 years</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--anniversary">Anniversary</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">Send a note?</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">Apr</span>
+                  <span class="wb-dash-upcoming-date__day">28</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Coverage gap — Kitchen</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--heads-up">Heads up</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">2 people out same day</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </main>
+
+        <main class="wb-dash__main" data-ws-main="/dashboard/sign-documents" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="dashboard.html#/dashboard" class="wb-create-doc__crumb-link">Dashboard</a>
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span><span class="wb-create-doc__crumb-current">Sign documents</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon"
+              /></a>
+              <span class="wb-dash__avatar" aria-hidden="true"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></span>
+            </div>
+          </header>
+          <div class="wb-sign-doc-page">
+            <div class="wb-sign-doc">
+              <p class="wb-onboarding__sub">Review and complete fields for each packet, then mark signing complete.</p>
+              <p><a href="dashboard.html#/dashboard" class="wb-link">← Back to dashboard</a></p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

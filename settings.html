@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Settings — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Settings -->
+    <div class="wb-app" data-static-view="settings" hidden>
+      <div class="wb-settings-shell">
+        <aside class="wb-settings-nav">
+          <div class="wb-settings-nav__head"><a href="dashboard.html#/dashboard" class="wb-settings-back-dashboard"><span class="wb-settings-back-dashboard__arrow" aria-hidden="true">←</span><span>Back to dashboard</span></a></div>
+          <p class="wb-settings-nav__section-label">Settings</p>
+          <nav class="wb-settings-nav__list" aria-label="Settings">
+            <a href="#/settings/profile" class="wb-settings-link" data-st-nav="/settings/profile"><span class="wb-settings-link__label">Profile</span><span class="wb-settings-link__badge">2</span></a>
+            <a href="#/settings/company" class="wb-settings-link" data-st-nav="/settings/company"><span class="wb-settings-link__label">Company Information</span></a>
+            <a href="#/settings/roles" class="wb-settings-link" data-st-nav="/settings/roles"><span class="wb-settings-link__label">Roles &amp; Permissions</span></a>
+            <a href="#/settings/billing" class="wb-settings-link" data-st-nav="/settings/billing"><span class="wb-settings-link__label">Plan &amp; Billing</span></a>
+            <a href="#/settings/data" class="wb-settings-link" data-st-nav="/settings/data"><span class="wb-settings-link__label">Data Management &amp; Sync</span><span class="wb-settings-link__badge">11</span></a>
+            <a href="#/settings/trigger-notifications" class="wb-settings-link" data-st-nav="/settings/trigger-notifications"><span class="wb-settings-link__label">Manage Trigger Notifications</span></a>
+            <a href="#/settings/employees" class="wb-settings-link" data-st-nav="/settings/employees"><span class="wb-settings-link__label">Manage Employees</span></a>
+            <a href="#/settings/security" class="wb-settings-link" data-st-nav="/settings/security"><span class="wb-settings-link__label">Password &amp; Security</span></a>
+          </nav>
+          <div class="wb-settings-nav__foot"><a href="#/settings/help" class="wb-settings-link wb-settings-link--ghost" data-st-nav="/settings/help">Help &amp; Support</a></div>
+        </aside>
+        <div class="wb-settings-main">
+                    <div class="wb-profile" data-st-page="/settings/profile" hidden>
+            <div class="wb-profile__banner">
+              <div
+                class="wb-profile__banner-bg"
+                style="background-image: url(https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1400&amp;h=220&amp;fit=crop)"
+              ></div>
+            </div>
+
+            <div class="wb-profile__identity">
+              <div class="wb-profile__avatar-wrap">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&amp;h=200&amp;fit=crop&amp;crop=face"
+                  width="120"
+                  height="120"
+                  alt=""
+                  class="wb-profile__avatar"
+                />
+                <button type="button" class="wb-profile__avatar-edit" aria-label="Edit photo">✎</button>
+              </div>
+              <div class="wb-profile__name-block">
+                <h1 class="wb-profile__name">Stacy Hammer</h1>
+                <p class="wb-profile__role">eatunique | Human Resources Admin</p>
+              </div>
+            </div>
+
+            <section class="wb-profile__section">
+              <header class="wb-profile__section-head">
+                <h2>Personal Information</h2>
+                <p>Add your personal information</p>
+              </header>
+              <div class="wb-profile__grid">
+                <label class="wb-profile-field" data-profile-editable>
+                  <span class="wb-profile-field__label-row">
+                    <span>First Name</span>
+                    <button type="button" class="wb-profile-field__edit" aria-pressed="false" aria-label="Edit First Name">
+                      Edit ✎
+                    </button>
+                  </span>
+                  <div class="wb-profile-field__input-row">
+                    <input class="wb-input wb-input--profile" name="firstName" type="text" value="Stacey" readonly />
+                  </div>
+                </label>
+
+                <label class="wb-profile-field" data-profile-editable>
+                  <span class="wb-profile-field__label-row">
+                    <span>Last Name</span>
+                    <button type="button" class="wb-profile-field__edit" aria-pressed="false" aria-label="Edit Last Name">
+                      Edit ✎
+                    </button>
+                  </span>
+                  <div class="wb-profile-field__input-row">
+                    <input class="wb-input wb-input--profile" name="lastName" type="text" value="Hammer" readonly />
+                  </div>
+                </label>
+
+                <label class="wb-profile-field" data-profile-editable>
+                  <span class="wb-profile-field__label-row">
+                    <span>Email Address</span>
+                    <button type="button" class="wb-profile-field__edit" aria-pressed="false" aria-label="Edit Email Address">
+                      Edit ✎
+                    </button>
+                  </span>
+                  <div class="wb-profile-field__input-row">
+                    <input
+                      class="wb-input wb-input--profile"
+                      name="email"
+                      type="email"
+                      value="stacy.hammer@eatunique.com"
+                      readonly
+                    />
+                  </div>
+                </label>
+
+                <div class="wb-profile-field" data-profile-phone>
+                  <span class="wb-profile-field__label-row">
+                    <span id="profile-phone-legend">Mobile Number</span>
+                    <button
+                      type="button"
+                      class="wb-profile-field__edit"
+                      data-profile-phone-toggle
+                      aria-pressed="false"
+                      aria-label="Edit Mobile Number"
+                    >
+                      Edit ✎
+                    </button>
+                  </span>
+                  <div class="wb-profile-field__input-row" data-profile-phone-view>
+                    <input
+                      type="text"
+                      class="wb-input wb-input--profile"
+                      id="profile-phone-display"
+                      readonly
+                      value="🇺🇸 +1 443-515-8476"
+                      aria-label="Mobile Number, 🇺🇸 +1 443-515-8476"
+                      aria-readonly="true"
+                    />
+                  </div>
+                  <div
+                    class="wb-profile-field__input-row wb-profile-field__input-row--phone wb-profile-field__input-row--editing"
+                    data-profile-phone-edit
+                    hidden
+                  >
+                    <div class="wb-profile-phone">
+                      <label for="profile-phone-country" class="visually-hidden">Country calling code</label>
+                      <select id="profile-phone-country" class="wb-profile-phone__select" aria-label="Country calling code">
+                        <option value="us">🇺🇸 +1</option>
+                        <option value="ca">🇨🇦 +1</option>
+                        <option value="gb">🇬🇧 +44</option>
+                        <option value="au">🇦🇺 +61</option>
+                        <option value="de">🇩🇪 +49</option>
+                        <option value="fr">🇫🇷 +33</option>
+                        <option value="in">🇮🇳 +91</option>
+                        <option value="jp">🇯🇵 +81</option>
+                        <option value="mx">🇲🇽 +52</option>
+                        <option value="br">🇧🇷 +55</option>
+                      </select>
+                      <label for="profile-phone-national" class="visually-hidden">Phone number without country code</label>
+                      <input
+                        id="profile-phone-national"
+                        type="tel"
+                        class="wb-input wb-input--profile wb-profile-phone__national"
+                        value="443-515-8476"
+                        autocomplete="tel-national"
+                        aria-label="Phone number"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <label class="wb-profile-field">
+                  <span class="wb-profile-field__label-row"><span>Employee ID</span></span>
+                  <div class="wb-profile-field__input-row">
+                    <input class="wb-input wb-input--profile" type="text" value="37485960" readonly aria-readonly="true" />
+                    <span class="wb-profile-field__lock" aria-hidden="true">🔒</span>
+                  </div>
+                </label>
+
+                <label class="wb-profile-field">
+                  <span class="wb-profile-field__label-row"><span>Date of Hire</span></span>
+                  <div class="wb-profile-field__input-row">
+                    <input class="wb-input wb-input--profile" type="text" value="03/23/2021" readonly aria-readonly="true" />
+                    <span class="wb-profile-field__lock" aria-hidden="true">🔒</span>
+                  </div>
+                </label>
+              </div>
+            </section>
+
+            <footer class="wb-profile__footer">
+              <div class="wb-profile__danger">
+                <a href="index.html#/login" class="wb-btn wb-btn--outline">Sign out</a>
+                <button type="button" class="wb-btn wb-btn--danger-outline" id="profile-open-delete">Delete Account</button>
+              </div>
+              <p class="wb-profile__last-login">Last Login: 03/29/2026 7:10AM EST</p>
+            </footer>
+
+          </div>
+          <div class="wb-company-page" data-st-page="/settings/company" hidden>
+            <header class="wb-company-page__hero">
+              <div class="wb-company-mark" aria-hidden="true"><span class="wb-company-mark__text">eatunique</span></div>
+              <h1 class="wb-company-page__title">eatunique</h1>
+            </header>
+
+            <div class="wb-company-card">
+              <header class="wb-company-card__head">
+                <h2 class="wb-company-card__title">Company Information</h2>
+                <p class="wb-company-card__sub">Add your company information</p>
+              </header>
+
+              <section class="wb-company-card__block">
+                <h3 class="wb-company-card__section-label">General info</h3>
+                <div class="wb-profile__grid">
+                  <label class="wb-profile-field">
+                    <span class="wb-profile-field__label-row"><span>Legal Company Name</span></span>
+                    <div class="wb-profile-field__input-row">
+                      <input class="wb-input wb-input--profile" type="text" value="eatunique" readonly aria-readonly="true" />
+                      <span class="wb-profile-field__lock" aria-hidden="true">🔒</span>
+                    </div>
+                  </label>
+                  <div class="wb-profile-field">
+                    <span class="wb-profile-field__label-row"><span>Industry type</span></span>
+                    <div class="wb-profile-field__input-row">
+                      <select class="wb-company-industry" aria-label="Industry type">
+                        <option>Restaurant / Food Services</option>
+                        <option>Retail</option>
+                        <option>Technology</option>
+                        <option>Healthcare</option>
+                        <option>Professional Services</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <hr class="wb-company-card__rule" />
+
+              <section class="wb-company-card__block">
+                <h3 class="wb-company-card__section-label">Primary address &amp; contact</h3>
+                <div class="wb-profile__grid">
+                  <label class="wb-profile-field" data-profile-editable>
+                    <span class="wb-profile-field__label-row">
+                      <span>Headquarters Address</span>
+                      <button type="button" class="wb-profile-field__edit" aria-pressed="false" aria-label="Edit Headquarters Address">
+                        Edit ✎
+                      </button>
+                    </span>
+                    <div class="wb-profile-field__input-row">
+                      <input
+                        class="wb-input wb-input--profile"
+                        type="text"
+                        value="305 S Craig St, Pittsburgh, PA 15213"
+                        readonly
+                      />
+                    </div>
+                  </label>
+
+                  <div class="wb-profile-field" data-profile-phone>
+                    <span class="wb-profile-field__label-row">
+                      <span id="company-phone-legend">Corporate Number</span>
+                      <button
+                        type="button"
+                        class="wb-profile-field__edit"
+                        data-profile-phone-toggle
+                        aria-pressed="false"
+                        aria-label="Edit Corporate Number"
+                      >
+                        Edit ✎
+                      </button>
+                    </span>
+                    <div class="wb-profile-field__input-row" data-profile-phone-view>
+                      <input
+                        type="text"
+                        class="wb-input wb-input--profile"
+                        id="company-phone-display"
+                        readonly
+                        value="🇺🇸 +1 (412) 683-9993"
+                        aria-label="Corporate Number, 🇺🇸 +1 (412) 683-9993"
+                        aria-readonly="true"
+                      />
+                    </div>
+                    <div
+                      class="wb-profile-field__input-row wb-profile-field__input-row--phone wb-profile-field__input-row--editing"
+                      data-profile-phone-edit
+                      hidden
+                    >
+                      <div class="wb-profile-phone">
+                        <label for="company-phone-country" class="visually-hidden">Country calling code</label>
+                        <select id="company-phone-country" class="wb-profile-phone__select" aria-label="Country calling code">
+                          <option value="us">🇺🇸 +1</option>
+                          <option value="ca">🇨🇦 +1</option>
+                          <option value="gb">🇬🇧 +44</option>
+                          <option value="au">🇦🇺 +61</option>
+                          <option value="de">🇩🇪 +49</option>
+                          <option value="fr">🇫🇷 +33</option>
+                          <option value="in">🇮🇳 +91</option>
+                          <option value="jp">🇯🇵 +81</option>
+                          <option value="mx">🇲🇽 +52</option>
+                          <option value="br">🇧🇷 +55</option>
+                        </select>
+                        <label for="company-phone-national" class="visually-hidden">Phone number without country code</label>
+                        <input
+                          id="company-phone-national"
+                          type="tel"
+                          class="wb-input wb-input--profile wb-profile-phone__national"
+                          value="(412) 683-9993"
+                          autocomplete="tel-national"
+                          aria-label="Phone number"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wb-company-card__full-row">
+                  <label class="wb-profile-field" data-profile-editable>
+                    <span class="wb-profile-field__label-row">
+                      <span>Primary Website</span>
+                      <button type="button" class="wb-profile-field__edit" aria-pressed="false" aria-label="Edit Primary Website">
+                        Edit ✎
+                      </button>
+                    </span>
+                    <div class="wb-profile-field__input-row">
+                      <input
+                        class="wb-input wb-input--profile"
+                        type="url"
+                        value="https://www.eatuniquecafe.com/"
+                        readonly
+                      />
+                    </div>
+                  </label>
+                </div>
+              </section>
+
+              <hr class="wb-company-card__rule" />
+
+              <section class="wb-company-card__block wb-company-card__block--logo">
+                <h3 class="wb-company-card__section-label">Company logo</h3>
+                <div class="wb-company-logo-row">
+                  <div class="wb-company-mark wb-company-mark--preview" aria-hidden="true">
+                    <span class="wb-company-mark__text">eatunique</span>
+                  </div>
+                  <div class="wb-company-logo-actions">
+                    <label for="company-logo-file" class="visually-hidden">Upload company logo</label>
+                    <input id="company-logo-file" type="file" accept="image/*" class="wb-company-logo-file" />
+                    <button type="button" class="wb-btn wb-btn--outline wb-company-upload-btn" id="company-logo-upload-btn">
+                      <span aria-hidden="true" class="wb-company-upload-icon">⬆</span>
+                      Upload New Logo
+                    </button>
+                    <p class="wb-company-logo-meta">Last Updated: 01/01/2026</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+                    <div class="wb-roles-page" data-st-page="/settings/roles" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Roles &amp; Permissions</h1>
+              <p class="wb-roles-page__sub">Manage user access levels</p>
+            </div>
+
+            <section class="wb-roles-panel" aria-labelledby="roles-section-full">
+              <div class="wb-roles-panel__toolbar">
+                <h2 class="wb-roles-panel__title" id="roles-section-full">Full Access (1)</h2>
+                <div class="wb-roles-panel__actions">
+                  <button type="button" class="wb-profile-field__edit wb-roles-panel__edit">
+                    Edit <span aria-hidden="true">✎</span>
+                  </button>
+                  <button type="button" class="wb-btn wb-btn--dark wb-roles-panel__assign">
+                    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+                      <path
+                        d="M10 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM3.5 17.5v-1A5.5 5.5 0 0110 11a5.5 5.5 0 015.5 5.5v1"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                      <path d="M16 6v4M14 8h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                    Assign Admin Role
+                  </button>
+                </div>
+              </div>
+              <div class="wb-roles-panel__body">
+                <article class="wb-roles-user">
+                  <img
+                    class="wb-roles-user__avatar"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                    width="48"
+                    height="48"
+                    alt=""
+                  />
+                  <div class="wb-roles-user__text">
+                    <span class="wb-roles-user__name">Remi Wilkins</span>
+                    <span class="wb-roles-user__title">Business Administrator</span>
+                  </div>
+                  <span class="wb-roles-user__badge">Admin</span>
+                </article>
+              </div>
+            </section>
+
+            <section class="wb-roles-panel" aria-labelledby="roles-section-view">
+              <div class="wb-roles-panel__toolbar">
+                <h2 class="wb-roles-panel__title" id="roles-section-view">View Only (2)</h2>
+                <div class="wb-roles-panel__actions">
+                  <button type="button" class="wb-profile-field__edit wb-roles-panel__edit">
+                    Edit <span aria-hidden="true">✎</span>
+                  </button>
+                  <button type="button" class="wb-btn wb-btn--dark wb-roles-panel__assign">
+                    <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+                      <path
+                        d="M10 10a3.5 3.5 0 100-7 3.5 3.5 0 000 7zM3.5 17.5v-1A5.5 5.5 0 0110 11a5.5 5.5 0 015.5 5.5v1"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                      <path d="M16 6v4M14 8h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                    Assign Admin Role
+                  </button>
+                </div>
+              </div>
+              <div class="wb-roles-panel__body">
+                <article class="wb-roles-user">
+                  <img
+                    class="wb-roles-user__avatar"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                    width="48"
+                    height="48"
+                    alt=""
+                  />
+                  <div class="wb-roles-user__text">
+                    <span class="wb-roles-user__name">Adam Benson</span>
+                    <span class="wb-roles-user__title">Business Administrator</span>
+                  </div>
+                  <span class="wb-roles-user__badge">Admin</span>
+                </article>
+                <article class="wb-roles-user">
+                  <img
+                    class="wb-roles-user__avatar"
+                    src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                    width="48"
+                    height="48"
+                    alt=""
+                  />
+                  <div class="wb-roles-user__text">
+                    <span class="wb-roles-user__name">Pauline Thomas</span>
+                    <span class="wb-roles-user__title">Business Administrator</span>
+                  </div>
+                  <span class="wb-roles-user__badge">Admin</span>
+                </article>
+              </div>
+            </section>
+          </div>
+          <div class="wb-billing-page" data-st-page="/settings/billing" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Plan &amp; Billing</h1>
+              <p class="wb-roles-page__sub">
+                Review your subscription, seats, payment method, and invoices. Changes here are a preview only.
+              </p>
+            </div>
+
+            <p class="wb-billing-page__note" role="status">Preview — billing actions do not connect to a payment provider in this static demo.</p>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="bill-plan-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="bill-plan-heading">Current plan</h2>
+              <p class="wb-settings-triggers__form-lede">
+                You are on the Business tier with priority support and advanced HR workflows.
+              </p>
+              <div class="wb-billing-page__plan-head">
+                <div class="wb-billing-page__plan-main">
+                  <p class="wb-billing-page__plan-name">Business</p>
+                  <p class="wb-billing-page__plan-meta">Renews April 15, 2027 · Invoice sent to billing@eatunique.com</p>
+                  <div class="wb-billing-page__cycle" role="group" aria-label="Billing cycle">
+                    <button type="button" class="wb-billing-page__cycle-btn wb-billing-page__cycle-btn--on" data-st-billing-cycle="monthly">
+                      Monthly
+                    </button>
+                    <button type="button" class="wb-billing-page__cycle-btn" data-st-billing-cycle="annual">Annual</button>
+                  </div>
+                </div>
+                <span class="wb-docs-table__status wb-docs-table__status--synced">Active</span>
+              </div>
+              <p class="wb-billing-page__price"><span data-st-billing-main>$249</span></p>
+              <p class="wb-billing-page__price-caption" data-st-billing-sub>per month · plus applicable tax</p>
+              <div class="wb-settings-triggers__form-actions">
+                <button type="button" class="wb-btn wb-btn--outline" data-st-billing-change-plan>Change plan</button>
+              </div>
+            </section>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="bill-usage-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="bill-usage-heading">Seat usage</h2>
+              <p class="wb-settings-triggers__form-lede">Licensed seats include everyone who can sign in to Workbench HR.</p>
+              <div class="wb-billing-page__meter-label">
+                <span>Active people</span>
+                <span>21 of 25 seats</span>
+              </div>
+              <div class="wb-billing-page__meter-track" aria-hidden="true">
+                <div class="wb-billing-page__meter-fill"></div>
+              </div>
+              <p class="wb-billing-page__meter-foot">4 seats are still available for new hires or contractors.</p>
+            </section>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="bill-pay-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="bill-pay-heading">Payment method</h2>
+              <p class="wb-settings-triggers__form-lede">Primary card on file for subscription renewals.</p>
+              <article class="wb-data-int-card">
+                <div class="wb-data-int-card__brand wb-billing-page__card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="16" fill="none" aria-hidden="true">
+                    <rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M2 10h20" stroke="currentColor" stroke-width="1.4" />
+                  </svg>
+                </div>
+                <div class="wb-data-int-card__body">
+                  <h3 class="wb-data-int-card__title">Visa ending in 4242</h3>
+                  <p class="wb-data-int-card__status">Expires 08/2027 · Default for subscription</p>
+                </div>
+              </article>
+              <div class="wb-settings-triggers__form-actions">
+                <button type="button" class="wb-btn wb-btn--primary" data-st-billing-update-pay>Update payment method</button>
+                <button type="button" class="wb-btn wb-btn--muted" data-st-billing-add-backup>Add backup card</button>
+              </div>
+            </section>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="bill-inv-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="bill-inv-heading">Recent invoices</h2>
+              <p class="wb-settings-triggers__form-lede">Download PDF copies for your records.</p>
+              <div class="wb-docs-table-wrap">
+                <table class="wb-docs-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Invoice</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col" class="wb-docs-table__th-actions">Receipt</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>INV-2026-0412</td>
+                      <td>Apr 12, 2026</td>
+                      <td>$249.00</td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action" data-st-billing-download>Download</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>INV-2026-0312</td>
+                      <td>Mar 12, 2026</td>
+                      <td>$249.00</td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action" data-st-billing-download>Download</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>INV-2026-0212</td>
+                      <td>Feb 12, 2026</td>
+                      <td>$249.00</td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action" data-st-billing-download>Download</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <p class="wb-billing-page__feedback" data-st-billing-feedback hidden role="status"></p>
+          </div>
+          <div class="wb-data-page" data-st-page="/settings/data" hidden>
+            <div class="wb-data-page__intro">
+              <h1 class="wb-data-page__title">Data Management &amp; Sync</h1>
+              <p class="wb-data-page__sub">
+                Manage manual imports, exports, and system synchronization settings
+              </p>
+            </div>
+
+            <section class="wb-data-health" aria-label="System health">
+              <div class="wb-data-health__left">
+                <span class="wb-data-health__badge">
+                  <span class="wb-data-health__badge-icon" aria-hidden="true">✓</span>
+                  All Systems Operational
+                </span>
+                <p class="wb-data-health__meta">Last synced 12 minutes ago.</p>
+              </div>
+              <button type="button" class="wb-btn wb-data-sync-now">Sync Now</button>
+            </section>
+
+            <section class="wb-data-integrations" aria-label="Integrations">
+              <article class="wb-data-int-card">
+                <div class="wb-data-int-card__brand">
+                  <img
+                    class="wb-data-int-card__img"
+                    src="assets/integrations/slack.svg"
+                    width="40"
+                    height="40"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="wb-data-int-card__body">
+                  <h3 class="wb-data-int-card__title">Slack</h3>
+                  <p class="wb-data-int-card__status">Syncing in real-time</p>
+                  <button type="button" class="wb-data-int-card__configure">
+                    Configure <span aria-hidden="true">›</span>
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="wb-toggle wb-toggle--on"
+                  data-data-integration-toggle="slack"
+                  aria-pressed="true"
+                  aria-label="Slack sync on"
+                >
+                  <span class="wb-toggle__knob"></span>
+                </button>
+              </article>
+              <article class="wb-data-int-card">
+                <div class="wb-data-int-card__brand">
+                  <img
+                    class="wb-data-int-card__img"
+                    src="assets/integrations/google-calendar.svg"
+                    width="40"
+                    height="40"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="wb-data-int-card__body">
+                  <h3 class="wb-data-int-card__title">Google Calendar</h3>
+                  <p class="wb-data-int-card__status">Syncing in hourly</p>
+                  <button type="button" class="wb-data-int-card__configure">
+                    Configure <span aria-hidden="true">›</span>
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="wb-toggle wb-toggle--on"
+                  data-data-integration-toggle="google"
+                  aria-pressed="true"
+                  aria-label="Google Calendar sync on"
+                >
+                  <span class="wb-toggle__knob"></span>
+                </button>
+              </article>
+            </section>
+
+            <div class="wb-data-split">
+              <section class="wb-data-panel wb-data-panel--upload" aria-label="Data export and import">
+                <h2 class="wb-data-panel__heading">Data export &amp; import</h2>
+                <div class="wb-data-drop" data-data-drop-zone>
+                  <label for="data-management-file-input" class="visually-hidden">Upload data file</label>
+                  <input
+                    id="data-management-file-input"
+                    type="file"
+                    class="wb-data-drop__input"
+                    accept=".pdf,.doc,.docx"
+                    data-data-file-input
+                  />
+                  <div class="wb-data-drop__icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" width="44" height="44" fill="none">
+                      <rect
+                        x="10"
+                        y="6"
+                        width="28"
+                        height="36"
+                        rx="4"
+                        stroke="var(--wb-green)"
+                        stroke-width="2.2"
+                      />
+                      <path
+                        d="M24 30V14M16 22l8-8 8 8"
+                        stroke="var(--wb-green)"
+                        stroke-width="2.2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p class="wb-data-drop__title">Drag and Drop your Files or Click to Upload!</p>
+                  <button type="button" class="wb-link wb-data-drop__browse" data-data-drop-browse>
+                    Choose file
+                  </button>
+                </div>
+                <p class="wb-data-file-status" data-data-file-status>
+                  <span class="wb-data-file-status__icon" aria-hidden="true">✓</span>
+                  <span data-data-file-name>Updated_Mission.pdf</span>
+                </p>
+                <button type="button" class="wb-btn wb-btn--primary wb-data-train">
+                  Train my Workbench <span aria-hidden="true">›</span>
+                </button>
+              </section>
+
+              <aside class="wb-data-ai" aria-label="AI overview">
+                <div class="wb-data-ai__head">
+                  <span class="wb-data-ai__sparkle" aria-hidden="true">✦</span>
+                  <h2 class="wb-data-ai__title">AI Overview</h2>
+                </div>
+                <div class="wb-data-ai__card">
+                  <div class="wb-data-ai__card-top">
+                    <h3 class="wb-data-ai__card-title">Anomaly Detection Alert</h3>
+                    <span class="wb-data-ai__pill">Optimization Opportunity</span>
+                  </div>
+                  <p class="wb-data-ai__desc">
+                    Suggested Action: Generate a Mapping Reconciliation Report to align &apos;People Ops&apos;
+                    with &apos;Human Resources&apos; across all integrated platforms.
+                  </p>
+                  <button type="button" class="wb-btn wb-btn--primary wb-data-ai__cta">
+                    View suggestions <span aria-hidden="true">›</span>
+                  </button>
+                  <p class="wb-data-ai__foot">Flagged 12 Discrepancies</p>
+                </div>
+              </aside>
+            </div>
+          </div>
+          <div class="wb-roles-page" data-st-page="/settings/trigger-notifications" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Trigger notifications</h1>
+              <p class="wb-roles-page__sub">
+                Assign HR-related alerts to an employee and choose how they receive them: in-app push, email, or a Google
+                Calendar invite (demo — stored in this browser only).
+              </p>
+            </div>
+
+            <div class="wb-settings-triggers">
+              <div class="wb-settings-triggers__welcome" role="status" data-st-trigger-welcome hidden>
+                <p class="wb-settings-triggers__welcome-text">
+                  You&apos;re all set from onboarding — review or add notifications below. Workbench will route these to
+                  the assignee using the channels you pick.
+                </p>
+                <button type="button" class="wb-btn wb-btn--muted wb-settings-triggers__welcome-dismiss" data-st-trigger-welcome-dismiss>
+                  Dismiss
+                </button>
+              </div>
+
+              <section class="wb-settings-triggers__panel" aria-labelledby="st-triggers-list-heading">
+                <div class="wb-settings-triggers__panel-head">
+                  <h2 class="wb-settings-triggers__panel-title" id="st-triggers-list-heading">Active notifications</h2>
+                  <span class="wb-settings-triggers__count" data-st-trigger-count>0</span>
+                </div>
+                <p class="wb-settings-triggers__empty" data-st-trigger-empty>No notifications yet. Create one using the form below.</p>
+                <ul class="wb-settings-triggers__list" data-st-trigger-list hidden></ul>
+              </section>
+
+              <section class="wb-settings-triggers__panel wb-settings-triggers__panel--form" aria-labelledby="st-triggers-form-heading">
+                <h2 class="wb-settings-triggers__panel-title" id="st-triggers-form-heading">Create notification</h2>
+                <p class="wb-settings-triggers__form-lede">
+                  Pick an HR task type, assign someone responsible, and select how they should be nudged.
+                </p>
+
+                <div class="wb-settings-triggers__form-grid">
+                  <label class="wb-settings-triggers__field">
+                    <span class="wb-settings-triggers__label">Notification name</span>
+                    <input
+                      class="wb-settings-triggers__input"
+                      type="text"
+                      id="st-trigger-title"
+                      data-st-trigger-title
+                      placeholder="e.g. I-9 reverification due"
+                      autocomplete="off"
+                    />
+                  </label>
+
+                  <label class="wb-settings-triggers__field">
+                    <span class="wb-settings-triggers__label">HR task type</span>
+                    <select class="wb-settings-triggers__select" id="st-trigger-task" data-st-trigger-task>
+                      <option value="review">Performance review deadline</option>
+                      <option value="compliance">Compliance / training renewal</option>
+                      <option value="onboarding">Onboarding documents</option>
+                      <option value="timeoff">Time off &amp; scheduling</option>
+                      <option value="payroll">Payroll &amp; approvals</option>
+                      <option value="policy">Policy acknowledgment</option>
+                    </select>
+                  </label>
+
+                  <label class="wb-settings-triggers__field wb-settings-triggers__field--full">
+                    <span class="wb-settings-triggers__label">Assign to employee</span>
+                    <select class="wb-settings-triggers__select" id="st-trigger-assignee" data-st-trigger-assignee>
+                      <option value="e1">Remi Wilkins</option>
+                      <option value="e2">Adam Benson</option>
+                      <option value="e3">Pauline Thomas</option>
+                      <option value="e4">Jordan Lee</option>
+                      <option value="e5">Morgan Ellis</option>
+                    </select>
+                  </label>
+
+                  <fieldset class="wb-settings-triggers__field wb-settings-triggers__field--full wb-settings-triggers__channels">
+                    <legend class="wb-settings-triggers__label">Deliver as</legend>
+                    <div class="wb-settings-triggers__channel-row">
+                      <label class="wb-settings-triggers__check">
+                        <input type="checkbox" data-st-trigger-ch-push checked />
+                        <span>In-app push</span>
+                      </label>
+                      <label class="wb-settings-triggers__check">
+                        <input type="checkbox" data-st-trigger-ch-email checked />
+                        <span>Email</span>
+                      </label>
+                      <label class="wb-settings-triggers__check">
+                        <input type="checkbox" data-st-trigger-ch-cal />
+                        <span>Google Calendar invite</span>
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+
+                <p class="wb-settings-triggers__error" data-st-trigger-error hidden></p>
+
+                <div class="wb-settings-triggers__form-actions">
+                  <button type="button" class="wb-btn wb-btn--primary" data-st-trigger-save>Save notification</button>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="wb-employees-page" data-st-page="/settings/employees" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Manage Employees</h1>
+              <p class="wb-roles-page__sub">Directory, invitations, and roles for people at your company.</p>
+            </div>
+
+            <div class="wb-docs-toolbar wb-employees-page__toolbar">
+              <label class="wb-docs-search wb-employees-page__search">
+                <span class="wb-docs-search__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                      fill="currentColor"
+                      d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                      opacity="0.45"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="search"
+                  class="wb-docs-search__input"
+                  placeholder="Search by name, email, or department…"
+                  aria-label="Search employees"
+                  data-st-emp-query
+                />
+              </label>
+              <button
+                type="button"
+                class="wb-btn wb-btn--dark wb-employees-page__add-btn"
+                data-st-emp-toggle-add
+                aria-expanded="false"
+              >
+                + Add employee
+              </button>
+            </div>
+
+            <section class="wb-employees-add" aria-labelledby="employees-add-heading" data-st-emp-add-panel hidden>
+              <h2 class="wb-employees-add__title" id="employees-add-heading">Add employee</h2>
+              <div class="wb-employees-add__grid">
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Full name</span>
+                  <input class="wb-employees-field__input" type="text" data-st-emp-name placeholder="e.g. Avery Kim" autocomplete="name" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Work email</span>
+                  <input
+                    class="wb-employees-field__input"
+                    type="email"
+                    data-st-emp-email
+                    placeholder="name@company.com"
+                    autocomplete="email"
+                  />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Role</span>
+                  <select class="wb-employees-field__input" data-st-emp-role aria-label="Role">
+                    <option value="Team Member">Team Member</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Administrator">Administrator</option>
+                  </select>
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Department</span>
+                  <input class="wb-employees-field__input" type="text" data-st-emp-dept placeholder="e.g. Front of House" />
+                </label>
+              </div>
+              <div class="wb-employees-add__actions">
+                <button type="button" class="wb-btn wb-btn--muted" data-st-emp-cancel-add">Cancel</button>
+                <button type="button" class="wb-btn wb-btn--primary" data-st-emp-send-invite">Send invite</button>
+              </div>
+            </section>
+
+            <section class="wb-employees-table-section" aria-labelledby="employees-table-heading">
+              <h2 class="visually-hidden" id="employees-table-heading">Employee directory</h2>
+              <div class="wb-docs-empty" data-st-emp-no-matches hidden>
+                <p class="wb-docs-empty__title">No matches</p>
+                <p class="wb-docs-empty__body">Try another search or add someone new.</p>
+              </div>
+              <div class="wb-docs-table-wrap" data-st-emp-table-wrap>
+                <table class="wb-docs-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Employee</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Department</th>
+                      <th scope="col">Status</th>
+                      <th scope="col" class="wb-docs-table__th-actions">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody data-st-emp-tbody></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <div class="wb-security-page" data-st-page="/settings/security" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Password &amp; Security</h1>
+              <p class="wb-roles-page__sub">Update your password, manage sign-ins, and strengthen your account.</p>
+            </div>
+
+            <p class="wb-security-page__note" role="status">Preview — nothing here is sent to a server in this static demo.</p>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="sec-password-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="sec-password-heading">Change password</h2>
+              <p class="wb-settings-triggers__form-lede">Use a strong password you don&apos;t reuse on other sites.</p>
+              <div class="wb-security-page__password-fields">
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Current password</span>
+                  <input class="wb-employees-field__input" type="password" autocomplete="current-password" data-st-sec-current />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">New password</span>
+                  <input class="wb-employees-field__input" type="password" autocomplete="new-password" data-st-sec-new />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Confirm new password</span>
+                  <input class="wb-employees-field__input" type="password" autocomplete="new-password" data-st-sec-confirm />
+                </label>
+              </div>
+              <p class="wb-security-page__feedback" data-st-sec-password-msg hidden role="status"></p>
+              <div class="wb-settings-triggers__form-actions">
+                <button type="button" class="wb-btn wb-btn--primary" data-st-sec-update-password>Update password</button>
+              </div>
+            </section>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="sec-2fa-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="sec-2fa-heading">Two-factor authentication</h2>
+              <p class="wb-settings-triggers__form-lede">
+                Require a code from your authenticator app when you sign in with email and password.
+              </p>
+              <article class="wb-data-int-card">
+                <div class="wb-data-int-card__brand wb-security-page__2fa-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+                    <path
+                      d="M12 3.5l7 2.6v6.4c0 4.2-2.9 8.1-7 9.5-4.1-1.4-7-5.3-7-9.5V6.1l7-2.6z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9.2 12.3l1.6 1.6 4.1-4.2"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <div class="wb-data-int-card__body">
+                  <h3 class="wb-data-int-card__title">Authenticator app</h3>
+                  <p class="wb-data-int-card__status">Recommended for administrators</p>
+                </div>
+                <button
+                  type="button"
+                  class="wb-toggle"
+                  data-st-sec-2fa
+                  aria-pressed="false"
+                  aria-label="Two-factor authentication off"
+                >
+                  <span class="wb-toggle__knob"></span>
+                </button>
+              </article>
+            </section>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="sec-sessions-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="sec-sessions-heading">Signed-in devices</h2>
+              <p class="wb-settings-triggers__form-lede">You&apos;re currently signed in on the devices below.</p>
+              <ul class="wb-security-page__sessions" aria-label="Active sessions">
+                <li class="wb-security-page__session">
+                  <span>This device · Chrome on macOS</span>
+                  <span class="wb-security-page__session-meta">Active now</span>
+                </li>
+                <li class="wb-security-page__session">
+                  <span>Safari on iPhone</span>
+                  <span class="wb-security-page__session-meta">Last active Mar 30, 2026</span>
+                </li>
+              </ul>
+              <p class="wb-security-page__feedback wb-security-page__feedback--success" data-st-sec-sessions-msg hidden role="status"></p>
+              <button type="button" class="wb-btn wb-btn--outline wb-security-page__session-action" data-st-sec-signout-all>
+                Sign out all other sessions
+              </button>
+            </section>
+          </div>
+          <div class="wb-help-page" data-st-page="/settings/help" hidden>
+            <div class="wb-roles-page__intro">
+              <h1 class="wb-roles-page__title">Help &amp; Support</h1>
+              <p class="wb-roles-page__sub">
+                Reach the Workbench HR team, browse popular topics, and open guides from the knowledge base. This screen is
+                a preview—connect your real help center when you are ready.
+              </p>
+            </div>
+
+            <p class="wb-help-page__note" role="status">
+              Preview — contact shortcuts and articles below do not open a live ticketing system in this static demo.
+            </p>
+
+            <section class="wb-settings-triggers__panel" aria-labelledby="help-contact-heading">
+              <h2 class="wb-settings-triggers__panel-title" id="help-contact-heading">Get in touch</h2>
+              <p class="wb-settings-triggers__form-lede">
+                Choose the channel that fits your question. Sample details stand in for production integrations.
+              </p>
+              <div class="wb-help-page__channels">
+                <article class="wb-help-card">
+                  <h3 class="wb-help-card__title">Email us</h3>
+                  <p class="wb-help-card__body">Best for detailed questions, screenshots, and policy reviews.</p>
+                  <p class="wb-help-card__meta">Typical reply within one business day</p>
+                  <a href="mailto:support@workbenchhr.example" class="wb-link wb-help-card__action">support@workbenchhr.example</a>
+                </article>
+                <article class="wb-help-card">
+                  <h3 class="wb-help-card__title">Phone</h3>
+                  <p class="wb-help-card__body">Talk with the Workbench HR success team during business hours.</p>
+                  <p class="wb-help-card__meta">Mon–Fri · 8:00 AM – 8:00 PM ET</p>
+                  <a href="tel:+18005550192" class="wb-link wb-help-card__action">+1 (800) 555-0192</a>
+                </article>
+                <article class="wb-help-card">
+                  <h3 class="wb-help-card__title">Live chat</h3>
+                  <p class="wb-help-card__body">Quick answers about navigation, permissions, and document flows.</p>
+                  <p class="wb-help-card__meta">Avg. wait under 3 minutes · sample data</p>
+                  <button
+                    type="button"
+                    class="wb-link wb-help-card__action wb-help-card__action--btn"
+                    data-st-help-msg="Preview only — live chat is not connected in this demo."
+                  >
+                    Start chat (demo)
+                  </button>
+                </article>
+              </div>
+            </section>
+
+            <div class="wb-help-page__split">
+              <section class="wb-settings-triggers__panel" aria-labelledby="help-topics-heading">
+                <h2 class="wb-settings-triggers__panel-title" id="help-topics-heading">Popular topics</h2>
+                <p class="wb-settings-triggers__form-lede">Jump to curated answers your admins ask about most often.</p>
+                <ul class="wb-help-topics">
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-topic"
+                      data-st-help-msg="Preview only — topic guides are not loaded in this demo."
+                    >
+                      <span>Inviting admins and assigning roles</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-topic"
+                      data-st-help-msg="Preview only — topic guides are not loaded in this demo."
+                    >
+                      <span>E-signatures and document packets</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-topic"
+                      data-st-help-msg="Preview only — topic guides are not loaded in this demo."
+                    >
+                      <span>Onboarding checklists and reminders</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-topic"
+                      data-st-help-msg="Preview only — topic guides are not loaded in this demo."
+                    >
+                      <span>Integrations (Slack, Google Calendar)</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-topic"
+                      data-st-help-msg="Preview only — topic guides are not loaded in this demo."
+                    >
+                      <span>Exporting payroll-ready reports</span>
+                      <span aria-hidden="true">→</span>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="wb-settings-triggers__panel" aria-labelledby="help-articles-heading">
+                <h2 class="wb-settings-triggers__panel-title" id="help-articles-heading">From the knowledge base</h2>
+                <p class="wb-settings-triggers__form-lede">Longer walkthroughs with estimated read times.</p>
+                <ul class="wb-help-articles">
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-article"
+                      data-st-help-msg="Preview only — articles open here once your CMS is wired up."
+                    >
+                      <span class="wb-help-article__title">Getting started with your first workspace</span>
+                      <span class="wb-help-article__meta">6 min read · Updated Apr 2, 2026</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-article"
+                      data-st-help-msg="Preview only — articles open here once your CMS is wired up."
+                    >
+                      <span class="wb-help-article__title">Understanding hiring pipeline stages</span>
+                      <span class="wb-help-article__meta">4 min read · Updated Mar 18, 2026</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-article"
+                      data-st-help-msg="Preview only — articles open here once your CMS is wired up."
+                    >
+                      <span class="wb-help-article__title">Trigger notifications: who gets what</span>
+                      <span class="wb-help-article__meta">5 min read · Updated Mar 4, 2026</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      class="wb-help-article"
+                      data-st-help-msg="Preview only — articles open here once your CMS is wired up."
+                    >
+                      <span class="wb-help-article__title">Data retention and export basics</span>
+                      <span class="wb-help-article__meta">7 min read · Updated Feb 21, 2026</span>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+            </div>
+
+            <p class="wb-help-page__feedback" data-st-help-feedback hidden role="status"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="profile-delete-modal" class="wb-dash-reminder wb-profile-delete-modal" hidden role="presentation">
+      <button type="button" class="wb-dash-reminder__backdrop" data-profile-delete-backdrop aria-label="Close"></button>
+      <div
+        class="wb-dash-reminder__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="profile-delete-title"
+        aria-describedby="profile-delete-desc"
+      >
+        <div class="wb-dash-reminder__head">
+          <h2 class="wb-dash-reminder__title" id="profile-delete-title">Delete your account?</h2>
+          <button type="button" class="wb-dash-reminder__close" data-profile-delete-close aria-label="Close dialog">
+            ×
+          </button>
+        </div>
+        <p class="wb-dash-reminder__lede" id="profile-delete-desc">
+          This action is permanent. Please read the following before you continue.
+        </p>
+        <div class="wb-profile-delete-warning" role="alert">
+          <strong>Warning</strong>
+          <ul>
+            <li>Your Workbench HR access for this organization will end immediately.</li>
+            <li>Personal settings, notifications, and activity tied to this login may be removed.</li>
+            <li>This cannot be undone from your side once the account is deleted.</li>
+          </ul>
+        </div>
+        <p class="wb-dash-reminder__lede wb-profile-delete-modal__hint">
+          If you still want to delete your account, type your <strong>password</strong> below to confirm it is really you.
+        </p>
+        <form id="profile-delete-form">
+          <div class="wb-profile-delete-modal__field">
+            <label class="wb-profile-delete-modal__label" for="profile-delete-password">Password</label>
+            <input
+              id="profile-delete-password"
+              type="password"
+              class="wb-input"
+              autocomplete="current-password"
+              aria-describedby="profile-delete-pass-err"
+            />
+            <p class="wb-profile-delete-modal__error" id="profile-delete-pass-err" role="alert" hidden></p>
+          </div>
+          <div class="wb-profile-delete-modal__actions">
+            <button type="button" class="wb-btn wb-btn--muted" data-profile-delete-cancel>Cancel</button>
+            <button type="submit" class="wb-btn wb-btn--danger-outline">Delete my account</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Documents — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wb-app" data-static-view="workspace" hidden>
+      <div class="wb-dash">
+        <aside class="wb-dash__sidebar" aria-label="Workspace navigation">
+          <div class="wb-dash__brand">
+            <a href="index.html#/" class="brand-mark">
+              <img src="assets/logo.png" width="34" height="34" alt="" class="brand-mark__img" />
+              <span class="brand-mark__text wb-dash__brand-text">Workbench HR</span>
+            </a>
+          </div>
+          <div class="wb-dash__cta-row">
+            <a href="create-document-template.html#/create-document/template" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+          </div>
+          <div class="wb-dash__nav-section">
+            <p class="wb-dash__nav-label">Workspace</p>
+            <nav class="wb-dash__nav" aria-label="Workspace">
+              <a href="dashboard.html#/dashboard" class="wb-dash__nav-link" data-ws-nav="/dashboard"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Dashboard</span></a
+              >
+              <a href="employees.html#/employees" class="wb-dash__nav-link" data-ws-nav="/employees"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><circle cx="12" cy="8" r="3.2" fill="currentColor" opacity="0.92" /><path
+                    fill="currentColor"
+                    d="M5 20v-1c0-2.2 3.1-4 7-4s7 1.8 7 4v1"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Employees</span></a
+              >
+              <a href="documents.html#/documents" class="wb-dash__nav-link" data-ws-nav="/documents"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Documents</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__nav-section wb-dash__nav-section--recruiting">
+            <p class="wb-dash__nav-label">Recruiting</p>
+            <nav class="wb-dash__nav" aria-label="Recruiting">
+              <a href="hiring.html#/hiring" class="wb-dash__nav-link" data-ws-nav="/hiring"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M12 2l2.4 7.4h7.8l-6.3 4.6 2.4 7.4L12 16.8 5.7 21.4 8.1 14 1.8 9.4h7.8L12 2z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Hiring</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__sidebar-spacer"></div>
+          <div class="wb-dash__sidebar-footer">
+            <a href="dashboard.html#/assistant" class="wb-dash__btn wb-dash__btn--primary wb-dash__btn--assistant-bar"
+              >AI Assistant
+              <span class="wb-dash__assistant-icon" aria-hidden="true"
+                ><img src="assets/robot.png" alt="" width="20" height="20" class="wb-dash__assistant-img" decoding="async"
+              /></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/documents" hidden>
+          <header class="wb-dash__header">
+            <h1 class="wb-dash__title">Documents</h1>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon"
+              /></a>
+              <span class="wb-dash__avatar" aria-hidden="true"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></span>
+            </div>
+          </header>
+
+          <div class="wb-docs-page">
+            <section class="wb-docs-pulse" aria-labelledby="docs-pulse-heading">
+              <div class="wb-docs-pulse__grid">
+                <div>
+                  <p class="wb-docs-pulse__eyebrow">Library intelligence</p>
+                  <h2 class="wb-docs-pulse__title" id="docs-pulse-heading">Indexed documents and AI suggestions</h2>
+                  <p class="wb-docs-pulse__lede">
+                    Workbench keeps <strong>policies, templates, and signed files</strong> in one searchable library. This
+                    static preview shows how status, categories, and gentle AI nudges would appear once your workspace is
+                    connected.
+                  </p>
+                  <ul class="wb-docs-pulse__tags">
+                    <li>Handbooks</li>
+                    <li>Offer letters</li>
+                    <li>Compliance</li>
+                    <li>Onboarding packs</li>
+                  </ul>
+                </div>
+                <div class="wb-docs-pulse__stats" aria-label="Library snapshot">
+                  <div class="wb-docs-pulse__stat">
+                    <span class="wb-docs-pulse__stat-value">24</span>
+                    <span class="wb-docs-pulse__stat-label">Indexed</span>
+                  </div>
+                  <div class="wb-docs-pulse__stat">
+                    <span class="wb-docs-pulse__stat-value">3</span>
+                    <span class="wb-docs-pulse__stat-label">Needs review</span>
+                  </div>
+                  <div class="wb-docs-pulse__stat">
+                    <span class="wb-docs-pulse__stat-value">5</span>
+                    <span class="wb-docs-pulse__stat-label">AI drafts</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="wb-docs-toolbar" role="search">
+              <label class="wb-docs-search">
+                <span class="wb-docs-search__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path
+                      fill="currentColor"
+                      d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                      opacity="0.55"
+                    />
+                  </svg>
+                </span>
+                <input type="search" class="wb-docs-search__input" placeholder="Search by title, tag, or owner…" autocomplete="off" />
+              </label>
+              <div class="wb-docs-filters" role="group" aria-label="Filter by type">
+                <button type="button" class="wb-docs-filter wb-docs-filter--active" aria-pressed="true">All</button>
+                <button type="button" class="wb-docs-filter" aria-pressed="false">Indexed</button>
+                <button type="button" class="wb-docs-filter" aria-pressed="false">Templates</button>
+                <button type="button" class="wb-docs-filter" aria-pressed="false">Policies</button>
+              </div>
+            </div>
+
+            <section class="wb-docs-suggest" aria-labelledby="docs-suggest-title">
+              <div class="wb-docs-suggest__head">
+                <h2 class="wb-docs-suggest__title" id="docs-suggest-title">Suggested next steps</h2>
+                <p class="wb-docs-suggest__sub">
+                  Shortcuts based on what is already in your library (demo copy — no model is running here).
+                </p>
+              </div>
+              <ul class="wb-docs-suggest__grid">
+                <li>
+                  <a href="create-document-template.html#/create-document/template" class="wb-docs-suggest-card wb-docs-suggest-card--mint">
+                    <h3 class="wb-docs-suggest-card__title">Refresh the employee handbook intro</h3>
+                    <p class="wb-docs-suggest-card__body">
+                      Align tone with your latest remote-work policy and surface changes for legal review.
+                    </p>
+                    <span class="wb-docs-suggest-card__btn">Start draft</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="create-document-template.html#/create-document/templates/company" class="wb-docs-suggest-card">
+                    <h3 class="wb-docs-suggest-card__title">Bundle offer letter + NDA</h3>
+                    <p class="wb-docs-suggest-card__body">
+                      Create a single packet for new hires in Sales — pulled from indexed templates.
+                    </p>
+                    <span class="wb-docs-suggest-card__btn">Open templates</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="dashboard.html#/dashboard/sign-documents" class="wb-docs-suggest-card">
+                    <h3 class="wb-docs-suggest-card__title">Catch up on signatures</h3>
+                    <p class="wb-docs-suggest-card__body">
+                      Two agreements are waiting on managers. Send a reminder from the sign-documents queue.
+                    </p>
+                    <span class="wb-docs-suggest-card__btn">Go to sign queue</span>
+                  </a>
+                </li>
+              </ul>
+            </section>
+
+            <div class="wb-docs-add-banner" role="status">
+              <p class="wb-docs-add-banner__text">
+                <strong>Tip:</strong> Drag files here to upload — they will be scanned, tagged, and indexed automatically
+                (preview only).
+              </p>
+            </div>
+
+            <section class="wb-docs-library" aria-labelledby="docs-library-title">
+              <div class="wb-docs-library__head">
+                <h2 class="wb-docs-library__title" id="docs-library-title">All documents</h2>
+                <a href="create-document-template.html#/create-document/template" class="wb-docs-library__link">+ New from template</a>
+              </div>
+              <div class="wb-docs-table-wrap">
+                <table class="wb-docs-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Status</th>
+                      <th class="wb-docs-table__th-actions" scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="wb-docs-table__tr--added">
+                      <td class="wb-docs-table__cell-name">
+                        <div class="wb-docs-table__name-inner">
+                          <span class="wb-docs-table__file-ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                              <path
+                                fill="currentColor"
+                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z"
+                                opacity="0.55"
+                              />
+                            </svg>
+                          </span>
+                          <span class="wb-docs-table__name">Remote_Work_Policy_v3.pdf</span>
+                        </div>
+                      </td>
+                      <td>Policy</td>
+                      <td><span class="wb-docs-table__status wb-docs-table__status--indexed">Indexed</span></td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action">Open</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="wb-docs-table__cell-name">
+                        <div class="wb-docs-table__name-inner">
+                          <span class="wb-docs-table__file-ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                              <path
+                                fill="currentColor"
+                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z"
+                                opacity="0.55"
+                              />
+                            </svg>
+                          </span>
+                          <span class="wb-docs-table__name">Employee_Handbook_2025.pdf</span>
+                        </div>
+                      </td>
+                      <td>Policy</td>
+                      <td><span class="wb-docs-table__status wb-docs-table__status--indexed">Indexed</span></td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action">Open</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="wb-docs-table__cell-name">
+                        <div class="wb-docs-table__name-inner">
+                          <span class="wb-docs-table__file-ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                              <path
+                                fill="currentColor"
+                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z"
+                                opacity="0.55"
+                              />
+                            </svg>
+                          </span>
+                          <span class="wb-docs-table__name">Offer_Letter_Template.docx</span>
+                        </div>
+                      </td>
+                      <td>Template</td>
+                      <td><span class="wb-docs-table__status wb-docs-table__status--indexed">Indexed</span></td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action">Open</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="wb-docs-table__cell-name">
+                        <div class="wb-docs-table__name-inner">
+                          <span class="wb-docs-table__file-ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                              <path
+                                fill="currentColor"
+                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z"
+                                opacity="0.55"
+                              />
+                            </svg>
+                          </span>
+                          <span class="wb-docs-table__name">NDA_Standard.pdf</span>
+                        </div>
+                      </td>
+                      <td>Legal</td>
+                      <td><span class="wb-docs-table__status wb-docs-table__status--synced">Synced</span></td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action">Open</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="wb-docs-table__cell-name">
+                        <div class="wb-docs-table__name-inner">
+                          <span class="wb-docs-table__file-ic" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
+                              <path
+                                fill="currentColor"
+                                d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z"
+                                opacity="0.55"
+                              />
+                            </svg>
+                          </span>
+                          <span class="wb-docs-table__name">PIP_Checklist_draft.docx</span>
+                        </div>
+                      </td>
+                      <td>Performance</td>
+                      <td><span class="wb-docs-table__status wb-docs-table__status--draft">Draft</span></td>
+                      <td class="wb-docs-table__actions">
+                        <button type="button" class="wb-docs-table__action">Open</button>
+                        <button type="button" class="wb-docs-table__action wb-docs-table__action--danger">Remove</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <div class="wb-create-draft__actions">
+              <a href="create-document-template.html#/create-document/template" class="wb-btn wb-btn--primary">+ Create Document</a>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

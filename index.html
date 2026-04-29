@@ -2,18 +2,920 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WorkBench HR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Marketing home -->
+    <div class="wb-marketing" data-static-view="marketing">
+      <header class="wb-mkt-header">
+        <div class="wb-mkt-header__inner">
+          <a href="#/" class="wb-mkt-logo">
+            <img src="assets/logo.png" width="36" height="36" alt="" />
+            <span class="wb-mkt-logo__text">Workbench HR</span>
+          </a>
+          <nav class="wb-mkt-tabs" aria-label="Site sections">
+            <a
+              href="#home"
+              class="wb-mkt-tab wb-mkt-tab--active"
+              data-mkt-tab="home"
+              data-mkt-tab-link="home"
+              aria-current="location"
+              >Home</a
+            >
+            <a
+              href="#platform"
+              class="wb-mkt-tab"
+              data-mkt-tab="platform"
+              data-mkt-tab-link="platform"
+              data-platform-center="1"
+              >Platform</a
+            >
+            <a href="#request-demo" class="wb-mkt-tab" data-mkt-tab="request-demo" data-mkt-tab-link="request-demo"
+              >Request a demo</a
+            >
+          </nav>
+          <div class="wb-mkt-header__actions">
+            <a href="#/login" class="wb-mkt-ghost">Sign in</a>
+            <a href="#/signup" class="wb-mkt-cta">Get started</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="wb-marketing__main">
+        <div class="wb-page wb-welcome">
+          <section id="home" class="wb-welcome__section wb-welcome__section--hero">
+            <header class="wb-welcome__hero">
+              <p class="wb-eyebrow">People-first operations</p>
+              <div class="wb-welcome__title-row">
+                <h1 class="wb-welcome__title-text">Welcome to Workbench HR</h1>
+                <img src="assets/logo.png" width="48" height="48" alt="" class="wb-welcome__title-logo" />
+              </div>
+              <p class="wb-welcome__tagline">
+                <em>Human Resources all in one place, and at your fingertips</em>
+              </p>
+              <div class="wb-welcome__hero-actions">
+                <a href="#/signup" class="wb-btn wb-btn--primary wb-btn--hero">Let&apos;s Get Started!</a>
+                <a href="#request-demo" class="wb-btn wb-btn--outline wb-btn--hero wb-welcome__request-demo-btn"
+                  >Request a demo</a
+                >
+              </div>
+            </header>
+          </section>
+
+          <section id="customers" class="wb-welcome__section">
+            <ul class="wb-stat-grid">
+              <li class="wb-stat-card">
+                <div class="wb-stat-card__top">
+                  <p class="wb-stat-card__label">Trusted by</p>
+                  <p class="wb-stat-card__metric">12,000+</p>
+                  <p class="wb-stat-card__desc">Small Businesses</p>
+                </div>
+                <div
+                  class="wb-stat-card__photo"
+                  style="background-image: url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&amp;h=720&amp;fit=crop)"
+                  role="img"
+                  aria-hidden="true"
+                ></div>
+              </li>
+              <li class="wb-stat-card">
+                <div class="wb-stat-card__top">
+                  <p class="wb-stat-card__label">Saves users</p>
+                  <p class="wb-stat-card__metric">12 hours</p>
+                  <p class="wb-stat-card__desc">per week on HR tasks</p>
+                </div>
+                <div
+                  class="wb-stat-card__photo"
+                  style="background-image: url(https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=960&amp;h=720&amp;fit=crop)"
+                  role="img"
+                  aria-hidden="true"
+                ></div>
+              </li>
+              <li class="wb-stat-card">
+                <div class="wb-stat-card__top">
+                  <p class="wb-stat-card__label">Built to support teams from</p>
+                  <p class="wb-stat-card__metric">5-100+</p>
+                  <p class="wb-stat-card__desc">at scale</p>
+                </div>
+                <div
+                  class="wb-stat-card__photo"
+                  style="background-image: url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=960&amp;h=720&amp;fit=crop)"
+                  role="img"
+                  aria-hidden="true"
+                ></div>
+              </li>
+              <li class="wb-stat-card">
+                <div class="wb-stat-card__top">
+                  <p class="wb-stat-card__label">Named the</p>
+                  <p class="wb-stat-card__metric">#1 HR</p>
+                  <p class="wb-stat-card__desc">platform for high growth startups by Bloomberg Business</p>
+                </div>
+                <div
+                  class="wb-stat-card__photo"
+                  style="background-image: url(https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=960&amp;h=720&amp;fit=crop)"
+                  role="img"
+                  aria-hidden="true"
+                ></div>
+              </li>
+            </ul>
+          </section>
+
+          <section id="platform" class="wb-welcome__section">
+            <div class="wb-mkt-section-head">
+              <h2 class="wb-mkt-section-head__title">Everything your HR bench needs</h2>
+              <p class="wb-mkt-section-head__lede">
+                One calm workspace for hiring, onboarding, and day-to-day people work, built for teams that are
+                growing fast.
+              </p>
+            </div>
+            <ul class="wb-mkt-feature-grid">
+              <li class="wb-mkt-feature-card">
+                <span class="wb-mkt-feature-card__icon" aria-hidden="true">◎</span>
+                <h3 class="wb-mkt-feature-card__title">Hiring &amp; pipeline</h3>
+                <p class="wb-mkt-feature-card__body">
+                  Post roles, track candidates, and keep your team aligned from first screen to signed offer.
+                </p>
+              </li>
+              <li class="wb-mkt-feature-card">
+                <span class="wb-mkt-feature-card__icon" aria-hidden="true">✓</span>
+                <h3 class="wb-mkt-feature-card__title">Onboarding &amp; tasks</h3>
+                <p class="wb-mkt-feature-card__body">
+                  Structured checklists, owners, and due dates so every new hire lands smoothly.
+                </p>
+              </li>
+              <li class="wb-mkt-feature-card">
+                <span class="wb-mkt-feature-card__icon" aria-hidden="true">📄</span>
+                <h3 class="wb-mkt-feature-card__title">Policies &amp; documents</h3>
+                <p class="wb-mkt-feature-card__body">
+                  Templates, e-signatures, and reminders in one place, with less chasing and fewer gaps.
+                </p>
+              </li>
+            </ul>
+          </section>
+
+          <section id="request-demo" class="wb-welcome__section wb-demo">
+            <div class="wb-demo__inner">
+              <div class="wb-mkt-section-head wb-demo__head">
+                <h2 class="wb-mkt-section-head__title">Request a demo</h2>
+                <p class="wb-mkt-section-head__lede">
+                  Tell us a bit about your team. We&apos;ll follow up with a tailored walkthrough of Workbench HR.
+                </p>
+              </div>
+              <form id="demo-request-form" class="wb-demo__form">
+                <label class="wb-field">
+                  <span class="wb-field__label">Full name</span>
+                  <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
+                </label>
+                <label class="wb-field">
+                  <span class="wb-field__label">Work email</span>
+                  <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
+                </label>
+                <label class="wb-field">
+                  <span class="wb-field__label">Company</span>
+                  <input class="wb-input wb-input--demo" name="company" required autocomplete="organization" />
+                </label>
+                <label class="wb-field">
+                  <span class="wb-field__label">Role (optional)</span>
+                  <input class="wb-input wb-input--demo" name="role" autocomplete="organization-title" />
+                </label>
+                <label class="wb-field wb-field--full">
+                  <span class="wb-field__label">What would you like to see? (optional)</span>
+                  <textarea
+                    class="wb-textarea"
+                    name="message"
+                    rows="4"
+                    placeholder="e.g. onboarding, hiring pipeline, reporting…"
+                  ></textarea>
+                </label>
+                <div class="wb-demo__submit">
+                  <button type="submit" class="wb-btn wb-btn--primary wb-btn--hero">Submit request</button>
+                </div>
+              </form>
+              <p id="demo-request-thanks" class="wb-demo__thanks" role="status" hidden>
+                Thanks! We&apos;ve received your request and will be in touch shortly.
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <footer class="wb-mkt-footer">
+          <div class="wb-mkt-footer__inner">
+            <span class="wb-mkt-footer__brand">© <span id="footer-year"></span> Workbench HR</span>
+            <nav class="wb-mkt-footer__links" aria-label="Site">
+              <a href="#/about">About</a>
+              <a href="#/contact">Contact</a>
+              <a href="#/privacy">Privacy</a>
+              <a href="#/terms">Terms</a>
+              <a href="#/design-reference">Design</a>
+            </nav>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- About -->
+    <div class="wb-legal" data-static-view="about" hidden>
+      <header class="wb-legal__top">
+        <div class="wb-legal__top-inner">
+          <a href="#/" class="wb-legal__back">← Back to home</a>
+          <a href="#/" class="brand-mark">
+            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+          </a>
+        </div>
+      </header>
+      <main class="wb-legal__main">
+        <article class="wb-legal__article">
+          <h1 class="wb-legal__title">About Workbench HR</h1>
+          <section class="wb-legal__section">
+            <p>
+              Workbench HR helps small businesses run people operations in one place—from hiring and onboarding to
+              policies, documents, and day-to-day HR workflows—without losing the nuance of how your team works.
+            </p>
+            <p>
+              We&apos;re building toward a future where HR specialists spend less time chasing paperwork and more time
+              supporting managers and employees.
+            </p>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <!-- Contact -->
+    <div class="wb-legal" data-static-view="contact" hidden>
+      <header class="wb-legal__top">
+        <div class="wb-legal__top-inner">
+          <a href="#/" class="wb-legal__back">← Back to home</a>
+          <a href="#/" class="brand-mark">
+            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+          </a>
+        </div>
+      </header>
+      <main class="wb-legal__main">
+        <article class="wb-legal__article">
+          <h1 class="wb-legal__title">Contact</h1>
+          <section class="wb-legal__section">
+            <p>
+              For product questions or partnership inquiries, reach out here (demo form — connect your backend when
+              ready). For a guided tour, you can also
+              <a href="#request-demo" class="wb-link wb-link--underline">request a demo</a>
+              from the home page.
+            </p>
+            <form id="contact-form" class="wb-demo__form wb-demo__form--contact">
+              <label class="wb-field">
+                <span class="wb-field__label">Name</span>
+                <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Email</span>
+                <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
+              </label>
+              <label class="wb-field wb-field--full">
+                <span class="wb-field__label">Message</span>
+                <textarea class="wb-textarea" name="message" rows="4" required></textarea>
+              </label>
+              <div class="wb-demo__submit">
+                <button type="submit" class="wb-btn wb-btn--primary">Send message</button>
+              </div>
+            </form>
+            <p id="contact-thanks" class="wb-demo__thanks" role="status" hidden>Thanks — we&apos;ll get back to you shortly.</p>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <!-- Privacy -->
+    <div class="wb-legal" data-static-view="privacy" hidden>
+      <header class="wb-legal__top">
+        <div class="wb-legal__top-inner">
+          <a href="#/" class="wb-legal__back">← Back to home</a>
+          <a href="#/" class="brand-mark">
+            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+          </a>
+        </div>
+      </header>
+      <main class="wb-legal__main">
+        <article class="wb-legal__article">
+          <h1 class="wb-legal__title">Privacy Policy</h1>
+          <p class="wb-legal__meta">Last updated: April 12, 2026</p>
+          <p class="wb-legal__notice">
+            <strong>Note:</strong> This is sample placeholder content for development and layout only. It does not
+            constitute legal advice and will be replaced with final policies before launch.
+          </p>
+          <section class="wb-legal__section">
+            <h2>1. Introduction</h2>
+            <p>
+              Workbench HR (“we,” “our,” or “us”) respects your privacy. This Privacy Policy describes how we collect,
+              use, store, and protect information when you visit our website, use our products, or interact with us
+              online. By using our services, you agree to the practices described here.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>2. Information we collect</h2>
+            <p>We may collect the following categories of information, depending on how you use Workbench HR:</p>
+            <ul>
+              <li>
+                <strong>Account and profile data:</strong> name, work email, company name, role, and preferences you
+                provide when you sign up or update your profile.
+              </li>
+              <li>
+                <strong>Usage data:</strong> pages viewed, features used, approximate location derived from IP address,
+                device type, browser version, and timestamps.
+              </li>
+              <li>
+                <strong>Support communications:</strong> messages you send to us, including attachments or screenshots
+                you choose to share when troubleshooting.
+              </li>
+              <li>
+                <strong>HR-related content you upload:</strong> documents, templates, or employee data you store in the
+                product, processed solely to provide the service you have configured.
+              </li>
+            </ul>
+          </section>
+          <section class="wb-legal__section">
+            <h2>3. How we use information</h2>
+            <p>We use collected information to:</p>
+            <ul>
+              <li>Provide, maintain, and improve Workbench HR;</li>
+              <li>Authenticate users, prevent fraud, and protect security;</li>
+              <li>Send transactional emails, product updates, and (where permitted) marketing communications;</li>
+              <li>Analyze aggregated usage trends to improve usability and performance;</li>
+              <li>Comply with legal obligations and enforce our agreements.</li>
+            </ul>
+          </section>
+          <section class="wb-legal__section">
+            <h2>4. Sharing and disclosure</h2>
+            <p>
+              We do not sell your personal information. We may share data with subprocessors who assist us (e.g.,
+              hosting, email delivery, analytics) under strict confidentiality and data-processing terms. We may disclose
+              information if required by law, court order, or to protect the rights, property, or safety of our users or
+              the public.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>5. Data retention</h2>
+            <p>
+              We retain information for as long as your account is active or as needed to provide services. After closure
+              of an account, we may retain certain records for a limited period for legal, tax, or security purposes,
+              after which data is deleted or anonymized according to our retention schedule.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>6. Your rights and choices</h2>
+            <p>
+              Depending on your jurisdiction, you may have the right to access, correct, delete, or export your personal
+              data, or to object to certain processing. You may opt out of marketing emails via the unsubscribe link. To
+              exercise other rights, contact us using the details in Section 10.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>7. Security</h2>
+            <p>
+              We implement administrative, technical, and organizational measures designed to protect data against
+              unauthorized access, alteration, or loss. No method of transmission over the Internet is completely
+              secure; we encourage strong passwords and careful handling of credentials.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>8. International transfers</h2>
+            <p>
+              If you access our services from outside the country where our servers are located, your information may
+              be transferred across borders. Where required, we use appropriate safeguards such as standard contractual
+              clauses.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>9. Children’s privacy</h2>
+            <p>
+              Workbench HR is not directed at children under 16. We do not knowingly collect personal information from
+              children. If you believe we have collected such information, please contact us so we can delete it.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>10. Changes to this policy</h2>
+            <p>
+              We may update this Privacy Policy from time to time. We will post the revised version on this page and
+              update the “Last updated” date. Material changes may be communicated by email or in-product notice where
+              appropriate.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>11. Contact</h2>
+            <p>
+              For privacy-related questions or requests, contact:
+              <a href="mailto:privacy@workbenchhr.example">privacy@workbenchhr.example</a> (placeholder address for sample
+              content).
+            </p>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <!-- Terms -->
+    <div class="wb-legal" data-static-view="terms" hidden>
+      <header class="wb-legal__top">
+        <div class="wb-legal__top-inner">
+          <a href="#/" class="wb-legal__back">← Back to home</a>
+          <a href="#/" class="brand-mark">
+            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+          </a>
+        </div>
+      </header>
+      <main class="wb-legal__main">
+        <article class="wb-legal__article">
+          <h1 class="wb-legal__title">Terms of Service</h1>
+          <p class="wb-legal__meta">Last updated: April 12, 2026</p>
+          <p class="wb-legal__notice">
+            <strong>Note:</strong> This is sample placeholder content for development and layout only. It does not
+            constitute legal advice and will be replaced with final policies before launch.
+          </p>
+          <section class="wb-legal__section">
+            <h2>1. Agreement to terms</h2>
+            <p>
+              These Terms of Service (“Terms”) govern your access to and use of Workbench HR’s websites, applications,
+              and related services (collectively, the “Services”). By creating an account, clicking “I agree,” or using
+              the Services, you agree to these Terms on behalf of yourself or the organization you represent.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>2. Description of services</h2>
+            <p>
+              Workbench HR provides cloud-based tools to help teams manage HR workflows such as hiring, onboarding,
+              documents, and related tasks. Features may change over time; we may add, modify, or discontinue
+              functionality with reasonable notice where practicable.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>3. Accounts and eligibility</h2>
+            <p>
+              You must provide accurate registration information and keep your credentials confidential. You are
+              responsible for all activity under your account. You must be at least 18 years old and authorized to bind
+              your organization if you register on its behalf.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>4. Acceptable use</h2>
+            <p>You agree not to:</p>
+            <ul>
+              <li>Use the Services in violation of law or third-party rights;</li>
+              <li>Attempt to gain unauthorized access to systems, data, or other users’ accounts;</li>
+              <li>Upload malware, excessive automated traffic, or content intended to disrupt the Services;</li>
+              <li>Reverse engineer or scrape the Services except as permitted by applicable law;</li>
+              <li>Use the Services to build a competing product without our written consent.</li>
+            </ul>
+          </section>
+          <section class="wb-legal__section">
+            <h2>5. Customer data</h2>
+            <p>
+              You retain ownership of data you submit to the Services (“Customer Data”). You grant us a limited license
+              to host, process, and display Customer Data solely to provide and improve the Services as described in your
+              agreement and our Privacy Policy. You represent that you have all rights necessary to submit Customer Data.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>6. Intellectual property</h2>
+            <p>
+              Workbench HR and its licensors own all rights in the Services, branding, and documentation. We grant you a
+              non-exclusive, non-transferable license to use the Services during your subscription term. Feedback you
+              provide may be used without obligation to you.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>7. Third-party services</h2>
+            <p>
+              The Services may integrate with third-party tools (e.g., calendars, identity providers). Your use of those
+              tools is subject to the third parties’ terms. We are not responsible for third-party services or content.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>8. Disclaimers</h2>
+            <p>
+              THE SERVICES ARE PROVIDED “AS IS” AND “AS AVAILABLE.” TO THE MAXIMUM EXTENT PERMITTED BY LAW, WE DISCLAIM
+              ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND
+              NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICES WILL BE UNINTERRUPTED OR ERROR-FREE.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>9. Limitation of liability</h2>
+            <p>
+              TO THE MAXIMUM EXTENT PERMITTED BY LAW, WORKBENCH HR AND ITS AFFILIATES WILL NOT BE LIABLE FOR ANY INDIRECT,
+              INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, OR GOODWILL. OUR
+              AGGREGATE LIABILITY ARISING OUT OF THESE TERMS WILL NOT EXCEED THE AMOUNT YOU PAID US FOR THE SERVICES IN
+              THE TWELVE MONTHS BEFORE THE CLAIM (OR ONE HUNDRED DOLLARS IF NO FEES APPLY), UNLESS APPLICABLE LAW
+              REQUIRES OTHERWISE.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>10. Indemnification</h2>
+            <p>
+              You will defend and indemnify Workbench HR against claims arising from your use of the Services, your
+              Customer Data, or your violation of these Terms, subject to our right to control the defense of matters
+              implicating our intellectual property.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>11. Term and termination</h2>
+            <p>
+              These Terms remain in effect while you use the Services. We may suspend or terminate access for material
+              breach, legal risk, or non-payment. You may stop using the Services at any time. Sections intended to
+              survive termination (e.g., liability, indemnity) will survive.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>12. Governing law</h2>
+            <p>
+              These Terms are governed by the laws of the State of Delaware, USA, excluding conflict-of-law rules,
+              unless a different governing law is specified in a signed order form. Courts in that jurisdiction will
+              have exclusive venue, subject to mandatory consumer protections in your country of residence.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>13. Changes</h2>
+            <p>
+              We may modify these Terms by posting an updated version and revising the “Last updated” date. Continued use
+              after changes become effective constitutes acceptance. For material changes, we may provide additional
+              notice as required by law.
+            </p>
+          </section>
+          <section class="wb-legal__section">
+            <h2>14. Contact</h2>
+            <p>
+              Questions about these Terms:
+              <a href="mailto:legal@workbenchhr.example">legal@workbenchhr.example</a> (placeholder address for sample
+              content).
+            </p>
+          </section>
+        </article>
+      </main>
+    </div>
+
+    <!-- Login -->
+    <div class="wb-split" data-static-view="login" hidden>
+      <a href="#/" class="wb-split__home" aria-label="Back to homepage"><span class="wb-split__home-arrow" aria-hidden="true">←</span> Home</a>
+      <div
+        class="wb-split__visual"
+        style="background-image: url(https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1200&amp;h=1600&amp;fit=crop)"
+        role="img"
+        aria-label="Colleagues greeting each other in a bright workspace"
+      ></div>
+      <div class="wb-split__panel">
+        <div class="wb-split__inner wb-split__card">
+          <span class="brand-mark">
+            <img src="assets/logo.png" width="44" height="44" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text">Workbench HR</span>
+          </span>
+          <p class="wb-split__tagline">
+            Welcome back! Sign in to pick up where you left off. Your team, tasks, and HR tools are right here when you
+            need them.
+          </p>
+          <p data-static-auth-msg class="wb-demo__thanks" hidden>
+            Static preview: there is no server. In the full app, signing in would continue to your workspace.
+          </p>
+          <form class="wb-form" data-static-auth-form>
+            <label class="wb-field">
+              <span class="wb-field__label">Email</span>
+              <input class="wb-input" name="email" type="email" autocomplete="email" />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Password</span>
+              <input class="wb-input" name="password" type="password" autocomplete="current-password" />
+            </label>
+            <div class="wb-split__form-row">
+              <label class="wb-split__remember">
+                <input type="checkbox" name="remember" checked />
+                <span>Keep me signed in</span>
+              </label>
+              <a href="#/forgot-password" class="wb-split__forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Sign in</button>
+          </form>
+          <p class="wb-split__footer">
+            New to Workbench HR? <a href="#/signup" class="wb-link">Create an account</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup -->
+    <div class="wb-split" data-static-view="signup" hidden>
+      <a href="#/" class="wb-split__home" aria-label="Back to homepage"><span class="wb-split__home-arrow" aria-hidden="true">←</span> Home</a>
+      <div
+        class="wb-split__visual"
+        style="background-image: url(https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&amp;h=1600&amp;fit=crop)"
+        role="img"
+        aria-label="Team collaborating in an office"
+      ></div>
+      <div class="wb-split__panel">
+        <div class="wb-split__inner wb-split__card">
+          <span class="brand-mark">
+            <img src="assets/logo.png" width="44" height="44" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text">Workbench HR</span>
+          </span>
+          <p class="wb-split__tagline">Finally, an HR tool that works as hard as you do!</p>
+          <p data-static-auth-msg class="wb-demo__thanks" hidden>
+            Static preview: there is no server. In the full app, you would continue to onboarding.
+          </p>
+          <form class="wb-form" data-static-auth-form>
+            <label class="wb-field">
+              <span class="wb-field__label">Name</span>
+              <input class="wb-input" name="name" autocomplete="name" />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Email</span>
+              <input class="wb-input" name="email" type="email" autocomplete="email" />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Password</span>
+              <input class="wb-input" name="password" type="password" autocomplete="new-password" />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Company Name</span>
+              <input class="wb-input" name="company" autocomplete="organization" />
+            </label>
+            <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Create Account</button>
+          </form>
+          <p class="wb-split__footer">
+            Already have an account? <a href="#/login" class="wb-link">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forgot password -->
+    <div class="wb-split" data-static-view="forgot-password" hidden>
+      <a href="#/" class="wb-split__home" aria-label="Back to homepage"><span class="wb-split__home-arrow" aria-hidden="true">←</span> Home</a>
+      <div
+        class="wb-split__visual"
+        style="background-image: url(https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&amp;h=1600&amp;fit=crop)"
+        role="img"
+        aria-label="Bright modern office workspace"
+      ></div>
+      <div class="wb-split__panel">
+        <div class="wb-split__inner wb-split__card">
+          <span class="brand-mark">
+            <img src="assets/logo.png" width="44" height="44" alt="" class="brand-mark__img" />
+            <span class="brand-mark__text">Workbench HR</span>
+          </span>
+          <p class="wb-split__tagline" id="forgot-tagline">
+            No worries, it happens. Enter your work email and we will send you a link to reset your password.
+          </p>
+          <form id="forgot-form" class="wb-form">
+            <label class="wb-field">
+              <span class="wb-field__label">Work email</span>
+              <input class="wb-input" name="email" type="email" required autocomplete="email" />
+            </label>
+            <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Send reset link</button>
+          </form>
+          <div id="forgot-after" hidden>
+            <p class="wb-split__tagline">
+              Check your inbox. We sent a link to reset your password if an account exists for that email.
+            </p>
+            <div class="wb-forgot__actions">
+              <a href="#/login" class="wb-btn wb-btn--dark wb-btn--block">Back to sign in</a>
+            </div>
+          </div>
+          <p class="wb-split__footer">
+            Remember your password? <a href="#/login" class="wb-link">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onboarding flows -->
+    <div class="wb-app" data-static-view="onboarding" hidden>
+      <div class="wb-page wb-onboarding wb-goals-page" data-ob-path="/onboarding/goal" hidden>
+        <header class="wb-goals__header">
+          <p class="wb-goals__eyebrow">Get started</p>
+          <h1 class="wb-onboarding__title wb-goals__title">What&apos;s your goal today?</h1>
+          <p class="wb-onboarding__sub wb-goals__sub">
+            Pick one path to begin. You can finish the rest of onboarding anytime from Settings.
+          </p>
+        </header>
+        <ul class="wb-goals__grid" role="list" id="goals-grid">
+          <li class="wb-goals__cell">
+            <button type="button" class="wb-goals-card" data-goal="docs" aria-pressed="false">
+              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">📄</span></span>
+              <span class="wb-goals-card__title">Generate documents</span>
+              <span class="wb-goals-card__hint">Policies, letters, and HR packs tailored to your workplace.</span>
+            </button>
+          </li>
+          <li class="wb-goals__cell">
+            <button type="button" class="wb-goals-card" data-goal="dashboard" aria-pressed="false">
+              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">▦</span></span>
+              <span class="wb-goals-card__title">Viewing my employee dashboard</span>
+              <span class="wb-goals-card__hint">See teams, roles, and people data in one calm workspace.</span>
+            </button>
+          </li>
+          <li class="wb-goals__cell">
+            <button type="button" class="wb-goals-card" data-goal="notifications" aria-pressed="false">
+              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">🔔</span></span>
+              <span class="wb-goals-card__title">Set up trigger notifications</span>
+              <span class="wb-goals-card__hint">Decide when WorkBench nudges you about reviews and tasks.</span>
+            </button>
+          </li>
+        </ul>
+        <div class="wb-goals__actions">
+          <button type="button" class="wb-btn wb-btn--primary wb-goals__next" id="goals-continue" disabled>
+            Continue <span aria-hidden>›</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="wb-page wb-onboarding wb-privacy" data-ob-path="/onboarding/privacy" hidden>
+        <div class="wb-privacy__top">
+          <a href="settings.html#/settings/profile" class="skip-for-now"><span>Skip for now</span><span class="skip-for-now__icon" aria-hidden="true">→</span></a>
+        </div>
+        <h1 class="wb-onboarding__title wb-privacy__title">Data &amp; Privacy Overview</h1>
+        <p class="wb-privacy__lede">WorkBench HR uses intelligent software to learn your company&apos;s specific needs and tone!</p>
+        <h2 class="wb-privacy__section-title">Here&apos;s how your data works for you:</h2>
+        <ul class="wb-privacy-grid">
+          <li class="wb-privacy-card">
+            <div class="wb-privacy-card__icon" aria-hidden="true"><img src="assets/dp1.png" alt="" width="40" height="40" /></div>
+            <div>
+              <h3 class="wb-privacy-card__title">1. Core Service Functionality</h3>
+              <p class="wb-privacy-card__body">We use employee data to power essential HR features.</p>
+            </div>
+          </li>
+          <li class="wb-privacy-card">
+            <div class="wb-privacy-card__icon" aria-hidden="true"><img src="assets/dp2.png" alt="" width="40" height="40" /></div>
+            <div>
+              <h3 class="wb-privacy-card__title">2. Analytics &amp; Performance Insights</h3>
+              <p class="wb-privacy-card__body">De-identified data helps generate WorkBench Insights.</p>
+            </div>
+          </li>
+          <li class="wb-privacy-card">
+            <div class="wb-privacy-card__icon" aria-hidden="true"><img src="assets/dp3.png" alt="" width="40" height="40" /></div>
+            <div>
+              <h3 class="wb-privacy-card__title">3. Security &amp; Fraud Prevention</h3>
+              <p class="wb-privacy-card__body">Login activity and logs help us detect unauthorized access.</p>
+            </div>
+          </li>
+          <li class="wb-privacy-card">
+            <div class="wb-privacy-card__icon" aria-hidden="true"><img src="assets/dp4.png" alt="" width="40" height="40" /></div>
+            <div>
+              <h3 class="wb-privacy-card__title">4. Personalization &amp; Platform Optimization</h3>
+              <p class="wb-privacy-card__body">We analyze usage to personalize your dashboard.</p>
+            </div>
+          </li>
+        </ul>
+        <div class="wb-privacy__footer">
+          <a href="#/terms" class="wb-link wb-link--underline">View the full terms and conditions</a>
+          <div class="wb-privacy__buttons">
+            <a href="#/onboarding/opt-out-confirm" class="wb-btn wb-btn--muted">Opt Out</a>
+            <a href="#/onboarding/learning" class="wb-btn wb-btn--primary">Accept &amp; Continue <span aria-hidden>›</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wb-page wb-onboarding wb-sync" data-ob-path="/onboarding/learning" hidden>
+        <div class="wb-sync__top">
+          <a href="settings.html#/settings/profile" class="skip-for-now"><span>Skip for now</span><span class="skip-for-now__icon" aria-hidden="true">→</span></a>
+        </div>
+        <h1 class="wb-onboarding__title wb-sync__title">Sync Your Company DNA</h1>
+        <p class="wb-onboarding__sub wb-sync__lede">
+          To begin generating documentation tailored to your business, please upload a few initial files.
+        </p>
+        <div class="wb-sync__drop" role="presentation">
+          <div class="wb-sync__drop-icon" aria-hidden="true">⬆</div>
+          <p class="wb-sync__drop-title">Drag &amp; drop files here</p>
+          <p class="wb-sync__drop-hint">PDF, DOC, DOCX · static preview</p>
+        </div>
+        <ul class="wb-sync__files" aria-label="Sample files">
+          <li>Employee_Handbook.pdf</li>
+          <li>Offer_Letter.pdf</li>
+          <li>Employee_Contract.pdf</li>
+        </ul>
+        <div class="wb-onboarding__actions">
+          <a href="#/onboarding/training" class="wb-btn wb-btn--primary">Continue <span aria-hidden>›</span></a>
+        </div>
+      </div>
+
+      <div class="wb-page wb-onboarding wb-optout" data-ob-path="/onboarding/opt-out-confirm" hidden>
+        <h1 class="wb-onboarding__title wb-optout__title">Are you sure?</h1>
+        <p class="wb-optout__lede">
+          By opting out, WorkBench will no longer be able to draft documents using your company&apos;s specific tone.
+        </p>
+        <ul class="wb-optout__cards">
+          <li class="wb-optout__card">
+            <div class="wb-optout__card-icon"><img src="assets/oo1.png" alt="" width="28" height="28" /></div>
+            <p class="wb-optout__card-text"><strong>Custom Tone Analysis:</strong> The AI will no longer mimic your brand voice.</p>
+          </li>
+          <li class="wb-optout__card">
+            <div class="wb-optout__card-icon"><img src="assets/oo2.png" alt="" width="28" height="28" /></div>
+            <p class="wb-optout__card-text"><strong>Policy Auto-fill:</strong> Automated drafting will be disabled.</p>
+          </li>
+          <li class="wb-optout__card">
+            <div class="wb-optout__card-icon"><img src="assets/oo3.png" alt="" width="28" height="28" /></div>
+            <p class="wb-optout__card-text"><strong>Document Tailoring:</strong> You&apos;ll lose hyper-personalized drafts.</p>
+          </li>
+        </ul>
+        <div class="wb-optout__footer">
+          <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--muted wb-optout__btn-back"><span aria-hidden>‹</span> Opt Out Anyway</a>
+          <a href="#/onboarding/learning" class="wb-btn wb-btn--primary">Stay Synced <span aria-hidden>›</span></a>
+        </div>
+      </div>
+
+      <div class="wb-page wb-onboarding wb-training" data-ob-path="/onboarding/training" hidden>
+        <div class="wb-privacy__top">
+          <a href="dashboard.html#/dashboard" class="skip-for-now"><span>Skip for now</span><span class="skip-for-now__icon" aria-hidden="true">→</span></a>
+        </div>
+        <h1 class="wb-onboarding__title wb-training__title">Got it! Your training is in progress!</h1>
+        <p class="wb-onboarding__sub wb-training__sub">
+          While we finish your setup, follow your progress using the WorkBenchHR training widget.
+        </p>
+        <div class="wb-training__layout">
+          <div class="wb-training__card">
+            <div class="wb-training__ring-wrap" aria-label="30 percent complete">
+              <svg class="wb-training__ring" viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="wb-training__ring-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10" />
+                <circle class="wb-training__ring-fill" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="228.71" transform="rotate(-90 60 60)" />
+              </svg>
+              <span class="wb-training__ring-label">30%</span>
+            </div>
+            <h2 class="wb-training__card-title">HR DNA Syncing...</h2>
+            <p class="wb-training__card-desc">Analyzing more documents to learn your company voice.</p>
+            <p class="wb-training__card-foot">5/13 Documents Synced</p>
+          </div>
+          <div class="wb-training__preview" aria-hidden="true">
+            <div class="wb-training__preview-sidebar"><span class="wb-training__preview-logo"></span></div>
+            <div class="wb-training__preview-main"><span class="wb-training__preview-bar"></span></div>
+          </div>
+        </div>
+        <div class="wb-onboarding__actions wb-training__actions">
+          <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--primary">Let&apos;s Get Started! <span aria-hidden>›</span></a>
+        </div>
+      </div>
+
+      <div class="wb-page wb-onboarding wb-notify" data-ob-path="/onboarding/notifications" hidden>
+        <div class="wb-privacy__top">
+          <a href="dashboard.html#/dashboard" class="skip-for-now"><span>Skip for now</span><span class="skip-for-now__icon" aria-hidden="true">→</span></a>
+        </div>
+        <h1 class="wb-onboarding__title">Set Up Trigger Notifications</h1>
+        <p class="wb-notify__sub">Receive notifications for key HR actions automatically.</p>
+        <div class="wb-notify-feature wb-notify-feature--on" id="notify-master-wrap">
+          <div class="wb-notify-feature__icon" aria-hidden="true">🔔</div>
+          <div class="wb-notify-feature__text">
+            <h2 class="wb-notify-feature__title">Trigger Notifications</h2>
+            <p class="wb-notify-feature__desc">Create custom notifications for HR actions you&apos;ll be alerted.</p>
+          </div>
+          <button type="button" class="wb-toggle wb-toggle--on" id="notify-master-toggle" aria-pressed="true" aria-label="Trigger notifications">
+            <span class="wb-toggle__knob"></span>
+          </button>
+        </div>
+        <ul class="wb-notify-list">
+          <li class="wb-notify-row">
+            <div class="wb-notify-row__body">
+              <h3 class="wb-notify-row__title">Upcoming Review</h3>
+              <p class="wb-notify-row__desc">Notify me one week before employee review is due.</p>
+            </div>
+            <label class="wb-select-wrap"><span class="visually-hidden">Frequency</span><select class="wb-select"><option>Weekly Summary</option><option>Instant</option><option>Off</option></select></label>
+          </li>
+          <li class="wb-notify-row">
+            <div class="wb-notify-row__body">
+              <h3 class="wb-notify-row__title">Employee Compliance Reminders</h3>
+              <p class="wb-notify-row__desc">Alerts for expiring certifications and policy signatures.</p>
+            </div>
+            <label class="wb-select-wrap"><select class="wb-select"><option>Instant Notification</option><option>Weekly Summary</option><option>Off</option></select></label>
+          </li>
+        </ul>
+        <div class="wb-privacy__footer wb-notify__footer">
+          <div class="wb-privacy__buttons">
+            <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--muted">Opt Out</a>
+            <a href="settings.html#/settings/trigger-notifications?welcome=1" class="wb-btn wb-btn--primary">Let&apos;s Get Started! <span aria-hidden>›</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design reference (Figma) -->
+    <div class="wb-app" data-static-view="design-reference" hidden>
+      <div class="wb-figma-page">
+        <header class="wb-figma-page__bar">
+          <a href="#/" class="wb-link">← Back to Welcome</a>
+          <span class="wb-figma-page__hint">Interactive prototype (Figma embed)</span>
+        </header>
+        <div class="wb-figma-page__frame">
+          <iframe
+            title="WorkBench HR: Figma prototype"
+            class="wb-figma-page__iframe"
+            allowfullscreen=""
+            src="https://embed.figma.com/proto/ZgC63LSLg3Tqs7MEFHCRZc/WorkBench-HR-UI?node-id=229-17&amp;scaling=scale-down&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;embed-host=share"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
   </body>
 </html>
