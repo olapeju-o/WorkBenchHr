@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hiring — Workbench HR</title>
+    <title>Applicants — Workbench HR</title>
     <link rel="icon" href="assets/logo.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,9 +76,16 @@
           </div>
         </aside>
 
-        <main class="wb-dash__main" data-ws-main="/hiring" hidden>
+        <main class="wb-dash__main" data-ws-main="/applicants" hidden>
           <header class="wb-dash__header">
-            <h1 class="wb-dash__title">Hiring</h1>
+            <div class="wb-dash__header-lead">
+              <h1 class="visually-hidden" data-applicants-page-heading>Applicants</h1>
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="hiring.html#/hiring" class="wb-create-doc__crumb-link">Hiring</a
+                ><span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span
+                ><span class="wb-create-doc__crumb-current" data-applicants-role-title>Front of House (FOH) Staff</span>
+              </nav>
+            </div>
             <div class="wb-dash__header-actions">
               <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
                 ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
@@ -95,7 +102,8 @@
               /></a>
             </div>
           </header>
-          <div class="wb-hiring">
+
+          <div class="wb-applicants">
             <div class="wb-hiring__toolbar">
               <label class="wb-hiring__search">
                 <span class="wb-hiring__search-icon" aria-hidden="true">
@@ -107,7 +115,13 @@
                     />
                   </svg>
                 </span>
-                <input type="search" placeholder="Search roles…" class="wb-hiring__search-input" />
+                <input
+                  type="search"
+                  data-applicants-search
+                  placeholder="Search &apos;Front of House (FOH) Staff&apos; applicants…"
+                  class="wb-hiring__search-input"
+                  autocomplete="off"
+                />
               </label>
               <div class="wb-hiring__toolbar-mid">
                 <span class="wb-hiring__sort-label">Sort by</span>
@@ -115,7 +129,7 @@
                   <button type="button" class="wb-hiring__sort-pill wb-hiring__sort-pill--active" aria-pressed="true">
                     Name A-Z
                   </button>
-                  <button type="button" class="wb-hiring__sort-pill" aria-pressed="false">Date joined</button>
+                  <button type="button" class="wb-hiring__sort-pill" aria-pressed="false">Date Joined</button>
                 </div>
               </div>
               <div class="wb-hiring__view-toggles" role="group" aria-label="View layout">
@@ -132,152 +146,97 @@
               </div>
             </div>
 
-            <div class="wb-hiring__body">
-              <aside class="wb-hiring__filters" aria-label="Filters">
-                <div class="wb-hiring__filter-block">
-                  <div class="wb-hiring__filter-head">
-                    <h2 class="wb-hiring__filter-title">Role</h2>
-                    <button type="button" class="wb-hiring__filter-clear">Clear</button>
-                  </div>
-                  <input type="search" class="wb-hiring__filter-search" placeholder="Search roles…" />
-                  <ul class="wb-hiring__checks">
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" checked />
-                        <span>Head Chef</span>
-                        <span class="wb-hiring__check-count">3</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Cashier</span>
-                        <span class="wb-hiring__check-count">6</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Kitchen Staff</span>
-                        <span class="wb-hiring__check-count">8</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Cleaning</span>
-                        <span class="wb-hiring__check-count">4</span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div class="wb-hiring__filter-block">
-                  <div class="wb-hiring__filter-head">
-                    <h2 class="wb-hiring__filter-title">Contract type</h2>
-                    <button type="button" class="wb-hiring__filter-clear">Clear</button>
-                  </div>
-                  <ul class="wb-hiring__checks">
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Intern</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" checked />
-                        <span>Full-time</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Part-time</span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div class="wb-hiring__filter-block">
-                  <div class="wb-hiring__filter-head">
-                    <h2 class="wb-hiring__filter-title">Role status</h2>
-                    <button type="button" class="wb-hiring__filter-clear">Clear</button>
-                  </div>
-                  <ul class="wb-hiring__checks">
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" checked />
-                        <span>Active</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Inactive</span>
-                      </label>
-                    </li>
-                    <li>
-                      <label class="wb-hiring__check">
-                        <input type="checkbox" />
-                        <span>Archived</span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-              </aside>
+            <p class="wb-applicants__count" data-applicants-count>
+              Showing <strong>15</strong> &lsquo;Front of House (FOH) Staff&rsquo; candidates.
+            </p>
 
-              <div class="wb-hiring__results">
-                <p class="wb-hiring__count">Showing <strong>2</strong> postings</p>
-                <div class="wb-hiring__cards wb-hiring__cards--list">
-                  <article class="wb-hiring-card">
-                    <div class="wb-hiring-card__top">
-                      <span class="wb-hiring-card__status-pill">Status: Role open</span>
-                    </div>
-                    <h3 class="wb-hiring-card__title">Front of House (FOH) Staff</h3>
-                    <dl class="wb-hiring-card__meta">
-                      <div>
-                        <dt>Date posted</dt>
-                        <dd>01/03/2026</dd>
-                      </div>
-                      <div>
-                        <dt>Timeline</dt>
-                        <dd>On-track to meet March 1st Deadline</dd>
-                      </div>
-                      <div>
-                        <dt>Applicants</dt>
-                        <dd>15</dd>
-                      </div>
-                    </dl>
-                    <div class="wb-hiring-card__bar-track" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">
-                      <span class="wb-hiring-card__bar-fill" style="width: 78%"></span>
-                    </div>
-                    <a href="applicants.html#/applicants?role=foh" class="wb-hiring-card__cta">View all applicants <span aria-hidden="true">→</span></a>
-                  </article>
-                  <article class="wb-hiring-card">
-                    <div class="wb-hiring-card__top">
-                      <span class="wb-hiring-card__status-pill">Status: Role open</span>
-                    </div>
-                    <h3 class="wb-hiring-card__title">Culinary Lead</h3>
-                    <dl class="wb-hiring-card__meta">
-                      <div>
-                        <dt>Date posted</dt>
-                        <dd>02/10/2026</dd>
-                      </div>
-                      <div>
-                        <dt>Timeline</dt>
-                        <dd class="wb-hiring-card__dd--risk">At-Risk, Missed 48hr contact goal</dd>
-                      </div>
-                      <div>
-                        <dt>Applicants</dt>
-                        <dd>4</dd>
-                      </div>
-                    </dl>
-                    <div class="wb-hiring-card__bar-track" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
-                      <span class="wb-hiring-card__bar-fill wb-hiring-card__bar-fill--risk" style="width: 38%"></span>
-                    </div>
-                    <a href="applicants.html#/applicants?role=culinary" class="wb-hiring-card__cta">View all applicants <span aria-hidden="true">→</span></a>
-                  </article>
+            <div class="wb-applicants__cards">
+              <article class="wb-applicant-card">
+                <img
+                  class="wb-applicant-card__photo"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="56"
+                  height="56"
+                />
+                <div class="wb-applicant-card__main">
+                  <div class="wb-applicant-card__headline">
+                    <h2 class="wb-applicant-card__name">Olivia Thompson</h2>
+                    <p class="wb-applicant-card__role">Front of House (FOH) Staff candidate</p>
+                  </div>
+                  <p class="wb-applicant-card__status"><span class="wb-applicant-card__status-pill">Status: Interview In-Progress</span></p>
+                  <blockquote class="wb-applicant-card__quote">
+                    Matches all core competencies for guest-facing service; strong upsell language in prior experience.
+                  </blockquote>
+                  <div class="wb-applicant-card__meta-row">
+                    <span class="wb-applicant-card__meta-item" aria-label="Notes"><span aria-hidden="true">📝</span> 4 Notes</span>
+                    <span class="wb-applicant-card__meta-item" aria-label="Comments"><span aria-hidden="true">💬</span> 2 Comments</span>
+                    <button type="button" class="wb-applicant-card__more" aria-label="More actions">⋯</button>
+                  </div>
                 </div>
-              </div>
+                <div class="wb-applicant-card__side">
+                  <p class="wb-applicant-card__match"><span class="wb-applicant-card__match-num">92%</span> Match Score</p>
+                  <a href="viewapplicant.html#/view-applicant?id=olivia" class="wb-applicant-card__cta">View Applicant <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
+
+              <article class="wb-applicant-card">
+                <img
+                  class="wb-applicant-card__photo"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="56"
+                  height="56"
+                />
+                <div class="wb-applicant-card__main">
+                  <div class="wb-applicant-card__headline">
+                    <h2 class="wb-applicant-card__name">Marcus Chen</h2>
+                    <p class="wb-applicant-card__role">Front of House (FOH) Staff candidate</p>
+                  </div>
+                  <p class="wb-applicant-card__status"><span class="wb-applicant-card__status-pill">Status: Interview Complete</span></p>
+                  <blockquote class="wb-applicant-card__quote">
+                    Excellent availability and shift flexibility; recommend scheduling final panel this week.
+                  </blockquote>
+                  <div class="wb-applicant-card__meta-row">
+                    <span class="wb-applicant-card__meta-item" aria-label="Notes"><span aria-hidden="true">📝</span> 2 Notes</span>
+                    <span class="wb-applicant-card__meta-item" aria-label="Comments"><span aria-hidden="true">💬</span> 0 Comments</span>
+                    <button type="button" class="wb-applicant-card__more" aria-label="More actions">⋯</button>
+                  </div>
+                </div>
+                <div class="wb-applicant-card__side">
+                  <p class="wb-applicant-card__match"><span class="wb-applicant-card__match-num">88%</span> Match Score</p>
+                  <a href="viewapplicant.html#/view-applicant?id=marcus" class="wb-applicant-card__cta">View Applicant <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
+
+              <article class="wb-applicant-card">
+                <img
+                  class="wb-applicant-card__photo"
+                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=120&amp;h=120&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="56"
+                  height="56"
+                />
+                <div class="wb-applicant-card__main">
+                  <div class="wb-applicant-card__headline">
+                    <h2 class="wb-applicant-card__name">Priya Nair</h2>
+                    <p class="wb-applicant-card__role">Front of House (FOH) Staff candidate</p>
+                  </div>
+                  <p class="wb-applicant-card__status"><span class="wb-applicant-card__status-pill">Status: Interview In-Progress</span></p>
+                  <blockquote class="wb-applicant-card__quote">
+                    Hospitality background aligns with peak-hour pacing; follow up on certification documents.
+                  </blockquote>
+                  <div class="wb-applicant-card__meta-row">
+                    <span class="wb-applicant-card__meta-item" aria-label="Notes"><span aria-hidden="true">📝</span> 1 Notes</span>
+                    <span class="wb-applicant-card__meta-item" aria-label="Comments"><span aria-hidden="true">💬</span> 3 Comments</span>
+                    <button type="button" class="wb-applicant-card__more" aria-label="More actions">⋯</button>
+                  </div>
+                </div>
+                <div class="wb-applicant-card__side">
+                  <p class="wb-applicant-card__match"><span class="wb-applicant-card__match-num">85%</span> Match Score</p>
+                  <a href="viewapplicant.html#/view-applicant?id=priya" class="wb-applicant-card__cta">View Applicant <span aria-hidden="true">→</span></a>
+                </div>
+              </article>
             </div>
           </div>
         </main>

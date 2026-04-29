@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fill document — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wb-app" data-static-view="workspace" hidden>
+      <div class="wb-dash">
+        <aside class="wb-dash__sidebar" aria-label="Workspace navigation">
+          <div class="wb-dash__brand">
+            <a href="index.html#/" class="brand-mark">
+              <img src="assets/logo.png" width="34" height="34" alt="" class="brand-mark__img" />
+              <span class="brand-mark__text wb-dash__brand-text">Workbench HR</span>
+            </a>
+          </div>
+          <div class="wb-dash__cta-row">
+            <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+          </div>
+          <div class="wb-dash__nav-section">
+            <p class="wb-dash__nav-label">Workspace</p>
+            <nav class="wb-dash__nav" aria-label="Workspace">
+              <a href="dashboard.html#/dashboard" class="wb-dash__nav-link" data-ws-nav="/dashboard"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Dashboard</span></a
+              >
+              <a href="employees.html#/employees" class="wb-dash__nav-link" data-ws-nav="/employees"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><circle cx="12" cy="8" r="3.2" fill="currentColor" opacity="0.92" /><path
+                    fill="currentColor"
+                    d="M5 20v-1c0-2.2 3.1-4 7-4s7 1.8 7 4v1"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Employees</span></a
+              >
+              <a href="documents.html#/documents" class="wb-dash__nav-link" data-ws-nav="/documents"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Documents</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__nav-section wb-dash__nav-section--recruiting">
+            <p class="wb-dash__nav-label">Recruiting</p>
+            <nav class="wb-dash__nav" aria-label="Recruiting">
+              <a href="hiring.html#/hiring" class="wb-dash__nav-link" data-ws-nav="/hiring"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M12 2l2.4 7.4h7.8l-6.3 4.6 2.4 7.4L12 16.8 5.7 21.4 8.1 14 1.8 9.4h7.8L12 2z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Hiring</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__sidebar-spacer"></div>
+          <div class="wb-dash__sidebar-footer">
+            <a href="dashboard.html#/assistant" class="wb-dash__btn wb-dash__btn--primary wb-dash__btn--assistant-bar"
+              >AI Assistant
+              <span class="wb-dash__assistant-icon" aria-hidden="true"
+                ><img src="assets/robot.png" alt="" width="20" height="20" class="wb-dash__assistant-img" decoding="async"
+              /></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/document-manual-fill" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="document-category.html" class="wb-create-doc__crumb-link">Create Document</a>
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <a href="document-templates.html" class="wb-create-doc__crumb-link" data-manual-crumb-templates
+                  >Select template</a
+                >
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <a href="document-method.html" class="wb-create-doc__crumb-link" data-manual-crumb-method
+                  >Document method</a
+                >
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <span class="wb-create-doc__crumb-current">Manual fill</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></a>
+            </div>
+          </header>
+
+          <section class="wb-manual-fill" data-manual-fill-root aria-labelledby="manual-fill-heading">
+            <div class="wb-manual-fill__head">
+              <h1 class="wb-manual-fill__title" id="manual-fill-heading" data-manual-fill-title>Fill template manually</h1>
+              <p class="wb-manual-fill__lede" data-manual-fill-lede>Type in the document body on the page preview. Short answers update the letter header.</p>
+              <p class="wb-manual-fill__file" data-manual-fill-file-label>
+                Template file: <span data-manual-fill-file></span>
+              </p>
+            </div>
+
+            <div class="wb-manual-fill__layout">
+              <div class="wb-manual-fill__col wb-manual-fill__col--doc">
+                <p class="wb-manual-fill__col-tag">Document preview</p>
+                <div class="wb-manual-fill__viewer" aria-label="Document preview and editor">
+                  <div class="wb-manual-fill__viewer-bg">
+                    <div class="wb-manual-fill__page">
+                      <div class="wb-manual-fill__letterhead">
+                        <span class="wb-manual-fill__logo-mark" aria-hidden="true"></span>
+                        <div class="wb-manual-fill__letterhead-text">
+                          <span>Workbench HR</span>
+                          <span class="wb-manual-fill__letterhead-sub">Human Resources</span>
+                        </div>
+                      </div>
+                      <div class="wb-manual-fill__meta-lines">
+                        <p class="wb-manual-fill__meta-line"><span data-manual-slot="letterDate">—</span></p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>To:</strong> <span data-manual-slot="candidateName">—</span>
+                        </p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>Role:</strong> <span data-manual-slot="roleTitle">—</span>
+                        </p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>Department:</strong> <span data-manual-slot="department">—</span>
+                        </p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>Start:</strong> <span data-manual-slot="startDate">—</span>
+                          · <strong>Comp:</strong> <span data-manual-slot="compensation">—</span>
+                        </p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>Manager:</strong> <span data-manual-slot="hiringManager">—</span>
+                        </p>
+                      </div>
+                      <label class="wb-manual-fill__editor-label" for="manual-doc-body">Document body (plain text)</label>
+                      <textarea
+                        id="manual-doc-body"
+                        class="wb-manual-fill__editor"
+                        data-manual-body
+                        rows="16"
+                        spellcheck="true"
+                        placeholder="Write the full letter or policy text here. Line breaks are preserved."
+                      >
+Dear [Candidate name],
+
+We are pleased to confirm the details discussed regarding your role.
+
+Please review the compensation and start date on the right and adjust the paragraphs below as needed before saving.
+
+Sincerely,
+[Your name]</textarea>
+                      <p class="wb-manual-fill__page-num" aria-hidden="true">Page 1 of 1</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wb-manual-fill__col wb-manual-fill__col--form">
+                <p class="wb-manual-fill__col-tag">Short answers</p>
+                <form class="wb-manual-fill__form" data-manual-form>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-date">Letter date</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="date"
+                      id="mf-date"
+                      data-manual-field="letterDate"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-candidate">Candidate full name</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-candidate"
+                      data-manual-field="candidateName"
+                      placeholder="e.g. Jordan Lee"
+                      autocomplete="name"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-role">Job title / role</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-role"
+                      data-manual-field="roleTitle"
+                      placeholder="e.g. Senior Customer Success Manager"
+                      autocomplete="organization-title"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-dept">Department</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-dept"
+                      data-manual-field="department"
+                      placeholder="e.g. Customer Experience"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-manager">Hiring manager</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-manager"
+                      data-manual-field="hiringManager"
+                      placeholder="Manager name"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-start">Start date</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-start"
+                      data-manual-field="startDate"
+                      placeholder="e.g. June 2, 2026"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field">
+                    <label class="wb-manual-fill__label" for="mf-comp">Compensation summary</label>
+                    <input
+                      class="wb-manual-fill__input"
+                      type="text"
+                      id="mf-comp"
+                      data-manual-field="compensation"
+                      placeholder="e.g. $142,000 base, bonus eligible"
+                    />
+                  </div>
+                  <div class="wb-manual-fill__field wb-manual-fill__field--full">
+                    <label class="wb-manual-fill__label" for="mf-notes">Internal notes (optional)</label>
+                    <textarea
+                      class="wb-manual-fill__textarea"
+                      id="mf-notes"
+                      data-manual-field="internalNotes"
+                      rows="3"
+                      placeholder="Not shown on the PDF — for your records only."
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="wb-manual-fill__footer">
+              <p class="wb-manual-fill__toast" data-manual-toast hidden role="status" aria-live="polite"></p>
+              <a href="document-method.html" class="wb-btn wb-btn--muted" data-manual-back>← Back</a>
+              <button type="button" class="wb-btn wb-btn--outline" data-manual-save-draft>Save draft</button>
+              <button type="button" class="wb-btn wb-btn--primary" data-manual-review>Review document</button>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

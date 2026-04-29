@@ -27,6 +27,85 @@
     "Mutual_Nondisclosure_Agreement_2026.pdf": 8,
   };
 
+  var TEMPLATE_BROWSE_LIST = {
+    company: [
+      { file: "Standard_Full_Time_Offer_Letter_US.pdf", title: "Standard full-time offer letter" },
+      { file: "Mutual_Nondisclosure_Agreement_2026.pdf", title: "Mutual NDA (standard)" },
+      { file: "Contractor_Services_Agreement.pdf", title: "Contractor services agreement" },
+      { file: "Employment_Amendment_Template.docx", title: "Employment amendment" },
+      { file: "Board_Resolution_Template.pdf", title: "Board resolution (HR matters)" },
+      { file: "Vendor_MSA_Standard.pdf", title: "Vendor master services agreement" },
+    ],
+    performance: [
+      { file: "Annual_Performance_Review_Manager_Worksheet.pdf", title: "Annual performance review" },
+      { file: "PIP_Checklist_draft.docx", title: "Performance improvement plan" },
+      { file: "Goals_Q4_Worksheet.docx", title: "Goals & OKRs worksheet" },
+      { file: "Feedback_360_Summary.docx", title: "360° feedback summary" },
+      { file: "Mid_Year_Check_In.docx", title: "Mid-year check-in" },
+      { file: "Calibration_Notes_Template.docx", title: "Calibration session notes" },
+    ],
+    payroll: [
+      { file: "Salary_Bands_by_Level_2026.pdf", title: "Salary bands by level" },
+      { file: "Bonus_Letter_Template.docx", title: "Bonus notification letter" },
+      { file: "Benefits_Summary_2026.pdf", title: "Benefits enrollment summary" },
+      { file: "Equity_Offer_Summary.pdf", title: "Equity grant summary" },
+      { file: "Commission_Plan_Overview.pdf", title: "Commission plan overview" },
+      { file: "PTO_Policy_Summary.pdf", title: "PTO & leave policy summary" },
+    ],
+    legal: [
+      { file: "Employee_Handbook_Master_2026.pdf", title: "Employee handbook (excerpt)" },
+      { file: "Remote_Work_Policy_v3.pdf", title: "Remote work policy" },
+      { file: "Code_of_Conduct_2026.pdf", title: "Code of conduct" },
+      { file: "Anti_Harassment_Policy.pdf", title: "Anti-harassment policy" },
+      { file: "Data_Retention_Policy.pdf", title: "Data retention policy" },
+      { file: "Whistleblower_Policy.pdf", title: "Whistleblower policy" },
+    ],
+    hiring: [
+      { file: "Job_Posting_Customer_Success_Manager.pdf", title: "Job posting — CS Manager" },
+      { file: "Interview_Scorecard_Template.docx", title: "Interview scorecard" },
+      { file: "Offer_Checklist_HR.docx", title: "Pre-offer checklist" },
+      { file: "Phone_Screen_Guide.docx", title: "Phone screen guide" },
+      { file: "Reference_Check_Form.docx", title: "Reference check form" },
+      { file: "Rejection_Letter_Template.docx", title: "Candidate rejection letter" },
+    ],
+    employment: [
+      { file: "Internal_Promotion_Notification_Letter.pdf", title: "Internal promotion letter" },
+      { file: "Transfer_Notification_Template.docx", title: "Transfer notification" },
+      { file: "Separation_Checklist.docx", title: "Separation checklist" },
+      { file: "Leave_Request_Form.docx", title: "Leave of absence request" },
+      { file: "Salary_Change_Notice.pdf", title: "Salary change notice" },
+      { file: "Remote_Work_Agreement_Addendum.pdf", title: "Remote work agreement addendum" },
+    ],
+  };
+
+  var WB_MANUAL_REVIEW_STORAGE_KEY = "wbManualReviewDraft";
+  var WB_DOCS_PENDING_ROW_KEY = "wbDocsPendingLibraryRow";
+
+  var VA_SAMPLE_PDF_SRC = "assets/sample.pdf";
+
+  var APPLICANT_SAMPLE_DOCS = {
+    olivia: [
+      { file: "Olivia_Thompson_Resume.pdf", kind: "resume", typeLabel: "Resume", date: "01/18/2026" },
+      { file: "Thompson_CoverLetter_FOH.pdf", kind: "cover", typeLabel: "Cover Letter", date: "01/17/2026" },
+      { file: "FOH_Portfolio_OThompson.pdf", kind: "portfolio", typeLabel: "Portfolio", date: "01/16/2026" },
+      { file: "ServSafe_Food_Handler_2025.pdf", kind: "other", typeLabel: "Certification", date: "05/02/2025" },
+      { file: "Professional_References_Olivia_T.pdf", kind: "other", typeLabel: "References", date: "01/15/2026" },
+    ],
+    marcus: [
+      { file: "Marcus_Chen_Resume.pdf", kind: "resume", typeLabel: "Resume", date: "02/02/2026" },
+      { file: "Chen_Cover_Letter_Hospitality.pdf", kind: "cover", typeLabel: "Cover Letter", date: "02/01/2026" },
+      { file: "Chen_Work_Samples_Menu_Event.pdf", kind: "portfolio", typeLabel: "Portfolio", date: "01/30/2026" },
+      { file: "Schedule_Availability_Winter2026.pdf", kind: "other", typeLabel: "Availability", date: "01/28/2026" },
+    ],
+    priya: [
+      { file: "Priya_Nair_Resume.pdf", kind: "resume", typeLabel: "Resume", date: "01/22/2026" },
+      { file: "Nair_CoverLetter_Restaurant.pdf", kind: "cover", typeLabel: "Cover Letter", date: "01/21/2026" },
+      { file: "Priya_Nair_Portfolio.pdf", kind: "portfolio", typeLabel: "Portfolio", date: "01/20/2026" },
+      { file: "TIPS_Certification_2024.pdf", kind: "other", typeLabel: "Certification", date: "08/10/2024" },
+      { file: "Prior_Employer_LOR.pdf", kind: "other", typeLabel: "References", date: "01/19/2026" },
+    ],
+  };
+
   var DOC_TITLES = {
     "/about": "About — Workbench HR",
     "/contact": "Contact — Workbench HR",
@@ -46,9 +125,17 @@
     "/assistant": "AI Assistant — Workbench HR",
     "/dashboard/sign-documents": "Sign documents — Workbench HR",
     "/hiring": "Hiring — Workbench HR",
+    "/applicants": "Applicants — Workbench HR",
+    "/view-applicant": "Applicant profile — Workbench HR",
     "/documents": "Documents — Workbench HR",
     "/employees": "Employee Portal — Workbench HR",
-    "/create-document/template": "Select category — Workbench HR",
+    "/create-document/category": "Document category — Workbench HR",
+    "/document-category": "Document category — Workbench HR",
+    "/document-templates": "Choose template — Workbench HR",
+    "/document-method": "Document method — Workbench HR",
+    "/document-manual-fill": "Fill document — Workbench HR",
+    "/document-review": "Review document — Workbench HR",
+    "/create-document/template": "Document category — Workbench HR",
     "/create-document/method": "Creation method — Workbench HR",
     "/settings/profile": "Profile — Settings",
     "/settings/company": "Company — Settings",
@@ -101,6 +188,24 @@
     return pathname === "/hiring";
   }
 
+  function isApplicantsHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)applicants\.html$/i.test(path);
+  }
+
+  function isApplicantsPath(pathname) {
+    return pathname === "/applicants";
+  }
+
+  function isViewApplicantHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)viewapplicant\.html$/i.test(path);
+  }
+
+  function isViewApplicantPath(pathname) {
+    return pathname === "/view-applicant";
+  }
+
   function isCreateDocumentHtmlDoc() {
     var path = (window.location.pathname || "").split("?")[0];
     return /(^|\/)create-document\.html$/i.test(path);
@@ -111,21 +216,58 @@
     return /(^|\/)create-document-template\.html$/i.test(path);
   }
 
+  function isDocumentCategoryHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)document-category\.html$/i.test(path);
+  }
+
+  function isDocumentTemplatesHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)document-templates\.html$/i.test(path);
+  }
+
+  function isDocumentMethodHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)document-method\.html$/i.test(path);
+  }
+
+  function isDocumentManualFillHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)document-manual-fill\.html$/i.test(path);
+  }
+
+  function isDocumentReviewHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)document-review\.html$/i.test(path);
+  }
+
   function isCreateDocumentShellDoc() {
     return isCreateDocumentHtmlDoc() || isCreateDocumentTemplateHtmlDoc();
   }
 
   function createDocumentShellFileForPath(pathname) {
-    return pathname === "/create-document/template"
-      ? "create-document-template.html"
-      : "create-document.html";
+    if (
+      pathname === "/create-document/category" ||
+      pathname === "/create-document/template" ||
+      pathname === "/document-category"
+    ) {
+      return "document-category.html";
+    }
+    return "create-document.html";
   }
 
   function createDocumentPathHref(pathname, fallbackHash) {
+    if (
+      pathname === "/create-document/category" ||
+      pathname === "/create-document/template" ||
+      pathname === "/document-category"
+    ) {
+      return "document-category.html";
+    }
     var file = createDocumentShellFileForPath(pathname);
     var h = window.location.hash;
     if (!h || h === "#" || h === "#/") {
-      return file + (fallbackHash || "#/create-document/template");
+      return file + (fallbackHash || "");
     }
     return file + h;
   }
@@ -256,11 +398,29 @@
       if (pathname === "/dashboard/sign-documents") return "/dashboard/sign-documents";
       return "/dashboard";
     }
+    if (isViewApplicantHtmlDoc()) {
+      return "/view-applicant";
+    }
+    if (isApplicantsHtmlDoc()) {
+      return "/applicants";
+    }
     if (isHiringHtmlDoc()) {
       return "/hiring";
     }
-    if (isCreateDocumentTemplateHtmlDoc()) {
-      return "/create-document/template";
+    if (isDocumentTemplatesHtmlDoc()) {
+      return "/document-templates";
+    }
+    if (isDocumentMethodHtmlDoc()) {
+      return "/document-method";
+    }
+    if (isDocumentManualFillHtmlDoc()) {
+      return "/document-manual-fill";
+    }
+    if (isDocumentReviewHtmlDoc()) {
+      return "/document-review";
+    }
+    if (isDocumentCategoryHtmlDoc()) {
+      return "/document-category";
     }
     if (isCreateDocumentHtmlDoc()) {
       if (/^\/create-document\/templates\/[^/]+\/review$/.test(pathname)) return "/create-document/template-review";
@@ -310,7 +470,7 @@
       } else {
         cont.setAttribute(
           "href",
-          "#/create-document/method?category=" +
+          "document-method.html?category=" +
             encodeURIComponent(reviewState.cat) +
             "&file=" +
             encodeURIComponent(reviewState.file) +
@@ -875,14 +1035,14 @@
       .replace(/"/g, "&quot;");
   }
 
-  function updateMethodPage(search) {
-    var params = new URLSearchParams(search.replace(/^\?/, ""));
+  function fillDocumentMethodPage(search) {
+    var params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
     var category = params.get("category") || "company";
     var fileRaw = params.get("file");
     var file = fileRaw && fileRaw.trim() ? fileRaw.trim() : "";
     var pages = params.get("pages");
     var catTitle = CAT_LABEL[category] || category;
-    var browseHash = "#/create-document/templates/" + encodeURIComponent(category);
+    var templatesBrowseHref = "document-templates.html?category=" + encodeURIComponent(category);
     var sub = document.getElementById("ws-method-sub");
     if (sub) {
       if (file) {
@@ -898,13 +1058,13 @@
           "You’re in <strong>" +
           escapeHtmlStatic(catTitle) +
           '</strong>. <a class="wb-link" href="' +
-          browseHash +
+          templatesBrowseHref +
           '">Choose a template</a> first, then pick how you want to fill it in.';
       }
     }
     var pick = document.getElementById("ws-method-pick-template");
     var pickWrap = document.querySelector(".wb-create-method__pick-wrap");
-    if (pick) pick.setAttribute("href", browseHash);
+    if (pick) pick.setAttribute("href", templatesBrowseHref);
     if (pick && pickWrap) {
       if (file) {
         pickWrap.hidden = false;
@@ -927,16 +1087,595 @@
     var ai = document.getElementById("ws-method-ai");
     var mn = document.getElementById("ws-method-manual");
     if (!file) {
-      if (ai) ai.setAttribute("href", browseHash);
-      if (mn) mn.setAttribute("href", browseHash);
+      if (ai) ai.setAttribute("href", templatesBrowseHref);
+      if (mn) mn.setAttribute("href", templatesBrowseHref);
     } else {
       var q = new URLSearchParams({ file: file, category: category });
       if (pages) q.set("pages", pages);
       q.set("method", "ai");
-      if (ai) ai.setAttribute("href", "#/create-document/draft?" + q.toString());
-      q.set("method", "manual");
-      if (mn) mn.setAttribute("href", "#/create-document/draft?" + q.toString());
+      if (ai) ai.setAttribute("href", "create-document.html#/create-document/draft?" + q.toString());
+      var manualParams = new URLSearchParams();
+      manualParams.set("category", category);
+      manualParams.set("file", file);
+      if (pages) manualParams.set("pages", pages);
+      if (mn) mn.setAttribute("href", "document-manual-fill.html?" + manualParams.toString());
     }
+  }
+
+  function updateMethodPage(search) {
+    fillDocumentMethodPage(search);
+  }
+
+  function bindDocumentMethodPage() {
+    var root = document.querySelector("[data-doc-method-root]");
+    if (!root || root.getAttribute("data-doc-method-ready") === "1") return;
+    root.setAttribute("data-doc-method-ready", "1");
+    var params = new URLSearchParams(window.location.search.replace(/^\?/, ""));
+    var cat = params.get("category");
+    if (!cat || !String(cat).trim()) {
+      window.location.replace("document-category.html");
+      return;
+    }
+    fillDocumentMethodPage(window.location.search);
+    var crumb = document.querySelector("[data-doc-method-crumb-templates]");
+    if (crumb) {
+      crumb.setAttribute("href", "document-templates.html?category=" + encodeURIComponent(cat));
+    }
+    var back = root.querySelector("[data-doc-method-back]");
+    if (back) {
+      back.setAttribute("href", "document-templates.html?category=" + encodeURIComponent(cat));
+    }
+  }
+
+  function collectManualFillPayload(root, cat, file, pages) {
+    var fields = {};
+    root.querySelectorAll("[data-manual-field]").forEach(function (inp) {
+      var k = inp.getAttribute("data-manual-field");
+      if (k) fields[k] = inp.value || "";
+    });
+    var bodyEl = root.querySelector("[data-manual-body]");
+    return {
+      version: 1,
+      category: cat,
+      file: file,
+      pages: pages || "",
+      fields: fields,
+      body: bodyEl ? bodyEl.value || "" : "",
+      savedAt: new Date().toISOString(),
+    };
+  }
+
+  function persistManualFillDraft(payload) {
+    try {
+      sessionStorage.setItem(WB_MANUAL_REVIEW_STORAGE_KEY, JSON.stringify(payload));
+    } catch (err) {}
+  }
+
+  function loadManualFillDraft() {
+    try {
+      var raw = sessionStorage.getItem(WB_MANUAL_REVIEW_STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function restoreManualFillFromStorage(root, cat, file) {
+    var draft = loadManualFillDraft();
+    if (!draft || draft.category !== cat || draft.file !== file) return;
+    if (draft.fields) {
+      Object.keys(draft.fields).forEach(function (k) {
+        var inp = root.querySelector('[data-manual-field="' + k + '"]');
+        if (inp) inp.value = draft.fields[k];
+      });
+    }
+    var bodyEl = root.querySelector("[data-manual-body]");
+    if (bodyEl && draft.body) bodyEl.value = draft.body;
+  }
+
+  function bindDocumentManualFillPage() {
+    var root = document.querySelector("[data-manual-fill-root]");
+    if (!root || root.getAttribute("data-manual-fill-ready") === "1") return;
+    root.setAttribute("data-manual-fill-ready", "1");
+    var params = new URLSearchParams(window.location.search.replace(/^\?/, ""));
+    var cat = (params.get("category") || "").trim();
+    var file = (params.get("file") || "").trim();
+    var pages = params.get("pages");
+    if (!cat || !file) {
+      window.location.replace(
+        cat ? "document-method.html?category=" + encodeURIComponent(cat) : "document-category.html"
+      );
+      return;
+    }
+    var shortName = humanizeMethodTemplateLabel(file);
+    var titleEl = root.querySelector("[data-manual-fill-title]");
+    var ledeEl = root.querySelector("[data-manual-fill-lede]");
+    var fileEl = root.querySelector("[data-manual-fill-file]");
+    if (titleEl) titleEl.textContent = "Fill template manually";
+    if (ledeEl) {
+      ledeEl.textContent =
+        "Edit the letter in plain text on the page. Short answers on the right fill the header.";
+    }
+    if (fileEl) fileEl.textContent = file;
+    document.title = shortName + " — Fill document — Workbench HR";
+
+    var methodParams = new URLSearchParams();
+    methodParams.set("category", cat);
+    methodParams.set("file", file);
+    if (pages) methodParams.set("pages", pages);
+    var methodQs = methodParams.toString();
+    var methodCrumb = document.querySelector("[data-manual-crumb-method]");
+    var tplCrumb = document.querySelector("[data-manual-crumb-templates]");
+    if (methodCrumb) methodCrumb.setAttribute("href", "document-method.html?" + methodQs);
+    if (tplCrumb) tplCrumb.setAttribute("href", "document-templates.html?category=" + encodeURIComponent(cat));
+
+    var back = root.querySelector("[data-manual-back]");
+    if (back) back.setAttribute("href", "document-method.html?" + methodQs);
+
+    restoreManualFillFromStorage(root, cat, file);
+
+    var toast = root.querySelector("[data-manual-toast]");
+    var saveBtn = root.querySelector("[data-manual-save-draft]");
+    if (saveBtn && toast) {
+      saveBtn.addEventListener("click", function () {
+        persistManualFillDraft(collectManualFillPayload(root, cat, file, pages));
+        toast.textContent = "Draft saved locally for this session.";
+        toast.hidden = false;
+        window.setTimeout(function () {
+          toast.hidden = true;
+        }, 3200);
+      });
+    }
+
+    function formatLetterDate(raw) {
+      if (!raw || !String(raw).trim()) return "—";
+      var d = new Date(raw + "T12:00:00");
+      if (isNaN(d.getTime())) return raw;
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+
+    function syncSlots() {
+      root.querySelectorAll("[data-manual-field]").forEach(function (input) {
+        var key = input.getAttribute("data-manual-field") || "";
+        var val = input.value || "";
+        root.querySelectorAll('[data-manual-slot="' + key + '"]').forEach(function (slot) {
+          if (key === "letterDate") {
+            slot.textContent = formatLetterDate(val);
+          } else {
+            slot.textContent = val.trim() ? val : "—";
+          }
+        });
+      });
+    }
+
+    root.querySelectorAll("[data-manual-field]").forEach(function (el) {
+      el.addEventListener("input", syncSlots);
+      el.addEventListener("change", syncSlots);
+    });
+    syncSlots();
+
+    var dateInput = root.querySelector('[data-manual-field="letterDate"]');
+    if (dateInput && !dateInput.value) {
+      var today = new Date();
+      var m = today.getMonth() + 1;
+      var d = today.getDate();
+      dateInput.value =
+        today.getFullYear() +
+        "-" +
+        (m < 10 ? "0" : "") +
+        m +
+        "-" +
+        (d < 10 ? "0" : "") +
+        d;
+      syncSlots();
+    }
+
+    var reviewBtn = root.querySelector("[data-manual-review]");
+    if (reviewBtn) {
+      reviewBtn.addEventListener("click", function () {
+        persistManualFillDraft(collectManualFillPayload(root, cat, file, pages));
+        window.location.href =
+          "document-review.html?category=" +
+          encodeURIComponent(cat) +
+          "&file=" +
+          encodeURIComponent(file) +
+          (pages ? "&pages=" + encodeURIComponent(pages) : "");
+      });
+    }
+  }
+
+  function bindDocumentReviewPage() {
+    var root = document.querySelector("[data-doc-review-root]");
+    if (!root || root.getAttribute("data-doc-review-ready") === "1") return;
+    root.setAttribute("data-doc-review-ready", "1");
+    var params = new URLSearchParams(window.location.search.replace(/^\?/, ""));
+    var cat = (params.get("category") || "").trim();
+    var file = (params.get("file") || "").trim();
+    var pages = params.get("pages");
+    if (!cat || !file) {
+      window.location.replace("document-category.html");
+      return;
+    }
+    var draft = loadManualFillDraft();
+    if (!draft || draft.category !== cat || draft.file !== file) {
+      window.location.replace(
+        "document-manual-fill.html?category=" + encodeURIComponent(cat) + "&file=" + encodeURIComponent(file)
+      );
+      return;
+    }
+
+    function formatLetterDate(raw) {
+      if (!raw || !String(raw).trim()) return "—";
+      var d = new Date(raw + "T12:00:00");
+      if (isNaN(d.getTime())) return raw;
+      return d.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    }
+
+    function slotText(key, fields) {
+      var val = (fields && fields[key]) || "";
+      if (key === "letterDate") return formatLetterDate(val);
+      return val.trim() ? val : "—";
+    }
+
+    var fields = draft.fields || {};
+    root.querySelectorAll("[data-review-slot]").forEach(function (slot) {
+      var key = slot.getAttribute("data-review-slot");
+      if (!key) return;
+      slot.textContent = slotText(key, fields);
+    });
+
+    var bodyOut = root.querySelector("[data-review-body]");
+    if (bodyOut) bodyOut.textContent = draft.body || "";
+
+    var shortName = humanizeMethodTemplateLabel(file);
+    var fileEl = root.querySelector("[data-review-file]");
+    if (fileEl) fileEl.textContent = file;
+    document.title = shortName + " — Review — Workbench HR";
+
+    var lede = root.querySelector("[data-review-lede]");
+    if (lede) {
+      lede.textContent =
+        "Your short answers appear in the header. The body matches your manual fill text.";
+    }
+
+    var methodParams = new URLSearchParams();
+    methodParams.set("category", cat);
+    methodParams.set("file", file);
+    if (pages) methodParams.set("pages", pages);
+    var qs = methodParams.toString();
+    var manualHref = "document-manual-fill.html?" + qs;
+
+    var tplCrumb = document.querySelector("[data-review-crumb-templates]");
+    var methodCrumb = document.querySelector("[data-review-crumb-method]");
+    var fillCrumb = document.querySelector("[data-review-crumb-fill]");
+    if (tplCrumb) tplCrumb.setAttribute("href", "document-templates.html?category=" + encodeURIComponent(cat));
+    if (methodCrumb) methodCrumb.setAttribute("href", "document-method.html?" + qs);
+    if (fillCrumb) fillCrumb.setAttribute("href", manualHref);
+
+    var back = root.querySelector("[data-review-back]");
+    if (back) back.setAttribute("href", manualHref);
+
+    var toast = root.querySelector("[data-review-toast]");
+    function showReviewToast(msg) {
+      if (!toast) return;
+      toast.textContent = msg;
+      toast.hidden = false;
+      window.setTimeout(function () {
+        toast.hidden = true;
+      }, 4200);
+    }
+
+    var saveBtn = root.querySelector("[data-review-save]");
+    if (saveBtn) {
+      saveBtn.addEventListener("click", function () {
+        draft.savedAt = new Date().toISOString();
+        persistManualFillDraft(draft);
+        try {
+          sessionStorage.setItem(
+            WB_DOCS_PENDING_ROW_KEY,
+            JSON.stringify({
+              fileName: file,
+              categoryKey: cat,
+              categoryLabel: CAT_LABEL[cat] || cat,
+              title: shortName,
+              savedAt: draft.savedAt,
+            })
+          );
+        } catch (err) {}
+        window.location.href = "documents.html#/documents?saved=1";
+      });
+    }
+
+    var shareBtn = root.querySelector("[data-review-share]");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", function () {
+        var title = shortName + " — Workbench HR";
+        var text = draft.body || "";
+        if (navigator.share) {
+          navigator
+            .share({ title: title, text: text.slice(0, 4000) })
+            .catch(function () {});
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text || title).then(
+            function () {
+              showReviewToast("Copied document text to clipboard.");
+            },
+            function () {
+              showReviewToast("Unable to copy automatically — select text in the preview.");
+            }
+          );
+        } else {
+          showReviewToast("Sharing isn’t available in this browser.");
+        }
+      });
+    }
+  }
+
+  function cleanDocumentsSavedQueryFromUrl() {
+    if ((window.location.hash || "").indexOf("saved=1") === -1) return;
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search + "#/documents"
+    );
+  }
+
+  function bindApplicantsPage(search) {
+    var params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
+    var role = params.get("role") || "foh";
+    var map = {
+      foh: { title: "Front of House (FOH) Staff", count: "15" },
+      culinary: { title: "Culinary Lead", count: "4" },
+    };
+    var m = map[role] || map.foh;
+    var searchInput = document.querySelector("[data-applicants-search]");
+    if (searchInput) {
+      searchInput.placeholder = "Search '" + m.title + "' applicants…";
+    }
+    var countEl = document.querySelector("[data-applicants-count]");
+    if (countEl) {
+      countEl.innerHTML =
+        "Showing <strong>" +
+        m.count +
+        "</strong> &lsquo;" +
+        m.title +
+        "&rsquo; candidates.";
+    }
+    var crumb = document.querySelector("[data-applicants-role-title]");
+    if (crumb) crumb.textContent = m.title;
+    var h = document.querySelector("[data-applicants-page-heading]");
+    if (h) h.textContent = "Applicants — " + m.title;
+    document.querySelectorAll(".wb-applicant-card__role").forEach(function (el) {
+      el.textContent = m.title + " candidate";
+    });
+  }
+
+  function bindViewApplicantPage(search) {
+    var params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
+    var id = (params.get("id") || "olivia").toLowerCase();
+    var map = {
+      olivia: {
+        name: "Olivia Thompson",
+        role: "Front of House (FOH) Staff Candidate",
+        crumb: "Olivia Thompson",
+        photo:
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
+        match: "92%",
+        summary:
+          "Matches all core competencies and 5/5 required skills. Exceeds experience requirements.",
+      },
+      marcus: {
+        name: "Marcus Chen",
+        role: "Front of House (FOH) Staff Candidate",
+        crumb: "Marcus Chen",
+        photo:
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+        match: "88%",
+        summary:
+          "Excellent availability and shift flexibility; recommend scheduling a final panel this week.",
+      },
+      priya: {
+        name: "Priya Nair",
+        role: "Front of House (FOH) Staff Candidate",
+        crumb: "Priya Nair",
+        photo:
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+        match: "85%",
+        summary:
+          "Hospitality background aligns with peak-hour pacing; follow up on certification documents.",
+      },
+    };
+    var m = map[id] || map.olivia;
+    var h = document.querySelector("[data-va-page-heading]");
+    if (h) h.textContent = "Applicant — " + m.name;
+    var crumb = document.querySelector("[data-va-crumb]");
+    if (crumb) crumb.textContent = m.crumb;
+    var nm = document.querySelector("[data-va-name]");
+    if (nm) nm.textContent = m.name;
+    var role = document.querySelector("[data-va-role]");
+    if (role) role.textContent = m.role;
+    var photo = document.querySelector("[data-va-photo]");
+    if (photo) photo.setAttribute("src", m.photo);
+    var match = document.querySelector("[data-va-match]");
+    if (match) match.textContent = m.match;
+    var summary = document.querySelector("[data-va-summary]");
+    if (summary) summary.textContent = m.summary;
+    var docSearch = document.querySelector("[data-va-docs-search]");
+    if (docSearch) docSearch.placeholder = "Search documents…";
+
+    var docListEl = document.querySelector("[data-va-docs-list]");
+    if (docListEl) {
+      var docs = APPLICANT_SAMPLE_DOCS[id] || APPLICANT_SAMPLE_DOCS.olivia;
+      var parts = [];
+      for (var i = 0; i < docs.length; i++) {
+        var d = docs[i];
+        parts.push(
+          '<li class="wb-va-doc-row" data-doc-kind="' +
+            d.kind +
+            '" data-va-doc-file="' +
+            d.file +
+            '">' +
+            '<span class="wb-va-doc-row__ic" aria-hidden="true">' +
+            '<svg viewBox="0 0 24 24" width="20" height="20">' +
+            '<path fill="currentColor" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z" opacity="0.55"/>' +
+            "</svg>" +
+            "</span>" +
+            '<div class="wb-va-doc-row__main">' +
+            '<span class="wb-va-doc-row__name">' +
+            d.file +
+            "</span>" +
+            '<span class="wb-va-doc-row__meta">' +
+            '<span class="wb-va-doc-row__pill wb-va-doc-row__pill--' +
+            d.kind +
+            '">' +
+            d.typeLabel +
+            "</span>" +
+            '<span class="wb-va-doc-row__date">Added ' +
+            d.date +
+            "</span>" +
+            "</span>" +
+            "</div>" +
+            '<button type="button" class="wb-va-doc-row__open">Open</button>' +
+            "</li>"
+        );
+      }
+      docListEl.innerHTML = parts.join("");
+    }
+  }
+
+  function openApplicantPdfModal(fileLabel) {
+    var modal = document.getElementById("wb-va-pdf-modal");
+    var titleEl = document.querySelector("[data-va-pdf-title]");
+    var frame = document.querySelector("[data-va-pdf-frame]");
+    if (!modal || !frame) return;
+    if (titleEl) titleEl.textContent = fileLabel || "Document";
+    frame.setAttribute("src", VA_SAMPLE_PDF_SRC);
+    modal.hidden = false;
+    document.body.classList.add("wb-va-pdf-modal--open");
+  }
+
+  function closeApplicantPdfModal() {
+    var modal = document.getElementById("wb-va-pdf-modal");
+    var frame = document.querySelector("[data-va-pdf-frame]");
+    if (modal) modal.hidden = true;
+    if (frame) frame.setAttribute("src", "about:blank");
+    document.body.classList.remove("wb-va-pdf-modal--open");
+  }
+
+  function bindApplicantPdfViewer() {
+    if (window.__wbVaPdfViewerBound) return;
+    window.__wbVaPdfViewerBound = true;
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-va-pdf-close]")) {
+        closeApplicantPdfModal();
+        return;
+      }
+      var row = e.target.closest(".wb-va-doc-row");
+      var list = e.target.closest("[data-va-docs-list]");
+      if (!row || !list) return;
+      var main = document.querySelector('[data-ws-main="/view-applicant"]');
+      if (!main || main.hidden) return;
+      var file = row.getAttribute("data-va-doc-file");
+      if (!file) return;
+      openApplicantPdfModal(file);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var modal = document.getElementById("wb-va-pdf-modal");
+      if (modal && !modal.hidden) closeApplicantPdfModal();
+    });
+  }
+
+  function bindDocumentsSavedIncoming(search) {
+    var params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
+    if (params.get("saved") !== "1") return;
+
+    var pendingRaw = null;
+    try {
+      pendingRaw = sessionStorage.getItem(WB_DOCS_PENDING_ROW_KEY);
+    } catch (err) {}
+    if (!pendingRaw) {
+      cleanDocumentsSavedQueryFromUrl();
+      return;
+    }
+
+    var pending;
+    try {
+      pending = JSON.parse(pendingRaw);
+    } catch (e) {
+      cleanDocumentsSavedQueryFromUrl();
+      return;
+    }
+
+    var tbody = document.querySelector("[data-docs-table-body]");
+    var lib = document.getElementById("docs-library");
+    var banner = document.querySelector("[data-docs-save-banner]");
+    if (!tbody || !lib) {
+      try {
+        sessionStorage.removeItem(WB_DOCS_PENDING_ROW_KEY);
+      } catch (err2) {}
+      cleanDocumentsSavedQueryFromUrl();
+      return;
+    }
+
+    if (tbody.querySelector("[data-docs-new-row='1']")) {
+      cleanDocumentsSavedQueryFromUrl();
+      return;
+    }
+
+    var displayName = pending.fileName || pending.title || "Document";
+    var catLabel = pending.categoryLabel || "—";
+
+    var tr = document.createElement("tr");
+    tr.className = "wb-docs-table__tr--added wb-docs-table__tr--just-saved";
+    tr.setAttribute("data-docs-new-row", "1");
+    tr.innerHTML =
+      '<td class="wb-docs-table__cell-name">' +
+      '<div class="wb-docs-table__name-inner">' +
+      '<span class="wb-docs-table__file-ic" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" width="18" height="18">' +
+      '<path fill="currentColor" d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM8 13h8v1.5H8V13zm0 3h8v1.5H8V16zm0-6h5V11H8v-1z" opacity="0.55"/></svg>' +
+      "</span>" +
+      '<span class="wb-docs-table__name"></span>' +
+      "</div></td>" +
+      "<td></td>" +
+      '<td><span class="wb-docs-table__status wb-docs-table__status--indexed">Indexed</span></td>' +
+      '<td class="wb-docs-table__actions">' +
+      '<button type="button" class="wb-docs-table__action">Open</button>' +
+      "</td>";
+
+    tr.querySelector(".wb-docs-table__name").textContent = displayName;
+    tr.querySelectorAll("td")[1].textContent = catLabel;
+
+    tbody.insertBefore(tr, tbody.firstChild);
+
+    if (banner) {
+      banner.hidden = false;
+      banner.textContent = "“" + displayName + "” was added to your library.";
+    }
+
+    window.setTimeout(function () {
+      lib.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+
+    window.setTimeout(function () {
+      tr.classList.remove("wb-docs-table__tr--just-saved");
+    }, 2600);
+
+    try {
+      sessionStorage.removeItem(WB_DOCS_PENDING_ROW_KEY);
+    } catch (err3) {}
+
+    cleanDocumentsSavedQueryFromUrl();
   }
 
   function updateDraftPage(search) {
@@ -968,7 +1707,14 @@
       main.className =
         mainClass +
         (key === "/dashboard" ? " wb-dash__main--dashboard" : "") +
-        (key === "/documents" ? " wb-dash__main--documents" : "") +
+        (key === "/documents" ||
+        key === "/document-templates" ||
+        key === "/document-category" ||
+        key === "/document-method" ||
+        key === "/document-manual-fill" ||
+        key === "/document-review"
+          ? " wb-dash__main--documents"
+          : "") +
         (key === "/create-document/templates/browse" || key === "/create-document/template-review"
           ? " wb-dash__main--sample-templates"
           : "");
@@ -976,15 +1722,29 @@
     if (key === "/create-document/templates/browse") updateBrowsePage(pathname);
     if (key === "/create-document/template-review") updateTemplateReviewPage(pathname, search);
     if (key === "/create-document/method") updateMethodPage(search);
+    if (key === "/document-method") bindDocumentMethodPage();
+    if (key === "/document-manual-fill") bindDocumentManualFillPage();
+    if (key === "/document-review") bindDocumentReviewPage();
+    if (key === "/documents") bindDocumentsSavedIncoming(search);
     if (key === "/create-document/draft") updateDraftPage(search);
+    if (key === "/applicants") bindApplicantsPage(search);
+    if (key === "/view-applicant") bindViewApplicantPage(search);
 
     document.querySelectorAll("[data-ws-nav]").forEach(function (a) {
       var p = a.getAttribute("data-ws-nav");
-      a.classList.toggle("wb-dash__nav-link--active", pathname === p);
+      var active = pathname === p;
+      if (p === "/hiring" && (pathname === "/applicants" || pathname === "/view-applicant")) active = true;
+      a.classList.toggle("wb-dash__nav-link--active", active);
     });
 
-    var inCreateDocFlow = pathname.indexOf("/create-document/") === 0;
-    document.querySelectorAll('a.wb-dash__btn--primary[href*="create-document"]').forEach(function (a) {
+    var inCreateDocFlow =
+      pathname.indexOf("/create-document/") === 0 &&
+      pathname !== "/create-document/category" &&
+      pathname !== "/create-document/template" &&
+      pathname !== "/document-category";
+    document.querySelectorAll(
+      'a.wb-dash__btn--primary[href*="create-document"], a.wb-dash__btn--primary[href*="document-category"], a.wb-dash__btn--primary[href*="document-templates"], a.wb-dash__btn--primary[href*="document-method"], a.wb-dash__btn--primary[href*="document-manual-fill"], a.wb-dash__btn--primary[href*="document-review"]'
+    ).forEach(function (a) {
       a.classList.toggle("wb-dash__btn--create-flow", inCreateDocFlow);
     });
 
@@ -1031,12 +1791,38 @@
       }
     }
 
+    if (isApplicantsHtmlDoc()) {
+      var rawAp = window.location.hash.replace(/^#/, "");
+      if (rawAp.charAt(0) === "!") rawAp = rawAp.slice(1);
+      var pathAp = rawAp.charAt(0) === "/";
+      if (!rawAp || rawAp === "/" || !pathAp) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search + "#/applicants"
+        );
+      }
+    }
+
+    if (isViewApplicantHtmlDoc()) {
+      var rawVa = window.location.hash.replace(/^#/, "");
+      if (rawVa.charAt(0) === "!") rawVa = rawVa.slice(1);
+      var pathVa = rawVa.charAt(0) === "/";
+      if (!rawVa || rawVa === "/" || !pathVa) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search + "#/view-applicant"
+        );
+      }
+    }
+
     if (isCreateDocumentHtmlDoc()) {
       var rawC = window.location.hash.replace(/^#/, "");
       if (rawC.charAt(0) === "!") rawC = rawC.slice(1);
       var pathC = rawC.charAt(0) === "/";
       if (!rawC || rawC === "/" || !pathC) {
-        window.location.replace("create-document-template.html#/create-document/template");
+        window.location.replace("document-category.html");
         return;
       }
     }
@@ -1083,12 +1869,53 @@
     var prev = window.__staticPrevView;
     var parsed = parseHash();
 
+    if (isDocumentCategoryHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/document-category", "");
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (isDocumentTemplatesHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/document-templates", "");
+      bindDocumentTemplatesPage();
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (isDocumentMethodHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/document-method", "");
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (isDocumentManualFillHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/document-manual-fill", "");
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (isDocumentReviewHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/document-review", "");
+      window.scrollTo(0, 0);
+      return;
+    }
+
     if (isDashboardHtmlDoc() && parsed.kind === "marketing") {
       window.location.replace("index.html" + (window.location.hash || "#/"));
       return;
     }
 
     if (isHiringHtmlDoc() && parsed.kind === "marketing") {
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isApplicantsHtmlDoc() && parsed.kind === "marketing") {
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isViewApplicantHtmlDoc() && parsed.kind === "marketing") {
       window.location.replace("index.html" + (window.location.hash || "#/"));
       return;
     }
@@ -1133,31 +1960,42 @@
     var search = parsed.search || "";
     window.__staticPrevView = "path:" + pathname + search;
 
-    if (isCreateDocumentHtmlDoc() && pathname === "/create-document/template") {
-      window.location.replace(
-        "create-document-template.html" + (window.location.hash || "#/create-document/template")
-      );
+    if (
+      isCreateDocumentHtmlDoc() &&
+      (pathname === "/create-document/template" ||
+        pathname === "/create-document/category" ||
+        pathname === "/document-category")
+    ) {
+      window.location.replace("document-category.html");
       return;
     }
 
-    if (isCreateDocumentTemplateHtmlDoc() && pathname !== "/create-document/template") {
+    if (
+      isDocumentCategoryHtmlDoc() &&
+      pathname !== "/document-category" &&
+      pathname !== "/create-document/category" &&
+      pathname !== "/create-document/template"
+    ) {
       if (isCreateDocumentPath(pathname)) {
         window.location.replace(
-          "create-document.html" +
-            (window.location.hash || "#/create-document/templates/company")
+          "create-document.html" + (window.location.hash || "#/create-document/templates/company")
         );
         return;
       }
       if (isDashboardHubPath(pathname)) {
-        window.location.replace(
-          "dashboard.html" + (window.location.hash || "#/dashboard")
-        );
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
         return;
       }
       if (isSettingsHubPath(pathname)) {
-        window.location.replace(
-          "settings.html" + (window.location.hash || "#/settings/profile")
-        );
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
         return;
       }
       if (isHiringPath(pathname)) {
@@ -1176,8 +2014,156 @@
       return;
     }
 
+    if (isDocumentTemplatesHtmlDoc() && parsed.kind === "path") {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isDocumentMethodHtmlDoc() && parsed.kind === "path") {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isDocumentManualFillHtmlDoc() && parsed.kind === "path") {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isDocumentReviewHtmlDoc() && parsed.kind === "path") {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
     if (!isCreateDocumentShellDoc() && isCreateDocumentPath(pathname)) {
-      window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
+      window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
       return;
     }
     if (isCreateDocumentHtmlDoc() && !isCreateDocumentPath(pathname)) {
@@ -1191,6 +2177,14 @@
         window.location.replace(
           "settings.html" + (window.location.hash || "#/settings/profile")
         );
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
         return;
       }
       if (isHiringPath(pathname)) {
@@ -1226,12 +2220,20 @@
         );
         return;
       }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
       if (isHiringPath(pathname)) {
         window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
         return;
       }
       if (isCreateDocumentPath(pathname)) {
-        window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
         return;
       }
       if (isEmployeesPath(pathname)) {
@@ -1259,6 +2261,14 @@
         );
         return;
       }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
       if (isHiringPath(pathname)) {
         window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
         return;
@@ -1268,10 +2278,20 @@
         return;
       }
       if (isCreateDocumentPath(pathname)) {
-        window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
         return;
       }
       window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (!isViewApplicantHtmlDoc() && isViewApplicantPath(pathname)) {
+      window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+      return;
+    }
+
+    if (!isApplicantsHtmlDoc() && isApplicantsPath(pathname)) {
+      window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
       return;
     }
 
@@ -1280,6 +2300,14 @@
       return;
     }
     if (isHiringHtmlDoc() && !isHiringPath(pathname)) {
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
       if (isDashboardHubPath(pathname)) {
         window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
         return;
@@ -1297,44 +2325,24 @@
         return;
       }
       if (isCreateDocumentPath(pathname)) {
-        window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
         return;
       }
       window.location.replace("index.html" + (window.location.hash || "#/"));
       return;
     }
 
-    if (!isDashboardHtmlDoc() && isDashboardHubPath(pathname)) {
-      window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
-      return;
-    }
-    if (isDashboardHtmlDoc() && isSettingsHubPath(pathname)) {
-      window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
-      return;
-    }
-    if (isDashboardHtmlDoc() && isHiringPath(pathname)) {
-      window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
-      return;
-    }
-    if (isDashboardHtmlDoc() && isDocumentsPath(pathname)) {
-      window.location.replace("documents.html" + (window.location.hash || "#/documents"));
-      return;
-    }
-    if (isDashboardHtmlDoc() && isEmployeesPath(pathname)) {
-      window.location.replace("employees.html" + (window.location.hash || "#/employees"));
-      return;
-    }
-    if (isDashboardHtmlDoc() && isCreateDocumentPath(pathname)) {
-      window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
-      return;
-    }
-    if (!isSettingsHtmlDoc() && isSettingsHubPath(pathname)) {
-      window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
-      return;
-    }
-    if (isSettingsHtmlDoc() && !isSettingsHubPath(pathname)) {
+    if (isApplicantsHtmlDoc() && !isApplicantsPath(pathname)) {
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
       if (isDashboardHubPath(pathname)) {
         window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
         return;
       }
       if (isHiringPath(pathname)) {
@@ -1350,7 +2358,109 @@
         return;
       }
       if (isCreateDocumentPath(pathname)) {
-        window.location.replace(createDocumentPathHref(pathname, "#/create-document/template"));
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isViewApplicantHtmlDoc() && !isViewApplicantPath(pathname)) {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (!isDashboardHtmlDoc() && isDashboardHubPath(pathname)) {
+      window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isSettingsHubPath(pathname)) {
+      window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isViewApplicantPath(pathname)) {
+      window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isApplicantsPath(pathname)) {
+      window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isHiringPath(pathname)) {
+      window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isDocumentsPath(pathname)) {
+      window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isEmployeesPath(pathname)) {
+      window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+      return;
+    }
+    if (isDashboardHtmlDoc() && isCreateDocumentPath(pathname)) {
+      window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
+      return;
+    }
+    if (!isSettingsHtmlDoc() && isSettingsHubPath(pathname)) {
+      window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+      return;
+    }
+    if (isSettingsHtmlDoc() && !isSettingsHubPath(pathname)) {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
         return;
       }
       window.location.replace("index.html" + (window.location.hash || "#/"));
@@ -1392,13 +2502,24 @@
     } else if (pathname.indexOf("/settings/") === 0) {
       showSettingsPage(pathname);
       window.scrollTo(0, 0);
-    } else if (pathname === "/create-document/template" && isCreateDocumentTemplateHtmlDoc()) {
+    } else if (
+      (pathname === "/document-category" ||
+        pathname === "/create-document/category" ||
+        pathname === "/create-document/template") &&
+      isDocumentCategoryHtmlDoc()
+    ) {
       showWorkspacePage(pathname, search);
       window.scrollTo(0, 0);
     } else if (isCreateDocumentPath(pathname) && isCreateDocumentHtmlDoc()) {
       showWorkspacePage(pathname, search);
       window.scrollTo(0, 0);
     } else if (pathname === "/hiring" && isHiringHtmlDoc()) {
+      showWorkspacePage(pathname, search);
+      window.scrollTo(0, 0);
+    } else if (pathname === "/applicants" && isApplicantsHtmlDoc()) {
+      showWorkspacePage(pathname, search);
+      window.scrollTo(0, 0);
+    } else if (pathname === "/view-applicant" && isViewApplicantHtmlDoc()) {
       showWorkspacePage(pathname, search);
       window.scrollTo(0, 0);
     } else if (
@@ -1411,7 +2532,10 @@
       window.scrollTo(0, 0);
     } else if (pathname === "/documents" && isDocumentsHtmlDoc()) {
       showWorkspacePage(pathname, search);
+      var savedQ = new URLSearchParams(String(search || "").replace(/^\?/, "")).get("saved");
+      if (savedQ !== "1") {
       window.scrollTo(0, 0);
+      }
     } else if (pathname === "/employees" && isEmployeesHtmlDoc()) {
       showWorkspacePage(pathname, search);
       syncEmployeePortalView();
@@ -2532,8 +3656,270 @@
     applyEmployeePortalView(q.get("view") === "grid" ? "grid" : "teams");
   }
 
+  function tplPageCount(fileName) {
+    if (FILE_PAGE_COUNT[fileName]) return FILE_PAGE_COUNT[fileName];
+    return 4 + (fileName.length % 4);
+  }
+
+  function bindDocumentTemplatesPage() {
+    var root = document.querySelector("[data-doc-tpl-root]");
+    if (!root || root.getAttribute("data-doc-tpl-ready") === "1") return;
+    root.setAttribute("data-doc-tpl-ready", "1");
+    var grid = root.querySelector("[data-doc-tpl-grid]");
+    var emptyEl = root.querySelector("[data-doc-tpl-empty]");
+    var titleEl = document.querySelector("[data-doc-tpl-title]");
+    var ledeEl = document.querySelector("[data-doc-tpl-lede]");
+    var crumbCat = document.querySelector("[data-doc-tpl-crumb-cat]");
+    var lb = document.querySelector("[data-doc-tpl-lightbox]");
+    if (!grid || !lb) return;
+
+    var params = new URLSearchParams(window.location.search.replace(/^\?/, ""));
+    var cat = params.get("category") || "";
+    var rows = TEMPLATE_BROWSE_LIST[cat];
+    if (!rows) {
+      window.location.replace("document-category.html");
+      return;
+    }
+
+    var catLabel = CAT_LABEL[cat] || cat;
+    if (titleEl) titleEl.textContent = catLabel;
+    if (crumbCat) crumbCat.textContent = catLabel;
+    document.title = catLabel + " — Templates — Workbench HR";
+    if (ledeEl) {
+      ledeEl.textContent =
+        "Preview placeholders for each file. Enlarge to flip pages, then select a template to continue.";
+    }
+
+    var selectedFile = "";
+    var lbIdx = 0;
+    var lbRow = null;
+    var lbCardRef = null;
+
+    function sheetMarkup(pageIdx, total, templateTitle) {
+      var safeTitle = escapeHtmlBrowse(templateTitle);
+      var paras = "";
+      var p;
+      var nParas = 5 + (pageIdx % 3);
+      for (p = 0; p < nParas; p++) {
+        var lineCount = p === 0 ? 1 : 2 + (p % 3);
+        var li;
+        var block = "";
+        for (li = 0; li < lineCount; li++) {
+          var w = 48 + ((pageIdx * 7 + p * 11 + li * 5) % 44);
+          var isHead = p === 0 && li === 0;
+          block +=
+            '<span class="wb-doc-tpl-sheet__line' +
+            (isHead ? " wb-doc-tpl-sheet__line--head" : "") +
+            '" style="width:' +
+            w +
+            '%"></span>';
+        }
+        paras += '<div class="wb-doc-tpl-sheet__para">' + block + "</div>";
+      }
+      return (
+        '<div class="wb-doc-tpl-sheet">' +
+        '<div class="wb-doc-tpl-sheet__viewer-bg">' +
+        '<div class="wb-doc-tpl-sheet__page">' +
+        '<div class="wb-doc-tpl-sheet__margin">' +
+        '<div class="wb-doc-tpl-sheet__letterhead">' +
+        '<span class="wb-doc-tpl-sheet__letterhead-logo"></span>' +
+        '<span class="wb-doc-tpl-sheet__letterhead-lines">' +
+        '<span class="wb-doc-tpl-sheet__letterhead-line"></span>' +
+        '<span class="wb-doc-tpl-sheet__letterhead-line wb-doc-tpl-sheet__letterhead-line--short"></span>' +
+        "</span>" +
+        "</div>" +
+        '<div class="wb-doc-tpl-sheet__title-rule"></div>' +
+        '<div class="wb-doc-tpl-sheet__paras">' +
+        paras +
+        "</div>" +
+        '<footer class="wb-doc-tpl-sheet__page-foot">' +
+        '<span class="wb-doc-tpl-sheet__page-num">' +
+        (pageIdx + 1) +
+        " / " +
+        total +
+        "</span>" +
+        "</footer>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        '<p class="wb-doc-tpl-sheet__caption">' +
+        safeTitle +
+        " · placeholder preview</p>" +
+        "</div>"
+      );
+    }
+
+    function renderLightbox() {
+      if (!lbRow) return;
+      var total = tplPageCount(lbRow.file);
+      if (lbIdx >= total) lbIdx = total - 1;
+      if (lbIdx < 0) lbIdx = 0;
+      var st = lb.querySelector("[data-doc-tpl-lb-stage]");
+      var meta = lb.querySelector("[data-doc-tpl-lb-meta]");
+      var h = lb.querySelector("[data-doc-tpl-lb-heading]");
+      var prev = lb.querySelector("[data-doc-tpl-lb-prev]");
+      var next = lb.querySelector("[data-doc-tpl-lb-next]");
+      if (st) st.innerHTML = sheetMarkup(lbIdx, total, lbRow.title);
+      if (meta) meta.textContent = "Page " + (lbIdx + 1) + " of " + total;
+      if (h) h.textContent = lbRow.title;
+      var single = total <= 1;
+      if (prev) {
+        prev.disabled = single;
+        prev.setAttribute("aria-disabled", single ? "true" : "false");
+      }
+      if (next) {
+        next.disabled = single;
+        next.setAttribute("aria-disabled", single ? "true" : "false");
+      }
+    }
+
+    function openLightbox(row, cardEl) {
+      lbRow = row;
+      lbCardRef = cardEl || null;
+      lbIdx = 0;
+      renderLightbox();
+      lb.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lb.hidden = true;
+      lbRow = null;
+      lbCardRef = null;
+      document.body.style.overflow = "";
+    }
+
+    function updateContinue() {
+      var a = document.querySelector("[data-doc-tpl-continue]");
+      if (!a) return;
+      if (!selectedFile) {
+        a.setAttribute("aria-disabled", "true");
+        a.setAttribute("href", "#");
+      } else {
+        a.setAttribute("aria-disabled", "false");
+        a.setAttribute(
+          "href",
+          "document-method.html?category=" +
+            encodeURIComponent(cat) +
+            "&file=" +
+            encodeURIComponent(selectedFile)
+        );
+      }
+    }
+
+    function setSelected(file, card) {
+      selectedFile = file;
+      grid.querySelectorAll(".wb-doc-tpl-card").forEach(function (c) {
+        var on = c.getAttribute("data-tpl-file") === file;
+        c.classList.toggle("wb-doc-tpl-card--selected", on);
+        c.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      updateContinue();
+    }
+
+    if (emptyEl) emptyEl.hidden = true;
+    grid.innerHTML = "";
+    rows.forEach(function (row) {
+      var pages = tplPageCount(row.file);
+      var art = document.createElement("article");
+      art.className = "wb-doc-tpl-card";
+      art.setAttribute("role", "listitem");
+      art.setAttribute("data-tpl-file", row.file);
+      art.setAttribute("tabindex", "0");
+      art.setAttribute("aria-selected", "false");
+      art.innerHTML =
+        '<div class="wb-doc-tpl-card__toolbar">' +
+        '<button type="button" class="wb-doc-tpl-card__zoom" data-doc-tpl-zoom aria-label="Enlarge preview">⤢</button>' +
+        "</div>" +
+        '<div class="wb-doc-tpl-card__preview">' +
+        '<div class="wb-doc-tpl-card__thumb" aria-hidden="true">' +
+        '<div class="wb-doc-tpl-card__thumb-shadow"></div>' +
+        '<div class="wb-doc-tpl-card__thumb-page">' +
+        '<div class="wb-doc-tpl-card__thumb-margin">' +
+        '<span class="wb-doc-tpl-card__thumb-head"></span>' +
+        '<span class="wb-doc-tpl-card__thumb-line wb-doc-tpl-card__thumb-line--title"></span>' +
+        '<span class="wb-doc-tpl-card__thumb-line"></span>' +
+        '<span class="wb-doc-tpl-card__thumb-line wb-doc-tpl-card__thumb-line--mid"></span>' +
+        '<span class="wb-doc-tpl-card__thumb-line wb-doc-tpl-card__thumb-line--short"></span>' +
+        "</div></div></div></div>" +
+        '<div class="wb-doc-tpl-card__footer">' +
+        "<h3 class=\"wb-doc-tpl-card__name\">" +
+        row.title +
+        "</h3>" +
+        '<p class="wb-doc-tpl-card__file">' +
+        row.file +
+        "</p>" +
+        '<span class="wb-doc-tpl-card__badge">' +
+        pages +
+        " pages · preview</span></div>";
+
+      art.addEventListener("click", function (e) {
+        if (e.target.closest("[data-doc-tpl-zoom]")) return;
+        setSelected(row.file, art);
+      });
+      art.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setSelected(row.file, art);
+        }
+      });
+      art.querySelector("[data-doc-tpl-zoom]").addEventListener("click", function (e) {
+        e.stopPropagation();
+        openLightbox(row, art);
+      });
+      grid.appendChild(art);
+    });
+
+    lb.querySelectorAll("[data-doc-tpl-lb-close]").forEach(function (btn) {
+      btn.addEventListener("click", closeLightbox);
+    });
+
+    var prevB = lb.querySelector("[data-doc-tpl-lb-prev]");
+    var nextB = lb.querySelector("[data-doc-tpl-lb-next]");
+    if (prevB) {
+      prevB.addEventListener("click", function () {
+        if (!lbRow) return;
+        var t = tplPageCount(lbRow.file);
+        if (t <= 1) return;
+        lbIdx = (lbIdx - 1 + t) % t;
+        renderLightbox();
+      });
+    }
+    if (nextB) {
+      nextB.addEventListener("click", function () {
+        if (!lbRow) return;
+        var t = tplPageCount(lbRow.file);
+        if (t <= 1) return;
+        lbIdx = (lbIdx + 1) % t;
+        renderLightbox();
+      });
+    }
+
+    var selBtn = lb.querySelector("[data-doc-tpl-lb-select]");
+    if (selBtn) {
+      selBtn.addEventListener("click", function () {
+        if (!lbRow) return;
+        if (lbCardRef) setSelected(lbRow.file, lbCardRef);
+        else {
+          var match = grid.querySelector('[data-tpl-file="' + lbRow.file + '"]');
+          setSelected(lbRow.file, match);
+        }
+        closeLightbox();
+      });
+    }
+
+    document.addEventListener("keydown", function docTplKey(e) {
+      if (lb.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft" && prevB && !prevB.disabled) prevB.click();
+      if (e.key === "ArrowRight" && nextB && !nextB.disabled) nextB.click();
+    });
+
+    updateContinue();
+  }
+
   function bindCreateDocumentTemplateStep() {
-    var root = document.querySelector('[data-ws-main="/create-document/template"]');
+    var root = document.querySelector('[data-ws-main="/document-category"]');
     if (!root) return;
     var grid = root.querySelector(".wb-create-doc__grid");
     var next = document.getElementById("ws-create-template-next");
@@ -2549,7 +3935,7 @@
       });
       next.setAttribute(
         "href",
-        "create-document.html#/create-document/method?category=" + encodeURIComponent(id)
+        "document-templates.html?category=" + encodeURIComponent(id)
       );
     }
     buttons.forEach(function (btn) {
@@ -2610,9 +3996,11 @@
     bindSettingsHelp();
     bindCreateDocumentTemplateStep();
     bindEmployeePortalView();
+    bindApplicantPdfViewer();
 
     window.addEventListener("hashchange", function () {
       closeProfileDeleteModal();
+      closeApplicantPdfModal();
       applyRoute();
       if (parseHash().kind === "marketing") setTimeout(onScrollMarketing, 400);
     });

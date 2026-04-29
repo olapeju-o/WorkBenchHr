@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document method — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wb-app" data-static-view="workspace" hidden>
+      <div class="wb-dash">
+        <aside class="wb-dash__sidebar" aria-label="Workspace navigation">
+          <div class="wb-dash__brand">
+            <a href="index.html#/" class="brand-mark">
+              <img src="assets/logo.png" width="34" height="34" alt="" class="brand-mark__img" />
+              <span class="brand-mark__text wb-dash__brand-text">Workbench HR</span>
+            </a>
+          </div>
+          <div class="wb-dash__cta-row">
+            <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+          </div>
+          <div class="wb-dash__nav-section">
+            <p class="wb-dash__nav-label">Workspace</p>
+            <nav class="wb-dash__nav" aria-label="Workspace">
+              <a href="dashboard.html#/dashboard" class="wb-dash__nav-link" data-ws-nav="/dashboard"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Dashboard</span></a
+              >
+              <a href="employees.html#/employees" class="wb-dash__nav-link" data-ws-nav="/employees"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><circle cx="12" cy="8" r="3.2" fill="currentColor" opacity="0.92" /><path
+                    fill="currentColor"
+                    d="M5 20v-1c0-2.2 3.1-4 7-4s7 1.8 7 4v1"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Employees</span></a
+              >
+              <a href="documents.html#/documents" class="wb-dash__nav-link" data-ws-nav="/documents"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Documents</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__nav-section wb-dash__nav-section--recruiting">
+            <p class="wb-dash__nav-label">Recruiting</p>
+            <nav class="wb-dash__nav" aria-label="Recruiting">
+              <a href="hiring.html#/hiring" class="wb-dash__nav-link" data-ws-nav="/hiring"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M12 2l2.4 7.4h7.8l-6.3 4.6 2.4 7.4L12 16.8 5.7 21.4 8.1 14 1.8 9.4h7.8L12 2z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Hiring</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__sidebar-spacer"></div>
+          <div class="wb-dash__sidebar-footer">
+            <a href="dashboard.html#/assistant" class="wb-dash__btn wb-dash__btn--primary wb-dash__btn--assistant-bar"
+              >AI Assistant
+              <span class="wb-dash__assistant-icon" aria-hidden="true"
+                ><img src="assets/robot.png" alt="" width="20" height="20" class="wb-dash__assistant-img" decoding="async"
+              /></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/document-method" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="document-category.html" class="wb-create-doc__crumb-link">Create Document</a>
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <a
+                  href="document-templates.html"
+                  class="wb-create-doc__crumb-link"
+                  data-doc-method-crumb-templates
+                  >Select template</a
+                >
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <span class="wb-create-doc__crumb-current">Document method</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></a>
+            </div>
+          </header>
+
+          <section class="wb-create-doc" data-doc-method-root>
+            <div class="wb-create-method">
+              <h1 class="wb-create-method__title">How would you like to create this?</h1>
+              <p id="ws-method-sub" class="wb-create-method__sub"></p>
+              <p id="ws-method-pages-note" class="wb-create-method__pages-note" hidden></p>
+              <div class="wb-create-method__pick-wrap" hidden>
+                <a id="ws-method-pick-template" class="wb-link" href="document-templates.html">Choose a different template</a>
+              </div>
+              <div class="wb-create-method__options">
+                <a
+                  id="ws-method-ai"
+                  class="wb-create-method__card wb-create-method__card--ai"
+                  href="document-templates.html"
+                >
+                  <div class="wb-create-method__card-top">
+                    <span class="wb-create-method__card-icon wb-create-method__card-icon--ai" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          fill="#fff"
+                          d="M12 2l2.09 6.26H21l-5.45 3.96 2.09 6.26L12 14.77 6.36 18.48l2.09-6.26L3 8.26h6.91L12 2z"
+                          opacity="0.95"
+                        />
+                      </svg>
+                    </span>
+                    <div class="wb-create-method__card-head">
+                      <span class="wb-create-method__card-title">Use AI to Generate Content</span>
+                      <span class="wb-create-method__badge">Recommended</span>
+                    </div>
+                    <span class="wb-create-method__chevron" aria-hidden="true">›</span>
+                  </div>
+                  <p class="wb-create-method__card-desc">
+                    Describe the role and situation. AI drafts the full document — you review and tweak before sending.
+                  </p>
+                </a>
+                <a
+                  id="ws-method-manual"
+                  class="wb-create-method__card wb-create-method__card--manual"
+                  href="document-templates.html"
+                >
+                  <div class="wb-create-method__card-top">
+                    <span class="wb-create-method__card-icon wb-create-method__card-icon--manual" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          fill="currentColor"
+                          fill-opacity="0.55"
+                          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                        />
+                      </svg>
+                    </span>
+                    <div class="wb-create-method__card-head">
+                      <span class="wb-create-method__card-title">Fill Template Manually</span>
+                    </div>
+                    <span class="wb-create-method__chevron" aria-hidden="true">›</span>
+                  </div>
+                  <p class="wb-create-method__card-desc">
+                    Use the standard template and fill in each field yourself. Best if you already know exactly what to say.
+                  </p>
+                </a>
+              </div>
+              <footer class="wb-create-method__footer">
+                <a href="document-templates.html" class="wb-btn wb-btn--muted wb-create-method__back" data-doc-method-back
+                  >← Back</a
+                >
+              </footer>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

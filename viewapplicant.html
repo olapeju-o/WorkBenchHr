@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Applicant profile — Workbench HR</title>
+    <link rel="icon" href="assets/logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wb-app" data-static-view="workspace" hidden>
+      <div class="wb-dash">
+        <aside class="wb-dash__sidebar" aria-label="Workspace navigation">
+          <div class="wb-dash__brand">
+            <a href="index.html#/" class="brand-mark">
+              <img src="assets/logo.png" width="34" height="34" alt="" class="brand-mark__img" />
+              <span class="brand-mark__text wb-dash__brand-text">Workbench HR</span>
+            </a>
+          </div>
+          <div class="wb-dash__cta-row">
+            <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+          </div>
+          <div class="wb-dash__nav-section">
+            <p class="wb-dash__nav-label">Workspace</p>
+            <nav class="wb-dash__nav" aria-label="Workspace">
+              <a href="dashboard.html#/dashboard" class="wb-dash__nav-link" data-ws-nav="/dashboard"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M4 4h7v7H4V4zm9 0h7v7h-7V4zM4 13h7v7H4v-7zm9 0h7v7h-7v-7z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Dashboard</span></a
+              >
+              <a href="employees.html#/employees" class="wb-dash__nav-link" data-ws-nav="/employees"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><circle cx="12" cy="8" r="3.2" fill="currentColor" opacity="0.92" /><path
+                    fill="currentColor"
+                    d="M5 20v-1c0-2.2 3.1-4 7-4s7 1.8 7 4v1"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Employees</span></a
+              >
+              <a href="documents.html#/documents" class="wb-dash__nav-link" data-ws-nav="/documents"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path
+                    fill="currentColor"
+                    d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm0 1.5L18.5 8H14V3.5zM6 20V4h7v5h5v11H6z"
+                    opacity="0.92"
+                /></svg>
+                <span class="wb-dash__nav-text">Documents</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__nav-section wb-dash__nav-section--recruiting">
+            <p class="wb-dash__nav-label">Recruiting</p>
+            <nav class="wb-dash__nav" aria-label="Recruiting">
+              <a href="hiring.html#/hiring" class="wb-dash__nav-link" data-ws-nav="/hiring"
+                ><svg class="wb-dash__nav-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"
+                  ><path fill="currentColor" d="M12 2l2.4 7.4h7.8l-6.3 4.6 2.4 7.4L12 16.8 5.7 21.4 8.1 14 1.8 9.4h7.8L12 2z" opacity="0.92"/></svg
+                ><span class="wb-dash__nav-text">Hiring</span></a
+              >
+            </nav>
+          </div>
+          <div class="wb-dash__sidebar-spacer"></div>
+          <div class="wb-dash__sidebar-footer">
+            <a href="dashboard.html#/assistant" class="wb-dash__btn wb-dash__btn--primary wb-dash__btn--assistant-bar"
+              >AI Assistant
+              <span class="wb-dash__assistant-icon" aria-hidden="true"
+                ><img src="assets/robot.png" alt="" width="20" height="20" class="wb-dash__assistant-img" decoding="async"
+              /></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="wb-dash__main" data-ws-main="/view-applicant" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <h1 class="visually-hidden" data-va-page-heading>Applicant profile</h1>
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="hiring.html#/hiring" class="wb-create-doc__crumb-link">Hiring</a
+                ><span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span
+                ><span class="wb-create-doc__crumb-current" data-va-crumb>Olivia Thompson</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></a>
+            </div>
+          </header>
+
+          <div class="wb-view-applicant">
+            <nav class="wb-va-pipeline" aria-label="Hiring pipeline">
+              <ol class="wb-va-pipeline__list">
+                <li class="wb-va-pipeline__step wb-va-pipeline__step--complete">
+                  <span class="wb-va-pipeline__dot" aria-hidden="true"></span>
+                  <span class="wb-va-pipeline__label">Screening</span>
+                </li>
+                <li class="wb-va-pipeline__step wb-va-pipeline__step--complete">
+                  <span class="wb-va-pipeline__dot" aria-hidden="true"></span>
+                  <span class="wb-va-pipeline__label">Interviewing</span>
+                </li>
+                <li class="wb-va-pipeline__step">
+                  <span class="wb-va-pipeline__dot" aria-hidden="true"></span>
+                  <span class="wb-va-pipeline__label">Offer Letter</span>
+                </li>
+                <li class="wb-va-pipeline__step">
+                  <span class="wb-va-pipeline__dot" aria-hidden="true"></span>
+                  <span class="wb-va-pipeline__label">Hired</span>
+                </li>
+              </ol>
+            </nav>
+
+            <section class="wb-va-hero" aria-labelledby="va-hero-name">
+              <img
+                class="wb-va-hero__photo"
+                data-va-photo
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&amp;h=200&amp;fit=crop&amp;crop=face"
+                alt=""
+                width="96"
+                height="96"
+              />
+              <div class="wb-va-hero__body">
+                <div class="wb-va-hero__top">
+                  <div>
+                    <h2 class="wb-va-hero__name" id="va-hero-name" data-va-name>Olivia Thompson</h2>
+                    <p class="wb-va-hero__role" data-va-role>Front of House (FOH) Staff Candidate</p>
+                  </div>
+                  <button type="button" class="wb-va-hero__more" aria-label="More actions">⋯</button>
+                </div>
+                <div class="wb-va-hero__row">
+                  <div class="wb-va-hero__match">
+                    <span class="wb-va-hero__match-num" data-va-match>92%</span>
+                    <span class="wb-va-hero__match-label">Match Score</span>
+                  </div>
+                  <p class="wb-va-hero__summary" data-va-summary>
+                    Matches all core competencies and 5/5 required skills. Exceeds experience requirements.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <details class="wb-va-docs" open>
+              <summary class="wb-va-docs__summary">
+                <span class="wb-va-docs__summary-text">Documents</span>
+                <span class="wb-va-docs__chev" aria-hidden="true"></span>
+              </summary>
+              <div class="wb-va-docs__panel">
+                <div class="wb-va-docs__tabs" role="tablist" aria-label="Document types">
+                  <button type="button" class="wb-va-docs__tab wb-va-docs__tab--active" role="tab" aria-selected="true">All</button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Resume</button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Cover Letter</button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Portfolio</button>
+                </div>
+                <div class="wb-hiring__toolbar wb-va-docs__toolbar">
+                  <label class="wb-hiring__search">
+                    <span class="wb-hiring__search-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="18" height="18">
+                        <path
+                          fill="currentColor"
+                          d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                          opacity="0.55"
+                        />
+                      </svg>
+                    </span>
+                    <input type="search" data-va-docs-search class="wb-hiring__search-input" placeholder="Search roles…" autocomplete="off" />
+                  </label>
+                  <div class="wb-hiring__toolbar-mid">
+                    <span class="wb-hiring__sort-label">Sort by</span>
+                    <div class="wb-hiring__sort-pills" role="group" aria-label="Sort documents">
+                      <button type="button" class="wb-hiring__sort-pill wb-hiring__sort-pill--active" aria-pressed="true">Name A-Z</button>
+                      <button type="button" class="wb-hiring__sort-pill" aria-pressed="false">Date Added</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="wb-va-docs__list-wrap">
+                  <ul class="wb-va-docs__list" data-va-docs-list aria-label="Uploaded documents"></ul>
+                </div>
+              </div>
+            </details>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div
+      id="wb-va-pdf-modal"
+      class="wb-va-pdf-modal"
+      hidden
+      role="presentation"
+    >
+      <button type="button" class="wb-va-pdf-modal__backdrop" data-va-pdf-close tabindex="-1" aria-label="Close preview"></button>
+      <div
+        class="wb-va-pdf-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wb-va-pdf-modal-title"
+      >
+        <header class="wb-va-pdf-modal__head">
+          <h2 id="wb-va-pdf-modal-title" class="wb-va-pdf-modal__title" data-va-pdf-title>Document</h2>
+          <button type="button" class="wb-va-pdf-modal__close" data-va-pdf-close aria-label="Close">×</button>
+        </header>
+        <div class="wb-va-pdf-modal__frame-wrap">
+          <iframe class="wb-va-pdf-modal__frame" data-va-pdf-frame title="PDF preview" src="about:blank"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

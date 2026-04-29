@@ -24,7 +24,7 @@
             </a>
           </div>
           <div class="wb-dash__cta-row">
-            <a href="create-document-template.html#/create-document/template" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
+            <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
             <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
           </div>
           <div class="wb-dash__nav-section">
@@ -81,53 +81,22 @@
             <h1 class="wb-dash__title">Documents</h1>
             <div class="wb-dash__header-actions">
               <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
-                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon"
-              /></a>
-              <span class="wb-dash__avatar" aria-hidden="true"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
                 ><img
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
                   alt=""
                   width="40"
                   height="40"
-              /></span>
+              /></a>
             </div>
           </header>
 
           <div class="wb-docs-page">
-            <section class="wb-docs-pulse" aria-labelledby="docs-pulse-heading">
-              <div class="wb-docs-pulse__grid">
-                <div>
-                  <p class="wb-docs-pulse__eyebrow">Library intelligence</p>
-                  <h2 class="wb-docs-pulse__title" id="docs-pulse-heading">Indexed documents and AI suggestions</h2>
-                  <p class="wb-docs-pulse__lede">
-                    Workbench keeps <strong>policies, templates, and signed files</strong> in one searchable library. This
-                    static preview shows how status, categories, and gentle AI nudges would appear once your workspace is
-                    connected.
-                  </p>
-                  <ul class="wb-docs-pulse__tags">
-                    <li>Handbooks</li>
-                    <li>Offer letters</li>
-                    <li>Compliance</li>
-                    <li>Onboarding packs</li>
-                  </ul>
-                </div>
-                <div class="wb-docs-pulse__stats" aria-label="Library snapshot">
-                  <div class="wb-docs-pulse__stat">
-                    <span class="wb-docs-pulse__stat-value">24</span>
-                    <span class="wb-docs-pulse__stat-label">Indexed</span>
-                  </div>
-                  <div class="wb-docs-pulse__stat">
-                    <span class="wb-docs-pulse__stat-value">3</span>
-                    <span class="wb-docs-pulse__stat-label">Needs review</span>
-                  </div>
-                  <div class="wb-docs-pulse__stat">
-                    <span class="wb-docs-pulse__stat-value">5</span>
-                    <span class="wb-docs-pulse__stat-label">AI drafts</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             <div class="wb-docs-toolbar" role="search">
               <label class="wb-docs-search">
                 <span class="wb-docs-search__icon" aria-hidden="true">
@@ -139,7 +108,12 @@
                     />
                   </svg>
                 </span>
-                <input type="search" class="wb-docs-search__input" placeholder="Search by title, tag, or owner…" autocomplete="off" />
+                <input
+                  type="search"
+                  class="wb-docs-search__input"
+                  placeholder="Search by title, tag, or owner..."
+                  autocomplete="off"
+                />
               </label>
               <div class="wb-docs-filters" role="group" aria-label="Filter by type">
                 <button type="button" class="wb-docs-filter wb-docs-filter--active" aria-pressed="true">All</button>
@@ -153,12 +127,12 @@
               <div class="wb-docs-suggest__head">
                 <h2 class="wb-docs-suggest__title" id="docs-suggest-title">Suggested next steps</h2>
                 <p class="wb-docs-suggest__sub">
-                  Shortcuts based on what is already in your library (demo copy — no model is running here).
+                  Shortcuts based on what is already in your library (preview — no model is running in this demo).
                 </p>
               </div>
               <ul class="wb-docs-suggest__grid">
                 <li>
-                  <a href="create-document-template.html#/create-document/template" class="wb-docs-suggest-card wb-docs-suggest-card--mint">
+                  <a href="document-category.html" class="wb-docs-suggest-card">
                     <h3 class="wb-docs-suggest-card__title">Refresh the employee handbook intro</h3>
                     <p class="wb-docs-suggest-card__body">
                       Align tone with your latest remote-work policy and surface changes for legal review.
@@ -167,7 +141,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="create-document-template.html#/create-document/templates/company" class="wb-docs-suggest-card">
+                  <a href="document-category.html" class="wb-docs-suggest-card">
                     <h3 class="wb-docs-suggest-card__title">Bundle offer letter + NDA</h3>
                     <p class="wb-docs-suggest-card__body">
                       Create a single packet for new hires in Sales — pulled from indexed templates.
@@ -194,10 +168,12 @@
               </p>
             </div>
 
-            <section class="wb-docs-library" aria-labelledby="docs-library-title">
+            <p class="wb-docs-save-banner" data-docs-save-banner hidden role="status" aria-live="polite"></p>
+
+            <section class="wb-docs-library" id="docs-library" aria-labelledby="docs-library-title">
               <div class="wb-docs-library__head">
                 <h2 class="wb-docs-library__title" id="docs-library-title">All documents</h2>
-                <a href="create-document-template.html#/create-document/template" class="wb-docs-library__link">+ New from template</a>
+                <a href="document-category.html" class="wb-docs-library__link">+ New from template</a>
               </div>
               <div class="wb-docs-table-wrap">
                 <table class="wb-docs-table">
@@ -209,8 +185,8 @@
                       <th class="wb-docs-table__th-actions" scope="col">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr class="wb-docs-table__tr--added">
+                  <tbody data-docs-table-body>
+                    <tr>
                       <td class="wb-docs-table__cell-name">
                         <div class="wb-docs-table__name-inner">
                           <span class="wb-docs-table__file-ic" aria-hidden="true">
@@ -322,7 +298,7 @@
             </section>
 
             <div class="wb-create-draft__actions">
-              <a href="create-document-template.html#/create-document/template" class="wb-btn wb-btn--primary">+ Create Document</a>
+              <a href="document-category.html" class="wb-btn wb-btn--primary">+ Create Document</a>
             </div>
           </div>
         </main>
