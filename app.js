@@ -128,7 +128,10 @@
     "/applicants": "Applicants — Workbench HR",
     "/view-applicant": "Applicant profile — Workbench HR",
     "/documents": "Documents — Workbench HR",
+    "/sign-documents": "Sign documents — Workbench HR",
     "/employees": "Employee Portal — Workbench HR",
+    "/employees/add": "Add employee — Workbench HR",
+    "/employees/teams/new": "Create team — Workbench HR",
     "/create-document/category": "Document category — Workbench HR",
     "/document-category": "Document category — Workbench HR",
     "/document-templates": "Choose template — Workbench HR",
@@ -169,6 +172,15 @@
 
   function isDocumentsPath(pathname) {
     return pathname === "/documents";
+  }
+
+  function isSignDocumentsHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)sign-documents\.html$/i.test(path);
+  }
+
+  function isSignDocumentsPath(pathname) {
+    return pathname === "/sign-documents";
   }
 
   function isSettingsHtmlDoc() {
@@ -288,7 +300,11 @@
   }
 
   function isEmployeesPath(pathname) {
-    return pathname === "/employees";
+    return (
+      pathname === "/employees" ||
+      pathname === "/employees/add" ||
+      pathname === "/employees/teams/new"
+    );
   }
 
   function parseHash() {
@@ -441,10 +457,15 @@
       if (pathname === "/create-document/document-edit") return "/create-document/document-edit";
       return "/create-document/templates/browse";
     }
+    if (isSignDocumentsHtmlDoc()) {
+      return "/sign-documents";
+    }
     if (isDocumentsHtmlDoc()) {
       return "/documents";
     }
     if (isEmployeesHtmlDoc()) {
+      if (pathname === "/employees/add") return "/employees/add";
+      if (pathname === "/employees/teams/new") return "/employees/teams/new";
       return "/employees";
     }
     if (pathname === "/documents") return "/documents";
@@ -1874,14 +1895,16 @@
     if (searchInput) {
       searchInput.placeholder = "Search '" + m.title + "' applicants…";
     }
-    var countEl = document.querySelector("[data-applicants-count]");
-    if (countEl) {
-      countEl.innerHTML =
-        "Showing <strong>" +
-        m.count +
-        "</strong> &lsquo;" +
-        m.title +
-        "&rsquo; candidates.";
+    var rootApplicants = document.querySelector("[data-applicants-root]");
+    if (rootApplicants) {
+      rootApplicants.setAttribute("data-applicants-role-title", m.title);
+      rootApplicants.setAttribute("data-applicants-role-count", m.count);
+    }
+    bindApplicantsSearchIfNeeded();
+    if (rootApplicants && rootApplicants.__wbApplicantsRefresh) {
+      var siClear = rootApplicants.querySelector("[data-applicants-search]");
+      if (siClear) siClear.value = "";
+      rootApplicants.__wbApplicantsRefresh();
     }
     var crumb = document.querySelector("[data-applicants-role-title]");
     if (crumb) crumb.textContent = m.title;
@@ -1890,6 +1913,55 @@
     document.querySelectorAll(".wb-applicant-card__role").forEach(function (el) {
       el.textContent = m.title + " candidate";
     });
+  }
+
+  function bindApplicantsSearchIfNeeded() {
+    var root = document.querySelector("[data-applicants-root]");
+    if (!root || root.getAttribute("data-applicants-search-bound") === "1") return;
+    root.setAttribute("data-applicants-search-bound", "1");
+    var searchInp = root.querySelector("[data-applicants-search]");
+    var countEl = document.querySelector("[data-applicants-count]");
+    if (!searchInp) return;
+
+    function applicantCardHaystack(card) {
+      return (card.textContent || "").toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function refreshApplicantsSearch() {
+      var q = (searchInp.value || "").trim().toLowerCase();
+      var cards = root.querySelectorAll(".wb-applicant-card");
+      var total = cards.length;
+      var visible = 0;
+      cards.forEach(function (card) {
+        var show = !q || applicantCardHaystack(card).indexOf(q) !== -1;
+        card.hidden = !show;
+        if (show) visible++;
+      });
+      if (!countEl) return;
+      var roleTitle = root.getAttribute("data-applicants-role-title") || "candidates";
+      var roleCount = root.getAttribute("data-applicants-role-count") || String(total);
+      if (!q) {
+        countEl.innerHTML =
+          "Showing <strong>" +
+          roleCount +
+          "</strong> &lsquo;" +
+          roleTitle +
+          "&rsquo; candidates.";
+      } else {
+        countEl.innerHTML =
+          "Showing <strong>" +
+          visible +
+          "</strong> of <strong>" +
+          total +
+          "</strong> matching &lsquo;" +
+          roleTitle +
+          "&rsquo;.";
+      }
+    }
+
+    searchInp.addEventListener("input", refreshApplicantsSearch);
+    searchInp.addEventListener("search", refreshApplicantsSearch);
+    root.__wbApplicantsRefresh = refreshApplicantsSearch;
   }
 
   function parseApplicantDocDateToMs(dateStr) {
@@ -1922,7 +1994,8 @@
       var kind = (li.getAttribute("data-doc-kind") || "").toLowerCase();
       var passTab = tab === "all" || tab === kind;
       var name = (li.getAttribute("data-va-doc-file") || "").toLowerCase();
-      var passQ = !q || name.indexOf(q) !== -1;
+      var rowText = (li.textContent || "").toLowerCase().replace(/\s+/g, " ");
+      var passQ = !q || name.indexOf(q) !== -1 || rowText.indexOf(q) !== -1;
       li.hidden = !(passTab && passQ);
     });
 
@@ -2106,6 +2179,339 @@
     document.body.classList.remove("wb-va-pdf-modal--open");
   }
 
+  function openDocumentsPdfModal(fileLabel) {
+    closeSignReminderModal();
+    closeNudgeModal();
+    var modal = document.getElementById("wb-docs-pdf-modal");
+    var titleEl = document.querySelector("[data-docs-pdf-title]");
+    var frame = document.querySelector("[data-docs-pdf-frame]");
+    if (!modal || !frame) return;
+    if (titleEl) titleEl.textContent = fileLabel || "Document";
+    frame.setAttribute("src", VA_SAMPLE_PDF_SRC);
+    modal.hidden = false;
+    document.body.classList.add("wb-va-pdf-modal--open");
+  }
+
+  function closeDocumentsPdfModal() {
+    var modal = document.getElementById("wb-docs-pdf-modal");
+    var frame = document.querySelector("[data-docs-pdf-frame]");
+    if (modal) modal.hidden = true;
+    if (frame) frame.setAttribute("src", "about:blank");
+    document.body.classList.remove("wb-va-pdf-modal--open");
+  }
+
+  function closeSignReminderModal() {
+    var modal = document.querySelector("[data-sign-reminder-modal]");
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove("wb-sign-reminder-modal--open");
+    var ref = window.__wbSignReminderLastFocus;
+    if (ref && typeof ref.focus === "function") ref.focus();
+    window.__wbSignReminderLastFocus = null;
+  }
+
+  function openSignReminderModal(triggerBtn) {
+    closeDocumentsPdfModal();
+    closeSignQueuePdfModal();
+    closeNudgeModal();
+    var modal = document.querySelector("[data-sign-reminder-modal]");
+    if (!modal) return;
+    var feedback = modal.querySelector("[data-sign-reminder-feedback]");
+    if (feedback) {
+      feedback.hidden = true;
+      feedback.textContent = "";
+    }
+    window.__wbSignReminderLastFocus = triggerBtn;
+    modal.hidden = false;
+    document.body.classList.add("wb-sign-reminder-modal--open");
+    var dateInp = modal.querySelector("[data-sign-reminder-date]");
+    if (dateInp && !dateInp.value) {
+      var d = new Date();
+      d.setDate(d.getDate() + 1);
+      var y = d.getFullYear();
+      var mo = d.getMonth() + 1;
+      var day = d.getDate();
+      dateInp.value = y + "-" + (mo < 10 ? "0" : "") + mo + "-" + (day < 10 ? "0" : "") + day;
+    }
+    window.setTimeout(function () {
+      var focusEl = modal.querySelector("[data-sign-reminder-date]");
+      if (focusEl && typeof focusEl.focus === "function") focusEl.focus();
+    }, 0);
+  }
+
+  function bindSignReminderModal() {
+    if (window.__wbSignReminderModalBound) return;
+    window.__wbSignReminderModalBound = true;
+    document.addEventListener("click", function (e) {
+      var openBtn = e.target.closest("[data-sign-reminder-open]");
+      if (openBtn) {
+        e.preventDefault();
+        openSignReminderModal(openBtn);
+        return;
+      }
+      if (e.target.closest("[data-sign-reminder-close]")) {
+        closeSignReminderModal();
+        return;
+      }
+      var saveBtn = e.target.closest("[data-sign-reminder-save]");
+      if (saveBtn) {
+        e.preventDefault();
+        var modal = saveBtn.closest("[data-sign-reminder-modal]");
+        if (!modal) return;
+        var dateInp = modal.querySelector("[data-sign-reminder-date]");
+        var timeInp = modal.querySelector("[data-sign-reminder-time]");
+        var noteInp = modal.querySelector("[data-sign-reminder-note]");
+        var fb = modal.querySelector("[data-sign-reminder-feedback]");
+        if (!dateInp || !dateInp.value) {
+          if (fb) {
+            fb.hidden = false;
+            fb.textContent = "Pick a reminder date to continue.";
+          }
+          return;
+        }
+        var timePart = timeInp && timeInp.value ? " at " + timeInp.value : "";
+        var noteTxt = noteInp && noteInp.value.trim();
+        if (fb) {
+          fb.hidden = false;
+          fb.textContent =
+            "We\u2019ll remind you around " +
+            dateInp.value +
+            timePart +
+            (noteTxt ? " \u2014 " + noteTxt : "") +
+            ". Preview only \u2014 this is not saved to a calendar.";
+        }
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var modal = document.querySelector("[data-sign-reminder-modal]");
+      if (!modal || modal.hidden) return;
+      e.preventDefault();
+      closeSignReminderModal();
+    });
+  }
+
+  function closeNudgeModal() {
+    var modal = document.querySelector("[data-nudge-modal]");
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove("wb-dash-nudge-modal--open");
+    var ref = window.__wbNudgeLastFocus;
+    if (ref && typeof ref.focus === "function") ref.focus();
+    window.__wbNudgeLastFocus = null;
+  }
+
+  function openNudgeModal(triggerBtn) {
+    closeSignReminderModal();
+    closeDocumentsPdfModal();
+    closeSignQueuePdfModal();
+    var modal = document.querySelector("[data-nudge-modal]");
+    if (!modal) return;
+    var feedback = modal.querySelector("[data-nudge-feedback]");
+    if (feedback) {
+      feedback.hidden = true;
+      feedback.textContent = "";
+    }
+    window.__wbNudgeLastFocus = triggerBtn;
+    modal.hidden = false;
+    document.body.classList.add("wb-dash-nudge-modal--open");
+    window.setTimeout(function () {
+      var first = modal.querySelector('input[name="wb-dash-nudge-channel"]');
+      if (first && typeof first.focus === "function") first.focus();
+    }, 0);
+  }
+
+  function applyDashboardUpcomingRange(root, days) {
+    var segWrap = root.querySelector("[data-dash-upcoming-segments]");
+    var list = root.querySelector("[data-dash-upcoming-list]");
+    if (!segWrap || !list) return;
+    var d = days === 30 ? 30 : 7;
+    segWrap.querySelectorAll("[data-dash-upcoming-range]").forEach(function (btn) {
+      var val = parseInt(btn.getAttribute("data-dash-upcoming-range") || "7", 10);
+      var on = val === d;
+      btn.classList.toggle("wb-dash-segments__btn--active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    list.querySelectorAll(".wb-dash-upcoming-row").forEach(function (row) {
+      var raw = (row.getAttribute("data-upcoming-ranges") || "7,30").trim();
+      var parts = raw.split(",").map(function (s) {
+        return parseInt(s.trim(), 10);
+      }).filter(function (n) {
+        return n === 7 || n === 30;
+      });
+      if (parts.length === 0) {
+        parts.push(7);
+        parts.push(30);
+      }
+      row.hidden = parts.indexOf(d) === -1;
+    });
+  }
+
+  function bindDashboardUpcoming() {
+    if (!isDashboardHtmlDoc() || window.__wbDashUpcomingBound) return;
+    var root = document.querySelector("[data-dash-upcoming-root]");
+    if (!root) return;
+    window.__wbDashUpcomingBound = true;
+    var segWrap = root.querySelector("[data-dash-upcoming-segments]");
+    if (!segWrap) return;
+    segWrap.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-dash-upcoming-range]");
+      if (!btn || !segWrap.contains(btn)) return;
+      var days = parseInt(btn.getAttribute("data-dash-upcoming-range") || "7", 10);
+      if (days !== 7 && days !== 30) return;
+      applyDashboardUpcomingRange(root, days);
+    });
+    applyDashboardUpcomingRange(root, 7);
+  }
+
+  function applyDashboardHiringStatus(root, statusStr) {
+    var segWrap = root.querySelector("[data-dash-hiring-segments]");
+    var list = root.querySelector("[data-dash-hiring-list]");
+    if (!segWrap || !list) return;
+    var sel = String(statusStr || "active").toLowerCase();
+    if (sel !== "active" && sel !== "paused" && sel !== "closed") sel = "active";
+    segWrap.querySelectorAll("[data-dash-hiring-status]").forEach(function (btn) {
+      var st = String(btn.getAttribute("data-dash-hiring-status") || "").toLowerCase();
+      var on = st === sel;
+      btn.classList.toggle("wb-dash-segments__btn--active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    list.querySelectorAll(".wb-dash-hire-row").forEach(function (row) {
+      var st = String(row.getAttribute("data-hiring-listing-status") || "active").toLowerCase();
+      row.hidden = st !== sel;
+    });
+  }
+
+  function bindDashboardHiringPipeline() {
+    if (!isDashboardHtmlDoc() || window.__wbDashHiringBound) return;
+    var root = document.querySelector("[data-dash-hiring-root]");
+    if (!root) return;
+    window.__wbDashHiringBound = true;
+    var segWrap = root.querySelector("[data-dash-hiring-segments]");
+    if (!segWrap) return;
+    segWrap.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-dash-hiring-status]");
+      if (!btn || !segWrap.contains(btn)) return;
+      var st = btn.getAttribute("data-dash-hiring-status");
+      if (!st) return;
+      applyDashboardHiringStatus(root, st);
+    });
+    applyDashboardHiringStatus(root, "active");
+  }
+
+  function bindNudgeModal() {
+    if (window.__wbNudgeModalBound) return;
+    window.__wbNudgeModalBound = true;
+    document.addEventListener("click", function (e) {
+      var openBtn = e.target.closest("[data-nudge-open]");
+      if (openBtn) {
+        e.preventDefault();
+        openNudgeModal(openBtn);
+        return;
+      }
+      if (e.target.closest("[data-nudge-close]")) {
+        closeNudgeModal();
+        return;
+      }
+      var sendBtn = e.target.closest("[data-nudge-send]");
+      if (sendBtn) {
+        e.preventDefault();
+        var modal = sendBtn.closest("[data-nudge-modal]");
+        if (!modal) return;
+        var ch = modal.querySelector('input[name="wb-dash-nudge-channel"]:checked');
+        var channel = ch ? ch.value : "email";
+        var msgInp = modal.querySelector("[data-nudge-message]");
+        var whenInp = modal.querySelector("[data-nudge-when]");
+        var fb = modal.querySelector("[data-nudge-feedback]");
+        var parts = ["Preview: nudge would go out via " + channel + "."];
+        if (msgInp && msgInp.value.trim()) parts.push("\u201c" + msgInp.value.trim() + "\u201d");
+        if (whenInp && whenInp.value) parts.push("Scheduled for " + whenInp.value + ".");
+        parts.push("Nothing was sent from this demo.");
+        if (fb) {
+          fb.hidden = false;
+          fb.textContent = parts.join(" ");
+        }
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var nudge = document.querySelector("[data-nudge-modal]");
+      if (!nudge || nudge.hidden) return;
+      e.preventDefault();
+      closeNudgeModal();
+    });
+  }
+
+  function openSignQueuePdfModal(fileLabel) {
+    closeSignReminderModal();
+    closeNudgeModal();
+    var modal = document.getElementById("wb-sign-queue-pdf-modal");
+    var titleEl = document.querySelector("[data-sign-queue-pdf-title]");
+    var frame = document.querySelector("[data-sign-queue-pdf-frame]");
+    if (!modal || !frame) return;
+    if (titleEl) titleEl.textContent = fileLabel || "Document";
+    frame.setAttribute("src", VA_SAMPLE_PDF_SRC);
+    modal.hidden = false;
+    document.body.classList.add("wb-va-pdf-modal--open");
+  }
+
+  function closeSignQueuePdfModal() {
+    var modal = document.getElementById("wb-sign-queue-pdf-modal");
+    var frame = document.querySelector("[data-sign-queue-pdf-frame]");
+    if (modal) modal.hidden = true;
+    if (frame) frame.setAttribute("src", "about:blank");
+    document.body.classList.remove("wb-va-pdf-modal--open");
+  }
+
+  function bindSignQueuePage() {
+    if (window.__wbSignQueueBound) return;
+    var root = document.querySelector("[data-sign-queue-root]");
+    if (!root) return;
+    window.__wbSignQueueBound = true;
+
+    function updateCount() {
+      var rows = root.querySelectorAll("[data-sign-queue-row]:not(.wb-sign-queue__row--signed)");
+      var n = rows.length;
+      var el = root.querySelector("[data-sign-queue-count]");
+      if (!el) return;
+      if (n === 0) {
+        el.textContent = "You are caught up — no signatures waiting.";
+      } else {
+        el.textContent =
+          n + (n === 1 ? " document is " : " documents are ") + "waiting on your signature.";
+      }
+    }
+
+    root.addEventListener("click", function (e) {
+      var prevBtn = e.target.closest("[data-sign-queue-preview]");
+      if (prevBtn && root.contains(prevBtn)) {
+        var row = prevBtn.closest("[data-sign-queue-row]");
+        var t = row ? row.querySelector(".wb-sign-queue__title") : null;
+        openSignQueuePdfModal(t ? t.textContent.trim() : "Document");
+        return;
+      }
+      var signBtn = e.target.closest("[data-sign-queue-sign]");
+      if (signBtn && root.contains(signBtn)) {
+        var row2 = signBtn.closest("[data-sign-queue-row]");
+        if (row2 && !row2.classList.contains("wb-sign-queue__row--signed")) {
+          row2.classList.add("wb-sign-queue__row--signed");
+          signBtn.disabled = true;
+          signBtn.textContent = "Signed";
+          updateCount();
+        }
+      }
+    });
+
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-sign-queue-pdf-close]")) closeSignQueuePdfModal();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var m = document.getElementById("wb-sign-queue-pdf-modal");
+      if (m && !m.hidden) closeSignQueuePdfModal();
+    });
+  }
+
   function bindApplicantPdfViewer() {
     if (window.__wbVaPdfViewerBound) return;
     window.__wbVaPdfViewerBound = true;
@@ -2128,6 +2534,55 @@
       var modal = document.getElementById("wb-va-pdf-modal");
       if (modal && !modal.hidden) closeApplicantPdfModal();
     });
+  }
+
+  function bindDocumentsLibraryPdf() {
+    if (window.__wbDocsPdfViewerBound) return;
+    window.__wbDocsPdfViewerBound = true;
+    document.addEventListener("click", function (e) {
+      if (e.target.closest("[data-docs-pdf-close]")) {
+        closeDocumentsPdfModal();
+        return;
+      }
+      var btn = e.target.closest(".wb-docs-table__action:not(.wb-docs-table__action--danger)");
+      if (!btn) return;
+      var tr = btn.closest("tr");
+      var tbody = document.querySelector("[data-docs-table-body]");
+      if (!tr || !tbody || !tbody.contains(tr)) return;
+      var main = document.querySelector('[data-ws-main="/documents"]');
+      if (!main || main.hidden) return;
+      var nameEl = tr.querySelector(".wb-docs-table__name");
+      var label = nameEl ? nameEl.textContent.trim() : "Document";
+      openDocumentsPdfModal(label);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      var modal = document.getElementById("wb-docs-pdf-modal");
+      if (modal && !modal.hidden) closeDocumentsPdfModal();
+    });
+  }
+
+  function bindDocumentsLibrarySearch() {
+    if (window.__wbDocsSearchBound) return;
+    var inp = document.querySelector("[data-docs-search-input]");
+    var tbody = document.querySelector("[data-docs-table-body]");
+    if (!inp || !tbody) return;
+    window.__wbDocsSearchBound = true;
+
+    function refreshDocsSearch() {
+      var q = (inp.value || "").trim().toLowerCase();
+      tbody.querySelectorAll("tr").forEach(function (tr) {
+        if (!q) {
+          tr.hidden = false;
+          return;
+        }
+        var blob = (tr.textContent || "").toLowerCase().replace(/\s+/g, " ");
+        tr.hidden = blob.indexOf(q) === -1;
+      });
+    }
+
+    inp.addEventListener("input", refreshDocsSearch);
+    inp.addEventListener("search", refreshDocsSearch);
   }
 
   function bindDocumentsSavedIncoming(search) {
@@ -2233,6 +2688,8 @@
   function showWorkspacePage(pathname, search) {
     showRoot("workspace");
     var key = workspaceMainKey(pathname, search);
+    var prevWsMainKey = window.__wbPrevWorkspaceMainKey;
+    window.__wbPrevWorkspaceMainKey = key;
     document.querySelectorAll("[data-ws-main]").forEach(function (main) {
       main.hidden = main.getAttribute("data-ws-main") !== key;
     });
@@ -2243,6 +2700,7 @@
         mainClass +
         (key === "/dashboard" ? " wb-dash__main--dashboard" : "") +
         (key === "/documents" ||
+        key === "/sign-documents" ||
         key === "/document-templates" ||
         key === "/document-category" ||
         key === "/document-method" ||
@@ -2266,11 +2724,25 @@
     if (key === "/create-document/draft") updateDraftPage(search);
     if (key === "/applicants") bindApplicantsPage(search);
     if (key === "/view-applicant") bindViewApplicantPage(search);
+    if (key === "/employees/add") {
+      bindWorkspaceEmpAddForm();
+      if (prevWsMainKey !== "/employees/add") resetWorkspaceEmpAddUi();
+    }
+    if (key === "/employees/teams/new") {
+      bindWorkspaceEmpTeamCreateForm();
+      if (prevWsMainKey !== "/employees/teams/new") resetWorkspaceEmpTeamCreateUi();
+    }
 
     document.querySelectorAll("[data-ws-nav]").forEach(function (a) {
       var p = a.getAttribute("data-ws-nav");
       var active = pathname === p;
+      if (p === "/documents" && pathname === "/sign-documents") active = true;
       if (p === "/hiring" && (pathname === "/applicants" || pathname === "/view-applicant")) active = true;
+      if (
+        p === "/employees" &&
+        (pathname === "/employees" || pathname === "/employees/add" || pathname === "/employees/teams/new")
+      )
+        active = true;
       a.classList.toggle("wb-dash__nav-link--active", active);
     });
 
@@ -2395,6 +2867,19 @@
       }
     }
 
+    if (isSignDocumentsHtmlDoc()) {
+      var rawSign = window.location.hash.replace(/^#/, "");
+      if (rawSign.charAt(0) === "!") rawSign = rawSign.slice(1);
+      var pathSign = rawSign.charAt(0) === "/";
+      if (!rawSign || rawSign === "/" || !pathSign) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search + "#/sign-documents"
+        );
+      }
+    }
+
     if (isEmployeesHtmlDoc()) {
       var rawE = window.location.hash.replace(/^#/, "");
       if (rawE.charAt(0) === "!") rawE = rawE.slice(1);
@@ -2479,6 +2964,11 @@
     }
 
     if (isDocumentsHtmlDoc() && parsed.kind === "marketing") {
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isSignDocumentsHtmlDoc() && parsed.kind === "marketing") {
       window.location.replace("index.html" + (window.location.hash || "#/"));
       return;
     }
@@ -2802,7 +3292,17 @@
       window.location.replace("documents.html" + (window.location.hash || "#/documents"));
       return;
     }
+    if (!isSignDocumentsHtmlDoc() && isSignDocumentsPath(pathname)) {
+      window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
+      return;
+    }
     if (isDocumentsHtmlDoc() && !isDocumentsPath(pathname)) {
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace(
+          "sign-documents.html" + (window.location.hash || "#/sign-documents")
+        );
+        return;
+      }
       if (isDashboardHubPath(pathname)) {
         window.location.replace(
           "dashboard.html" + (window.location.hash || "#/dashboard")
@@ -2839,6 +3339,47 @@
       return;
     }
 
+    if (isSignDocumentsHtmlDoc() && !isSignDocumentsPath(pathname)) {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace(
+          "dashboard.html" + (window.location.hash || "#/dashboard")
+        );
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace(
+          "settings.html" + (window.location.hash || "#/settings/profile")
+        );
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, "#/create-document/category"));
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
     if (!isEmployeesHtmlDoc() && isEmployeesPath(pathname)) {
       window.location.replace("employees.html" + (window.location.hash || "#/employees"));
       return;
@@ -2866,6 +3407,10 @@
       }
       if (isHiringPath(pathname)) {
         window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
         return;
       }
       if (isDocumentsPath(pathname)) {
@@ -2911,6 +3456,10 @@
         window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
         return;
       }
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
+        return;
+      }
       if (isDocumentsPath(pathname)) {
         window.location.replace("documents.html" + (window.location.hash || "#/documents"));
         return;
@@ -2944,6 +3493,10 @@
         window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
         return;
       }
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
+        return;
+      }
       if (isDocumentsPath(pathname)) {
         window.location.replace("documents.html" + (window.location.hash || "#/documents"));
         return;
@@ -2975,6 +3528,10 @@
       }
       if (isApplicantsPath(pathname)) {
         window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
         return;
       }
       if (isDocumentsPath(pathname)) {
@@ -3017,6 +3574,10 @@
       window.location.replace("documents.html" + (window.location.hash || "#/documents"));
       return;
     }
+    if (isDashboardHtmlDoc() && isSignDocumentsPath(pathname)) {
+      window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
+      return;
+    }
     if (isDashboardHtmlDoc() && isEmployeesPath(pathname)) {
       window.location.replace("employees.html" + (window.location.hash || "#/employees"));
       return;
@@ -3044,6 +3605,10 @@
       }
       if (isHiringPath(pathname)) {
         window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isSignDocumentsPath(pathname)) {
+        window.location.replace("sign-documents.html" + (window.location.hash || "#/sign-documents"));
         return;
       }
       if (isDocumentsPath(pathname)) {
@@ -3132,9 +3697,17 @@
       if (savedQ !== "1") {
       window.scrollTo(0, 0);
       }
-    } else if (pathname === "/employees" && isEmployeesHtmlDoc()) {
+    } else if (pathname === "/sign-documents" && isSignDocumentsHtmlDoc()) {
       showWorkspacePage(pathname, search);
-      syncEmployeePortalView();
+      window.scrollTo(0, 0);
+    } else if (
+      (pathname === "/employees" ||
+        pathname === "/employees/add" ||
+        pathname === "/employees/teams/new") &&
+      isEmployeesHtmlDoc()
+    ) {
+      showWorkspacePage(pathname, search);
+      if (pathname === "/employees") syncEmployeePortalView();
       window.scrollTo(0, 0);
     } else {
       window.location.hash = "#/";
@@ -4188,6 +4761,109 @@
     return m === "date" ? "date" : "name";
   }
 
+  function applyEmployeePortalRoleListFilter(root) {
+    var block = root.querySelector('[data-emp-filter-block="role"]');
+    if (!block) return;
+    var inp = block.querySelector("[data-emp-role-search]");
+    var q = (inp && inp.value ? inp.value : "").trim().toLowerCase();
+    block.querySelectorAll(".wb-hiring__checks > li").forEach(function (li) {
+      if (!q) {
+        li.hidden = false;
+        return;
+      }
+      var t = (li.textContent || "").toLowerCase().replace(/\s+/g, " ");
+      li.hidden = t.indexOf(q) === -1;
+    });
+  }
+
+  function applyEmployeePortalToolbarFilter(root) {
+    var inp = root.querySelector("[data-emp-toolbar-search]");
+    var q = (inp && inp.value ? inp.value : "").trim().toLowerCase();
+    if (!q) {
+      root.querySelectorAll(".wb-emp-team__row").forEach(function (li) {
+        li.hidden = false;
+      });
+      root.querySelectorAll(".wb-emp-team").forEach(function (article) {
+        article.hidden = false;
+      });
+      root.querySelectorAll(".wb-emp-card").forEach(function (card) {
+        card.hidden = false;
+      });
+      return;
+    }
+    root.querySelectorAll(".wb-emp-team__row").forEach(function (li) {
+      var name = (li.getAttribute("data-emp-name") || "").toLowerCase();
+      var roleEl = li.querySelector(".wb-emp-team__role");
+      var rtxt = roleEl ? roleEl.textContent.trim().toLowerCase() : "";
+      var blob = (name + " " + rtxt).replace(/\s+/g, " ");
+      li.hidden = blob.indexOf(q) === -1;
+    });
+    root.querySelectorAll(".wb-emp-team").forEach(function (article) {
+      var rows = article.querySelectorAll(".wb-emp-team__row");
+      var anyVisible = false;
+      for (var k = 0; k < rows.length; k++) {
+        if (!rows[k].hidden) {
+          anyVisible = true;
+          break;
+        }
+      }
+      article.hidden = !anyVisible;
+    });
+    root.querySelectorAll(".wb-emp-card").forEach(function (card) {
+      var name = (card.getAttribute("data-emp-name") || "").toLowerCase();
+      var title = card.querySelector(".wb-emp-card__title");
+      var tags = card.querySelector(".wb-emp-card__tags");
+      var blob =
+        name +
+        " " +
+        (title ? title.textContent.trim().toLowerCase() : "") +
+        " " +
+        (tags ? tags.textContent.trim().toLowerCase() : "");
+      blob = blob.replace(/\s+/g, " ");
+      card.hidden = blob.indexOf(q) === -1;
+    });
+  }
+
+  function updateEmployeePortalCountMessages(root) {
+    var snap = root.__wbEmpCountSnap;
+    var inp = root.querySelector("[data-emp-toolbar-search]");
+    var q = (inp && inp.value ? inp.value : "").trim();
+    var tEl = root.querySelector(".wb-emp-teams__count");
+    var gEl = root.querySelector(".wb-emp-grid__count");
+    if (!q && snap) {
+      if (tEl && snap.teams) tEl.innerHTML = snap.teams;
+      if (gEl && snap.grid) gEl.innerHTML = snap.grid;
+      return;
+    }
+    var nTeams = 0;
+    root.querySelectorAll(".wb-emp-team").forEach(function (a) {
+      if (!a.hidden) nTeams++;
+    });
+    if (tEl) tEl.innerHTML = "Showing <strong>" + nTeams + "</strong> teams";
+    var nCards = 0;
+    var totalCards = 0;
+    root.querySelectorAll(".wb-emp-card").forEach(function (c) {
+      totalCards++;
+      if (!c.hidden) nCards++;
+    });
+    if (gEl) {
+      gEl.innerHTML =
+        "Showing <strong>" +
+        nCards +
+        "</strong> of <strong>" +
+        (totalCards || nCards) +
+        "</strong> employees";
+    }
+  }
+
+  function refreshEmployeePortalSearchUi(root) {
+    if (!root) return;
+    applyEmployeePortalRoleListFilter(root);
+    applyEmployeePortalToolbarFilter(root);
+    applyEmployeePortalSort(root, getEmployeePortalSortModeFromDom(root));
+    updateEmployeePortalCountMessages(root);
+  }
+
   function applyEmployeePortalSort(root, sortMode) {
     if (!root) return;
     var byName = sortMode !== "date";
@@ -4224,16 +4900,28 @@
     }
     root.querySelectorAll(".wb-emp-team__list").forEach(function (ul) {
       var rows = collectTeamRows(ul);
-      rows.sort(cmp);
+      var vis = [];
+      var hid = [];
       rows.forEach(function (li) {
+        (li.hidden ? hid : vis).push(li);
+      });
+      vis.sort(cmp);
+      hid.sort(cmp);
+      vis.concat(hid).forEach(function (li) {
         ul.appendChild(li);
       });
     });
     var grid = root.querySelector(".wb-emp-grid");
     if (grid) {
       var cards = collectGridCards(grid);
-      cards.sort(cmp);
-      cards.forEach(function (art) {
+      var visC = [];
+      var hidC = [];
+      cards.forEach(function (c) {
+        (c.hidden ? hidC : visC).push(c);
+      });
+      visC.sort(cmp);
+      hidC.sort(cmp);
+      visC.concat(hidC).forEach(function (art) {
         grid.appendChild(art);
       });
     }
@@ -4253,7 +4941,77 @@
       btn.classList.toggle("wb-hiring__view-btn--active", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    applyEmployeePortalSort(root, getEmployeePortalSortModeFromDom(root));
+    refreshEmployeePortalSearchUi(root);
+  }
+
+  function resetWorkspaceEmpAddUi() {
+    var form = document.getElementById("wb-emp-add-form");
+    var thanks = document.getElementById("wb-emp-add-thanks");
+    if (form) {
+      form.hidden = false;
+      form.reset();
+    }
+    if (thanks) thanks.hidden = true;
+  }
+
+  function bindWorkspaceEmpAddForm() {
+    var form = document.getElementById("wb-emp-add-form");
+    if (!form || form.getAttribute("data-emp-add-bound") === "1") return;
+    form.setAttribute("data-emp-add-bound", "1");
+    var thanks = document.getElementById("wb-emp-add-thanks");
+    var another = document.getElementById("wb-emp-add-another");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.hidden = true;
+      if (thanks) {
+        thanks.hidden = false;
+        thanks.focus();
+      }
+    });
+    if (another) {
+      another.addEventListener("click", function () {
+        form.reset();
+        form.hidden = false;
+        if (thanks) thanks.hidden = true;
+        var first = form.querySelector("input, select, textarea");
+        if (first && typeof first.focus === "function") first.focus();
+      });
+    }
+  }
+
+  function resetWorkspaceEmpTeamCreateUi() {
+    var form = document.getElementById("wb-emp-team-create-form");
+    var thanks = document.getElementById("wb-emp-team-create-thanks");
+    if (form) {
+      form.hidden = false;
+      form.reset();
+    }
+    if (thanks) thanks.hidden = true;
+  }
+
+  function bindWorkspaceEmpTeamCreateForm() {
+    var form = document.getElementById("wb-emp-team-create-form");
+    if (!form || form.getAttribute("data-emp-team-create-bound") === "1") return;
+    form.setAttribute("data-emp-team-create-bound", "1");
+    var thanks = document.getElementById("wb-emp-team-create-thanks");
+    var another = document.getElementById("wb-emp-team-create-another");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      form.hidden = true;
+      if (thanks) {
+        thanks.hidden = false;
+        thanks.focus();
+      }
+    });
+    if (another) {
+      another.addEventListener("click", function () {
+        form.reset();
+        form.hidden = false;
+        if (thanks) thanks.hidden = true;
+        var first = form.querySelector("input, select, textarea");
+        if (first && typeof first.focus === "function") first.focus();
+      });
+    }
   }
 
   function syncEmployeePortalView() {
@@ -4758,30 +5516,68 @@
   function bindEmployeePortalView() {
     var root = document.querySelector("[data-emp-portal]");
     if (!root) return;
-    applyEmployeePortalSort(root, getEmployeePortalSortModeFromDom(root));
-    root.querySelectorAll("[data-emp-sort]").forEach(function (pill) {
-      pill.addEventListener("click", function () {
-        var mode = pill.getAttribute("data-emp-sort") || "name";
-        root.querySelectorAll("[data-emp-sort]").forEach(function (p) {
-          var on = p === pill;
-          p.classList.toggle("wb-hiring__sort-pill--active", on);
-          p.setAttribute("aria-pressed", on ? "true" : "false");
+    if (!root.__wbEmpCountSnap) {
+      var te = root.querySelector(".wb-emp-teams__count");
+      var ge = root.querySelector(".wb-emp-grid__count");
+      root.__wbEmpCountSnap = { teams: te ? te.innerHTML : "", grid: ge ? ge.innerHTML : "" };
+    }
+    if (root.getAttribute("data-emp-portal-bound") !== "1") {
+      root.setAttribute("data-emp-portal-bound", "1");
+      root.querySelectorAll("[data-emp-sort]").forEach(function (pill) {
+        pill.addEventListener("click", function () {
+          var mode = pill.getAttribute("data-emp-sort") || "name";
+          root.querySelectorAll("[data-emp-sort]").forEach(function (p) {
+            var on = p === pill;
+            p.classList.toggle("wb-hiring__sort-pill--active", on);
+            p.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+          refreshEmployeePortalSearchUi(root);
         });
-        applyEmployeePortalSort(root, mode === "date" ? "date" : "name");
       });
-    });
-    root.querySelectorAll("[data-emp-view-toggle]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var mode = btn.getAttribute("data-emp-view-toggle") || "teams";
-        applyEmployeePortalView(mode);
-        var base = window.location.pathname + window.location.search;
-        window.history.replaceState(
-          null,
-          "",
-          base + (mode === "grid" ? "#/employees?view=grid" : "#/employees")
-        );
+      root.querySelectorAll("[data-emp-view-toggle]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var mode = btn.getAttribute("data-emp-view-toggle") || "teams";
+          applyEmployeePortalView(mode);
+          var base = window.location.pathname + window.location.search;
+          window.history.replaceState(
+            null,
+            "",
+            base + (mode === "grid" ? "#/employees?view=grid" : "#/employees")
+          );
+        });
       });
-    });
+      var toolbarSearch = root.querySelector("[data-emp-toolbar-search]");
+      if (toolbarSearch) {
+        toolbarSearch.addEventListener("input", function () {
+          refreshEmployeePortalSearchUi(root);
+        });
+        toolbarSearch.addEventListener("search", function () {
+          refreshEmployeePortalSearchUi(root);
+        });
+      }
+      var roleSearch = root.querySelector("[data-emp-role-search]");
+      if (roleSearch) {
+        roleSearch.addEventListener("input", function () {
+          refreshEmployeePortalSearchUi(root);
+        });
+        roleSearch.addEventListener("search", function () {
+          refreshEmployeePortalSearchUi(root);
+        });
+      }
+      root.querySelectorAll("[data-emp-filter-clear]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var block = btn.closest("[data-emp-filter-block]");
+          if (!block) return;
+          block.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+            cb.checked = false;
+          });
+          var s = block.querySelector("[data-emp-role-search]");
+          if (s) s.value = "";
+          refreshEmployeePortalSearchUi(root);
+        });
+      });
+    }
+    refreshEmployeePortalSearchUi(root);
   }
 
   function init() {
@@ -4804,11 +5600,22 @@
     bindEmployeePortalView();
     bindHiringPage();
     bindApplicantPdfViewer();
+    bindDocumentsLibraryPdf();
+    bindDocumentsLibrarySearch();
+    bindSignReminderModal();
+    bindNudgeModal();
+    bindDashboardUpcoming();
+    bindDashboardHiringPipeline();
+    bindSignQueuePage();
     bindViewApplicantDocsControls();
 
     window.addEventListener("hashchange", function () {
       closeProfileDeleteModal();
       closeApplicantPdfModal();
+      closeDocumentsPdfModal();
+      closeSignReminderModal();
+      closeNudgeModal();
+      closeSignQueuePdfModal();
       applyRoute();
       if (parseHash().kind === "marketing") setTimeout(onScrollMarketing, 400);
     });

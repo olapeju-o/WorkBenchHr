@@ -2040,39 +2040,6 @@ a.wb-btn {
   font-weight: 500;
 }
 
-.wb-docs-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-
-.wb-docs-filter {
-  border: 1px solid var(--wb-border);
-  background: #fff;
-  font: inherit;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.38rem 0.65rem;
-  border-radius: 999px;
-  color: var(--wb-muted);
-  cursor: pointer;
-  transition:
-    background 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out),
-    color 0.2s var(--ease-out);
-}
-
-.wb-docs-filter:hover {
-  border-color: rgba(0, 200, 117, 0.35);
-  color: var(--wb-forest-mid);
-}
-
-.wb-docs-filter--active {
-  background: var(--wb-mint);
-  border-color: rgba(0, 200, 117, 0.35);
-  color: var(--wb-green-dark);
-}
-
 .wb-docs-suggest__head {
   margin-bottom: 0.85rem;
 }
@@ -3583,7 +3550,7 @@ a.wb-btn {
 }
 
 /* Profile — delete account confirmation (full viewport; settings has no workspace sidebar) */
-.wb-profile-delete-modal.wb-dash-reminder {
+.wb-profile-delete-modal.wb-dash-reminder:not([hidden]) {
   left: 0;
   right: 0;
   width: 100%;
@@ -3620,7 +3587,7 @@ a.wb-btn {
 }
 
 @media (min-width: 961px) {
-  .wb-profile-delete-modal.wb-dash-reminder {
+  .wb-profile-delete-modal.wb-dash-reminder:not([hidden]) {
     left: 0;
     right: 0;
     width: 100%;
@@ -4246,12 +4213,77 @@ button.wb-help-card__action--btn {
   outline-offset: 1px;
 }
 
+.wb-employees-field__input--textarea {
+  min-height: 5.5rem;
+  resize: vertical;
+  line-height: 1.45;
+}
+
 .wb-employees-add__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
   justify-content: flex-end;
   margin-top: 1.15rem;
+}
+
+.wb-emp-add-page {
+  padding: 0 clamp(0.75rem, 2.5vw, 1.25rem) 2rem;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+.wb-emp-add__intro {
+  margin-bottom: 1.25rem;
+}
+
+.wb-emp-add__title {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--wb-forest);
+}
+
+.wb-emp-add__lede {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--wb-muted);
+}
+
+.wb-emp-add__form .wb-employees-field--full {
+  grid-column: 1 / -1;
+}
+
+.wb-emp-add__thanks {
+  margin-top: 1rem;
+  padding: 1.35rem 1.25rem 1.4rem;
+  border-radius: var(--wb-radius-lg);
+  border: 1px solid var(--wb-border);
+  background: var(--wb-surface-muted);
+  box-shadow: var(--wb-shadow-xs);
+}
+
+.wb-emp-add__thanks-title {
+  margin: 0 0 0.45rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--wb-forest);
+}
+
+.wb-emp-add__thanks-body {
+  margin: 0 0 1.1rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--wb-muted);
+}
+
+.wb-emp-add__thanks-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
 .wb-employees-table-section {
@@ -8086,6 +8118,129 @@ a.wb-dash-home__btn-dark--link {
   box-shadow: 0 4px 18px rgba(0, 209, 124, 0.38);
 }
 
+/* Sign documents queue (standalone page) */
+.wb-sign-queue-page {
+  padding: 0 clamp(0.75rem, 2.5vw, 1.25rem) clamp(1.75rem, 4vw, 2.5rem);
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.wb-sign-queue__head {
+  margin-bottom: 1rem;
+}
+
+.wb-sign-queue__page-title {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.35rem, 2.8vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--wb-forest);
+}
+
+.wb-sign-queue__lede {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--wb-muted);
+}
+
+.wb-sign-queue__count {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--wb-forest-mid);
+}
+
+.wb-sign-queue__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.wb-sign-queue__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem 1.25rem;
+  padding: 1.1rem 1.15rem 1.15rem;
+  border-radius: var(--wb-radius-lg);
+  border: 1px solid var(--wb-border);
+  background: #fff;
+  box-shadow: var(--wb-shadow-xs);
+  transition:
+    border-color 0.2s var(--ease-out),
+    opacity 0.25s var(--ease-out);
+}
+
+.wb-sign-queue__row--signed {
+  opacity: 0.55;
+  border-color: rgba(0, 200, 117, 0.28);
+  background: var(--wb-surface-muted);
+}
+
+.wb-sign-queue__main {
+  flex: 1;
+  min-width: min(100%, 14rem);
+}
+
+.wb-sign-queue__pill {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 200, 117, 0.12);
+  color: var(--wb-green-dark);
+  border: 1px solid rgba(0, 200, 117, 0.22);
+}
+
+.wb-sign-queue__pill--witness {
+  background: rgba(11, 45, 34, 0.06);
+  color: var(--wb-forest-mid);
+  border-color: var(--wb-border-strong);
+}
+
+.wb-sign-queue__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--wb-forest);
+}
+
+.wb-sign-queue__meta {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--wb-muted);
+  line-height: 1.45;
+}
+
+.wb-sign-queue__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.wb-sign-queue__actions .wb-btn {
+  padding: 0.52rem 1.05rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.wb-sign-queue__foot {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+}
+
 .wb-dash-card__icon-btn {
   width: 2.35rem;
   height: 2.35rem;
@@ -8181,7 +8336,11 @@ a.wb-dash-home__btn-dark--link {
 /* Dashboard — modals (remind later + send nudge)
    Align overlay with the workspace main column (not full viewport), so dialogs
    center over the content area beside the 280px sidebar. */
-.wb-dash-reminder {
+.wb-dash-reminder[hidden] {
+  display: none !important;
+}
+
+.wb-dash-reminder:not([hidden]) {
   position: fixed;
   top: 0;
   right: 0;
@@ -8202,7 +8361,7 @@ a.wb-dash-home__btn-dark--link {
 }
 
 @media (min-width: 961px) {
-  .wb-dash-reminder {
+  .wb-dash-reminder:not([hidden]) {
     left: 280px;
     right: 0;
     width: auto;
@@ -8444,6 +8603,28 @@ a.wb-dash-home__btn-dark--link {
 .wb-dash-nudge__btn-primary {
   flex: 1.2;
   min-width: 8rem;
+}
+
+.wb-dash-nudge__actions .wb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wb-dash-nudge__feedback {
+  margin: 0 0 1rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--wb-forest);
+  background: rgba(0, 209, 124, 0.1);
+  border: 1px solid rgba(0, 209, 124, 0.35);
+  border-radius: var(--wb-radius-md);
+}
+
+body.wb-dash-nudge-modal--open {
+  overflow: hidden;
 }
 
 .wb-dash-home__overview-title {
@@ -8775,6 +8956,11 @@ a.wb-dash-home__btn-dark--link {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.wb-dash-upcoming-row[hidden],
+.wb-dash-hire-row[hidden] {
+  display: none !important;
 }
 
 .wb-dash-upcoming-row {
@@ -10015,6 +10201,179 @@ body.wb-va-pdf-modal--open {
   overflow: hidden;
 }
 
+body.wb-sign-reminder-modal--open {
+  overflow: hidden;
+}
+
+.wb-docs-pending-wrap {
+  margin: 0 0 1.35rem;
+}
+
+.wb-sign-reminder-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: min(1.25rem, 3vw);
+}
+
+.wb-sign-reminder-modal:not([hidden]) {
+  display: flex;
+}
+
+.wb-sign-reminder-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: rgba(11, 45, 34, 0.5);
+  cursor: pointer;
+}
+
+.wb-sign-reminder-modal__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(96vw, 26rem);
+  max-height: min(90vh, 32rem);
+  background: #fff;
+  border-radius: var(--wb-radius-lg);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(11, 45, 34, 0.12);
+  overflow: hidden;
+}
+
+.wb-sign-reminder-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--wb-border);
+  background: var(--wb-surface-muted);
+  flex-shrink: 0;
+}
+
+.wb-sign-reminder-modal__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--wb-forest);
+  letter-spacing: -0.02em;
+}
+
+.wb-sign-reminder-modal__close {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: var(--wb-radius-md);
+  background: transparent;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--wb-muted);
+}
+
+.wb-sign-reminder-modal__close:hover {
+  background: rgba(11, 45, 34, 0.06);
+  color: var(--wb-forest);
+}
+
+.wb-sign-reminder-modal__body {
+  padding: 1rem 1rem 0.25rem;
+  overflow-y: auto;
+}
+
+.wb-sign-reminder-modal__lede {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--wb-muted);
+}
+
+.wb-sign-reminder-modal__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+}
+
+.wb-sign-reminder-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.wb-sign-reminder-modal__field--full {
+  grid-column: 1 / -1;
+}
+
+.wb-sign-reminder-modal__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--wb-forest);
+}
+
+.wb-sign-reminder-modal__optional {
+  font-weight: 600;
+  color: var(--wb-muted);
+}
+
+.wb-sign-reminder-modal__input,
+.wb-sign-reminder-modal__textarea {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--wb-radius-md);
+  border: 1px solid var(--wb-border);
+  background: #fff;
+  color: var(--wb-forest);
+}
+
+.wb-sign-reminder-modal__textarea {
+  resize: vertical;
+  min-height: 3.25rem;
+}
+
+.wb-sign-reminder-modal__input:focus,
+.wb-sign-reminder-modal__textarea:focus {
+  outline: none;
+  border-color: var(--wb-green);
+  box-shadow: 0 0 0 2px var(--wb-green-dim);
+}
+
+.wb-sign-reminder-modal__feedback {
+  margin: 0.85rem 0 0;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--wb-forest);
+  background: rgba(0, 209, 124, 0.1);
+  border: 1px solid rgba(0, 209, 124, 0.35);
+  border-radius: var(--wb-radius-md);
+}
+
+.wb-sign-reminder-modal__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--wb-border);
+  background: var(--wb-surface-muted);
+  flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .wb-sign-reminder-modal__fields {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
   .wb-va-doc-row {
     flex-wrap: wrap;
@@ -10054,6 +10413,10 @@ body.wb-va-pdf-modal--open {
 }
 
 .wb-emp-teams__create {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   border: none;
   border-radius: 999px;
   padding: 0.45rem 1rem;
@@ -10198,6 +10561,10 @@ body.wb-va-pdf-modal--open {
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.wb-emp-team__add:visited {
+  color: var(--wb-green-dark);
 }
 
 .wb-emp-team__add:hover {

@@ -25,7 +25,7 @@
           </div>
           <div class="wb-dash__cta-row">
             <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
-            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+            <a href="employees.html#/employees/add" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
           </div>
           <div class="wb-dash__nav-section">
             <p class="wb-dash__nav-label">Workspace</p>
@@ -109,7 +109,13 @@
                     />
                   </svg>
                 </span>
-                <input type="search" placeholder="Search employee…" class="wb-hiring__search-input" autocomplete="off" />
+                <input
+                  type="search"
+                  placeholder="Search employee…"
+                  class="wb-hiring__search-input"
+                  data-emp-toolbar-search
+                  autocomplete="off"
+                />
               </label>
               <div class="wb-hiring__toolbar-mid">
                 <span class="wb-hiring__sort-label">Sort by</span>
@@ -150,12 +156,18 @@
 
             <div class="wb-hiring__body">
               <aside class="wb-hiring__filters" aria-label="Filters">
-                <div class="wb-hiring__filter-block">
+                <div class="wb-hiring__filter-block" data-emp-filter-block="role">
                   <div class="wb-hiring__filter-head">
                     <h2 class="wb-hiring__filter-title">Role</h2>
-                    <button type="button" class="wb-hiring__filter-clear">Clear</button>
+                    <button type="button" class="wb-hiring__filter-clear" data-emp-filter-clear>Clear</button>
                   </div>
-                  <input type="search" class="wb-hiring__filter-search" placeholder="Chef" />
+                  <input
+                    type="search"
+                    class="wb-hiring__filter-search"
+                    placeholder="Filter role list…"
+                    data-emp-role-search
+                    autocomplete="off"
+                  />
                   <ul class="wb-hiring__checks">
                     <li>
                       <label class="wb-hiring__check">
@@ -187,10 +199,10 @@
                     </li>
                   </ul>
                 </div>
-                <div class="wb-hiring__filter-block">
+                <div class="wb-hiring__filter-block" data-emp-filter-block="contract">
                   <div class="wb-hiring__filter-head">
                     <h2 class="wb-hiring__filter-title">Contract type</h2>
-                    <button type="button" class="wb-hiring__filter-clear">Clear</button>
+                    <button type="button" class="wb-hiring__filter-clear" data-emp-filter-clear>Clear</button>
                   </div>
                   <ul class="wb-hiring__checks">
                     <li>
@@ -222,7 +234,7 @@
                 <div class="wb-emp-results-panel" data-emp-panel="teams">
                 <div class="wb-emp-teams__bar">
                   <p class="wb-emp-teams__count">Showing <strong>4</strong> teams</p>
-                  <button type="button" class="wb-emp-teams__create">+ Create team</button>
+                  <a href="#/employees/teams/new" class="wb-emp-teams__create">+ Create team</a>
                 </div>
 
                 <div class="wb-emp-teams">
@@ -262,7 +274,7 @@
                       </li>
                     </ul>
                     <footer class="wb-emp-team__footer">
-                      <button type="button" class="wb-emp-team__add">+ Add member</button>
+                      <a href="#/employees/add" class="wb-emp-team__add">+ Add member</a>
                     </footer>
                   </article>
 
@@ -295,7 +307,7 @@
                       </li>
                     </ul>
                     <footer class="wb-emp-team__footer">
-                      <button type="button" class="wb-emp-team__add">+ Add member</button>
+                      <a href="#/employees/add" class="wb-emp-team__add">+ Add member</a>
                     </footer>
                   </article>
 
@@ -321,7 +333,7 @@
                       </li>
                     </ul>
                     <footer class="wb-emp-team__footer">
-                      <button type="button" class="wb-emp-team__add">+ Add member</button>
+                      <a href="#/employees/add" class="wb-emp-team__add">+ Add member</a>
                     </footer>
                   </article>
 
@@ -347,7 +359,7 @@
                       </li>
                     </ul>
                     <footer class="wb-emp-team__footer">
-                      <button type="button" class="wb-emp-team__add">+ Add member</button>
+                      <a href="#/employees/add" class="wb-emp-team__add">+ Add member</a>
                     </footer>
                   </article>
                 </div>
@@ -502,6 +514,224 @@
                     </article>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/employees/add" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="employees.html#/employees" class="wb-create-doc__crumb-link">Employees</a>
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <span class="wb-create-doc__crumb-current">Add employee</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></a>
+            </div>
+          </header>
+
+          <div class="wb-emp-add-page">
+            <div class="wb-emp-add__intro">
+              <h1 class="wb-emp-add__title">Add a new employee</h1>
+              <p class="wb-emp-add__lede">
+                Collect their basics and send an invite. Preview only — nothing is saved to a server in this static
+                build.
+              </p>
+            </div>
+
+            <form id="wb-emp-add-form" class="wb-employees-add wb-emp-add__form" autocomplete="on">
+              <h2 class="wb-employees-add__title">Employee details</h2>
+              <div class="wb-employees-add__grid">
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Full name</span>
+                  <input class="wb-employees-field__input" name="name" type="text" required placeholder="e.g. Avery Kim" autocomplete="name" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Work email</span>
+                  <input
+                    class="wb-employees-field__input"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="name@company.com"
+                    autocomplete="email"
+                  />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Position type</span>
+                  <select class="wb-employees-field__input" name="position" required aria-label="Position type">
+                    <option value="" selected disabled>Select…</option>
+                    <option value="foh">Front of house</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="operations">Operations</option>
+                    <option value="management">Management</option>
+                    <option value="admin">Administration / support</option>
+                  </select>
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Role / access level</span>
+                  <select class="wb-employees-field__input" name="role" required aria-label="Role">
+                    <option value="Team Member">Team member</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Administrator">Administrator</option>
+                  </select>
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Department</span>
+                  <input class="wb-employees-field__input" name="department" type="text" placeholder="e.g. Front of house" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Job title</span>
+                  <input class="wb-employees-field__input" name="title" type="text" placeholder="e.g. Line cook, Lead server" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Mobile (optional)</span>
+                  <input class="wb-employees-field__input" name="phone" type="tel" autocomplete="tel" placeholder="(555) 000-0000" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Start date</span>
+                  <input class="wb-employees-field__input" name="start" type="date" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Employment type</span>
+                  <select class="wb-employees-field__input" name="employment" aria-label="Employment type">
+                    <option value="fulltime">Full-time</option>
+                    <option value="parttime">Part-time</option>
+                    <option value="seasonal">Seasonal</option>
+                    <option value="contractor">Contractor</option>
+                  </select>
+                </label>
+                <label class="wb-employees-field wb-employees-field--full">
+                  <span class="wb-employees-field__label">Manager (optional)</span>
+                  <input class="wb-employees-field__input" name="manager" type="text" placeholder="Who they report to" />
+                </label>
+              </div>
+              <div class="wb-employees-add__actions">
+                <a href="employees.html#/employees" class="wb-btn wb-btn--muted">Cancel</a>
+                <button type="submit" class="wb-btn wb-btn--primary">Send invite</button>
+              </div>
+            </form>
+
+            <div id="wb-emp-add-thanks" class="wb-emp-add__thanks" role="status" hidden tabindex="-1">
+              <p class="wb-emp-add__thanks-title">Invite queued (preview)</p>
+              <p class="wb-emp-add__thanks-body">
+                In a live workspace this would email the employee and add them to your directory. Here, nothing was
+                stored.
+              </p>
+              <div class="wb-emp-add__thanks-actions">
+                <button type="button" class="wb-btn wb-btn--outline" id="wb-emp-add-another">Add another</button>
+                <a href="employees.html#/employees" class="wb-btn wb-btn--primary">Back to directory</a>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/employees/teams/new" hidden>
+          <header class="wb-dash__header">
+            <div class="wb-dash__header-lead">
+              <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
+                <a href="employees.html#/employees" class="wb-create-doc__crumb-link">Employees</a>
+                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
+                <span class="wb-create-doc__crumb-current">Create team</span>
+              </nav>
+            </div>
+            <div class="wb-dash__header-actions">
+              <a href="settings.html#/settings/profile" class="wb-dash__icon-btn" aria-label="Settings"
+                ><img src="assets/Settings.png" alt="" width="20" height="20" class="wb-dash__settings-icon" /><span
+                  class="wb-dash__icon-btn-label"
+                  >Settings</span
+                ></a
+              >
+              <a href="settings.html#/settings/profile" class="wb-dash__avatar" aria-label="Open profile"
+                ><img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&amp;h=80&amp;fit=crop&amp;crop=face"
+                  alt=""
+                  width="40"
+                  height="40"
+              /></a>
+            </div>
+          </header>
+
+          <div class="wb-emp-add-page">
+            <div class="wb-emp-add__intro">
+              <h1 class="wb-emp-add__title">Create a new team</h1>
+              <p class="wb-emp-add__lede">
+                Name the group, add context, and optionally pick a lead. Preview only — nothing is saved to a server in
+                this static build.
+              </p>
+            </div>
+
+            <form id="wb-emp-team-create-form" class="wb-employees-add wb-emp-add__form" autocomplete="on">
+              <h2 class="wb-employees-add__title">Team details</h2>
+              <div class="wb-employees-add__grid">
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Team name</span>
+                  <input
+                    class="wb-employees-field__input"
+                    name="teamName"
+                    type="text"
+                    required
+                    placeholder="e.g. Weekend baristas"
+                    autocomplete="organization"
+                  />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Department (optional)</span>
+                  <input class="wb-employees-field__input" name="department" type="text" placeholder="e.g. Front of house" />
+                </label>
+                <label class="wb-employees-field wb-employees-field--full">
+                  <span class="wb-employees-field__label">Purpose or notes</span>
+                  <textarea
+                    class="wb-employees-field__input wb-employees-field__input--textarea"
+                    name="purpose"
+                    rows="3"
+                    placeholder="What this team owns, shift coverage, or onboarding focus…"
+                  ></textarea>
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Team lead (optional)</span>
+                  <input class="wb-employees-field__input" name="lead" type="text" placeholder="Who coordinates this group" />
+                </label>
+                <label class="wb-employees-field">
+                  <span class="wb-employees-field__label">Visibility</span>
+                  <select class="wb-employees-field__input" name="visibility" aria-label="Team visibility">
+                    <option value="org">Everyone in the workspace</option>
+                    <option value="dept">Department only</option>
+                    <option value="private">Managers and members</option>
+                  </select>
+                </label>
+              </div>
+              <div class="wb-employees-add__actions">
+                <a href="employees.html#/employees" class="wb-btn wb-btn--muted">Cancel</a>
+                <button type="submit" class="wb-btn wb-btn--primary">Create team</button>
+              </div>
+            </form>
+
+            <div id="wb-emp-team-create-thanks" class="wb-emp-add__thanks" role="status" hidden tabindex="-1">
+              <p class="wb-emp-add__thanks-title">Team created (preview)</p>
+              <p class="wb-emp-add__thanks-body">
+                In a live workspace this would appear in your teams list and you could invite members next. Here,
+                nothing was stored.
+              </p>
+              <div class="wb-emp-add__thanks-actions">
+                <button type="button" class="wb-btn wb-btn--outline" id="wb-emp-team-create-another">Create another</button>
+                <a href="employees.html#/employees" class="wb-btn wb-btn--primary">Back to teams</a>
               </div>
             </div>
           </div>

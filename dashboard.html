@@ -25,7 +25,7 @@
           </div>
           <div class="wb-dash__cta-row">
             <a href="document-category.html" class="wb-dash__btn wb-dash__btn--primary">+ Create Document</a>
-            <a href="settings.html#/settings/employees" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
+            <a href="employees.html#/employees/add" class="wb-dash__btn wb-dash__btn--outline">+ Add Employee</a>
           </div>
           <div class="wb-dash__nav-section">
             <p class="wb-dash__nav-label">Workspace</p>
@@ -151,9 +151,9 @@
                     Marcus Lee&apos;s offer letter and Priya Patel&apos;s NDA need your signature before EOD.
                   </p>
                   <div class="wb-dash-card__actions">
-                    <a href="dashboard.html#/dashboard/sign-documents" class="wb-dash-home__btn-dark wb-dash-home__btn-dark--link"
+                    <a href="sign-documents.html#/sign-documents" class="wb-dash-home__btn-dark wb-dash-home__btn-dark--link"
                       >Sign now <span aria-hidden="true">→</span></a
-                    ><button type="button" class="wb-dash-card__icon-btn wb-dash-card__icon-btn--clock" aria-label="Set reminder for later">
+                    ><button type="button" class="wb-dash-card__icon-btn wb-dash-card__icon-btn--clock" data-sign-reminder-open aria-label="Set reminder for later">
                       <img src="assets/clock.png" alt="" width="18" height="18" class="wb-dash-card__clock-img" />
                     </button>
                   </div>
@@ -168,7 +168,7 @@
                   <p class="wb-dash-card__sub">
                     Jessica Christie started 4 days ago, still missing tax forms and direct deposit info.
                   </p>
-                  <div class="wb-dash-card__actions"><button type="button" class="wb-dash-home__btn-dark">Send nudge</button></div>
+                  <div class="wb-dash-card__actions"><button type="button" class="wb-dash-home__btn-dark" data-nudge-open>Send nudge</button></div>
                 </div>
               </article>
             </div>
@@ -233,19 +233,19 @@
               </article>
             </div>
           </section>
-          <section class="wb-dash-panel" aria-labelledby="dash-hiring-heading">
+          <section class="wb-dash-panel" aria-labelledby="dash-hiring-heading" data-dash-hiring-root>
             <div class="wb-dash-panel__head">
               <h2 class="wb-dash-panel__title" id="dash-hiring-heading">Hiring pipeline</h2>
-              <div class="wb-dash-segments" role="group" aria-label="Listing status">
-                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" aria-pressed="true">
+              <div class="wb-dash-segments" role="group" aria-label="Listing status" data-dash-hiring-segments>
+                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" data-dash-hiring-status="active" aria-pressed="true">
                   Active
                 </button>
-                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">Paused</button>
-                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">Closed</button>
+                <button type="button" class="wb-dash-segments__btn" data-dash-hiring-status="paused" aria-pressed="false">Paused</button>
+                <button type="button" class="wb-dash-segments__btn" data-dash-hiring-status="closed" aria-pressed="false">Closed</button>
               </div>
             </div>
-            <div class="wb-dash-hire-list">
-              <article class="wb-dash-hire-row">
+            <div class="wb-dash-hire-list" data-dash-hiring-list>
+              <article class="wb-dash-hire-row" data-hiring-listing-status="active">
                 <div class="wb-dash-hire-row__lead">
                   <h3 class="wb-dash-hire-row__title">Head Chef</h3>
                   <p class="wb-dash-hire-row__meta">12 applicants · Posted 9 days ago</p>
@@ -265,7 +265,7 @@
                   <span class="wb-dash-hire-row__status-sub">3 scheduled</span>
                 </p>
               </article>
-              <article class="wb-dash-hire-row">
+              <article class="wb-dash-hire-row" data-hiring-listing-status="active">
                 <div class="wb-dash-hire-row__lead">
                   <h3 class="wb-dash-hire-row__title">Cashier · Morning shift</h3>
                   <p class="wb-dash-hire-row__meta">28 applicants · Posted 14 days ago</p>
@@ -285,7 +285,7 @@
                   <span class="wb-dash-hire-row__status-sub">Awaiting reply</span>
                 </p>
               </article>
-              <article class="wb-dash-hire-row">
+              <article class="wb-dash-hire-row" data-hiring-listing-status="paused">
                 <div class="wb-dash-hire-row__lead">
                   <h3 class="wb-dash-hire-row__title">Cashier · Evening shift</h3>
                   <p class="wb-dash-hire-row__meta">19 applicants · Posted 11 days ago</p>
@@ -305,7 +305,7 @@
                   <span class="wb-dash-hire-row__status-sub">7 to review</span>
                 </p>
               </article>
-              <article class="wb-dash-hire-row">
+              <article class="wb-dash-hire-row" data-hiring-listing-status="active">
                 <div class="wb-dash-hire-row__lead">
                   <h3 class="wb-dash-hire-row__title">Kitchen Staff</h3>
                   <p class="wb-dash-hire-row__meta">6 applicants · Posted 3 days ago</p>
@@ -325,20 +325,100 @@
                   <span class="wb-dash-hire-row__status-sub">Collecting apps</span>
                 </p>
               </article>
+              <article class="wb-dash-hire-row" data-hiring-listing-status="paused">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Sous chef (coverage)</h3>
+                  <p class="wb-dash-hire-row__meta">4 applicants · Posted 20 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--ring"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Paused</span>
+                  <span class="wb-dash-hire-row__status-sub">Budget freeze</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row" data-hiring-listing-status="paused">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Weekend barista</h3>
+                  <p class="wb-dash-hire-row__meta">31 applicants · Posted 45 days ago</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--ring"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--empty"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Paused</span>
+                  <span class="wb-dash-hire-row__status-sub">Awaiting schedule sign-off</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row" data-hiring-listing-status="closed">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Host (filled)</h3>
+                  <p class="wb-dash-hire-row__meta">Role closed · 18 applicants</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Closed</span>
+                  <span class="wb-dash-hire-row__status-sub">Start date Mar 10</span>
+                </p>
+              </article>
+              <article class="wb-dash-hire-row" data-hiring-listing-status="closed">
+                <div class="wb-dash-hire-row__lead">
+                  <h3 class="wb-dash-hire-row__title">Line cook (filled)</h3>
+                  <p class="wb-dash-hire-row__meta">Role closed · 9 applicants</p>
+                </div>
+                <div class="wb-dash-hire-row__track-wrap">
+                  <div class="wb-dash-hire-progress" aria-hidden="true">
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                    <span class="wb-dash-hire-progress__seg wb-dash-hire-progress__seg--full"></span>
+                  </div>
+                </div>
+                <p class="wb-dash-hire-row__status">
+                  <span class="wb-dash-hire-row__status-main">Closed</span>
+                  <span class="wb-dash-hire-row__status-sub">Start date Feb 24</span>
+                </p>
+              </article>
             </div>
           </section>
-          <section class="wb-dash-panel" aria-labelledby="dash-upcoming-heading">
+          <section class="wb-dash-panel" aria-labelledby="dash-upcoming-heading" data-dash-upcoming-root>
             <div class="wb-dash-panel__head">
               <h2 class="wb-dash-panel__title" id="dash-upcoming-heading">Upcoming</h2>
-              <div class="wb-dash-segments" role="group" aria-label="Date range">
-                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" aria-pressed="true">
+              <div class="wb-dash-segments" role="group" aria-label="Date range" data-dash-upcoming-segments>
+                <button type="button" class="wb-dash-segments__btn wb-dash-segments__btn--active" data-dash-upcoming-range="7" aria-pressed="true">
                   7 days
                 </button>
-                <button type="button" class="wb-dash-segments__btn" aria-pressed="false">30 days</button>
+                <button type="button" class="wb-dash-segments__btn" data-dash-upcoming-range="30" aria-pressed="false">30 days</button>
               </div>
             </div>
-            <ul class="wb-dash-upcoming-list">
-              <li class="wb-dash-upcoming-row">
+            <ul class="wb-dash-upcoming-list" data-dash-upcoming-list>
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="7,30">
                 <div class="wb-dash-upcoming-date" aria-hidden="true">
                   <span class="wb-dash-upcoming-date__mo">Apr</span>
                   <span class="wb-dash-upcoming-date__day">22</span>
@@ -351,7 +431,7 @@
                   <p class="wb-dash-upcoming-row__sub">First day — checklist ready</p>
                 </div>
               </li>
-              <li class="wb-dash-upcoming-row">
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="7,30">
                 <div class="wb-dash-upcoming-date" aria-hidden="true">
                   <span class="wb-dash-upcoming-date__mo">Apr</span>
                   <span class="wb-dash-upcoming-date__day">24</span>
@@ -364,7 +444,7 @@
                   <p class="wb-dash-upcoming-row__sub">Friday, 2:00 PM</p>
                 </div>
               </li>
-              <li class="wb-dash-upcoming-row">
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="7,30">
                 <div class="wb-dash-upcoming-date" aria-hidden="true">
                   <span class="wb-dash-upcoming-date__mo">Apr</span>
                   <span class="wb-dash-upcoming-date__day">26</span>
@@ -377,7 +457,7 @@
                   <p class="wb-dash-upcoming-row__sub">Sunday</p>
                 </div>
               </li>
-              <li class="wb-dash-upcoming-row">
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="30">
                 <div class="wb-dash-upcoming-date" aria-hidden="true">
                   <span class="wb-dash-upcoming-date__mo">Apr</span>
                   <span class="wb-dash-upcoming-date__day">27</span>
@@ -390,7 +470,7 @@
                   <p class="wb-dash-upcoming-row__sub">Send a note?</p>
                 </div>
               </li>
-              <li class="wb-dash-upcoming-row">
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="30">
                 <div class="wb-dash-upcoming-date" aria-hidden="true">
                   <span class="wb-dash-upcoming-date__mo">Apr</span>
                   <span class="wb-dash-upcoming-date__day">28</span>
@@ -401,6 +481,45 @@
                     <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--heads-up">Heads up</span>
                   </div>
                   <p class="wb-dash-upcoming-row__sub">2 people out same day</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="30">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">May</span>
+                  <span class="wb-dash-upcoming-date__day">05</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Benefits open enrollment ends</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--heads-up">Deadline</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">Last day to make plan changes</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="30">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">May</span>
+                  <span class="wb-dash-upcoming-date__day">18</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Summer PTO blackout starts</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--heads-up">Policy</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">Kitchen + FOH — 2 weeks</p>
+                </div>
+              </li>
+              <li class="wb-dash-upcoming-row" data-upcoming-ranges="30">
+                <div class="wb-dash-upcoming-date" aria-hidden="true">
+                  <span class="wb-dash-upcoming-date__mo">May</span>
+                  <span class="wb-dash-upcoming-date__day">27</span>
+                </div>
+                <div class="wb-dash-upcoming-body">
+                  <h3 class="wb-dash-upcoming-row__title">Food handler renewals due</h3>
+                  <div class="wb-dash-upcoming-row__line">
+                    <span class="wb-dash-upcoming-tag wb-dash-upcoming-tag--review">Compliance</span>
+                  </div>
+                  <p class="wb-dash-upcoming-row__sub">12 certificates expiring</p>
                 </div>
               </li>
             </ul>
@@ -435,6 +554,111 @@
             </div>
           </div>
         </main>
+      </div>
+    </div>
+
+    <div class="wb-sign-reminder-modal" data-sign-reminder-modal hidden>
+      <button
+        type="button"
+        class="wb-sign-reminder-modal__backdrop"
+        data-sign-reminder-close
+        tabindex="-1"
+        aria-label="Close reminder dialog"
+      ></button>
+      <div
+        class="wb-sign-reminder-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wb-dash-sign-reminder-title"
+      >
+        <header class="wb-sign-reminder-modal__head">
+          <h2 id="wb-dash-sign-reminder-title" class="wb-sign-reminder-modal__title">Remind me later</h2>
+          <button type="button" class="wb-sign-reminder-modal__close" data-sign-reminder-close aria-label="Close">×</button>
+        </header>
+        <div class="wb-sign-reminder-modal__body">
+          <p class="wb-sign-reminder-modal__lede">
+            Choose when you&apos;d like a nudge to finish signing. This demo doesn&apos;t connect to your calendar.
+          </p>
+          <div class="wb-sign-reminder-modal__fields">
+            <label class="wb-sign-reminder-modal__field">
+              <span class="wb-sign-reminder-modal__label">Reminder date</span>
+              <input type="date" class="wb-sign-reminder-modal__input" data-sign-reminder-date required />
+            </label>
+            <label class="wb-sign-reminder-modal__field">
+              <span class="wb-sign-reminder-modal__label">Time <span class="wb-sign-reminder-modal__optional">(optional)</span></span>
+              <input type="time" class="wb-sign-reminder-modal__input" data-sign-reminder-time />
+            </label>
+            <label class="wb-sign-reminder-modal__field wb-sign-reminder-modal__field--full">
+              <span class="wb-sign-reminder-modal__label">Note <span class="wb-sign-reminder-modal__optional">(optional)</span></span>
+              <textarea
+                class="wb-sign-reminder-modal__textarea"
+                data-sign-reminder-note
+                rows="2"
+                placeholder="e.g. After standup"
+              ></textarea>
+            </label>
+          </div>
+          <p class="wb-sign-reminder-modal__feedback" data-sign-reminder-feedback hidden role="status"></p>
+        </div>
+        <footer class="wb-sign-reminder-modal__foot">
+          <button type="button" class="wb-btn wb-btn--muted" data-sign-reminder-close>Cancel</button>
+          <button type="button" class="wb-btn wb-btn--primary" data-sign-reminder-save>Save reminder</button>
+        </footer>
+      </div>
+    </div>
+
+    <div class="wb-dash-reminder wb-dash-nudge" id="wb-dash-nudge-modal" data-nudge-modal hidden role="presentation">
+      <button type="button" class="wb-dash-reminder__backdrop" data-nudge-close tabindex="-1" aria-label="Close nudge dialog"></button>
+      <div
+        class="wb-dash-reminder__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wb-dash-nudge-title"
+      >
+        <div class="wb-dash-reminder__head">
+          <h2 class="wb-dash-reminder__title" id="wb-dash-nudge-title">Send a nudge</h2>
+          <button type="button" class="wb-dash-reminder__close" data-nudge-close aria-label="Close dialog">×</button>
+        </div>
+        <p class="wb-dash-reminder__lede">
+          Jessica Christie will get a friendly prompt to finish onboarding. Nothing is actually sent in this static demo.
+        </p>
+        <div class="wb-dash-nudge__field">
+          <span class="wb-dash-nudge__label">Channel</span>
+          <div class="wb-dash-nudge__radios">
+            <label class="wb-dash-nudge__radio"
+              ><input type="radio" name="wb-dash-nudge-channel" value="email" checked /> Email</label
+            >
+            <label class="wb-dash-nudge__radio"
+              ><input type="radio" name="wb-dash-nudge-channel" value="inapp" /> In-app only</label
+            >
+            <label class="wb-dash-nudge__radio"
+              ><input type="radio" name="wb-dash-nudge-channel" value="sms" /> SMS (if on file)</label
+            >
+          </div>
+        </div>
+        <div class="wb-dash-nudge__field">
+          <label class="wb-dash-nudge__label" for="wb-dash-nudge-msg"
+            >Message <span class="wb-dash-nudge__optional">(optional)</span></label
+          >
+          <textarea
+            id="wb-dash-nudge-msg"
+            class="wb-dash-nudge__textarea"
+            data-nudge-message
+            rows="3"
+            placeholder="e.g. Please upload your W-4 and direct deposit form when you can."
+          ></textarea>
+        </div>
+        <div class="wb-dash-nudge__field">
+          <label class="wb-dash-nudge__label" for="wb-dash-nudge-when"
+            >Schedule for later <span class="wb-dash-nudge__optional">(optional)</span></label
+          >
+          <input type="datetime-local" id="wb-dash-nudge-when" class="wb-dash-nudge__input" data-nudge-when />
+        </div>
+        <p class="wb-dash-nudge__feedback" data-nudge-feedback hidden role="status"></p>
+        <div class="wb-dash-nudge__actions">
+          <button type="button" class="wb-btn wb-btn--muted wb-dash-nudge__btn-secondary" data-nudge-close>Cancel</button>
+          <button type="button" class="wb-btn wb-btn--primary wb-dash-nudge__btn-primary" data-nudge-send>Send nudge</button>
+        </div>
       </div>
     </div>
 

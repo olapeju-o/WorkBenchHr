@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Document method — Workbench HR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign documents — Workbench HR</title>
     <link rel="icon" href="assets/logo.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,20 +76,13 @@
           </div>
         </aside>
 
-        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/document-method" hidden>
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/sign-documents" hidden>
           <header class="wb-dash__header">
             <div class="wb-dash__header-lead">
               <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
-                <a href="document-category.html" class="wb-create-doc__crumb-link">Create Document</a>
+                <a href="documents.html#/documents" class="wb-create-doc__crumb-link">Documents</a>
                 <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <a
-                  href="document-templates.html"
-                  class="wb-create-doc__crumb-link"
-                  data-doc-method-crumb-templates
-                  >Select template</a
-                >
-                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <span class="wb-create-doc__crumb-current">Document method</span>
+                <span class="wb-create-doc__crumb-current">Sign queue</span>
               </nav>
             </div>
             <div class="wb-dash__header-actions">
@@ -109,73 +102,82 @@
             </div>
           </header>
 
-          <section class="wb-create-doc" data-doc-method-root>
-            <div class="wb-create-method">
-              <h1 class="wb-create-method__title">How would you like to create this?</h1>
-              <p id="ws-method-sub" class="wb-create-method__sub"></p>
-              <p id="ws-method-pages-note" class="wb-create-method__pages-note" hidden></p>
-              <div class="wb-create-method__pick-wrap" hidden>
-                <a id="ws-method-pick-template" class="wb-link" href="document-templates.html">Choose a different template</a>
+          <div class="wb-sign-queue-page">
+            <div class="wb-sign-queue" data-sign-queue-root>
+              <div class="wb-sign-queue__head">
+                <h1 class="wb-sign-queue__page-title">Sign documents</h1>
+                <p class="wb-sign-queue__lede">
+                  Review each packet and sign in one tap. This queue is a static preview — nothing is sent to a
+                  server.
+                </p>
               </div>
-              <div class="wb-create-method__options">
-                <a
-                  id="ws-method-ai"
-                  class="wb-create-method__card wb-create-method__card--ai"
-                  href="document-templates.html"
-                >
-                  <div class="wb-create-method__card-top">
-                    <span class="wb-create-method__card-icon wb-create-method__card-icon--ai" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          fill="#fff"
-                          d="M12 2l2.09 6.26H21l-5.45 3.96 2.09 6.26L12 14.77 6.36 18.48l2.09-6.26L3 8.26h6.91L12 2z"
-                          opacity="0.95"
-                        />
-                      </svg>
-                    </span>
-                    <div class="wb-create-method__card-head">
-                      <span class="wb-create-method__card-title">Use AI to Generate Content</span>
-                      <span class="wb-create-method__badge">Recommended</span>
-                    </div>
-                    <span class="wb-create-method__chevron" aria-hidden="true">›</span>
+              <p class="wb-sign-queue__count" data-sign-queue-count aria-live="polite">
+                3 documents are waiting on your signature.
+              </p>
+              <ul class="wb-sign-queue__list" role="list">
+                <li class="wb-sign-queue__row" data-sign-queue-row>
+                  <div class="wb-sign-queue__main">
+                    <span class="wb-sign-queue__pill">Your signature</span>
+                    <h2 class="wb-sign-queue__title">Offer letter — Marcus Lee</h2>
+                    <p class="wb-sign-queue__meta">Hiring · Due today, 5:00 PM</p>
                   </div>
-                  <p class="wb-create-method__card-desc">
-                    Describe the role and situation. AI drafts the full document — you review and tweak before sending.
-                  </p>
-                </a>
-                <a
-                  id="ws-method-manual"
-                  class="wb-create-method__card wb-create-method__card--manual"
-                  href="document-templates.html"
-                >
-                  <div class="wb-create-method__card-top">
-                    <span class="wb-create-method__card-icon wb-create-method__card-icon--manual" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          fill="currentColor"
-                          fill-opacity="0.55"
-                          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 000-1.41l-2.34-2.34a1 1 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-                        />
-                      </svg>
-                    </span>
-                    <div class="wb-create-method__card-head">
-                      <span class="wb-create-method__card-title">Fill Template Manually</span>
-                    </div>
-                    <span class="wb-create-method__chevron" aria-hidden="true">›</span>
+                  <div class="wb-sign-queue__actions">
+                    <button type="button" class="wb-btn wb-btn--outline" data-sign-queue-preview>Quick view</button>
+                    <button type="button" class="wb-btn wb-btn--primary" data-sign-queue-sign>Sign now</button>
                   </div>
-                  <p class="wb-create-method__card-desc">
-                    Use the standard template and fill in each field yourself. Best if you already know exactly what to say.
-                  </p>
-                </a>
-              </div>
-              <footer class="wb-create-method__footer">
-                <a href="document-templates.html" class="wb-btn wb-btn--muted wb-create-method__back" data-doc-method-back
-                  >← Back</a
-                >
-              </footer>
+                </li>
+                <li class="wb-sign-queue__row" data-sign-queue-row>
+                  <div class="wb-sign-queue__main">
+                    <span class="wb-sign-queue__pill wb-sign-queue__pill--witness">Counter-sign</span>
+                    <h2 class="wb-sign-queue__title">NDA — Priya Patel (Sales)</h2>
+                    <p class="wb-sign-queue__meta">Legal · Waiting on you after candidate signed</p>
+                  </div>
+                  <div class="wb-sign-queue__actions">
+                    <button type="button" class="wb-btn wb-btn--outline" data-sign-queue-preview>Quick view</button>
+                    <button type="button" class="wb-btn wb-btn--primary" data-sign-queue-sign>Sign now</button>
+                  </div>
+                </li>
+                <li class="wb-sign-queue__row" data-sign-queue-row>
+                  <div class="wb-sign-queue__main">
+                    <span class="wb-sign-queue__pill">Your signature</span>
+                    <h2 class="wb-sign-queue__title">Remote work acknowledgment — Q1 rollout</h2>
+                    <p class="wb-sign-queue__meta">Policies · Reminder sent yesterday</p>
+                  </div>
+                  <div class="wb-sign-queue__actions">
+                    <button type="button" class="wb-btn wb-btn--outline" data-sign-queue-preview>Quick view</button>
+                    <button type="button" class="wb-btn wb-btn--primary" data-sign-queue-sign>Sign now</button>
+                  </div>
+                </li>
+              </ul>
+              <p class="wb-sign-queue__foot">
+                <a href="documents.html#/documents" class="wb-link wb-link--underline">← Back to Documents library</a>
+              </p>
             </div>
-          </section>
+          </div>
         </main>
+      </div>
+    </div>
+
+    <div
+      id="wb-sign-queue-pdf-modal"
+      class="wb-va-pdf-modal"
+      hidden
+      role="presentation"
+    >
+      <button type="button" class="wb-va-pdf-modal__backdrop" data-sign-queue-pdf-close tabindex="-1" aria-label="Close preview"></button>
+      <div
+        class="wb-va-pdf-modal__panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="wb-sign-queue-pdf-modal-title"
+      >
+        <header class="wb-va-pdf-modal__head">
+          <h2 id="wb-sign-queue-pdf-modal-title" class="wb-va-pdf-modal__title" data-sign-queue-pdf-title>Document</h2>
+          <button type="button" class="wb-va-pdf-modal__close" data-sign-queue-pdf-close aria-label="Close">×</button>
+        </header>
+        <div class="wb-va-pdf-modal__frame-wrap">
+          <iframe class="wb-va-pdf-modal__frame" data-sign-queue-pdf-frame title="PDF preview" src="about:blank"></iframe>
+        </div>
       </div>
     </div>
 
