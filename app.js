@@ -1892,6 +1892,106 @@
     });
   }
 
+  function parseApplicantDocDateToMs(dateStr) {
+    var parts = String(dateStr || "").split("/");
+    if (parts.length !== 3) return 0;
+    var mo = parseInt(parts[0], 10);
+    var day = parseInt(parts[1], 10);
+    var yr = parseInt(parts[2], 10);
+    if (!yr || !mo || !day) return 0;
+    var t = new Date(yr, mo - 1, day).getTime();
+    return isNaN(t) ? 0 : t;
+  }
+
+  function applyViewApplicantDocsFilterSort() {
+    var root = document.querySelector("[data-va-docs-root]");
+    var list = document.querySelector("[data-va-docs-list]");
+    if (!root || !list) return;
+
+    var activeTabBtn = root.querySelector(".wb-va-docs__tab.wb-va-docs__tab--active");
+    var tab = activeTabBtn ? (activeTabBtn.getAttribute("data-va-docs-tab") || "all").toLowerCase() : "all";
+
+    var sortPill = root.querySelector("[data-va-doc-sort].wb-hiring__sort-pill--active");
+    var sortMode = sortPill && sortPill.getAttribute("data-va-doc-sort") === "date" ? "date" : "name";
+
+    var searchInp = root.querySelector("[data-va-docs-search]");
+    var q = (searchInp && searchInp.value ? searchInp.value : "").trim().toLowerCase();
+
+    var items = Array.prototype.slice.call(list.querySelectorAll(".wb-va-doc-row"));
+    items.forEach(function (li) {
+      var kind = (li.getAttribute("data-doc-kind") || "").toLowerCase();
+      var passTab = tab === "all" || tab === kind;
+      var name = (li.getAttribute("data-va-doc-file") || "").toLowerCase();
+      var passQ = !q || name.indexOf(q) !== -1;
+      li.hidden = !(passTab && passQ);
+    });
+
+    var visible = items.filter(function (li) {
+      return !li.hidden;
+    });
+    var hidden = items.filter(function (li) {
+      return li.hidden;
+    });
+
+    function cmp(a, b) {
+      if (sortMode === "date") {
+        var ad = parseInt(a.getAttribute("data-va-doc-posted") || "0", 10);
+        var bd = parseInt(b.getAttribute("data-va-doc-posted") || "0", 10);
+        if (ad !== bd) return bd - ad;
+      }
+      var an = (a.getAttribute("data-va-doc-file") || "").toLowerCase();
+      var bn = (b.getAttribute("data-va-doc-file") || "").toLowerCase();
+      if (an < bn) return -1;
+      if (an > bn) return 1;
+      return 0;
+    }
+
+    visible.sort(cmp);
+    hidden.sort(cmp);
+    visible.concat(hidden).forEach(function (li) {
+      list.appendChild(li);
+    });
+
+    var msg = root.querySelector("[data-va-docs-count-msg]");
+    if (msg) {
+      var n = visible.length;
+      msg.textContent = n ? "Showing " + n + " " + (n === 1 ? "document" : "documents") : "No documents match your filters";
+    }
+  }
+
+  function bindViewApplicantDocsControls() {
+    if (window.__wbVaDocsControlsBound) return;
+    var root = document.querySelector("[data-va-docs-root]");
+    if (!root) return;
+    window.__wbVaDocsControlsBound = true;
+
+    root.addEventListener("click", function (e) {
+      var tab = e.target.closest("[data-va-docs-tab]");
+      if (tab && root.contains(tab)) {
+        root.querySelectorAll("[data-va-docs-tab]").forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle("wb-va-docs__tab--active", on);
+          t.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        applyViewApplicantDocsFilterSort();
+        return;
+      }
+
+      var pill = e.target.closest("[data-va-doc-sort]");
+      if (pill && root.contains(pill)) {
+        root.querySelectorAll("[data-va-doc-sort]").forEach(function (p) {
+          var on = p === pill;
+          p.classList.toggle("wb-hiring__sort-pill--active", on);
+          p.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        applyViewApplicantDocsFilterSort();
+      }
+    });
+
+    var searchInp = root.querySelector("[data-va-docs-search]");
+    if (searchInp) searchInp.addEventListener("input", applyViewApplicantDocsFilterSort);
+  }
+
   function bindViewApplicantPage(search) {
     var params = new URLSearchParams(String(search || "").replace(/^\?/, ""));
     var id = (params.get("id") || "olivia").toLowerCase();
@@ -1900,8 +2000,7 @@
         name: "Olivia Thompson",
         role: "Front of House (FOH) Staff Candidate",
         crumb: "Olivia Thompson",
-        photo:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
+        photo: "assets/olivia.png",
         match: "92%",
         summary:
           "Matches all core competencies and 5/5 required skills. Exceeds experience requirements.",
@@ -1956,6 +2055,8 @@
             d.kind +
             '" data-va-doc-file="' +
             d.file +
+            '" data-va-doc-posted="' +
+            parseApplicantDocDateToMs(d.date) +
             '">' +
             '<span class="wb-va-doc-row__ic" aria-hidden="true">' +
             '<svg viewBox="0 0 24 24" width="20" height="20">' +
@@ -1983,6 +2084,7 @@
       }
       docListEl.innerHTML = parts.join("");
     }
+    applyViewApplicantDocsFilterSort();
   }
 
   function openApplicantPdfModal(fileLabel) {
@@ -3008,6 +3110,7 @@
       window.scrollTo(0, 0);
     } else if (pathname === "/hiring" && isHiringHtmlDoc()) {
       showWorkspacePage(pathname, search);
+      syncHiringPageView();
       window.scrollTo(0, 0);
     } else if (pathname === "/applicants" && isApplicantsHtmlDoc()) {
       showWorkspacePage(pathname, search);
@@ -3075,38 +3178,23 @@
 
   function bindDemoForm() {
     var form = document.getElementById("demo-request-form");
-    var surface = document.getElementById("demo-request-surface");
-    var success = document.getElementById("demo-request-success");
-    var again = document.getElementById("demo-request-again");
-    var successTitle = document.getElementById("demo-request-success-title");
-    if (!form || !surface || !success) return;
-
-    function showSuccess() {
-      surface.classList.add("wb-demo__surface--success");
-      success.setAttribute("aria-hidden", "false");
-      form.setAttribute("aria-hidden", "true");
-      if (successTitle && typeof successTitle.focus === "function") {
-        successTitle.focus();
-      }
-    }
-
-    function resetDemo() {
-      surface.classList.remove("wb-demo__surface--success");
-      success.setAttribute("aria-hidden", "true");
-      form.removeAttribute("aria-hidden");
-      form.reset();
-      var first = form.querySelector("input, textarea, button");
-      if (first && typeof first.focus === "function") first.focus();
-    }
-
+    if (!form) return;
+    var thanks = document.getElementById("demo-request-thanks");
+    var slot = document.getElementById("demo-request-form-slot");
+    var resetBtn = document.getElementById("demo-request-reset");
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      showSuccess();
+      if (slot) slot.classList.add("wb-demo__form-slot--success");
+      if (thanks) thanks.hidden = false;
+      if (thanks) thanks.focus();
     });
-
-    if (again) {
-      again.addEventListener("click", function () {
-        resetDemo();
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        form.reset();
+        if (thanks) thanks.hidden = true;
+        if (slot) slot.classList.remove("wb-demo__form-slot--success");
+        var first = form.querySelector("input, textarea, select, button");
+        if (first) first.focus();
       });
     }
   }
@@ -3123,130 +3211,21 @@
   }
 
   function bindAuthForms() {
-    function authApiBase() {
-      var loc = window.location;
-      if (loc.protocol === "file:" || !loc.hostname) {
-        return "http://127.0.0.1:3847/api";
-      }
-      return loc.origin + "/api";
-    }
-
-    function setAuthError(form, message) {
-      var root = form.closest(".wb-split__inner") || form.parentElement;
-      var err = root ? root.querySelector("[data-auth-error]") : null;
-      if (!err) return;
-      if (message) {
-        err.textContent = message;
-        err.hidden = false;
-      } else {
-        err.textContent = "";
-        err.hidden = true;
-      }
-    }
-
-    function readJsonSafe(res) {
-      return res.text().then(function (t) {
-        try {
-          return JSON.parse(t);
-        } catch (e) {
-          return null;
-        }
-      });
-    }
-
     document.querySelectorAll("[data-static-auth-form]").forEach(function (form) {
       form.addEventListener("submit", function (e) {
+        if (form.closest('[data-static-view="signup"]')) {
+          e.preventDefault();
+          window.location.hash = "#/onboarding/goal";
+          return;
+        }
+        if (form.closest('[data-static-view="login"]')) {
+          e.preventDefault();
+          window.location.replace("dashboard.html#/dashboard");
+          return;
+        }
         e.preventDefault();
-        setAuthError(form, "");
-
-        if (!form.reportValidity()) return;
-
-        var fd = new FormData(form);
-        var username = String(fd.get("username") || "").trim();
-        var password = String(fd.get("password") || "");
-        if (!username || !password) {
-          setAuthError(form, "Please enter both username and password.");
-          return;
-        }
-
-        var submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) submitBtn.disabled = true;
-
-        var base = authApiBase();
-        var isSignup = !!form.closest('[data-static-view="signup"]');
-
-        if (isSignup) {
-          var body = {
-            username: username,
-            password: password,
-            name: String(fd.get("name") || "").trim(),
-            company: String(fd.get("company") || "").trim(),
-          };
-          fetch(base + "/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-          })
-            .then(function (res) {
-              return readJsonSafe(res).then(function (data) {
-                return { res: res, data: data };
-              });
-            })
-            .then(function (x) {
-              if (x.res.ok && x.data && x.data.ok) {
-                window.location.hash = "#/onboarding/goal";
-                return;
-              }
-              var msg =
-                (x.data && x.data.error) ||
-                (x.res.status === 0
-                  ? "Could not reach the server. Run npm start in the project folder and use the printed URL."
-                  : "Could not create account.");
-              setAuthError(form, msg);
-            })
-            .catch(function () {
-              setAuthError(
-                form,
-                "Could not reach the server. Run npm start in the project folder and use the printed URL."
-              );
-            })
-            .finally(function () {
-              if (submitBtn) submitBtn.disabled = false;
-            });
-          return;
-        }
-
-        fetch(base + "/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: username, password: password }),
-        })
-          .then(function (res) {
-            return readJsonSafe(res).then(function (data) {
-              return { res: res, data: data };
-            });
-          })
-          .then(function (x) {
-            if (x.res.ok && x.data && x.data.ok) {
-              window.location.replace("dashboard.html#/dashboard");
-              return;
-            }
-            var msg =
-              (x.data && x.data.error) ||
-              (x.res.status === 0
-                ? "Could not reach the server. Run npm start in the project folder and use the printed URL."
-                : "Sign-in failed.");
-            setAuthError(form, msg);
-          })
-          .catch(function () {
-            setAuthError(
-              form,
-              "Could not reach the server. Run npm start in the project folder and use the printed URL."
-            );
-          })
-          .finally(function () {
-            if (submitBtn) submitBtn.disabled = false;
-          });
+        var msg = form.querySelector("[data-static-auth-msg]");
+        if (msg) msg.hidden = false;
       });
     });
   }
@@ -4578,6 +4557,204 @@
     setSelected((initial && initial.getAttribute("data-create-category")) || "company");
   }
 
+  function getHiringSortModeFromDom(root) {
+    var pill = root.querySelector("[data-hiring-sort].wb-hiring__sort-pill--active");
+    var m = pill ? pill.getAttribute("data-hiring-sort") : "";
+    return m === "date" ? "date" : "name";
+  }
+
+  function applyHiringSort(root, sortMode) {
+    var box = root.querySelector("[data-hiring-cards]");
+    if (!box) return;
+    var cards = Array.prototype.slice.call(box.querySelectorAll("[data-hiring-card]"));
+    var byName = sortMode !== "date";
+    cards.sort(function (a, b) {
+      var at = (a.getAttribute("data-hiring-title") || "").toLowerCase();
+      var bt = (b.getAttribute("data-hiring-title") || "").toLowerCase();
+      if (byName) {
+        if (at < bt) return -1;
+        if (at > bt) return 1;
+        return 0;
+      }
+      var ad = Date.parse(a.getAttribute("data-hiring-posted") || "") || 0;
+      var bd = Date.parse(b.getAttribute("data-hiring-posted") || "") || 0;
+      if (ad !== bd) return bd - ad;
+      if (at < bt) return -1;
+      if (at > bt) return 1;
+      return 0;
+    });
+    cards.forEach(function (c) {
+      box.appendChild(c);
+    });
+  }
+
+  function applyHiringView(root, mode) {
+    var cards = root.querySelector("[data-hiring-cards]");
+    if (!cards) return;
+    var grid = mode === "grid";
+    cards.classList.toggle("wb-hiring__cards--grid", grid);
+    cards.classList.toggle("wb-hiring__cards--list", !grid);
+    root.querySelectorAll("[data-hiring-view-toggle]").forEach(function (btn) {
+      var on = (btn.getAttribute("data-hiring-view-toggle") || "") === mode;
+      btn.classList.toggle("wb-hiring__view-btn--active", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  function syncHiringPageView() {
+    if (!isHiringHtmlDoc()) return;
+    var p = parseHash();
+    if (p.kind !== "path" || p.pathname !== "/hiring") return;
+    var root = document.querySelector("[data-hiring-root]");
+    if (!root) return;
+    var q = new URLSearchParams((p.search || "").replace(/^\?/, ""));
+    applyHiringView(root, q.get("view") === "grid" ? "grid" : "list");
+  }
+
+  function getHiringToolbarQuery(root) {
+    var inp = root.querySelector("[data-hiring-toolbar-search]");
+    return (inp && inp.value ? inp.value : "").trim().toLowerCase();
+  }
+
+  function getHiringSelectedInBlock(root, block) {
+    var el = root.querySelector('[data-hiring-filter-block="' + block + '"]');
+    if (!el) return [];
+    var out = [];
+    el.querySelectorAll('input[type="checkbox"][data-hiring-value]').forEach(function (cb) {
+      if (cb.checked) out.push(cb.getAttribute("data-hiring-value") || "");
+    });
+    return out.filter(Boolean);
+  }
+
+  function hiringCardMatchesFilters(card, root) {
+    var q = getHiringToolbarQuery(root);
+    var title = (card.getAttribute("data-hiring-title") || "").toLowerCase();
+    if (q && title.indexOf(q) === -1) return false;
+
+    var rolesSel = getHiringSelectedInBlock(root, "role");
+    if (rolesSel.length) {
+      var rolesAttr = card.getAttribute("data-hiring-roles") || "";
+      var tokens = rolesAttr.split(",").map(function (s) {
+        return s.trim();
+      }).filter(Boolean);
+      var hit = false;
+      for (var i = 0; i < rolesSel.length; i++) {
+        if (tokens.indexOf(rolesSel[i]) !== -1) {
+          hit = true;
+          break;
+        }
+      }
+      if (!hit) return false;
+    }
+
+    var contrSel = getHiringSelectedInBlock(root, "contract");
+    if (contrSel.length) {
+      var c = card.getAttribute("data-hiring-contract") || "";
+      if (contrSel.indexOf(c) === -1) return false;
+    }
+
+    var statSel = getHiringSelectedInBlock(root, "status");
+    if (statSel.length) {
+      var st = card.getAttribute("data-hiring-status") || "";
+      if (statSel.indexOf(st) === -1) return false;
+    }
+
+    return true;
+  }
+
+  function applyHiringRoleListFilter(root) {
+    var block = root.querySelector('[data-hiring-filter-block="role"]');
+    if (!block) return;
+    var inp = block.querySelector("[data-hiring-role-search]");
+    var q = (inp && inp.value ? inp.value : "").trim().toLowerCase();
+    block.querySelectorAll(".wb-hiring__checks > li").forEach(function (li) {
+      if (!q) {
+        li.hidden = false;
+        return;
+      }
+      var t = (li.textContent || "").toLowerCase().replace(/\s+/g, " ");
+      li.hidden = t.indexOf(q) === -1;
+    });
+  }
+
+  function updateHiringCountMsg(root) {
+    var msg = root.querySelector("[data-hiring-count-msg]");
+    if (!msg) return;
+    var n = 0;
+    root.querySelectorAll("[data-hiring-card]").forEach(function (c) {
+      if (!c.hidden) n++;
+    });
+    msg.textContent = "Showing " + n + " " + (n === 1 ? "posting" : "postings");
+  }
+
+  function applyHiringFiltersAndSort(root) {
+    if (!root) return;
+    applyHiringRoleListFilter(root);
+    applyHiringSort(root, getHiringSortModeFromDom(root));
+    root.querySelectorAll("[data-hiring-card]").forEach(function (card) {
+      card.hidden = !hiringCardMatchesFilters(card, root);
+    });
+    updateHiringCountMsg(root);
+  }
+
+  function bindHiringPage() {
+    if (!isHiringHtmlDoc()) return;
+    var root = document.querySelector("[data-hiring-root]");
+    if (!root || root.getAttribute("data-hiring-bound") === "1") return;
+    root.setAttribute("data-hiring-bound", "1");
+
+    function refresh() {
+      applyHiringFiltersAndSort(root);
+    }
+
+    root.querySelectorAll("[data-hiring-sort]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        var mode = pill.getAttribute("data-hiring-sort") || "name";
+        root.querySelectorAll("[data-hiring-sort]").forEach(function (p) {
+          var on = p === pill;
+          p.classList.toggle("wb-hiring__sort-pill--active", on);
+          p.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        refresh();
+      });
+    });
+
+    root.querySelectorAll("[data-hiring-view-toggle]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var mode = btn.getAttribute("data-hiring-view-toggle") || "list";
+        applyHiringView(root, mode === "grid" ? "grid" : "list");
+        var base = window.location.pathname + window.location.search;
+        window.history.replaceState(null, "", base + (mode === "grid" ? "#/hiring?view=grid" : "#/hiring"));
+      });
+    });
+
+    var ts = root.querySelector("[data-hiring-toolbar-search]");
+    if (ts) ts.addEventListener("input", refresh);
+
+    var rs = root.querySelector("[data-hiring-role-search]");
+    if (rs) rs.addEventListener("input", refresh);
+
+    root.querySelectorAll('[data-hiring-filter-block] input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener("change", refresh);
+    });
+
+    root.querySelectorAll("[data-hiring-filter-clear]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var block = btn.closest("[data-hiring-filter-block]");
+        if (!block) return;
+        block.querySelectorAll('input[type="checkbox"]').forEach(function (cb) {
+          cb.checked = false;
+        });
+        var s = block.querySelector("[data-hiring-role-search]");
+        if (s) s.value = "";
+        refresh();
+      });
+    });
+
+    syncHiringPageView();
+    refresh();
+  }
+
   function bindEmployeePortalView() {
     var root = document.querySelector("[data-emp-portal]");
     if (!root) return;
@@ -4625,7 +4802,9 @@
     bindSettingsHelp();
     bindCreateDocumentTemplateStep();
     bindEmployeePortalView();
+    bindHiringPage();
     bindApplicantPdfViewer();
+    bindViewApplicantDocsControls();
 
     window.addEventListener("hashchange", function () {
       closeProfileDeleteModal();

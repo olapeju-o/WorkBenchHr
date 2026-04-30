@@ -129,7 +129,7 @@
               <img
                 class="wb-va-hero__photo"
                 data-va-photo
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&amp;h=200&amp;fit=crop&amp;crop=face"
+                src="assets/olivia.png"
                 alt=""
                 width="96"
                 height="96"
@@ -154,17 +154,31 @@
               </div>
             </section>
 
-            <details class="wb-va-docs" open>
+            <details class="wb-va-docs" open data-va-docs-root>
               <summary class="wb-va-docs__summary">
                 <span class="wb-va-docs__summary-text">Documents</span>
                 <span class="wb-va-docs__chev" aria-hidden="true"></span>
               </summary>
               <div class="wb-va-docs__panel">
                 <div class="wb-va-docs__tabs" role="tablist" aria-label="Document types">
-                  <button type="button" class="wb-va-docs__tab wb-va-docs__tab--active" role="tab" aria-selected="true">All</button>
-                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Resume</button>
-                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Cover Letter</button>
-                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false">Portfolio</button>
+                  <button
+                    type="button"
+                    class="wb-va-docs__tab wb-va-docs__tab--active"
+                    role="tab"
+                    aria-selected="true"
+                    data-va-docs-tab="all"
+                  >
+                    All
+                  </button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false" data-va-docs-tab="resume">
+                    Resume
+                  </button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false" data-va-docs-tab="cover">
+                    Cover Letter
+                  </button>
+                  <button type="button" class="wb-va-docs__tab" role="tab" aria-selected="false" data-va-docs-tab="portfolio">
+                    Portfolio
+                  </button>
                 </div>
                 <div class="wb-hiring__toolbar wb-va-docs__toolbar">
                   <label class="wb-hiring__search">
@@ -182,11 +196,21 @@
                   <div class="wb-hiring__toolbar-mid">
                     <span class="wb-hiring__sort-label">Sort by</span>
                     <div class="wb-hiring__sort-pills" role="group" aria-label="Sort documents">
-                      <button type="button" class="wb-hiring__sort-pill wb-hiring__sort-pill--active" aria-pressed="true">Name A-Z</button>
-                      <button type="button" class="wb-hiring__sort-pill" aria-pressed="false">Date Added</button>
+                      <button
+                        type="button"
+                        class="wb-hiring__sort-pill wb-hiring__sort-pill--active"
+                        data-va-doc-sort="name"
+                        aria-pressed="true"
+                      >
+                        Name A-Z
+                      </button>
+                      <button type="button" class="wb-hiring__sort-pill" data-va-doc-sort="date" aria-pressed="false">
+                        Date added
+                      </button>
                     </div>
                   </div>
                 </div>
+                <p class="wb-va-docs__count" aria-live="polite"><span data-va-docs-count-msg></span></p>
                 <div class="wb-va-docs__list-wrap">
                   <ul class="wb-va-docs__list" data-va-docs-list aria-label="Uploaded documents"></ul>
                 </div>

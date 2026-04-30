@@ -169,8 +169,8 @@
                   Tell us a bit about your team. We&apos;ll follow up with a tailored walkthrough of Workbench HR.
                 </p>
               </div>
-              <div class="wb-demo__surface" id="demo-request-surface">
-                <form id="demo-request-form" class="wb-demo__form" aria-label="Request a demo">
+              <div class="wb-demo__form-slot" id="demo-request-form-slot">
+                <form id="demo-request-form" class="wb-demo__form">
                   <label class="wb-field">
                     <span class="wb-field__label">Full name</span>
                     <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
@@ -201,29 +201,29 @@
                   </div>
                 </form>
                 <div
-                  id="demo-request-success"
-                  class="wb-demo__success"
+                  id="demo-request-thanks"
+                  class="wb-demo__success-panel"
                   role="status"
-                  aria-live="polite"
-                  aria-hidden="true"
+                  aria-labelledby="demo-success-title"
+                  hidden
+                  tabindex="-1"
                 >
                   <div class="wb-demo__success-icon" aria-hidden="true">
-                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" opacity="0.35" />
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
-                        d="M14 24.5l7 7 13-14"
+                        d="M20 6L9 17l-5-5"
                         stroke="currentColor"
-                        stroke-width="2.5"
+                        stroke-width="2.25"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       />
                     </svg>
                   </div>
-                  <h3 class="wb-demo__success-title" id="demo-request-success-title" tabindex="-1">Request received</h3>
-                  <p class="wb-demo__success-body">
-                    Thanks—we&apos;ll follow up shortly with a tailored walkthrough of Workbench HR.
+                  <h3 id="demo-success-title" class="wb-demo__success-title">Request received</h3>
+                  <p class="wb-demo__success-lede">
+                    Thanks! We&apos;ve received your request and will be in touch shortly.
                   </p>
-                  <button type="button" class="wb-btn wb-btn--outline wb-demo__success-again" id="demo-request-again">
+                  <button type="button" class="wb-btn wb-btn--outline wb-btn--hero" id="demo-request-reset">
                     Submit another request
                   </button>
                 </div>
@@ -605,33 +605,17 @@
             Welcome back! Sign in to pick up where you left off. Your team, tasks, and HR tools are right here when you
             need them.
           </p>
-          <p class="wb-auth-note" data-auth-demo-note>
-            Demo: use username <strong>test</strong> and password <strong>test</strong> after starting the local
-            server (<code>npm start</code> in this project folder, then open the URL it prints).
+          <p data-static-auth-msg class="wb-demo__thanks" hidden>
+            Static preview: there is no server. In the full app, signing in would continue to your workspace.
           </p>
-          <p class="wb-auth-error" data-auth-error role="alert" hidden></p>
           <form class="wb-form" data-static-auth-form>
             <label class="wb-field">
-              <span class="wb-field__label">Username</span>
-              <input
-                class="wb-input"
-                name="username"
-                type="text"
-                autocomplete="username"
-                required
-                minlength="1"
-              />
+              <span class="wb-field__label">Email</span>
+              <input class="wb-input" name="email" type="email" autocomplete="email" />
             </label>
             <label class="wb-field">
               <span class="wb-field__label">Password</span>
-              <input
-                class="wb-input"
-                name="password"
-                type="password"
-                autocomplete="current-password"
-                required
-                minlength="1"
-              />
+              <input class="wb-input" name="password" type="password" autocomplete="current-password" />
             </label>
             <div class="wb-split__form-row">
               <label class="wb-split__remember">
@@ -665,40 +649,24 @@
             <span class="brand-mark__text">Workbench HR</span>
           </span>
           <p class="wb-split__tagline">Finally, an HR tool that works as hard as you do!</p>
-          <p class="wb-auth-note" data-auth-demo-note>
-            Already have the demo account? Sign in with <strong>test</strong> / <strong>test</strong>. New accounts are
-            saved to the local SQLite database when this site is served with <code>npm start</code>.
+          <p data-static-auth-msg class="wb-demo__thanks" hidden>
+            Static preview: there is no server. In the full app, you would continue to onboarding.
           </p>
-          <p class="wb-auth-error" data-auth-error role="alert" hidden></p>
           <form class="wb-form" data-static-auth-form>
             <label class="wb-field">
-              <span class="wb-field__label">Name <span class="wb-field__optional">(optional)</span></span>
+              <span class="wb-field__label">Name</span>
               <input class="wb-input" name="name" autocomplete="name" />
             </label>
             <label class="wb-field">
-              <span class="wb-field__label">Username</span>
-              <input
-                class="wb-input"
-                name="username"
-                type="text"
-                autocomplete="username"
-                required
-                minlength="2"
-              />
+              <span class="wb-field__label">Email</span>
+              <input class="wb-input" name="email" type="email" autocomplete="email" />
             </label>
             <label class="wb-field">
               <span class="wb-field__label">Password</span>
-              <input
-                class="wb-input"
-                name="password"
-                type="password"
-                autocomplete="new-password"
-                required
-                minlength="2"
-              />
+              <input class="wb-input" name="password" type="password" autocomplete="new-password" />
             </label>
             <label class="wb-field">
-              <span class="wb-field__label">Company name <span class="wb-field__optional">(optional)</span></span>
+              <span class="wb-field__label">Company Name</span>
               <input class="wb-input" name="company" autocomplete="organization" />
             </label>
             <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Create Account</button>

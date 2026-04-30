@@ -511,32 +511,11 @@ code {
   margin-bottom: 1.5rem;
 }
 
-.wb-demo__surface {
-  position: relative;
-  display: grid;
-  grid-template-areas: "demo-stack";
-  min-height: 12rem;
-}
-
-.wb-demo__form,
-.wb-demo__success {
-  grid-area: demo-stack;
-  align-self: start;
-  width: 100%;
-}
-
 .wb-demo__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem 1.15rem;
   text-align: left;
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition:
-    opacity 0.28s var(--ease-out),
-    transform 0.28s var(--ease-out),
-    visibility 0.28s;
 }
 
 @media (max-width: 640px) {
@@ -594,93 +573,92 @@ code {
   margin-top: 0.35rem;
 }
 
-.wb-demo__success {
-  box-sizing: border-box;
+/* Demo form + success share one layout slot (success replaces form in place). */
+.wb-demo__form-slot {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.wb-demo__form-slot > * {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.wb-demo__form-slot--success .wb-demo__form {
+  display: none;
+}
+
+.wb-demo__success-panel[hidden] {
+  display: none !important;
+}
+
+.wb-demo__success-panel:not([hidden]) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
-  padding: clamp(1.75rem, 4vw, 2.75rem) 1.25rem;
-  margin: 0;
+  align-self: start;
+  width: 100%;
+  padding: clamp(1.25rem, 4vw, 2rem) 0.5rem clamp(1.5rem, 4vw, 2.25rem);
+  gap: 0.65rem;
   border-radius: var(--wb-radius-md);
-  background: linear-gradient(165deg, rgba(0, 200, 117, 0.07) 0%, rgba(0, 200, 117, 0.02) 55%, transparent 100%);
-  border: 1px solid rgba(0, 200, 117, 0.14);
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(10px) scale(0.985);
-  transition:
-    opacity 0.32s var(--ease-out),
-    transform 0.32s var(--ease-out),
-    visibility 0.32s;
+  background: linear-gradient(180deg, var(--wb-surface-muted) 0%, var(--wb-surface) 42%);
+  border: 1px solid var(--wb-border);
+  box-shadow: var(--wb-shadow-xs);
 }
 
-.wb-demo__surface--success .wb-demo__form {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transform: translateY(-10px);
+@media (prefers-reduced-motion: no-preference) {
+  .wb-demo__success-panel:not([hidden]) {
+    animation: wb-demo-success-in 0.42s var(--ease-out) both;
+  }
 }
 
-.wb-demo__surface--success .wb-demo__success {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translateY(0) scale(1);
-}
+@keyframes wb-demo-success-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .wb-demo__form,
-  .wb-demo__success,
-  .wb-demo__surface--success .wb-demo__form,
-  .wb-demo__surface--success .wb-demo__success {
-    transition: none;
-    transform: none;
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
 .wb-demo__success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 3rem;
   height: 3rem;
-  margin-bottom: 1rem;
+  border-radius: 50%;
   color: var(--wb-green-dark);
-}
-
-.wb-demo__success-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
+  background: var(--wb-mint);
+  border: 1px solid rgba(0, 200, 117, 0.18);
+  margin-bottom: 0.15rem;
 }
 
 .wb-demo__success-title {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  margin: 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--wb-ink);
+  color: var(--wb-forest);
 }
 
-.wb-demo__success-title:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--wb-green-dim);
-  border-radius: 6px;
-}
-
-.wb-demo__success-body {
-  margin: 0 0 1.35rem;
+.wb-demo__success-lede {
+  margin: 0;
   max-width: 22rem;
-  font-size: 0.94rem;
+  font-size: 0.95rem;
   line-height: 1.55;
-  font-weight: 500;
   color: var(--wb-muted);
+  font-weight: 500;
 }
 
-.wb-demo__success-again {
-  font-size: 0.9rem;
+.wb-demo__success-panel .wb-btn {
+  margin-top: 0.35rem;
 }
 
-/* Contact page reuses this class for inline thank-you */
 .wb-demo__thanks {
   margin: 0;
   padding: 1.5rem 1.25rem;
@@ -691,44 +669,6 @@ code {
   background: var(--wb-mint);
   border: 1px solid rgba(0, 200, 117, 0.2);
   border-radius: var(--wb-radius-md);
-}
-
-.wb-auth-note {
-  margin: 0 0 1rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--wb-forest-mid);
-  background: rgba(0, 200, 117, 0.08);
-  border: 1px solid rgba(0, 200, 117, 0.22);
-  border-radius: var(--wb-radius-md);
-}
-
-.wb-auth-note code {
-  font-size: 0.78em;
-  font-weight: 600;
-  padding: 0.1em 0.35em;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.65);
-}
-
-.wb-auth-error {
-  margin: 0 0 1rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: #b42318;
-  background: #fef3f2;
-  border: 1px solid #fecdca;
-  border-radius: var(--wb-radius-md);
-}
-
-.wb-field__optional {
-  font-weight: 500;
-  color: var(--wb-muted-soft);
-  font-size: 0.85em;
 }
 
 .wb-mkt-section-head {
@@ -9851,6 +9791,13 @@ a.wb-applicant-card__cta {
 
 .wb-va-docs__toolbar {
   margin-bottom: 0.75rem;
+}
+
+.wb-va-docs__count {
+  margin: -0.25rem 0 0.65rem;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--wb-muted);
 }
 
 .wb-va-docs__list-wrap {
