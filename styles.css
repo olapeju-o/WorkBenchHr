@@ -511,11 +511,32 @@ code {
   margin-bottom: 1.5rem;
 }
 
+.wb-demo__surface {
+  position: relative;
+  display: grid;
+  grid-template-areas: "demo-stack";
+  min-height: 12rem;
+}
+
+.wb-demo__form,
+.wb-demo__success {
+  grid-area: demo-stack;
+  align-self: start;
+  width: 100%;
+}
+
 .wb-demo__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem 1.15rem;
   text-align: left;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity 0.28s var(--ease-out),
+    transform 0.28s var(--ease-out),
+    visibility 0.28s;
 }
 
 @media (max-width: 640px) {
@@ -573,6 +594,93 @@ code {
   margin-top: 0.35rem;
 }
 
+.wb-demo__success {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 2.75rem) 1.25rem;
+  margin: 0;
+  border-radius: var(--wb-radius-md);
+  background: linear-gradient(165deg, rgba(0, 200, 117, 0.07) 0%, rgba(0, 200, 117, 0.02) 55%, transparent 100%);
+  border: 1px solid rgba(0, 200, 117, 0.14);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.985);
+  transition:
+    opacity 0.32s var(--ease-out),
+    transform 0.32s var(--ease-out),
+    visibility 0.32s;
+}
+
+.wb-demo__surface--success .wb-demo__form {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+.wb-demo__surface--success .wb-demo__success {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-demo__form,
+  .wb-demo__success,
+  .wb-demo__surface--success .wb-demo__form,
+  .wb-demo__surface--success .wb-demo__success {
+    transition: none;
+    transform: none;
+  }
+}
+
+.wb-demo__success-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+  color: var(--wb-green-dark);
+}
+
+.wb-demo__success-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wb-demo__success-title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--wb-ink);
+}
+
+.wb-demo__success-title:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--wb-green-dim);
+  border-radius: 6px;
+}
+
+.wb-demo__success-body {
+  margin: 0 0 1.35rem;
+  max-width: 22rem;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  font-weight: 500;
+  color: var(--wb-muted);
+}
+
+.wb-demo__success-again {
+  font-size: 0.9rem;
+}
+
+/* Contact page reuses this class for inline thank-you */
 .wb-demo__thanks {
   margin: 0;
   padding: 1.5rem 1.25rem;

@@ -169,39 +169,65 @@
                   Tell us a bit about your team. We&apos;ll follow up with a tailored walkthrough of Workbench HR.
                 </p>
               </div>
-              <form id="demo-request-form" class="wb-demo__form">
-                <label class="wb-field">
-                  <span class="wb-field__label">Full name</span>
-                  <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
-                </label>
-                <label class="wb-field">
-                  <span class="wb-field__label">Work email</span>
-                  <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
-                </label>
-                <label class="wb-field">
-                  <span class="wb-field__label">Company</span>
-                  <input class="wb-input wb-input--demo" name="company" required autocomplete="organization" />
-                </label>
-                <label class="wb-field">
-                  <span class="wb-field__label">Role (optional)</span>
-                  <input class="wb-input wb-input--demo" name="role" autocomplete="organization-title" />
-                </label>
-                <label class="wb-field wb-field--full">
-                  <span class="wb-field__label">What would you like to see? (optional)</span>
-                  <textarea
-                    class="wb-textarea"
-                    name="message"
-                    rows="4"
-                    placeholder="e.g. onboarding, hiring pipeline, reporting…"
-                  ></textarea>
-                </label>
-                <div class="wb-demo__submit">
-                  <button type="submit" class="wb-btn wb-btn--primary wb-btn--hero">Submit request</button>
+              <div class="wb-demo__surface" id="demo-request-surface">
+                <form id="demo-request-form" class="wb-demo__form" aria-label="Request a demo">
+                  <label class="wb-field">
+                    <span class="wb-field__label">Full name</span>
+                    <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
+                  </label>
+                  <label class="wb-field">
+                    <span class="wb-field__label">Work email</span>
+                    <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
+                  </label>
+                  <label class="wb-field">
+                    <span class="wb-field__label">Company</span>
+                    <input class="wb-input wb-input--demo" name="company" required autocomplete="organization" />
+                  </label>
+                  <label class="wb-field">
+                    <span class="wb-field__label">Role (optional)</span>
+                    <input class="wb-input wb-input--demo" name="role" autocomplete="organization-title" />
+                  </label>
+                  <label class="wb-field wb-field--full">
+                    <span class="wb-field__label">What would you like to see? (optional)</span>
+                    <textarea
+                      class="wb-textarea"
+                      name="message"
+                      rows="4"
+                      placeholder="e.g. onboarding, hiring pipeline, reporting…"
+                    ></textarea>
+                  </label>
+                  <div class="wb-demo__submit">
+                    <button type="submit" class="wb-btn wb-btn--primary wb-btn--hero">Submit request</button>
+                  </div>
+                </form>
+                <div
+                  id="demo-request-success"
+                  class="wb-demo__success"
+                  role="status"
+                  aria-live="polite"
+                  aria-hidden="true"
+                >
+                  <div class="wb-demo__success-icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2" opacity="0.35" />
+                      <path
+                        d="M14 24.5l7 7 13-14"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <h3 class="wb-demo__success-title" id="demo-request-success-title" tabindex="-1">Request received</h3>
+                  <p class="wb-demo__success-body">
+                    Thanks—we&apos;ll follow up shortly with a tailored walkthrough of Workbench HR.
+                  </p>
+                  <button type="button" class="wb-btn wb-btn--outline wb-demo__success-again" id="demo-request-again">
+                    Submit another request
+                  </button>
                 </div>
-              </form>
-              <p id="demo-request-thanks" class="wb-demo__thanks" role="status" hidden>
-                Thanks! We&apos;ve received your request and will be in touch shortly.
-              </p>
+              </div>
             </div>
           </section>
         </div>

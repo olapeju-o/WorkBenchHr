@@ -3075,13 +3075,40 @@
 
   function bindDemoForm() {
     var form = document.getElementById("demo-request-form");
-    if (!form) return;
+    var surface = document.getElementById("demo-request-surface");
+    var success = document.getElementById("demo-request-success");
+    var again = document.getElementById("demo-request-again");
+    var successTitle = document.getElementById("demo-request-success-title");
+    if (!form || !surface || !success) return;
+
+    function showSuccess() {
+      surface.classList.add("wb-demo__surface--success");
+      success.setAttribute("aria-hidden", "false");
+      form.setAttribute("aria-hidden", "true");
+      if (successTitle && typeof successTitle.focus === "function") {
+        successTitle.focus();
+      }
+    }
+
+    function resetDemo() {
+      surface.classList.remove("wb-demo__surface--success");
+      success.setAttribute("aria-hidden", "true");
+      form.removeAttribute("aria-hidden");
+      form.reset();
+      var first = form.querySelector("input, textarea, button");
+      if (first && typeof first.focus === "function") first.focus();
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var thanks = document.getElementById("demo-request-thanks");
-      form.hidden = true;
-      if (thanks) thanks.hidden = false;
+      showSuccess();
     });
+
+    if (again) {
+      again.addEventListener("click", function () {
+        resetDemo();
+      });
+    }
   }
 
   function bindContactForm() {
