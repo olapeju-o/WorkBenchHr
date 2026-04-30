@@ -134,6 +134,7 @@
     "/document-templates": "Choose template — Workbench HR",
     "/document-method": "Document method — Workbench HR",
     "/document-manual-fill": "Fill document — Workbench HR",
+    "/generate-ai": "AI document draft — Workbench HR",
     "/document-review": "Review document — Workbench HR",
     "/create-document/template": "Document category — Workbench HR",
     "/create-document/method": "Creation method — Workbench HR",
@@ -234,6 +235,11 @@
   function isDocumentManualFillHtmlDoc() {
     var path = (window.location.pathname || "").split("?")[0];
     return /(^|\/)document-manual-fill\.html$/i.test(path);
+  }
+
+  function isGenerateAiHtmlDoc() {
+    var path = (window.location.pathname || "").split("?")[0];
+    return /(^|\/)generate-ai\.html$/i.test(path);
   }
 
   function isDocumentReviewHtmlDoc() {
@@ -415,6 +421,9 @@
     }
     if (isDocumentManualFillHtmlDoc()) {
       return "/document-manual-fill";
+    }
+    if (isGenerateAiHtmlDoc()) {
+      return "/generate-ai";
     }
     if (isDocumentReviewHtmlDoc()) {
       return "/document-review";
@@ -1090,14 +1099,11 @@
       if (ai) ai.setAttribute("href", templatesBrowseHref);
       if (mn) mn.setAttribute("href", templatesBrowseHref);
     } else {
-      var q = new URLSearchParams({ file: file, category: category });
-      if (pages) q.set("pages", pages);
-      q.set("method", "ai");
-      if (ai) ai.setAttribute("href", "create-document.html#/create-document/draft?" + q.toString());
       var manualParams = new URLSearchParams();
       manualParams.set("category", category);
       manualParams.set("file", file);
       if (pages) manualParams.set("pages", pages);
+      if (ai) ai.setAttribute("href", "generate-ai.html?" + manualParams.toString());
       if (mn) mn.setAttribute("href", "document-manual-fill.html?" + manualParams.toString());
     }
   }
@@ -1174,13 +1180,54 @@
     if (bodyEl && draft.body) bodyEl.value = draft.body;
   }
 
+  /**
+   * Absolute origin for POST /documents/generate (FastAPI). Returns null when the site is
+   * deployed but no public API is configured (GitHub Pages cannot reach localhost).
+   */
   function getDocGenApiBase() {
-    if (typeof window.__WB_DOC_GEN_API__ === "string" && window.__WB_DOC_GEN_API__.trim()) {
-      return window.__WB_DOC_GEN_API__.trim().replace(/\/$/, "");
+    function normalize(raw) {
+      if (typeof raw !== "string") return null;
+      var t = raw.trim().replace(/\/$/, "");
+      if (!t || t === "/") return null;
+      return t;
     }
+
+    var hNow = window.location.hostname || "";
+    var isLocalDev =
+      hNow === "localhost" || hNow === "127.0.0.1" || hNow === "[::1]";
+
+    function rejectLoopbackOnDeploy(urlStr) {
+      if (isLocalDev) return false;
+      return /^http:\/\/(localhost|127\.0\.0\.1)\b/i.test(urlStr);
+    }
+
+    var w = normalize(typeof window.__WB_DOC_GEN_API__ === "string" ? window.__WB_DOC_GEN_API__ : "");
+    if (w) {
+      if (rejectLoopbackOnDeploy(w)) return null;
+      if (/^https?:\/\//i.test(w)) return w;
+      try {
+        var uw = new URL(w, window.location.href);
+        return uw.origin + uw.pathname.replace(/\/$/, "") + (uw.search || "");
+      } catch (e1) {
+        return null;
+      }
+    }
+
     var m = document.querySelector('meta[name="wb-doc-gen-api"]');
-    if (m && m.getAttribute("content")) return m.getAttribute("content").trim().replace(/\/$/, "");
-    return "http://localhost:8000";
+    var fromMeta = normalize(m ? m.getAttribute("content") || "" : "");
+    if (fromMeta) {
+      if (rejectLoopbackOnDeploy(fromMeta)) return null;
+      if (/^https?:\/\//i.test(fromMeta)) return fromMeta;
+      try {
+        var u = new URL(fromMeta, window.location.href);
+        return u.origin + u.pathname.replace(/\/$/, "") + (u.search || "");
+      } catch (e2) {
+        return null;
+      }
+    }
+
+    if (isLocalDev) return "http://localhost:8000";
+    return null;
   }
 
   function inferDocumentTypeForTemplate(category, file) {
@@ -1460,6 +1507,101 @@
     }
   }
 
+  function bindGenerateAiPage() {
+    var root = document.querySelector("[data-gen-ai-root]");
+    if (!root || root.getAttribute("data-gen-ai-ready") === "1") return;
+    root.setAttribute("data-gen-ai-ready", "1");
+    var params = new URLSearchParams(window.location.search.replace(/^\?/, ""));
+    var cat = (params.get("category") || "").trim();
+    var file = (params.get("file") || "").trim();
+    var pages = params.get("pages");
+    if (!cat || !file) {
+      window.location.replace(
+        cat ? "document-method.html?category=" + encodeURIComponent(cat) : "document-category.html"
+      );
+      return;
+    }
+
+    var shortName = humanizeMethodTemplateLabel(file);
+    var fileEl = root.querySelector("[data-gen-ai-file]");
+    if (fileEl) fileEl.textContent = file;
+    document.title = shortName + " — AI draft — Workbench HR";
+
+    var lede = root.querySelector("[data-gen-ai-lede]");
+    if (lede) {
+      lede.textContent =
+        "Template selected: " +
+        file +
+        ". Use the assistant to describe what you want in the document (demonstration — no live model).";
+    }
+
+    var methodParams = new URLSearchParams();
+    methodParams.set("category", cat);
+    methodParams.set("file", file);
+    if (pages) methodParams.set("pages", pages);
+    var qs = methodParams.toString();
+
+    var tplCrumb = document.querySelector("[data-gen-ai-crumb-templates]");
+    var methodCrumb = document.querySelector("[data-gen-ai-crumb-method]");
+    if (tplCrumb) tplCrumb.setAttribute("href", "document-templates.html?category=" + encodeURIComponent(cat));
+    if (methodCrumb) methodCrumb.setAttribute("href", "document-method.html?" + qs);
+
+    var back = root.querySelector("[data-gen-ai-back]");
+    if (back) back.setAttribute("href", "document-method.html?" + qs);
+
+    var manualAlt = root.querySelector("[data-gen-ai-manual-alt]");
+    if (manualAlt) manualAlt.setAttribute("href", "document-manual-fill.html?" + qs);
+
+    var messagesEl = root.querySelector("[data-gen-ai-messages]");
+    var inputEl = root.querySelector("[data-gen-ai-input]");
+    var formEl = root.querySelector("[data-gen-ai-form]");
+
+    function appendBubble(role, text) {
+      if (!messagesEl) return;
+      var wrap = document.createElement("div");
+      wrap.className =
+        "wb-gen-ai__msg wb-gen-ai__msg--" + (role === "user" ? "user" : "bot");
+      var p = document.createElement("p");
+      p.className = "wb-gen-ai__msg-text";
+      p.textContent = text;
+      wrap.appendChild(p);
+      messagesEl.appendChild(wrap);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function demoReply(userText) {
+      var lower = (userText || "").toLowerCase();
+      if (/offer|hire|salary|comp|start date/.test(lower)) {
+        return "I can structure this as an offer letter: start date, compensation, benefits summary, and reporting line. In production, this would fill the preview on the left. Want a more formal or conversational tone?";
+      }
+      if (/termin|lay off|separation|let go|fire/.test(lower)) {
+        return "For a separation notice, I’d confirm last day, final pay timing, and return of equipment. Share jurisdiction or policy constraints if you need them reflected (demo only).";
+      }
+      if (/thanks|ok|yes|sounds good/.test(lower)) {
+        return "Great. Add any must-have phrases or names, and we’ll shape the next draft (preview only in this demo).";
+      }
+      return "Got it. Give a bit more context — audience, dates, and what outcome you want from this document — and I’ll mirror that in a real integrated flow.";
+    }
+
+    function send() {
+      var text = (inputEl && inputEl.value) || "";
+      text = text.trim();
+      if (!text) return;
+      appendBubble("user", text);
+      if (inputEl) inputEl.value = "";
+      window.setTimeout(function () {
+        appendBubble("bot", demoReply(text));
+      }, 450);
+    }
+
+    if (formEl) {
+      formEl.addEventListener("submit", function (e) {
+        e.preventDefault();
+        send();
+      });
+    }
+  }
+
   function bindDocumentReviewPage() {
     var root = document.querySelector("[data-doc-review-root]");
     if (!root || root.getAttribute("data-doc-review-ready") === "1") return;
@@ -1626,7 +1768,19 @@
 
       aiBtn.disabled = true;
 
-      fetchDocGenConfig(apiBase)
+      if (!apiBase) {
+        fillDocGenTypeSelect(aiSelect, DOC_GEN_FALLBACK_TYPES, inferred);
+        aiGenReady = false;
+        aiBtn.disabled = true;
+        showAiError(
+          "Document API URL is not set for this deployment. GitHub Pages cannot call localhost. Add " +
+            '<meta name="wb-doc-gen-api" content="https://YOUR-API.example.com"> ' +
+            "(your deployed FastAPI origin, no trailing slash), or set window.__WB_DOC_GEN_API__. " +
+            "Then allow this site in the API CORS ALLOWED_ORIGINS."
+        );
+        setHint("Example: https://workbench-ai.onrender.com — same URL you use for https://…/health.");
+      } else {
+        fetchDocGenConfig(apiBase)
         .then(function (cfg) {
           showAiError("");
           var types = (cfg && cfg.doc_types) || [];
@@ -1654,15 +1808,28 @@
           showAiError(
             "Could not reach /documents/config at " +
               apiBase +
-              " — using built-in document types. Ensure the API is running and ALLOWED_ORIGINS includes this site (e.g. http://127.0.0.1:5500)."
+              " — using built-in document types. " +
+              "If the API is on another host, set CORS ALLOWED_ORIGINS to include " +
+              (window.location.origin || "this site") +
+              (window.location.host && window.location.host.indexOf("github.io") !== -1
+                ? " (project pages: https://user.github.io and https://user.github.io/repo-name)."
+                : ".")
           );
           setHint(
             "Config request failed (often CORS or wrong API URL in meta wb-doc-gen-api). You can still try Generate."
           );
         });
 
+      }
+
       aiBtn.addEventListener("click", function () {
         showAiError("");
+        if (!apiBase) {
+          showAiError(
+            "Set your deployed API URL in meta wb-doc-gen-api (HTTPS). GitHub Pages cannot use localhost."
+          );
+          return;
+        }
         var docType = aiSelect.value;
         if (!docType) return;
         var employee = buildEmployeeForDocGen(docType, fields);
@@ -1978,6 +2145,7 @@
         key === "/document-category" ||
         key === "/document-method" ||
         key === "/document-manual-fill" ||
+        key === "/generate-ai" ||
         key === "/document-review"
           ? " wb-dash__main--documents"
           : "") +
@@ -1990,6 +2158,7 @@
     if (key === "/create-document/method") updateMethodPage(search);
     if (key === "/document-method") bindDocumentMethodPage();
     if (key === "/document-manual-fill") bindDocumentManualFillPage();
+    if (key === "/generate-ai") bindGenerateAiPage();
     if (key === "/document-review") bindDocumentReviewPage();
     if (key === "/documents") bindDocumentsSavedIncoming(search);
     if (key === "/create-document/draft") updateDraftPage(search);
@@ -2004,12 +2173,17 @@
     });
 
     var inCreateDocFlow =
-      pathname.indexOf("/create-document/") === 0 &&
-      pathname !== "/create-document/category" &&
-      pathname !== "/create-document/template" &&
-      pathname !== "/document-category";
+      pathname === "/document-templates" ||
+      pathname === "/document-method" ||
+      pathname === "/document-manual-fill" ||
+      pathname === "/generate-ai" ||
+      pathname === "/document-review" ||
+      (pathname.indexOf("/create-document/") === 0 &&
+        pathname !== "/create-document/category" &&
+        pathname !== "/create-document/template" &&
+        pathname !== "/document-category");
     document.querySelectorAll(
-      'a.wb-dash__btn--primary[href*="create-document"], a.wb-dash__btn--primary[href*="document-category"], a.wb-dash__btn--primary[href*="document-templates"], a.wb-dash__btn--primary[href*="document-method"], a.wb-dash__btn--primary[href*="document-manual-fill"], a.wb-dash__btn--primary[href*="document-review"]'
+      'a.wb-dash__btn--primary[href*="create-document"], a.wb-dash__btn--primary[href*="document-category"], a.wb-dash__btn--primary[href*="document-templates"], a.wb-dash__btn--primary[href*="document-method"], a.wb-dash__btn--primary[href*="document-manual-fill"], a.wb-dash__btn--primary[href*="generate-ai"], a.wb-dash__btn--primary[href*="document-review"]'
     ).forEach(function (a) {
       a.classList.toggle("wb-dash__btn--create-flow", inCreateDocFlow);
     });
@@ -2162,6 +2336,12 @@
 
     if (isDocumentReviewHtmlDoc() && parsed.kind === "marketing") {
       showWorkspacePage("/document-review", "");
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    if (isGenerateAiHtmlDoc() && parsed.kind === "marketing") {
+      showWorkspacePage("/generate-ai", "");
       window.scrollTo(0, 0);
       return;
     }
@@ -2426,6 +2606,48 @@
       }
       if (pathname === "/document-review") {
         showWorkspacePage("/document-review", search);
+        window.scrollTo(0, 0);
+        return;
+      }
+      window.location.replace("index.html" + (window.location.hash || "#/"));
+      return;
+    }
+
+    if (isGenerateAiHtmlDoc() && parsed.kind === "path") {
+      if (isDashboardHubPath(pathname)) {
+        window.location.replace("dashboard.html" + (window.location.hash || "#/dashboard"));
+        return;
+      }
+      if (isSettingsHubPath(pathname)) {
+        window.location.replace("settings.html" + (window.location.hash || "#/settings/profile"));
+        return;
+      }
+      if (isApplicantsPath(pathname)) {
+        window.location.replace("applicants.html" + (window.location.hash || "#/applicants"));
+        return;
+      }
+      if (isViewApplicantPath(pathname)) {
+        window.location.replace("viewapplicant.html" + (window.location.hash || "#/view-applicant"));
+        return;
+      }
+      if (isHiringPath(pathname)) {
+        window.location.replace("hiring.html" + (window.location.hash || "#/hiring"));
+        return;
+      }
+      if (isDocumentsPath(pathname)) {
+        window.location.replace("documents.html" + (window.location.hash || "#/documents"));
+        return;
+      }
+      if (isEmployeesPath(pathname)) {
+        window.location.replace("employees.html" + (window.location.hash || "#/employees"));
+        return;
+      }
+      if (isCreateDocumentPath(pathname)) {
+        window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      if (pathname === "/generate-ai") {
+        showWorkspacePage("/generate-ai", search);
         window.scrollTo(0, 0);
         return;
       }
@@ -2874,21 +3096,130 @@
   }
 
   function bindAuthForms() {
+    function authApiBase() {
+      var loc = window.location;
+      if (loc.protocol === "file:" || !loc.hostname) {
+        return "http://127.0.0.1:3847/api";
+      }
+      return loc.origin + "/api";
+    }
+
+    function setAuthError(form, message) {
+      var root = form.closest(".wb-split__inner") || form.parentElement;
+      var err = root ? root.querySelector("[data-auth-error]") : null;
+      if (!err) return;
+      if (message) {
+        err.textContent = message;
+        err.hidden = false;
+      } else {
+        err.textContent = "";
+        err.hidden = true;
+      }
+    }
+
+    function readJsonSafe(res) {
+      return res.text().then(function (t) {
+        try {
+          return JSON.parse(t);
+        } catch (e) {
+          return null;
+        }
+      });
+    }
+
     document.querySelectorAll("[data-static-auth-form]").forEach(function (form) {
       form.addEventListener("submit", function (e) {
-        if (form.closest('[data-static-view="signup"]')) {
-          e.preventDefault();
-          window.location.hash = "#/onboarding/goal";
-          return;
-        }
-        if (form.closest('[data-static-view="login"]')) {
-          e.preventDefault();
-          window.location.replace("dashboard.html#/dashboard");
-          return;
-        }
         e.preventDefault();
-        var msg = form.querySelector("[data-static-auth-msg]");
-        if (msg) msg.hidden = false;
+        setAuthError(form, "");
+
+        if (!form.reportValidity()) return;
+
+        var fd = new FormData(form);
+        var username = String(fd.get("username") || "").trim();
+        var password = String(fd.get("password") || "");
+        if (!username || !password) {
+          setAuthError(form, "Please enter both username and password.");
+          return;
+        }
+
+        var submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.disabled = true;
+
+        var base = authApiBase();
+        var isSignup = !!form.closest('[data-static-view="signup"]');
+
+        if (isSignup) {
+          var body = {
+            username: username,
+            password: password,
+            name: String(fd.get("name") || "").trim(),
+            company: String(fd.get("company") || "").trim(),
+          };
+          fetch(base + "/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          })
+            .then(function (res) {
+              return readJsonSafe(res).then(function (data) {
+                return { res: res, data: data };
+              });
+            })
+            .then(function (x) {
+              if (x.res.ok && x.data && x.data.ok) {
+                window.location.hash = "#/onboarding/goal";
+                return;
+              }
+              var msg =
+                (x.data && x.data.error) ||
+                (x.res.status === 0
+                  ? "Could not reach the server. Run npm start in the project folder and use the printed URL."
+                  : "Could not create account.");
+              setAuthError(form, msg);
+            })
+            .catch(function () {
+              setAuthError(
+                form,
+                "Could not reach the server. Run npm start in the project folder and use the printed URL."
+              );
+            })
+            .finally(function () {
+              if (submitBtn) submitBtn.disabled = false;
+            });
+          return;
+        }
+
+        fetch(base + "/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: username, password: password }),
+        })
+          .then(function (res) {
+            return readJsonSafe(res).then(function (data) {
+              return { res: res, data: data };
+            });
+          })
+          .then(function (x) {
+            if (x.res.ok && x.data && x.data.ok) {
+              window.location.replace("dashboard.html#/dashboard");
+              return;
+            }
+            var msg =
+              (x.data && x.data.error) ||
+              (x.res.status === 0
+                ? "Could not reach the server. Run npm start in the project folder and use the printed URL."
+                : "Sign-in failed.");
+            setAuthError(form, msg);
+          })
+          .catch(function () {
+            setAuthError(
+              form,
+              "Could not reach the server. Run npm start in the project folder and use the printed URL."
+            );
+          })
+          .finally(function () {
+            if (submitBtn) submitBtn.disabled = false;
+          });
       });
     });
   }

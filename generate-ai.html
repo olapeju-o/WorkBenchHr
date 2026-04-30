@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Review document — Workbench HR</title>
+    <title>AI document draft — Workbench HR</title>
     <link rel="icon" href="assets/logo.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,8 +12,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!-- Leave empty for local dev (defaults to http://localhost:8000). For GitHub Pages, set your deployed FastAPI HTTPS origin (no trailing slash). -->
-    <meta name="wb-doc-gen-api" content="" />
   </head>
   <body>
     <div class="wb-app" data-static-view="workspace" hidden>
@@ -78,25 +76,21 @@
           </div>
         </aside>
 
-        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/document-review" hidden>
+        <main class="wb-dash__main wb-dash__main--documents" data-ws-main="/generate-ai" hidden>
           <header class="wb-dash__header">
             <div class="wb-dash__header-lead">
               <nav class="wb-create-doc__crumbs" aria-label="Breadcrumb">
                 <a href="document-category.html" class="wb-create-doc__crumb-link">Create Document</a>
                 <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <a href="document-templates.html" class="wb-create-doc__crumb-link" data-review-crumb-templates
+                <a href="document-templates.html" class="wb-create-doc__crumb-link" data-gen-ai-crumb-templates
                   >Select template</a
                 >
                 <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <a href="document-method.html" class="wb-create-doc__crumb-link" data-review-crumb-method
+                <a href="document-method.html" class="wb-create-doc__crumb-link" data-gen-ai-crumb-method
                   >Document method</a
                 >
                 <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <a href="document-manual-fill.html" class="wb-create-doc__crumb-link" data-review-crumb-fill"
-                  >Manual fill</a
-                >
-                <span class="wb-create-doc__crumb-sep" aria-hidden="true"> &gt; </span>
-                <span class="wb-create-doc__crumb-current">Review</span>
+                <span class="wb-create-doc__crumb-current">AI draft</span>
               </nav>
             </div>
             <div class="wb-dash__header-actions">
@@ -116,89 +110,104 @@
             </div>
           </header>
 
-          <section class="wb-doc-review" data-doc-review-root>
-            <div class="wb-doc-review__head">
-              <h1 class="wb-doc-review__title" id="doc-review-heading">Review document</h1>
-              <p class="wb-doc-review__lede" data-review-lede>
-                Confirm your template with the short answers applied before saving or sharing.
+          <section class="wb-manual-fill wb-gen-ai" data-gen-ai-root aria-labelledby="gen-ai-heading">
+            <div class="wb-manual-fill__head">
+              <h1 class="wb-manual-fill__title" id="gen-ai-heading" data-gen-ai-title>AI draft (demo)</h1>
+              <p class="wb-manual-fill__lede" data-gen-ai-lede>
+                Describe what you need in the assistant. The preview on the left updates in a real build; this flow is
+                for demonstration.
               </p>
-              <p class="wb-doc-review__meta">
-                <span class="wb-doc-review__meta-label">Template</span>
-                <span class="wb-doc-review__meta-value" data-review-file></span>
+              <p class="wb-manual-fill__file" data-gen-ai-file-label>
+                Template file: <span data-gen-ai-file></span>
               </p>
             </div>
 
-            <div class="wb-doc-review__viewer-wrap">
-              <p class="wb-doc-review__viewer-caption" data-review-viewer-caption>Preview — not a generated PDF yet</p>
-              <div class="wb-doc-review__viewer">
-                <div class="wb-doc-review__viewer-bg">
-                  <div class="wb-doc-review__page">
-                    <div class="wb-doc-review__letterhead">
-                      <span class="wb-doc-review__logo-mark" aria-hidden="true"></span>
-                      <div class="wb-doc-review__letterhead-text">
-                        <span>Workbench HR</span>
-                        <span class="wb-doc-review__letterhead-sub">Human Resources</span>
+            <div class="wb-manual-fill__layout">
+              <div class="wb-manual-fill__col wb-manual-fill__col--doc">
+                <p class="wb-manual-fill__col-tag">Document preview</p>
+                <div class="wb-manual-fill__viewer" aria-label="Document preview">
+                  <div class="wb-manual-fill__viewer-bg">
+                    <div class="wb-manual-fill__page">
+                      <div class="wb-manual-fill__letterhead">
+                        <span class="wb-manual-fill__logo-mark" aria-hidden="true"></span>
+                        <div class="wb-manual-fill__letterhead-text">
+                          <span>Workbench HR</span>
+                          <span class="wb-manual-fill__letterhead-sub">Human Resources</span>
+                        </div>
                       </div>
+                      <div class="wb-manual-fill__meta-lines">
+                        <p class="wb-manual-fill__meta-line"><span>April 29, 2026</span></p>
+                        <p class="wb-manual-fill__meta-line"><strong>To:</strong> <span>Candidate name</span></p>
+                        <p class="wb-manual-fill__meta-line"><strong>Role:</strong> <span>Role title</span></p>
+                        <p class="wb-manual-fill__meta-line"><strong>Department:</strong> <span>Department</span></p>
+                        <p class="wb-manual-fill__meta-line">
+                          <strong>Start:</strong> <span>Start date</span>
+                          · <strong>Comp:</strong> <span>Compensation</span>
+                        </p>
+                        <p class="wb-manual-fill__meta-line"><strong>Manager:</strong> <span>Hiring manager</span></p>
+                      </div>
+                      <label class="wb-manual-fill__editor-label" for="gen-ai-preview-body">Draft body (preview)</label>
+                      <textarea
+                        id="gen-ai-preview-body"
+                        class="wb-manual-fill__editor wb-gen-ai__preview-editor"
+                        rows="14"
+                        readonly
+                        spellcheck="false"
+                      >Dear [Candidate name],
+
+Thank you for your patience. Below is a placeholder draft — your conversation with the assistant on the right will shape the final wording in a connected experience.
+
+We are pleased to continue the conversation regarding your role and next steps.
+
+Sincerely,
+Workbench HR</textarea>
+                      <p class="wb-manual-fill__page-num" aria-hidden="true">Page 1 of 1</p>
                     </div>
-                    <div class="wb-doc-review__meta-lines">
-                      <p class="wb-doc-review__meta-line"><span data-review-slot="letterDate">—</span></p>
-                      <p class="wb-doc-review__meta-line">
-                        <strong>To:</strong> <span data-review-slot="candidateName">—</span>
-                      </p>
-                      <p class="wb-doc-review__meta-line">
-                        <strong>Role:</strong> <span data-review-slot="roleTitle">—</span>
-                      </p>
-                      <p class="wb-doc-review__meta-line">
-                        <strong>Department:</strong> <span data-review-slot="department">—</span>
-                      </p>
-                      <p class="wb-doc-review__meta-line">
-                        <strong>Start:</strong> <span data-review-slot="startDate">—</span>
-                        · <strong>Comp:</strong> <span data-review-slot="compensation">—</span>
-                      </p>
-                      <p class="wb-doc-review__meta-line">
-                        <strong>Manager:</strong> <span data-review-slot="hiringManager">—</span>
-                      </p>
-                    </div>
-                    <div class="wb-doc-review__body-label">Document body</div>
-                    <div class="wb-doc-review__body" data-review-body></div>
-                    <p class="wb-doc-review__page-num" aria-hidden="true">Page 1 of 1</p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="wb-doc-review__ai-panel" data-review-ai-panel>
-              <p class="wb-doc-review__ai-title">AI document generation</p>
-              <p class="wb-doc-review__ai-desc">
-                Fills the document body using your team&rsquo;s WorkbenchAI backend
-                (<code>POST /documents/generate</code>). Configure the API origin via
-                <code>&lt;meta name=&quot;wb-doc-gen-api&quot;&gt;</code> or
-                <code>window.__WB_DOC_GEN_API__</code> (defaults to <code>http://localhost:8000</code>).
-              </p>
-              <div class="wb-doc-review__ai-row">
-                <label class="wb-doc-review__ai-label" for="wb-doc-gen-type">Document type</label>
-                <select
-                  id="wb-doc-gen-type"
-                  class="wb-select wb-doc-review__ai-select"
-                  data-review-ai-doctype-select
-                  aria-describedby="wb-doc-gen-type-hint"
-                ></select>
-                <button type="button" class="wb-btn wb-btn--primary" data-review-ai-generate disabled>Generate with AI</button>
+              <div class="wb-manual-fill__col wb-manual-fill__col--form">
+                <p class="wb-manual-fill__col-tag">AI assistant</p>
+                <div class="wb-gen-ai__chat" aria-label="AI assistant (demo)">
+                  <div class="wb-gen-ai__chat-head">
+                    <span class="wb-gen-ai__chat-head-title">Draft assistant</span>
+                    <span class="wb-gen-ai__chat-head-badge">Demo</span>
+                  </div>
+                  <div class="wb-gen-ai__messages" data-gen-ai-messages tabindex="0">
+                    <div class="wb-gen-ai__msg wb-gen-ai__msg--bot">
+                      <p class="wb-gen-ai__msg-text">
+                        Hi — what would you like this document to accomplish? For example: tone (formal / friendly),
+                        key dates, salary framing, or policy constraints.
+                      </p>
+                    </div>
+                  </div>
+                  <form class="wb-gen-ai__composer" data-gen-ai-form>
+                    <label class="visually-hidden" for="gen-ai-input">Message the assistant</label>
+                    <textarea
+                      id="gen-ai-input"
+                      class="wb-gen-ai__input"
+                      data-gen-ai-input
+                      rows="3"
+                      placeholder="Describe what you’d like the letter to say…"
+                      autocomplete="off"
+                    ></textarea>
+                    <div class="wb-gen-ai__composer-actions">
+                      <button type="submit" class="wb-btn wb-btn--primary" data-gen-ai-send>Send</button>
+                    </div>
+                  </form>
+                </div>
+                <p class="wb-gen-ai__fine-print">
+                  Demonstration only — messages are not sent to a live model in this preview.
+                </p>
               </div>
-              <p class="wb-doc-review__ai-hint" id="wb-doc-gen-type-hint" data-review-ai-hint>
-                Loading document types from the API…
-              </p>
-              <span class="wb-doc-review__ai-status" data-review-ai-status hidden></span>
-              <p class="wb-doc-review__ai-error" data-review-ai-error hidden></p>
             </div>
 
-            <p class="wb-doc-review__toast" data-review-toast hidden role="status" aria-live="polite"></p>
-
-            <div class="wb-doc-review__actions">
-              <a href="document-manual-fill.html" class="wb-btn wb-btn--muted" data-review-back>← Back to edit</a>
-              <button type="button" class="wb-btn wb-btn--outline" data-review-save>Save document</button>
-              <button type="button" class="wb-btn wb-btn--outline" data-review-share>Share</button>
-              <a href="documents.html#/documents" class="wb-btn wb-btn--primary" data-review-library>Open Documents library</a>
+            <div class="wb-manual-fill__footer">
+              <a href="document-method.html" class="wb-btn wb-btn--muted" data-gen-ai-back>← Back</a>
+              <a href="document-manual-fill.html" class="wb-btn wb-btn--outline" data-gen-ai-manual-alt
+                >Fill manually instead</a
+              >
             </div>
           </section>
         </main>

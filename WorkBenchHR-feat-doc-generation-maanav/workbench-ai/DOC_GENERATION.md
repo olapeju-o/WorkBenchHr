@@ -13,11 +13,12 @@ FastAPI service used by the main Workbench HR static site on **document-review**
    uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-3. **CORS:** Add every origin that serves the HTML app to `ALLOWED_ORIGINS` (comma-separated, no spaces required). Opening HTML via `file://` does not send a reliable Origin header for CORS—serve the site over `http://localhost` (or similar) instead.
+3. **CORS:** Add every origin that serves the HTML app to `ALLOWED_ORIGINS` (comma-separated). For **GitHub Pages**, include the full site origin, e.g. `https://username.github.io` (user site) or `https://username.github.io/repo-name` (project site). `file://` does not send a reliable `Origin` for CORS.
 
 ## Frontend configuration
 
-- Default API base: `http://localhost:8000` via `<meta name="wb-doc-gen-api" content="http://localhost:8000" />` on `document-review.html`.
-- Override globally with `window.__WB_DOC_GEN_API__ = "https://your-api.example.com"` before `app.js` loads.
+- In `document-review.html`, set `<meta name="wb-doc-gen-api" content="https://your-deployed-api.example.com" />` (no trailing slash). Empty `content` uses `http://localhost:8000` only when the page is served from `localhost` / `127.0.0.1`.
+- Deployed static hosts (e.g. GitHub Pages) **cannot** call `localhost`; the API must be on a public `https://` host.
+- Override with `window.__WB_DOC_GEN_API__ = "https://your-api.example.com"` before `app.js` loads.
 
 The React demo under `frontend/` proxies `/api` to this server; the static site talks to `/documents/*` directly on the configured base URL.
