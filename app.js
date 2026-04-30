@@ -1174,6 +1174,177 @@
     if (bodyEl && draft.body) bodyEl.value = draft.body;
   }
 
+  function getDocGenApiBase() {
+    if (typeof window.__WB_DOC_GEN_API__ === "string" && window.__WB_DOC_GEN_API__.trim()) {
+      return window.__WB_DOC_GEN_API__.trim().replace(/\/$/, "");
+    }
+    var m = document.querySelector('meta[name="wb-doc-gen-api"]');
+    if (m && m.getAttribute("content")) return m.getAttribute("content").trim().replace(/\/$/, "");
+    return "http://localhost:8000";
+  }
+
+  function inferDocumentTypeForTemplate(category, file) {
+    var f = (file || "").toLowerCase();
+    if (/offer|full[_\s-]?time[_\s-]?offer/.test(f)) return "offer_letter";
+    if (/separation|layoff|downsiz|riff|redundan/.test(f)) return "termination_layoff";
+    if (/misconduct|disciplin/.test(f)) return "termination_misconduct";
+    if (/pip|poor[_\s-]?performance|performance[_\s-]?termin/.test(f)) return "termination_poor_performance";
+    if (/termin/.test(f)) return "termination_layoff";
+    if ((category || "").toLowerCase() === "company" && /standard_full_time_offer/.test(f.replace(/[^a-z0-9]+/gi, "_"))) {
+      return "offer_letter";
+    }
+    return "offer_letter";
+  }
+
+  function stringField(v) {
+    if (v == null) return "";
+    return String(v).slice(0, 2000);
+  }
+
+  function buildEmployeeForDocGen(docType, fields) {
+    var f = fields || {};
+    var out = {};
+    if (docType === "offer_letter") {
+      out.employee_name = stringField(f.candidateName);
+      out.employee_address = stringField(f.employeeAddress);
+      out.job_title = stringField(f.roleTitle);
+      out.company_name = stringField(f.companyName);
+      out.salary = stringField(f.compensation);
+      out.pay_frequency = stringField(f.payFrequency) || "annual";
+      out.employment_type = stringField(f.employmentType) || "full-time";
+      out.location = stringField(f.location) || stringField(f.department);
+      out.benefits = stringField(f.benefits);
+      if (!out.benefits && f.internalNotes) out.benefits = stringField(f.internalNotes).slice(0, 500);
+      out.offer_expiry_date = stringField(f.offerExpiry);
+      out.manager_name = stringField(f.hiringManager);
+      out.current_date = stringField(f.letterDate);
+      return out;
+    }
+
+    out.employee_name = stringField(f.candidateName);
+    out.employee_address = stringField(f.employeeAddress);
+    out.job_title = stringField(f.roleTitle);
+    out.department = stringField(f.department);
+    out.company_name = stringField(f.companyName);
+    out.manager_name = stringField(f.hiringManager);
+    out.manager_title = stringField(f.managerTitle) || "HR Manager";
+    out.termination_date = stringField(f.terminationDate) || stringField(f.startDate);
+    out.final_pay_date = stringField(f.finalPayDate);
+    out.company_property = stringField(f.companyProperty) || "keys, badge, and laptop";
+    out.hr_contact = stringField(f.hrContact) || "HR";
+    out.hr_email = stringField(f.hrEmail) || "hr@company.com";
+    out.current_date = stringField(f.letterDate);
+
+    if (docType === "termination_layoff") {
+      out.layoff_reason = stringField(f.internalNotes) || "organizational restructuring";
+      out.severance_amount = stringField(f.compensation) || "per company policy";
+      out.severance_details = stringField(f.severanceDetails) || "per separation agreement";
+      out.return_date = stringField(f.returnDate) || out.termination_date;
+      out.benefits_end_date = stringField(f.benefitsEndDate);
+    }
+    if (docType === "termination_misconduct") {
+      out.termination_reason = stringField(f.internalNotes) || "policy violations";
+      out.misconduct_issues = stringField(f.misconductIssues) || "workplace conduct standards";
+      out.counseling_dates = stringField(f.counselingDates) || "prior meetings";
+      out.warning_date = stringField(f.warningDate) || "recent";
+      out.misconduct_detail = stringField(f.misconductDetail) || "documented concerns";
+    }
+    if (docType === "termination_poor_performance") {
+      out.warning_dates = stringField(f.warningDates) || "prior discussions";
+      var notes = stringField(f.internalNotes);
+      var lines = notes ? notes.split(/\r?\n/).filter(Boolean) : [];
+      out.performance_issue_1 = stringField(f.performanceIssue1) || lines[0] || "performance expectations";
+      out.performance_issue_2 = stringField(f.performanceIssue2) || lines[1] || "ongoing improvement goals";
+      out.performance_issue_3 = stringField(f.performanceIssue3) || lines[2] || "feedback sessions";
+      out.benefits_end_date = stringField(f.benefitsEndDate);
+    }
+    return out;
+  }
+
+  function fetchDocGenConfig(base) {
+    return fetch(base + "/documents/config", { credentials: "omit" }).then(function (r) {
+      return r.text().then(function (t) {
+        var data = {};
+        try {
+          data = t ? JSON.parse(t) : {};
+        } catch (e) {
+          if (!r.ok) throw new Error(t ? t.slice(0, 240) : "Config request failed");
+          return {};
+        }
+        if (!r.ok) {
+          var msg = "Config failed";
+          if (data.detail) {
+            if (typeof data.detail === "string") msg = data.detail;
+            else if (Array.isArray(data.detail))
+              msg = data.detail
+                .map(function (x) {
+                  return x && x.msg ? x.msg : "";
+                })
+                .filter(Boolean)
+                .join("; ");
+          }
+          throw new Error(msg);
+        }
+        return data;
+      });
+    });
+  }
+
+  /** Mirrors backend routes/documents.py when /documents/config is unreachable. */
+  var DOC_GEN_FALLBACK_TYPES = [
+    { value: "offer_letter", label: "Offer Letter" },
+    { value: "termination_misconduct", label: "Termination — Misconduct" },
+    { value: "termination_poor_performance", label: "Termination — Poor Performance" },
+    { value: "termination_layoff", label: "Termination — Layoff" },
+  ];
+
+  function fillDocGenTypeSelect(aiSelect, types, inferred) {
+    aiSelect.innerHTML = "";
+    for (var i = 0; i < types.length; i++) {
+      var dt = types[i];
+      var opt = document.createElement("option");
+      opt.value = dt.value;
+      opt.textContent = dt.label || dt.value;
+      if (dt.value === inferred) opt.selected = true;
+      aiSelect.appendChild(opt);
+    }
+    if (!aiSelect.value && types.length) aiSelect.selectedIndex = 0;
+  }
+
+  function postDocGenGenerate(base, document_type, employee) {
+    return fetch(base + "/documents/generate", {
+      method: "POST",
+      credentials: "omit",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ document_type: document_type, employee: employee }),
+    }).then(function (r) {
+      return r.text().then(function (t) {
+        var data = {};
+        try {
+          data = t ? JSON.parse(t) : {};
+        } catch (e) {
+          if (!r.ok) throw new Error(t ? t.slice(0, 240) : "Generation failed");
+          return {};
+        }
+        if (!r.ok) {
+          var msg = "Generation failed";
+          if (data.detail) {
+            if (typeof data.detail === "string") msg = data.detail;
+            else if (Array.isArray(data.detail))
+              msg = data.detail
+                .map(function (x) {
+                  return x && x.msg ? x.msg : "";
+                })
+                .filter(Boolean)
+                .join("; ");
+          }
+          throw new Error(msg);
+        }
+        return data;
+      });
+    });
+  }
+
   function bindDocumentManualFillPage() {
     var root = document.querySelector("[data-manual-fill-root]");
     if (!root || root.getAttribute("data-manual-fill-ready") === "1") return;
@@ -1416,6 +1587,101 @@
         } else {
           showReviewToast("Sharing isn’t available in this browser.");
         }
+      });
+    }
+
+    var apiBase = getDocGenApiBase();
+    var aiPanel = root.querySelector("[data-review-ai-panel]");
+    var aiSelect = root.querySelector("[data-review-ai-doctype-select]");
+    var aiBtn = root.querySelector("[data-review-ai-generate]");
+    var aiStatus = root.querySelector("[data-review-ai-status]");
+    var aiErr = root.querySelector("[data-review-ai-error]");
+    var aiHint = root.querySelector("[data-review-ai-hint]");
+    var capEl = root.querySelector("[data-review-viewer-caption]");
+
+    function showAiError(msg) {
+      if (!aiErr) return;
+      aiErr.textContent = msg || "";
+      aiErr.hidden = !msg;
+    }
+
+    if (aiPanel && aiSelect && aiBtn) {
+      var inferred = inferDocumentTypeForTemplate(cat, file);
+      var aiGenReady = false;
+
+      function setHint(text) {
+        if (aiHint) aiHint.textContent = text;
+      }
+
+      function setAiLoading(on) {
+        if (aiBtn) {
+          if (on) aiBtn.disabled = true;
+          else aiBtn.disabled = !aiGenReady;
+        }
+        if (aiStatus) {
+          aiStatus.hidden = !on;
+          aiStatus.textContent = on ? "Generating…" : "";
+        }
+      }
+
+      aiBtn.disabled = true;
+
+      fetchDocGenConfig(apiBase)
+        .then(function (cfg) {
+          showAiError("");
+          var types = (cfg && cfg.doc_types) || [];
+          fillDocGenTypeSelect(aiSelect, types, inferred);
+          setHint(
+            'Mapped from template to "' +
+              (aiSelect.options[aiSelect.selectedIndex] &&
+                aiSelect.options[aiSelect.selectedIndex].textContent) +
+              '". Choose another type if needed.'
+          );
+          if (!types.length) {
+            fillDocGenTypeSelect(aiSelect, DOC_GEN_FALLBACK_TYPES, inferred);
+            aiGenReady = true;
+            aiBtn.disabled = false;
+            setHint("API returned no types — using built-in list. Try Generate or check Pinecone indexing.");
+          } else {
+            aiGenReady = true;
+            aiBtn.disabled = false;
+          }
+        })
+        .catch(function () {
+          fillDocGenTypeSelect(aiSelect, DOC_GEN_FALLBACK_TYPES, inferred);
+          aiGenReady = true;
+          aiBtn.disabled = false;
+          showAiError(
+            "Could not reach /documents/config at " +
+              apiBase +
+              " — using built-in document types. Ensure the API is running and ALLOWED_ORIGINS includes this site (e.g. http://127.0.0.1:5500)."
+          );
+          setHint(
+            "Config request failed (often CORS or wrong API URL in meta wb-doc-gen-api). You can still try Generate."
+          );
+        });
+
+      aiBtn.addEventListener("click", function () {
+        showAiError("");
+        var docType = aiSelect.value;
+        if (!docType) return;
+        var employee = buildEmployeeForDocGen(docType, fields);
+        setAiLoading(true);
+        postDocGenGenerate(apiBase, docType, employee).then(
+          function (res) {
+            var text = (res && res.document) || "";
+            if (bodyOut) bodyOut.textContent = text;
+            draft.body = text;
+            persistManualFillDraft(draft);
+            if (capEl) capEl.textContent = "AI-generated draft — review before saving";
+            showReviewToast("Document body updated from AI.");
+          },
+          function (err) {
+            showAiError((err && err.message) || String(err));
+          }
+        ).then(function () {
+          setAiLoading(false);
+        });
       });
     }
   }
@@ -2156,6 +2422,11 @@
       }
       if (isCreateDocumentPath(pathname)) {
         window.location.replace(createDocumentPathHref(pathname, ""));
+        return;
+      }
+      if (pathname === "/document-review") {
+        showWorkspacePage("/document-review", search);
+        window.scrollTo(0, 0);
         return;
       }
       window.location.replace("index.html" + (window.location.hash || "#/"));

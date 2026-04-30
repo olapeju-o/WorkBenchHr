@@ -11249,3 +11249,74 @@ body.wb-va-pdf-modal--open {
   align-items: center;
   gap: 0.65rem;
 }
+
+.wb-doc-review__ai-panel {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem 1.05rem;
+  border-radius: 12px;
+  border: 1px solid rgba(5, 33, 22, 0.1);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(245, 250, 247, 0.88));
+}
+
+.wb-doc-review__ai-title {
+  margin: 0 0 0.45rem;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(5, 33, 22, 0.52);
+}
+
+.wb-doc-review__ai-desc,
+.wb-doc-review__ai-hint {
+  margin: 0 0 0.75rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--wb-muted);
+}
+
+.wb-doc-review__ai-desc code {
+  font-size: 0.78em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(5, 33, 22, 0.06);
+}
+
+.wb-doc-review__ai-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
+}
+
+.wb-doc-review__ai-label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(5, 33, 22, 0.45);
+}
+
+.wb-doc-review__ai-select {
+  min-width: 12rem;
+  flex: 1 1 10rem;
+}
+
+.wb-doc-review__ai-status {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--wb-green-dark);
+}
+
+.wb-doc-review__ai-status[hidden] {
+  display: none !important;
+}
+
+.wb-doc-review__ai-error {
+  margin: 0.55rem 0 0;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #b42318;
+}

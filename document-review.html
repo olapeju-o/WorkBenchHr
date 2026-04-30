@@ -12,6 +12,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <!-- Base URL for WorkbenchAI document API (FastAPI /documents/*). Override with window.__WB_DOC_GEN_API__ if needed. -->
+    <meta name="wb-doc-gen-api" content="http://localhost:8000" />
   </head>
   <body>
     <div class="wb-app" data-static-view="workspace" hidden>
@@ -127,7 +129,7 @@
             </div>
 
             <div class="wb-doc-review__viewer-wrap">
-              <p class="wb-doc-review__viewer-caption">Preview — not a generated PDF yet</p>
+              <p class="wb-doc-review__viewer-caption" data-review-viewer-caption>Preview — not a generated PDF yet</p>
               <div class="wb-doc-review__viewer">
                 <div class="wb-doc-review__viewer-bg">
                   <div class="wb-doc-review__page">
@@ -163,6 +165,31 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="wb-doc-review__ai-panel" data-review-ai-panel>
+              <p class="wb-doc-review__ai-title">AI document generation</p>
+              <p class="wb-doc-review__ai-desc">
+                Fills the document body using your team&rsquo;s WorkbenchAI backend
+                (<code>POST /documents/generate</code>). Configure the API origin via
+                <code>&lt;meta name=&quot;wb-doc-gen-api&quot;&gt;</code> or
+                <code>window.__WB_DOC_GEN_API__</code> (defaults to <code>http://localhost:8000</code>).
+              </p>
+              <div class="wb-doc-review__ai-row">
+                <label class="wb-doc-review__ai-label" for="wb-doc-gen-type">Document type</label>
+                <select
+                  id="wb-doc-gen-type"
+                  class="wb-select wb-doc-review__ai-select"
+                  data-review-ai-doctype-select
+                  aria-describedby="wb-doc-gen-type-hint"
+                ></select>
+                <button type="button" class="wb-btn wb-btn--primary" data-review-ai-generate disabled>Generate with AI</button>
+              </div>
+              <p class="wb-doc-review__ai-hint" id="wb-doc-gen-type-hint" data-review-ai-hint>
+                Loading document types from the API…
+              </p>
+              <span class="wb-doc-review__ai-status" data-review-ai-status hidden></span>
+              <p class="wb-doc-review__ai-error" data-review-ai-error hidden></p>
             </div>
 
             <p class="wb-doc-review__toast" data-review-toast hidden role="status" aria-live="polite"></p>
