@@ -731,21 +731,33 @@
         <ul class="wb-goals__grid" role="list" id="goals-grid">
           <li class="wb-goals__cell">
             <button type="button" class="wb-goals-card" data-goal="docs" aria-pressed="false">
-              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">📄</span></span>
+              <span class="wb-goals-card__row"
+                ><span class="wb-goals-card__icon" aria-hidden="true"
+                  ><img src="assets/01.png" alt="" width="48" height="48" decoding="async" /></span
+                ></span
+              >
               <span class="wb-goals-card__title">Generate documents</span>
               <span class="wb-goals-card__hint">Policies, letters, and HR packs tailored to your workplace.</span>
             </button>
           </li>
           <li class="wb-goals__cell">
             <button type="button" class="wb-goals-card" data-goal="dashboard" aria-pressed="false">
-              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">▦</span></span>
+              <span class="wb-goals-card__row"
+                ><span class="wb-goals-card__icon" aria-hidden="true"
+                  ><img src="assets/02.png" alt="" width="48" height="48" decoding="async" /></span
+                ></span
+              >
               <span class="wb-goals-card__title">Viewing my employee dashboard</span>
               <span class="wb-goals-card__hint">See teams, roles, and people data in one calm workspace.</span>
             </button>
           </li>
           <li class="wb-goals__cell">
             <button type="button" class="wb-goals-card" data-goal="notifications" aria-pressed="false">
-              <span class="wb-goals-card__row"><span class="wb-goals-card__icon" aria-hidden="true">🔔</span></span>
+              <span class="wb-goals-card__row"
+                ><span class="wb-goals-card__icon" aria-hidden="true"
+                  ><img src="assets/03.png" alt="" width="48" height="48" decoding="async" /></span
+                ></span
+              >
               <span class="wb-goals-card__title">Set up trigger notifications</span>
               <span class="wb-goals-card__hint">Decide when WorkBench nudges you about reviews and tasks.</span>
             </button>
@@ -804,7 +816,7 @@
         </div>
       </div>
 
-      <div class="wb-page wb-onboarding wb-sync" data-ob-path="/onboarding/learning" hidden>
+      <div class="wb-page wb-onboarding wb-sync" data-ob-path="/onboarding/learning" data-ob-sync-page hidden>
         <div class="wb-sync__top">
           <a href="settings.html#/settings/profile" class="skip-for-now"><span>Skip for now</span><span class="skip-for-now__icon" aria-hidden="true">→</span></a>
         </div>
@@ -812,18 +824,65 @@
         <p class="wb-onboarding__sub wb-sync__lede">
           To begin generating documentation tailored to your business, please upload a few initial files.
         </p>
-        <div class="wb-sync__drop" role="presentation">
-          <div class="wb-sync__drop-icon" aria-hidden="true">⬆</div>
-          <p class="wb-sync__drop-title">Drag &amp; drop files here</p>
-          <p class="wb-sync__drop-hint">PDF, DOC, DOCX · static preview</p>
-        </div>
-        <ul class="wb-sync__files" aria-label="Sample files">
-          <li>Employee_Handbook.pdf</li>
-          <li>Offer_Letter.pdf</li>
-          <li>Employee_Contract.pdf</li>
-        </ul>
-        <div class="wb-onboarding__actions">
-          <a href="#/onboarding/training" class="wb-btn wb-btn--primary">Continue <span aria-hidden>›</span></a>
+
+        <div class="wb-sync__upload" data-ob-sync-upload>
+          <div
+            class="wb-sync__drop"
+            data-ob-sync-drop
+            tabindex="0"
+            role="region"
+            aria-labelledby="wb-sync-drop-title"
+          >
+            <div class="wb-sync__drop-icon" aria-hidden="true">
+              <svg class="wb-sync__drop-svg" viewBox="0 0 64 64" width="56" height="56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="14" y="10" width="36" height="44" rx="4" stroke="currentColor" stroke-width="2.2" />
+                <path d="M22 20h20M22 28h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                <path
+                  d="M32 36v12M26 46l6-6 6 6"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="wb-sync__drop-title" id="wb-sync-drop-title">Drag and drop your files here</p>
+            <button type="button" class="wb-btn wb-btn--primary wb-sync__upload-btn" data-ob-sync-browse>
+              or Upload files <span aria-hidden="true">›</span>
+            </button>
+            <input
+              type="file"
+              class="wb-sync__file-input"
+              data-ob-sync-input
+              multiple
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            />
+            <p class="wb-sync__hint">(PDF, DOC, DOCX · up to 10 files)</p>
+          </div>
+
+          <p class="wb-sync__feedback" data-ob-sync-feedback hidden role="status"></p>
+
+          <div class="wb-sync__files-block">
+            <div class="wb-sync__chips-wrap wb-sync__chips-scroll">
+              <ul class="wb-sync__chips" data-ob-sync-list aria-label="Queued files"></ul>
+            </div>
+          </div>
+
+          <div class="wb-sync__status wb-sync__status--empty" data-ob-sync-status>
+            <span class="wb-sync__status-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6" />
+                <path d="M6 10.2l2.6 2.6L14.2 7.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span><strong data-ob-sync-count>0</strong> <span data-ob-sync-count-label>Documents</span> uploaded</span>
+          </div>
+
+          <div class="wb-onboarding__actions wb-sync__actions-footer">
+            <button type="button" class="wb-btn wb-btn--primary" data-ob-sync-train disabled>
+              Train my WorkBench <span aria-hidden="true">›</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -858,28 +917,87 @@
         </div>
         <h1 class="wb-onboarding__title wb-training__title">Got it! Your training is in progress!</h1>
         <p class="wb-onboarding__sub wb-training__sub">
-          While we finish your setup, follow your progress using the WorkBenchHR training widget.
+          While we finish your setup, follow your progress using the WorkBenchHR training widget in the bottom right corner.
         </p>
-        <div class="wb-training__layout">
-          <div class="wb-training__card">
-            <div class="wb-training__ring-wrap" aria-label="30 percent complete">
-              <svg class="wb-training__ring" viewBox="0 0 120 120" aria-hidden="true">
-                <circle class="wb-training__ring-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10" />
-                <circle class="wb-training__ring-fill" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="228.71" transform="rotate(-90 60 60)" />
-              </svg>
-              <span class="wb-training__ring-label">30%</span>
+
+        <div class="wb-training__hero-wrap">
+          <div class="wb-training__layout">
+            <div class="wb-training__card">
+              <div class="wb-training__card-inner">
+                <div class="wb-training__ring-wrap" aria-label="30 percent complete">
+                  <svg class="wb-training__ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="wb-training__ring-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10" />
+                    <circle
+                      class="wb-training__ring-fill"
+                      cx="60"
+                      cy="60"
+                      r="52"
+                      fill="none"
+                      stroke-width="10"
+                      stroke-linecap="round"
+                      stroke-dasharray="326.73"
+                      stroke-dashoffset="228.71"
+                      transform="rotate(-90 60 60)"
+                    />
+                  </svg>
+                  <span class="wb-training__ring-label">30%</span>
+                </div>
+                <div class="wb-training__card-copy">
+                  <h2 class="wb-training__card-title">HR DNA Syncing...</h2>
+                  <p class="wb-training__card-desc">Analyzing 5 more documents to learn your company voice.</p>
+                  <p class="wb-training__card-foot">5/13 Documents Synced</p>
+                </div>
+              </div>
             </div>
-            <h2 class="wb-training__card-title">HR DNA Syncing...</h2>
-            <p class="wb-training__card-desc">Analyzing more documents to learn your company voice.</p>
-            <p class="wb-training__card-foot">5/13 Documents Synced</p>
+
+            <div class="wb-training__preview" aria-hidden="true">
+              <aside class="wb-training__preview-sidebar">
+                <span class="wb-training__preview-logo"></span>
+                <span class="wb-training__preview-nav"></span>
+                <span class="wb-training__preview-nav wb-training__preview-nav--active"></span>
+                <span class="wb-training__preview-nav"></span>
+                <span class="wb-training__preview-nav"></span>
+              </aside>
+              <div class="wb-training__preview-main">
+                <span class="wb-training__preview-bar"></span>
+                <div class="wb-training__preview-grid">
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                  <span class="wb-training__preview-tile"></span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="wb-training__preview" aria-hidden="true">
-            <div class="wb-training__preview-sidebar"><span class="wb-training__preview-logo"></span></div>
-            <div class="wb-training__preview-main"><span class="wb-training__preview-bar"></span></div>
-          </div>
+
+          <svg class="wb-training__arrow" viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path
+              d="M14 98 C52 62 78 22 146 38"
+              stroke="#b5c2bc"
+              stroke-width="2.35"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <path
+              d="M138 32l14 5-7 12"
+              stroke="#b5c2bc"
+              stroke-width="2.1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              fill="none"
+            />
+          </svg>
         </div>
+
         <div class="wb-onboarding__actions wb-training__actions">
-          <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--primary">Let&apos;s Get Started! <span aria-hidden>›</span></a>
+          <a href="dashboard.html#/dashboard" class="wb-btn wb-btn--primary wb-training__cta"
+            >Let&apos;s Get Started! <span aria-hidden="true">›</span></a
+          >
         </div>
       </div>
 
@@ -890,7 +1008,9 @@
         <h1 class="wb-onboarding__title">Set Up Trigger Notifications</h1>
         <p class="wb-notify__sub">Receive notifications for key HR actions automatically.</p>
         <div class="wb-notify-feature wb-notify-feature--on" id="notify-master-wrap">
-          <div class="wb-notify-feature__icon" aria-hidden="true">🔔</div>
+          <div class="wb-notify-feature__icon" aria-hidden="true">
+            <img src="assets/03.png" alt="" width="48" height="48" decoding="async" />
+          </div>
           <div class="wb-notify-feature__text">
             <h2 class="wb-notify-feature__title">Trigger Notifications</h2>
             <p class="wb-notify-feature__desc">Create custom notifications for HR actions you&apos;ll be alerted.</p>

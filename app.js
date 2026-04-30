@@ -3852,6 +3852,208 @@
     });
   }
 
+  var WB_SYNC_CHIP_SVG =
+    '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M3 2.5h6L12 5.5V13a.5.5 0 01-.5.5H3A.5.5 0 012.5 13V3A.5.5 0 013 2.5z" fill="none" stroke="currentColor" stroke-width="1.1"/>' +
+    '<path d="M8.5 2.6V5H11" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>' +
+    "</svg>";
+
+  function bindOnboardingCompanyDnaUpload() {
+    var root = document.querySelector("[data-ob-sync-page]");
+    if (!root || root.getAttribute("data-ob-sync-bound") === "1") return;
+    root.setAttribute("data-ob-sync-bound", "1");
+
+    var drop = root.querySelector("[data-ob-sync-drop]");
+    var input = root.querySelector("[data-ob-sync-input]");
+    var browse = root.querySelector("[data-ob-sync-browse]");
+    var list = root.querySelector("[data-ob-sync-list]");
+    var countEl = root.querySelector("[data-ob-sync-count]");
+    var countLabel = root.querySelector("[data-ob-sync-count-label]");
+    var train = root.querySelector("[data-ob-sync-train]");
+    var feedback = root.querySelector("[data-ob-sync-feedback]");
+    var statusWrap = root.querySelector("[data-ob-sync-status]");
+    if (!drop || !input || !browse || !list || !train) return;
+
+    var MAX_FILES = 10;
+    var files = [];
+    var nextId = 1;
+
+    function fileKey(file) {
+      return (file.name || "") + ":" + file.size + ":" + file.lastModified;
+    }
+
+    function isAllowedFile(file) {
+      var name = (file.name || "").toLowerCase();
+      var dot = name.lastIndexOf(".");
+      var ext = dot === -1 ? "" : name.slice(dot);
+      if (ext === ".pdf" || ext === ".doc" || ext === ".docx") return true;
+      var t = (file.type || "").toLowerCase();
+      if (t === "application/pdf") return true;
+      if (t === "application/msword") return true;
+      if (t === "application/vnd.openxmlformats-officedocument.wordprocessingml.document") return true;
+      return false;
+    }
+
+    function showFeedback(msg, isError) {
+      if (!feedback) return;
+      if (!msg) {
+        feedback.hidden = true;
+        feedback.textContent = "";
+        feedback.classList.remove("wb-sync__feedback--error");
+        return;
+      }
+      feedback.hidden = false;
+      feedback.textContent = msg;
+      feedback.classList.toggle("wb-sync__feedback--error", !!isError);
+    }
+
+    function syncTrainState() {
+      var empty = files.length === 0;
+      train.disabled = empty;
+      train.setAttribute("aria-disabled", empty ? "true" : "false");
+    }
+
+    function updateCount() {
+      if (countEl) countEl.textContent = String(files.length);
+      if (countLabel) countLabel.textContent = files.length === 1 ? "Document" : "Documents";
+      if (statusWrap) statusWrap.classList.toggle("wb-sync__status--empty", files.length === 0);
+    }
+
+    function renderList() {
+      list.innerHTML = "";
+      files.forEach(function (entry) {
+        var li = document.createElement("li");
+        li.className = "wb-sync__chip";
+
+        var iconWrap = document.createElement("span");
+        iconWrap.className = "wb-sync__chip-icon";
+        iconWrap.setAttribute("aria-hidden", "true");
+        iconWrap.innerHTML = WB_SYNC_CHIP_SVG;
+
+        var nameEl = document.createElement("span");
+        nameEl.className = "wb-sync__chip-name";
+        nameEl.textContent = entry.file.name;
+        nameEl.title = entry.file.name;
+
+        var rm = document.createElement("button");
+        rm.type = "button";
+        rm.className = "wb-sync__chip-remove";
+        rm.setAttribute("aria-label", "Remove " + entry.file.name);
+        rm.textContent = "\u00d7";
+        rm.addEventListener("click", function () {
+          files = files.filter(function (x) {
+            return x.id !== entry.id;
+          });
+          renderList();
+          updateCount();
+          syncTrainState();
+          showFeedback("");
+        });
+
+        li.appendChild(iconWrap);
+        li.appendChild(nameEl);
+        li.appendChild(rm);
+        list.appendChild(li);
+      });
+    }
+
+    function addIncoming(fileList) {
+      var arr = Array.prototype.slice.call(fileList || []);
+      if (!arr.length) return;
+
+      var added = 0;
+      var skippedType = 0;
+      var skippedDup = 0;
+      var skippedCap = 0;
+      var keys = {};
+      files.forEach(function (e) {
+        keys[fileKey(e.file)] = true;
+      });
+
+      arr.forEach(function (file) {
+        if (files.length >= MAX_FILES) {
+          skippedCap++;
+          return;
+        }
+        if (!isAllowedFile(file)) {
+          skippedType++;
+          return;
+        }
+        var k = fileKey(file);
+        if (keys[k]) {
+          skippedDup++;
+          return;
+        }
+        keys[k] = true;
+        files.push({ id: nextId++, file: file });
+        added++;
+      });
+
+      renderList();
+      updateCount();
+      syncTrainState();
+
+      var warn = skippedType || skippedDup || skippedCap;
+      if (warn) {
+        var parts = [];
+        if (skippedType) parts.push("Only PDF and Word files (.pdf, .doc, .docx) are allowed.");
+        if (skippedDup) parts.push("Duplicate files were skipped.");
+        if (skippedCap) parts.push("You can queue up to " + MAX_FILES + " files.");
+        showFeedback(parts.join(" "), true);
+      } else {
+        showFeedback("");
+      }
+    }
+
+    browse.addEventListener("click", function () {
+      input.click();
+    });
+
+    input.addEventListener("change", function () {
+      addIncoming(input.files);
+      input.value = "";
+    });
+
+    drop.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        input.click();
+      }
+    });
+
+    drop.addEventListener("dragenter", function (e) {
+      e.preventDefault();
+      drop.classList.add("wb-sync__drop--active");
+    });
+
+    drop.addEventListener("dragleave", function (e) {
+      e.preventDefault();
+      var rel = e.relatedTarget;
+      if (!rel || !drop.contains(rel)) drop.classList.remove("wb-sync__drop--active");
+    });
+
+    drop.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      try {
+        e.dataTransfer.dropEffect = "copy";
+      } catch (err) {}
+    });
+
+    drop.addEventListener("drop", function (e) {
+      e.preventDefault();
+      drop.classList.remove("wb-sync__drop--active");
+      if (e.dataTransfer && e.dataTransfer.files) addIncoming(e.dataTransfer.files);
+    });
+
+    train.addEventListener("click", function () {
+      if (train.disabled) return;
+      window.location.hash = "#/onboarding/training";
+    });
+
+    syncTrainState();
+    updateCount();
+  }
+
   function closeProfileDeleteModal(e) {
     if (e) {
       e.preventDefault();
@@ -5588,6 +5790,7 @@
     bindForgotForm();
     bindGoals();
     bindNotifyToggle();
+    bindOnboardingCompanyDnaUpload();
     bindSettingsProfile();
     bindCompanyInformation();
     bindDataManagementSync();
