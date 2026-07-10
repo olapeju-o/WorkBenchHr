@@ -1693,7 +1693,7 @@ body.wb-signup-modal--open {
   margin: 0 0 0.85rem;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
-  background: var(--wb-green);
+  background: var(--wb-forest);
   color: #fff;
   font-size: 0.68rem;
   font-weight: 800;
@@ -1799,7 +1799,7 @@ body.wb-signup-modal--open {
 
 .wb-contact__details {
   list-style: none;
-  margin: auto 0 0;
+  margin: auto 0 2.25rem;
   padding: 1rem 0 0;
   border-top: 1px solid var(--wb-border);
   display: flex;
