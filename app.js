@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var MARKETING_SECTIONS = ["home", "customers", "platform", "request-demo"];
+  var MARKETING_SECTIONS = ["home", "platform", "request-demo"];
 
   var CAT_LABEL = {
     company: "Company Documents",
@@ -3783,6 +3783,70 @@
     });
   }
 
+  function bindSignupModal() {
+    var modal = document.querySelector("[data-signup-modal]");
+    if (!modal) return;
+
+    var panel = modal.querySelector(".wb-signup-modal__panel");
+    var form = modal.querySelector("[data-signup-modal-form]");
+    var lastFocus = null;
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add("wb-signup-modal--open");
+      var first = modal.querySelector("input, button, a");
+      if (first) {
+        window.setTimeout(function () {
+          first.focus();
+        }, 0);
+      }
+    }
+
+    function closeModal() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("wb-signup-modal--open");
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        try {
+          lastFocus.focus();
+        } catch (err) {}
+      }
+    }
+
+    document.querySelectorAll("[data-open-signup-modal]").forEach(function (el) {
+      el.addEventListener("click", openModal);
+    });
+
+    modal.querySelectorAll("[data-signup-modal-close]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        closeModal();
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modal.hidden) {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        closeModal();
+        window.location.hash = "#/onboarding/goal";
+      });
+    }
+
+    if (panel) {
+      panel.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+  }
+
   function bindAuthForms() {
     document.querySelectorAll("[data-static-auth-form]").forEach(function (form) {
       form.addEventListener("submit", function (e) {
@@ -5784,6 +5848,7 @@
 
   function init() {
     bindMarketingNav();
+    bindSignupModal();
     bindDemoForm();
     bindContactForm();
     bindAuthForms();

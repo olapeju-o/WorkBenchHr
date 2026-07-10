@@ -22,183 +22,440 @@
             <img src="assets/logo.png" width="36" height="36" alt="" />
             <span class="wb-mkt-logo__text">Workbench HR</span>
           </a>
-          <nav class="wb-mkt-tabs" aria-label="Site sections">
-            <a
-              href="#home"
-              class="wb-mkt-tab wb-mkt-tab--active"
-              data-mkt-tab="home"
-              data-mkt-tab-link="home"
-              aria-current="location"
-              >Home</a
-            >
-            <a
-              href="#platform"
-              class="wb-mkt-tab"
-              data-mkt-tab="platform"
-              data-mkt-tab-link="platform"
-              data-platform-center="1"
-              >Platform</a
-            >
-            <a href="#request-demo" class="wb-mkt-tab" data-mkt-tab="request-demo" data-mkt-tab-link="request-demo"
-              >Request a demo</a
-            >
-          </nav>
           <div class="wb-mkt-header__actions">
             <a href="#/login" class="wb-mkt-ghost">Sign in</a>
-            <a href="#/signup" class="wb-mkt-cta">Get started</a>
+            <a href="#/" class="wb-mkt-cta" data-open-signup-modal>Create account</a>
           </div>
         </div>
       </header>
 
       <main class="wb-marketing__main">
-        <div class="wb-page wb-welcome">
-          <section id="home" class="wb-welcome__section wb-welcome__section--hero">
-            <header class="wb-welcome__hero">
-              <p class="wb-eyebrow">People-first operations</p>
-              <div class="wb-welcome__title-row">
-                <h1 class="wb-welcome__title-text">Welcome to Workbench HR</h1>
-                <img src="assets/logo.png" width="48" height="48" alt="" class="wb-welcome__title-logo" />
+        <section id="home" class="wb-hero-split" aria-label="Workbench HR">
+          <div class="wb-hero-split__copy">
+            <p class="wb-hero-split__eyebrow">Trusted HR platform for small business</p>
+            <h1 class="wb-hero-split__title">The #1 solution for mainstream small business HR.</h1>
+            <p class="wb-hero-split__lede">
+              <em
+                >A trusted, verified partner platform for small business with real HR documents, honest
+                guidance, and an assistant that learns how you work.</em
+              >
+            </p>
+            <div class="wb-hero-split__actions">
+              <a href="#/" class="wb-btn wb-btn--primary wb-btn--hero" data-open-signup-modal>Create account</a>
+              <a href="#request-demo" class="wb-btn wb-btn--muted wb-btn--hero">Request a demo</a>
+            </div>
+            <div class="wb-hero-split__proof">
+              <div class="wb-hero-split__avatars" aria-hidden="true">
+                <span class="wb-hero-split__avatar wb-hero-split__avatar--a">J</span>
+                <span class="wb-hero-split__avatar wb-hero-split__avatar--b">M</span>
+                <span class="wb-hero-split__avatar wb-hero-split__avatar--c">S</span>
+                <span class="wb-hero-split__avatar wb-hero-split__avatar--d">R</span>
               </div>
-              <p class="wb-welcome__tagline">
-                <em>Human Resources all in one place, and at your fingertips</em>
-              </p>
-              <div class="wb-welcome__hero-actions">
-                <a href="#/signup" class="wb-btn wb-btn--primary wb-btn--hero">Let&apos;s Get Started!</a>
-                <a href="#request-demo" class="wb-btn wb-btn--outline wb-btn--hero wb-welcome__request-demo-btn"
-                  >Request a demo</a
-                >
+              <div class="wb-hero-split__proof-meta">
+                <div class="wb-hero-split__stars" aria-label="5 out of 5 stars">
+                  <span aria-hidden="true">★</span><span aria-hidden="true">★</span
+                  ><span aria-hidden="true">★</span><span aria-hidden="true">★</span
+                  ><span aria-hidden="true">★</span>
+                </div>
+                <p class="wb-hero-split__proof-text">Join early teams already exploring Workbench HR</p>
               </div>
-            </header>
-          </section>
+            </div>
+          </div>
 
-          <section id="customers" class="wb-welcome__section">
-            <ul class="wb-stat-grid">
-              <li class="wb-stat-card">
-                <div class="wb-stat-card__top">
-                  <p class="wb-stat-card__label">Trusted by</p>
-                  <p class="wb-stat-card__metric">12,000+</p>
-                  <p class="wb-stat-card__desc">Small Businesses</p>
-                </div>
+          <div class="wb-hero-split__stage">
+            <img
+              class="wb-hero-split__stage-img"
+              src="assets/image1.png"
+              alt="Workbench HR product preview: offer letter, org health, and reminders"
+              width="1258"
+              height="1508"
+              decoding="async"
+            />
+          </div>
+        </section>
+
+        <section id="proof" class="wb-proof" aria-label="What Workbench HR helps you do">
+          <div class="wb-proof__inner">
+            <ul class="wb-proof__grid">
+              <li class="wb-proof-card">
                 <div
-                  class="wb-stat-card__photo"
-                  style="background-image: url(https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=960&amp;h=720&amp;fit=crop)"
+                  class="wb-proof-card__media"
+                  style="background-image: url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&amp;h=1100&amp;fit=crop)"
                   role="img"
                   aria-hidden="true"
                 ></div>
+                <div class="wb-proof-card__overlay">
+                  <p class="wb-proof-card__label">Hiring</p>
+                  <p class="wb-proof-card__metric">One pipeline</p>
+                  <p class="wb-proof-card__desc">Roles, applicants, and offers in one place</p>
+                </div>
               </li>
-              <li class="wb-stat-card">
-                <div class="wb-stat-card__top">
-                  <p class="wb-stat-card__label">Saves users</p>
-                  <p class="wb-stat-card__metric">12 hours</p>
-                  <p class="wb-stat-card__desc">per week on HR tasks</p>
-                </div>
+              <li class="wb-proof-card">
                 <div
-                  class="wb-stat-card__photo"
-                  style="background-image: url(https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=960&amp;h=720&amp;fit=crop)"
+                  class="wb-proof-card__media"
+                  style="background-image: url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&amp;h=1100&amp;fit=crop)"
                   role="img"
                   aria-hidden="true"
                 ></div>
+                <div class="wb-proof-card__overlay">
+                  <p class="wb-proof-card__label">Onboarding</p>
+                  <p class="wb-proof-card__metric">Day-one ready</p>
+                  <p class="wb-proof-card__desc">Checklists, owners, and due dates that stick</p>
+                </div>
               </li>
-              <li class="wb-stat-card">
-                <div class="wb-stat-card__top">
-                  <p class="wb-stat-card__label">Built to support teams from</p>
-                  <p class="wb-stat-card__metric">5-100+</p>
-                  <p class="wb-stat-card__desc">at scale</p>
-                </div>
+              <li class="wb-proof-card">
                 <div
-                  class="wb-stat-card__photo"
-                  style="background-image: url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=960&amp;h=720&amp;fit=crop)"
+                  class="wb-proof-card__media"
+                  style="background-image: url(https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&amp;h=1100&amp;fit=crop)"
                   role="img"
                   aria-hidden="true"
                 ></div>
+                <div class="wb-proof-card__overlay">
+                  <p class="wb-proof-card__label">Documents</p>
+                  <p class="wb-proof-card__metric">Built for you</p>
+                  <p class="wb-proof-card__desc">Offers, policies, and letters in your tone</p>
+                </div>
               </li>
-              <li class="wb-stat-card">
-                <div class="wb-stat-card__top">
-                  <p class="wb-stat-card__label">Named the</p>
-                  <p class="wb-stat-card__metric">#1 HR</p>
-                  <p class="wb-stat-card__desc">platform for high growth startups by Bloomberg Business</p>
-                </div>
+              <li class="wb-proof-card">
                 <div
-                  class="wb-stat-card__photo"
-                  style="background-image: url(https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=960&amp;h=720&amp;fit=crop)"
+                  class="wb-proof-card__media"
+                  style="background-image: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&amp;h=1100&amp;fit=crop)"
                   role="img"
                   aria-hidden="true"
                 ></div>
+                <div class="wb-proof-card__overlay">
+                  <p class="wb-proof-card__label">Compliance</p>
+                  <p class="wb-proof-card__metric">Less chasing</p>
+                  <p class="wb-proof-card__desc">Signatures and reminders without the scramble</p>
+                </div>
+              </li>
+              <li class="wb-proof-card">
+                <div
+                  class="wb-proof-card__media"
+                  style="background-image: url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&amp;h=1100&amp;fit=crop)"
+                  role="img"
+                  aria-hidden="true"
+                ></div>
+                <div class="wb-proof-card__overlay">
+                  <p class="wb-proof-card__label">People ops</p>
+                  <p class="wb-proof-card__metric">Stay ahead</p>
+                  <p class="wb-proof-card__desc">Reviews and follow-ups before they slip</p>
+                </div>
               </li>
             </ul>
-          </section>
+          </div>
 
-          <section id="platform" class="wb-welcome__section">
-            <div class="wb-mkt-section-head">
-              <h2 class="wb-mkt-section-head__title">Everything your HR bench needs</h2>
-              <p class="wb-mkt-section-head__lede">
+          <div class="wb-built-for" aria-label="Business types Workbench HR is built for">
+            <p class="wb-built-for__label">Built for</p>
+            <div class="wb-built-for__viewport">
+              <div class="wb-built-for__track">
+                <ul class="wb-built-for__list">
+                  <li>Dental offices</li>
+                  <li>Plumbing &amp; trades</li>
+                  <li>Retail &amp; boutiques</li>
+                  <li>Childcare centers</li>
+                  <li>Auto repair shops</li>
+                  <li>Restaurants &amp; cafes</li>
+                  <li>Salons &amp; spas</li>
+                  <li>Construction crews</li>
+                  <li>Veterinary clinics</li>
+                  <li>Landscaping teams</li>
+                  <li>Cleaning services</li>
+                  <li>Gyms &amp; studios</li>
+                  <li>Medical practices</li>
+                  <li>Home services</li>
+                </ul>
+                <ul class="wb-built-for__list" aria-hidden="true">
+                  <li>Dental offices</li>
+                  <li>Plumbing &amp; trades</li>
+                  <li>Retail &amp; boutiques</li>
+                  <li>Childcare centers</li>
+                  <li>Auto repair shops</li>
+                  <li>Restaurants &amp; cafes</li>
+                  <li>Salons &amp; spas</li>
+                  <li>Construction crews</li>
+                  <li>Veterinary clinics</li>
+                  <li>Landscaping teams</li>
+                  <li>Cleaning services</li>
+                  <li>Gyms &amp; studios</li>
+                  <li>Medical practices</li>
+                  <li>Home services</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="platform" class="wb-platform" aria-labelledby="wb-platform-title">
+          <div class="wb-platform__inner">
+            <header class="wb-platform__head">
+              <p class="wb-platform__eyebrow">Platform</p>
+              <h2 id="wb-platform-title" class="wb-platform__title">Everything your HR bench needs</h2>
+              <p class="wb-platform__lede">
                 One calm workspace for hiring, onboarding, and day-to-day people work, built for teams that are
                 growing fast.
               </p>
-            </div>
-            <ul class="wb-mkt-feature-grid">
-              <li class="wb-mkt-feature-card">
-                <span class="wb-mkt-feature-card__icon" aria-hidden="true">◎</span>
-                <h3 class="wb-mkt-feature-card__title">Hiring &amp; pipeline</h3>
-                <p class="wb-mkt-feature-card__body">
+            </header>
+            <ul class="wb-platform__grid">
+              <li class="wb-platform-card">
+                <span class="wb-platform-card__icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M8 7h8M8 12h5M6 3h12a2 2 0 0 1 2 2v14l-4-2.5L12 19l-4-2.5L4 19V5a2 2 0 0 1 2-2z"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <h3 class="wb-platform-card__title">Hiring &amp; pipeline</h3>
+                <p class="wb-platform-card__body">
                   Post roles, track candidates, and keep your team aligned from first screen to signed offer.
                 </p>
               </li>
-              <li class="wb-mkt-feature-card">
-                <span class="wb-mkt-feature-card__icon" aria-hidden="true">✓</span>
-                <h3 class="wb-mkt-feature-card__title">Onboarding &amp; tasks</h3>
-                <p class="wb-mkt-feature-card__body">
+              <li class="wb-platform-card">
+                <span class="wb-platform-card__icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M9 11.5l2 2 4-4.5M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                <h3 class="wb-platform-card__title">Onboarding &amp; tasks</h3>
+                <p class="wb-platform-card__body">
                   Structured checklists, owners, and due dates so every new hire lands smoothly.
                 </p>
               </li>
-              <li class="wb-mkt-feature-card">
-                <span class="wb-mkt-feature-card__icon" aria-hidden="true">📄</span>
-                <h3 class="wb-mkt-feature-card__title">Policies &amp; documents</h3>
-                <p class="wb-mkt-feature-card__body">
+              <li class="wb-platform-card">
+                <span class="wb-platform-card__icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M8 3h6l4 4v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M14 3v4h4M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <h3 class="wb-platform-card__title">Policies &amp; documents</h3>
+                <p class="wb-platform-card__body">
                   Templates, e-signatures, and reminders in one place, with less chasing and fewer gaps.
                 </p>
               </li>
             </ul>
-          </section>
+          </div>
+        </section>
 
-          <section id="request-demo" class="wb-welcome__section wb-demo">
-            <div class="wb-demo__inner">
-              <div class="wb-mkt-section-head wb-demo__head">
-                <h2 class="wb-mkt-section-head__title">Request a demo</h2>
-                <p class="wb-mkt-section-head__lede">
-                  Tell us a bit about your team. We&apos;ll follow up with a tailored walkthrough of Workbench HR.
+        <section id="pricing" class="wb-pricing" aria-labelledby="wb-pricing-title">
+          <div class="wb-pricing__inner">
+            <header class="wb-pricing__head">
+              <p class="wb-pricing__eyebrow">Pricing</p>
+              <h2 id="wb-pricing-title" class="wb-pricing__title">Simple pricing. No surprises.</h2>
+              <p class="wb-pricing__lede">
+                All plans include a free trial. Not sure which fits? We will help you find the right one.
+              </p>
+            </header>
+
+            <ul class="wb-pricing__grid">
+              <li class="wb-price-card">
+                <p class="wb-price-card__tier">Starter</p>
+                <p class="wb-price-card__price"><span class="wb-price-card__amount">$8</span> <span class="wb-price-card__period">/mo</span></p>
+                <p class="wb-price-card__blurb"><em>For very small teams getting started.</em></p>
+                <ul class="wb-price-card__features">
+                  <li>Up to 10 employees</li>
+                  <li>AI document generation</li>
+                  <li>HR policy library</li>
+                  <li>Reminders &amp; compliance alerts</li>
+                  <li>Basic org health score</li>
+                  <li>Email support</li>
+                </ul>
+                <a href="#/" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-signup-modal>Get started free</a>
+              </li>
+
+              <li class="wb-price-card wb-price-card--featured">
+                <span class="wb-price-card__badge">Most popular</span>
+                <p class="wb-price-card__tier">Core</p>
+                <p class="wb-price-card__price"><span class="wb-price-card__amount">$15</span> <span class="wb-price-card__period">/mo</span></p>
+                <p class="wb-price-card__blurb"><em>For growing teams that need real HR.</em></p>
+                <ul class="wb-price-card__features">
+                  <li>Up to 30 employees</li>
+                  <li>Everything in Starter</li>
+                  <li>Virtual HR assistant</li>
+                  <li>Performance management tools</li>
+                  <li>Full org health dashboard</li>
+                  <li>Priority support</li>
+                </ul>
+                <a href="#/" class="wb-btn wb-btn--primary wb-price-card__cta" data-open-signup-modal>Get started free</a>
+              </li>
+
+              <li class="wb-price-card">
+                <p class="wb-price-card__tier">Pro</p>
+                <p class="wb-price-card__price"><span class="wb-price-card__amount">$20</span> <span class="wb-price-card__period">/mo</span></p>
+                <p class="wb-price-card__blurb"><em>For teams that want the full picture.</em></p>
+                <ul class="wb-price-card__features">
+                  <li>Unlimited employees</li>
+                  <li>Everything in Core</li>
+                  <li>Projections &amp; scenario planning</li>
+                  <li>Custom AI model training</li>
+                  <li>Dedicated onboarding</li>
+                  <li>SLA-backed support</li>
+                </ul>
+                <a href="#/" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-signup-modal>Get started free</a>
+              </li>
+            </ul>
+
+            <div class="wb-pricing__quote">
+              <div class="wb-pricing__quote-copy">
+                <p class="wb-pricing__quote-title">Not sure which plan is right for you?</p>
+                <p class="wb-pricing__quote-lede">
+                  Request a quote or schedule a walkthrough. We will match you to the right fit.
                 </p>
               </div>
+              <a href="#request-demo" class="wb-btn wb-btn--dark wb-pricing__quote-cta">Get a quote →</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="request-demo" class="wb-contact" aria-labelledby="wb-contact-title">
+          <div class="wb-contact__inner">
+            <div class="wb-contact__people">
+              <p class="wb-contact__eyebrow">Contact us</p>
+              <h2 id="wb-contact-title" class="wb-contact__title">Talk to the people building Workbench.</h2>
+              <p class="wb-contact__lede">
+                <em
+                  >Reach out directly. No support ticket queues, no bots — real people who know the product.</em
+                >
+              </p>
+              <ul class="wb-contact__list">
+                <li class="wb-contact-card">
+                  <span class="wb-contact-card__avatar" aria-hidden="true">C</span>
+                  <div class="wb-contact-card__meta">
+                    <p class="wb-contact-card__name">Chris</p>
+                    <p class="wb-contact-card__role">Chief Executive Officer</p>
+                  </div>
+                  <a class="wb-contact-card__email" href="mailto:chris@workbenchhr.com">
+                    <svg class="wb-contact-card__mail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                      <path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    chris@workbenchhr.com
+                  </a>
+                </li>
+                <li class="wb-contact-card">
+                  <span class="wb-contact-card__avatar" aria-hidden="true">O</span>
+                  <div class="wb-contact-card__meta">
+                    <p class="wb-contact-card__name">Olapeju</p>
+                    <p class="wb-contact-card__role">Product &amp; Customer Success</p>
+                  </div>
+                  <a class="wb-contact-card__email" href="mailto:olapeju@workbenchhr.com">
+                    <svg class="wb-contact-card__mail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                      <path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    olapeju@workbenchhr.com
+                  </a>
+                </li>
+                <li class="wb-contact-card">
+                  <span class="wb-contact-card__avatar" aria-hidden="true">S</span>
+                  <div class="wb-contact-card__meta">
+                    <p class="wb-contact-card__name">Sahil</p>
+                    <p class="wb-contact-card__role">Engineering</p>
+                  </div>
+                  <a class="wb-contact-card__email" href="mailto:sahil@workbenchhr.com">
+                    <svg class="wb-contact-card__mail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                      <path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    sahil@workbenchhr.com
+                  </a>
+                </li>
+                <li class="wb-contact-card">
+                  <span class="wb-contact-card__avatar" aria-hidden="true">?</span>
+                  <div class="wb-contact-card__meta">
+                    <p class="wb-contact-card__name">Support</p>
+                    <p class="wb-contact-card__role">General inquiries</p>
+                  </div>
+                  <a class="wb-contact-card__email" href="mailto:hello@workbenchhr.com">
+                    <svg class="wb-contact-card__mail-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M4 7.5A2.5 2.5 0 0 1 6.5 5h11A2.5 2.5 0 0 1 20 7.5v9a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5v-9z"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                      <path d="M5 8l7 5 7-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    hello@workbenchhr.com
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="wb-contact__panel">
+              <h3 class="wb-contact__panel-title">Request a demo</h3>
+              <p class="wb-contact__panel-lede">
+                <em>We will show you a live walkthrough in the context of your actual business.</em>
+              </p>
               <div class="wb-demo__form-slot" id="demo-request-form-slot">
-                <form id="demo-request-form" class="wb-demo__form">
+                <form id="demo-request-form" class="wb-contact__form">
                   <label class="wb-field">
-                    <span class="wb-field__label">Full name</span>
-                    <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
+                    <span class="wb-field__label">Your name</span>
+                    <input
+                      class="wb-input wb-input--demo"
+                      name="name"
+                      required
+                      autocomplete="name"
+                      placeholder="Jane Smith"
+                    />
                   </label>
                   <label class="wb-field">
-                    <span class="wb-field__label">Work email</span>
-                    <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
+                    <span class="wb-field__label">Email</span>
+                    <input
+                      class="wb-input wb-input--demo"
+                      name="email"
+                      type="email"
+                      required
+                      autocomplete="email"
+                      placeholder="jane@yourcompany.com"
+                    />
                   </label>
                   <label class="wb-field">
-                    <span class="wb-field__label">Company</span>
-                    <input class="wb-input wb-input--demo" name="company" required autocomplete="organization" />
+                    <span class="wb-field__label">Business type</span>
+                    <input
+                      class="wb-input wb-input--demo"
+                      name="company"
+                      required
+                      autocomplete="organization"
+                      placeholder="e.g. dental office, plumbing company"
+                    />
                   </label>
                   <label class="wb-field">
-                    <span class="wb-field__label">Role (optional)</span>
-                    <input class="wb-input wb-input--demo" name="role" autocomplete="organization-title" />
-                  </label>
-                  <label class="wb-field wb-field--full">
-                    <span class="wb-field__label">What would you like to see? (optional)</span>
+                    <span class="wb-field__label">Biggest HR challenge</span>
                     <textarea
                       class="wb-textarea"
                       name="message"
                       rows="4"
-                      placeholder="e.g. onboarding, hiring pipeline, reporting…"
+                      placeholder="e.g. Writing offer letters, tracking reviews, handling turnover…"
                     ></textarea>
                   </label>
-                  <div class="wb-demo__submit">
-                    <button type="submit" class="wb-btn wb-btn--primary wb-btn--hero">Submit request</button>
-                  </div>
+                  <button type="submit" class="wb-btn wb-btn--primary wb-btn--block">Send demo request</button>
                 </form>
                 <div
                   id="demo-request-thanks"
@@ -223,14 +480,18 @@
                   <p class="wb-demo__success-lede">
                     Thanks! We&apos;ve received your request and will be in touch shortly.
                   </p>
-                  <button type="button" class="wb-btn wb-btn--outline wb-btn--hero" id="demo-request-reset">
+                  <button type="button" class="wb-btn wb-btn--outline" id="demo-request-reset">
                     Submit another request
                   </button>
                 </div>
               </div>
+              <p class="wb-contact__panel-foot">
+                Prefer to talk now?
+                <a href="mailto:hello@workbenchhr.com" class="wb-link">Email us directly</a>
+              </p>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
 
         <footer class="wb-mkt-footer">
           <div class="wb-mkt-footer__inner">
@@ -245,6 +506,55 @@
           </div>
         </footer>
       </main>
+
+      <div class="wb-signup-modal" data-signup-modal hidden>
+        <button
+          type="button"
+          class="wb-signup-modal__backdrop"
+          data-signup-modal-close
+          tabindex="-1"
+          aria-label="Close create account dialog"
+        ></button>
+        <div
+          class="wb-signup-modal__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="wb-signup-modal-title"
+        >
+          <header class="wb-signup-modal__head">
+            <div class="wb-signup-modal__brand">
+              <img src="assets/logo.png" width="36" height="36" alt="" />
+              <h2 id="wb-signup-modal-title" class="wb-signup-modal__title">Create an account</h2>
+            </div>
+            <button type="button" class="wb-signup-modal__close" data-signup-modal-close aria-label="Close">
+              ×
+            </button>
+          </header>
+          <p class="wb-signup-modal__lede">Finally, an HR tool that works as hard as you do.</p>
+          <form class="wb-signup-modal__form" data-signup-modal-form>
+            <label class="wb-field">
+              <span class="wb-field__label">Name</span>
+              <input class="wb-input" name="name" autocomplete="name" required />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Email</span>
+              <input class="wb-input" name="email" type="email" autocomplete="email" required />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Password</span>
+              <input class="wb-input" name="password" type="password" autocomplete="new-password" required />
+            </label>
+            <label class="wb-field">
+              <span class="wb-field__label">Company name</span>
+              <input class="wb-input" name="company" autocomplete="organization" required />
+            </label>
+            <button type="submit" class="wb-btn wb-btn--primary wb-btn--block">Create account</button>
+          </form>
+          <p class="wb-signup-modal__footer">
+            Already have an account? <a href="#/login" class="wb-link" data-signup-modal-close>Sign in</a>
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- About -->
