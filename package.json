@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Workbench HR static marketing and app UI",
   "scripts": {
-    "build": "echo 'Static site — no compile step'"
+    "build": "echo 'Static site - no compile step'"
   },
   "dependencies": {
     "express": "^4.21.2"

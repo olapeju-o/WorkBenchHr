@@ -61,7 +61,7 @@
       { file: "Whistleblower_Policy.pdf", title: "Whistleblower policy" },
     ],
     hiring: [
-      { file: "Job_Posting_Customer_Success_Manager.pdf", title: "Job posting — CS Manager" },
+      { file: "Job_Posting_Customer_Success_Manager.pdf", title: "Job posting - CS Manager" },
       { file: "Interview_Scorecard_Template.docx", title: "Interview scorecard" },
       { file: "Offer_Checklist_HR.docx", title: "Pre-offer checklist" },
       { file: "Phone_Screen_Guide.docx", title: "Phone screen guide" },
@@ -107,49 +107,49 @@
   };
 
   var DOC_TITLES = {
-    "/about": "About — Workbench HR",
-    "/contact": "Contact — Workbench HR",
-    "/privacy": "Privacy Policy — Workbench HR",
-    "/terms": "Terms of Service — Workbench HR",
-    "/login": "Sign in — Workbench HR",
-    "/signup": "Sign up — Workbench HR",
-    "/forgot-password": "Forgot password — Workbench HR",
-    "/onboarding/goal": "Get started — Workbench HR",
-    "/onboarding/privacy": "Data & Privacy — Workbench HR",
-    "/onboarding/learning": "Sync company DNA — Workbench HR",
-    "/onboarding/opt-out-confirm": "Opt out — Workbench HR",
-    "/onboarding/training": "Training — Workbench HR",
-    "/onboarding/notifications": "Notifications — Workbench HR",
-    "/design-reference": "Design reference — Workbench HR",
-    "/dashboard": "Dashboard — Workbench HR",
-    "/assistant": "AI Assistant — Workbench HR",
-    "/dashboard/sign-documents": "Sign documents — Workbench HR",
-    "/hiring": "Hiring — Workbench HR",
-    "/applicants": "Applicants — Workbench HR",
-    "/view-applicant": "Applicant profile — Workbench HR",
-    "/documents": "Documents — Workbench HR",
-    "/sign-documents": "Sign documents — Workbench HR",
-    "/employees": "Employee Portal — Workbench HR",
-    "/employees/add": "Add employee — Workbench HR",
-    "/employees/teams/new": "Create team — Workbench HR",
-    "/create-document/category": "Document category — Workbench HR",
-    "/document-category": "Document category — Workbench HR",
-    "/document-templates": "Choose template — Workbench HR",
-    "/document-method": "Document method — Workbench HR",
-    "/document-manual-fill": "Fill document — Workbench HR",
-    "/generate-ai": "AI document draft — Workbench HR",
-    "/document-review": "Review document — Workbench HR",
-    "/create-document/template": "Document category — Workbench HR",
-    "/create-document/method": "Creation method — Workbench HR",
-    "/settings/profile": "Profile — Settings",
-    "/settings/company": "Company — Settings",
-    "/settings/roles": "Roles — Settings",
-    "/settings/billing": "Billing — Settings",
-    "/settings/data": "Data — Settings",
-    "/settings/trigger-notifications": "Triggers — Settings",
-    "/settings/employees": "Employees — Settings",
-    "/settings/security": "Security — Settings",
-    "/settings/help": "Help — Settings",
+    "/about": "About - Workbench HR",
+    "/contact": "Contact - Workbench HR",
+    "/privacy": "Privacy Policy - Workbench HR",
+    "/terms": "Terms of Service - Workbench HR",
+    "/login": "Sign in - Workbench HR",
+    "/signup": "Sign up - Workbench HR",
+    "/forgot-password": "Forgot password - Workbench HR",
+    "/onboarding/goal": "Get started - Workbench HR",
+    "/onboarding/privacy": "Data & Privacy - Workbench HR",
+    "/onboarding/learning": "Sync company DNA - Workbench HR",
+    "/onboarding/opt-out-confirm": "Opt out - Workbench HR",
+    "/onboarding/training": "Training - Workbench HR",
+    "/onboarding/notifications": "Notifications - Workbench HR",
+    "/design-reference": "Design reference - Workbench HR",
+    "/dashboard": "Dashboard - Workbench HR",
+    "/assistant": "AI Assistant - Workbench HR",
+    "/dashboard/sign-documents": "Sign documents - Workbench HR",
+    "/hiring": "Hiring - Workbench HR",
+    "/applicants": "Applicants - Workbench HR",
+    "/view-applicant": "Applicant profile - Workbench HR",
+    "/documents": "Documents - Workbench HR",
+    "/sign-documents": "Sign documents - Workbench HR",
+    "/employees": "Employee Portal - Workbench HR",
+    "/employees/add": "Add employee - Workbench HR",
+    "/employees/teams/new": "Create team - Workbench HR",
+    "/create-document/category": "Document category - Workbench HR",
+    "/document-category": "Document category - Workbench HR",
+    "/document-templates": "Choose template - Workbench HR",
+    "/document-method": "Document method - Workbench HR",
+    "/document-manual-fill": "Fill document - Workbench HR",
+    "/generate-ai": "AI document draft - Workbench HR",
+    "/document-review": "Review document - Workbench HR",
+    "/create-document/template": "Document category - Workbench HR",
+    "/create-document/method": "Creation method - Workbench HR",
+    "/settings/profile": "Profile - Settings",
+    "/settings/company": "Company - Settings",
+    "/settings/roles": "Roles - Settings",
+    "/settings/billing": "Billing - Settings",
+    "/settings/data": "Data - Settings",
+    "/settings/trigger-notifications": "Triggers - Settings",
+    "/settings/employees": "Employees - Settings",
+    "/settings/security": "Security - Settings",
+    "/settings/help": "Help - Settings",
   };
 
   function isDashboardHtmlDoc() {
@@ -384,11 +384,11 @@
     }
     var m = pathname.match(/^\/create-document\/templates\/([^/]+)$/);
     if (m) {
-      document.title = (CAT_LABEL[m[1]] || "Templates") + " — Workbench HR";
+      document.title = (CAT_LABEL[m[1]] || "Templates") + " - Workbench HR";
       return;
     }
     if (pathname.indexOf("/create-document/") === 0) {
-      document.title = "Create document — Workbench HR";
+      document.title = "Create document - Workbench HR";
       return;
     }
     document.title = "Workbench HR";
@@ -487,7 +487,7 @@
     var meta = document.getElementById("ws-review-viewer-meta");
     if (meta) meta.textContent = "Page " + (reviewState.view + 1) + " of " + reviewState.count;
     var panel = document.getElementById("ws-review-viewer-panel");
-    if (panel) panel.textContent = "Preview — page " + (reviewState.view + 1);
+    if (panel) panel.textContent = "Preview - page " + (reviewState.view + 1);
     document.querySelectorAll("[data-review-page-idx]").forEach(function (row) {
       var idx = parseInt(row.getAttribute("data-review-page-idx"), 10);
       row.classList.toggle("wb-template-review__page-row--active", idx === reviewState.view);
@@ -581,7 +581,7 @@
     if (fname) fname.textContent = reviewState.file;
     if (panel) {
       panel.innerHTML = "";
-      panel.textContent = "Preview — page 1";
+      panel.textContent = "Preview - page 1";
     }
     if (prevBtn) prevBtn.disabled = false;
     if (nextBtn) nextBtn.disabled = false;
@@ -1361,9 +1361,9 @@
   /** Mirrors backend routes/documents.py when /documents/config is unreachable. */
   var DOC_GEN_FALLBACK_TYPES = [
     { value: "offer_letter", label: "Offer Letter" },
-    { value: "termination_misconduct", label: "Termination — Misconduct" },
-    { value: "termination_poor_performance", label: "Termination — Poor Performance" },
-    { value: "termination_layoff", label: "Termination — Layoff" },
+    { value: "termination_misconduct", label: "Termination - Misconduct" },
+    { value: "termination_poor_performance", label: "Termination - Poor Performance" },
+    { value: "termination_layoff", label: "Termination - Layoff" },
   ];
 
   function fillDocGenTypeSelect(aiSelect, types, inferred) {
@@ -1437,7 +1437,7 @@
         "Edit the letter in plain text on the page. Short answers on the right fill the header.";
     }
     if (fileEl) fileEl.textContent = file;
-    document.title = shortName + " — Fill document — Workbench HR";
+    document.title = shortName + " - Fill document - Workbench HR";
 
     var methodParams = new URLSearchParams();
     methodParams.set("category", cat);
@@ -1468,7 +1468,7 @@
     }
 
     function formatLetterDate(raw) {
-      if (!raw || !String(raw).trim()) return "—";
+      if (!raw || !String(raw).trim()) return "-";
       var d = new Date(raw + "T12:00:00");
       if (isNaN(d.getTime())) return raw;
       return d.toLocaleDateString(undefined, {
@@ -1486,7 +1486,7 @@
           if (key === "letterDate") {
             slot.textContent = formatLetterDate(val);
           } else {
-            slot.textContent = val.trim() ? val : "—";
+            slot.textContent = val.trim() ? val : "-";
           }
         });
       });
@@ -1546,14 +1546,14 @@
     var shortName = humanizeMethodTemplateLabel(file);
     var fileEl = root.querySelector("[data-gen-ai-file]");
     if (fileEl) fileEl.textContent = file;
-    document.title = shortName + " — AI draft — Workbench HR";
+    document.title = shortName + " - AI draft - Workbench HR";
 
     var lede = root.querySelector("[data-gen-ai-lede]");
     if (lede) {
       lede.textContent =
         "Template selected: " +
         file +
-        ". Use the assistant to describe what you want in the document (demonstration — no live model).";
+        ". Use the assistant to describe what you want in the document (demonstration - no live model).";
     }
 
     var methodParams = new URLSearchParams();
@@ -1601,7 +1601,7 @@
       if (/thanks|ok|yes|sounds good/.test(lower)) {
         return "Great. Add any must-have phrases or names, and we’ll shape the next draft (preview only in this demo).";
       }
-      return "Got it. Give a bit more context — audience, dates, and what outcome you want from this document — and I’ll mirror that in a real integrated flow.";
+      return "Got it. Give a bit more context - audience, dates, and what outcome you want from this document - and I’ll mirror that in a real integrated flow.";
     }
 
     function send() {
@@ -1644,7 +1644,7 @@
     }
 
     function formatLetterDate(raw) {
-      if (!raw || !String(raw).trim()) return "—";
+      if (!raw || !String(raw).trim()) return "-";
       var d = new Date(raw + "T12:00:00");
       if (isNaN(d.getTime())) return raw;
       return d.toLocaleDateString(undefined, {
@@ -1657,7 +1657,7 @@
     function slotText(key, fields) {
       var val = (fields && fields[key]) || "";
       if (key === "letterDate") return formatLetterDate(val);
-      return val.trim() ? val : "—";
+      return val.trim() ? val : "-";
     }
 
     var fields = draft.fields || {};
@@ -1673,7 +1673,7 @@
     var shortName = humanizeMethodTemplateLabel(file);
     var fileEl = root.querySelector("[data-review-file]");
     if (fileEl) fileEl.textContent = file;
-    document.title = shortName + " — Review — Workbench HR";
+    document.title = shortName + " - Review - Workbench HR";
 
     var lede = root.querySelector("[data-review-lede]");
     if (lede) {
@@ -1732,7 +1732,7 @@
     var shareBtn = root.querySelector("[data-review-share]");
     if (shareBtn) {
       shareBtn.addEventListener("click", function () {
-        var title = shortName + " — Workbench HR";
+        var title = shortName + " - Workbench HR";
         var text = draft.body || "";
         if (navigator.share) {
           navigator
@@ -1744,7 +1744,7 @@
               showReviewToast("Copied document text to clipboard.");
             },
             function () {
-              showReviewToast("Unable to copy automatically — select text in the preview.");
+              showReviewToast("Unable to copy automatically - select text in the preview.");
             }
           );
         } else {
@@ -1799,7 +1799,7 @@
             "(your deployed FastAPI origin, no trailing slash), or set window.__WB_DOC_GEN_API__. " +
             "Then allow this site in the API CORS ALLOWED_ORIGINS."
         );
-        setHint("Example: https://workbench-ai.onrender.com — same URL you use for https://…/health.");
+        setHint("Example: https://workbench-ai.onrender.com - same URL you use for https://…/health.");
       } else {
         fetchDocGenConfig(apiBase)
         .then(function (cfg) {
@@ -1816,7 +1816,7 @@
             fillDocGenTypeSelect(aiSelect, DOC_GEN_FALLBACK_TYPES, inferred);
             aiGenReady = true;
             aiBtn.disabled = false;
-            setHint("API returned no types — using built-in list. Try Generate or check Pinecone indexing.");
+            setHint("API returned no types - using built-in list. Try Generate or check Pinecone indexing.");
           } else {
             aiGenReady = true;
             aiBtn.disabled = false;
@@ -1829,7 +1829,7 @@
           showAiError(
             "Could not reach /documents/config at " +
               apiBase +
-              " — using built-in document types. " +
+              " - using built-in document types. " +
               "If the API is on another host, set CORS ALLOWED_ORIGINS to include " +
               (window.location.origin || "this site") +
               (window.location.host && window.location.host.indexOf("github.io") !== -1
@@ -1861,7 +1861,7 @@
             if (bodyOut) bodyOut.textContent = text;
             draft.body = text;
             persistManualFillDraft(draft);
-            if (capEl) capEl.textContent = "AI-generated draft — review before saving";
+            if (capEl) capEl.textContent = "AI-generated draft - review before saving";
             showReviewToast("Document body updated from AI.");
           },
           function (err) {
@@ -1909,7 +1909,7 @@
     var crumb = document.querySelector("[data-applicants-role-title]");
     if (crumb) crumb.textContent = m.title;
     var h = document.querySelector("[data-applicants-page-heading]");
-    if (h) h.textContent = "Applicants — " + m.title;
+    if (h) h.textContent = "Applicants - " + m.title;
     document.querySelectorAll(".wb-applicant-card__role").forEach(function (el) {
       el.textContent = m.title + " candidate";
     });
@@ -2101,7 +2101,7 @@
     };
     var m = map[id] || map.olivia;
     var h = document.querySelector("[data-va-page-heading]");
-    if (h) h.textContent = "Applicant — " + m.name;
+    if (h) h.textContent = "Applicant - " + m.name;
     var crumb = document.querySelector("[data-va-crumb]");
     if (crumb) crumb.textContent = m.crumb;
     var nm = document.querySelector("[data-va-name]");
@@ -2475,7 +2475,7 @@
       var el = root.querySelector("[data-sign-queue-count]");
       if (!el) return;
       if (n === 0) {
-        el.textContent = "You are caught up — no signatures waiting.";
+        el.textContent = "You are caught up - no signatures waiting.";
       } else {
         el.textContent =
           n + (n === 1 ? " document is " : " documents are ") + "waiting on your signature.";
@@ -2623,7 +2623,7 @@
     }
 
     var displayName = pending.fileName || pending.title || "Document";
-    var catLabel = pending.categoryLabel || "—";
+    var catLabel = pending.categoryLabel || "-";
 
     var tr = document.createElement("tr");
     tr.className = "wb-docs-table__tr--added wb-docs-table__tr--just-saved";
@@ -4343,7 +4343,7 @@
     var DEFAULT_TRIGGER_RULES = [
       {
         id: "tn-seed-1",
-        title: "Certification expiring — kitchen leads",
+        title: "Certification expiring - kitchen leads",
         taskKey: "compliance",
         taskLabel: "Compliance / training renewal",
         assigneeId: "e2",
@@ -4907,7 +4907,7 @@
           setPwFeedback("New password and confirmation do not match.", "error");
           return;
         }
-        setPwFeedback("Preview only — your password was not changed.", "success");
+        setPwFeedback("Preview only - your password was not changed.", "success");
         if (cur) cur.value = "";
         if (next) next.value = "";
         if (conf) conf.value = "";
@@ -4932,7 +4932,7 @@
     if (signout && sessMsg) {
       signout.addEventListener("click", function () {
         if (!window.confirm("Sign out all other sessions? You will stay signed in on this device.")) return;
-        sessMsg.textContent = "Preview only — sessions were not ended.";
+        sessMsg.textContent = "Preview only - sessions were not ended.";
         sessMsg.removeAttribute("hidden");
       });
     }
@@ -4977,27 +4977,27 @@
     var changePlan = root.querySelector("[data-st-billing-change-plan]");
     if (changePlan) {
       changePlan.addEventListener("click", function () {
-        showFeedback("Preview only — plan changes are not submitted.");
+        showFeedback("Preview only - plan changes are not submitted.");
       });
     }
 
     var upd = root.querySelector("[data-st-billing-update-pay]");
     if (upd) {
       upd.addEventListener("click", function () {
-        showFeedback("Preview only — payment details were not updated.");
+        showFeedback("Preview only - payment details were not updated.");
       });
     }
 
     var addB = root.querySelector("[data-st-billing-add-backup]");
     if (addB) {
       addB.addEventListener("click", function () {
-        showFeedback("Preview only — backup cards are not saved here.");
+        showFeedback("Preview only - backup cards are not saved here.");
       });
     }
 
     root.querySelectorAll("[data-st-billing-download]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        showFeedback("Preview only — no file was downloaded.");
+        showFeedback("Preview only - no file was downloaded.");
       });
     });
   }
@@ -5316,7 +5316,7 @@
     var catLabel = CAT_LABEL[cat] || cat;
     if (titleEl) titleEl.textContent = catLabel;
     if (crumbCat) crumbCat.textContent = catLabel;
-    document.title = catLabel + " — Templates — Workbench HR";
+    document.title = catLabel + " - Templates - Workbench HR";
     if (ledeEl) {
       ledeEl.textContent =
         "Preview placeholders for each file. Enlarge to flip pages, then select a template to continue.";

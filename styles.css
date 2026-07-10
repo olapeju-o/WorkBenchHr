@@ -1618,9 +1618,9 @@ body.wb-signup-modal--open {
   margin-top: 1.5rem;
   padding: 1.15rem 1.35rem;
   border-radius: 10px;
-  background: #fff;
-  border: 1px solid var(--wb-border-strong);
-  box-shadow: var(--wb-shadow-xs);
+  background: linear-gradient(180deg, var(--wb-forest-mid) 0%, var(--wb-forest) 100%);
+  border: 1px solid transparent;
+  box-shadow: 0 12px 32px rgba(11, 45, 34, 0.22);
 }
 
 .wb-pricing__quote-title {
@@ -1628,20 +1628,28 @@ body.wb-signup-modal--open {
   font-size: 0.98rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: var(--wb-forest);
+  color: #fff;
 }
 
 .wb-pricing__quote-lede {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.45;
-  color: var(--wb-muted);
+  color: rgba(255, 255, 255, 0.78);
   font-weight: 500;
 }
 
 .wb-pricing__quote-cta {
   flex-shrink: 0;
   text-decoration: none;
+  background: var(--wb-green) !important;
+  color: #fff !important;
+  box-shadow: var(--wb-shadow-glow);
+  border: none;
+}
+
+.wb-pricing__quote-cta:hover {
+  filter: brightness(1.06);
 }
 
 @media (max-width: 900px) {
@@ -1673,7 +1681,7 @@ body.wb-signup-modal--open {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
   gap: clamp(1.5rem, 4vw, 2.75rem);
-  align-items: start;
+  align-items: stretch;
   width: 100%;
   padding: clamp(3rem, 7vw, 4.75rem) var(--wb-mkt-inline-end) clamp(3rem, 7vw, 4.75rem)
     var(--wb-mkt-inline-start);
@@ -1783,6 +1791,45 @@ body.wb-signup-modal--open {
   opacity: 0.9;
 }
 
+.wb-contact__people {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.wb-contact__details {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--wb-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.wb-contact__details li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
+}
+
+.wb-contact__details-label {
+  min-width: 4.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wb-muted-soft);
+}
+
+.wb-contact__details-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--wb-forest);
+  letter-spacing: -0.01em;
+}
+
 .wb-contact__panel {
   padding: clamp(1.5rem, 3vw, 2rem);
   border-radius: 14px;
@@ -1854,6 +1901,10 @@ body.wb-signup-modal--open {
 
   .wb-contact__title {
     max-width: none;
+  }
+
+  .wb-contact__details {
+    margin-top: 1.25rem;
   }
 
   .wb-contact-card {
@@ -3351,7 +3402,7 @@ a.wb-btn {
   color: var(--wb-forest-mid);
 }
 
-/* Rich empty states — tips, actions, non-interactive previews */
+/* Rich empty states - tips, actions, non-interactive previews */
 .wb-docs-empty--rich {
   max-width: min(42rem, 100%);
   margin-inline: auto;
@@ -4757,7 +4808,7 @@ a.wb-btn {
   color: var(--wb-muted-soft);
 }
 
-/* Profile — delete account confirmation (full viewport; settings has no workspace sidebar) */
+/* Profile - delete account confirmation (full viewport; settings has no workspace sidebar) */
 .wb-profile-delete-modal.wb-dash-reminder:not([hidden]) {
   left: 0;
   right: 0;
@@ -4882,7 +4933,7 @@ a.wb-btn {
   min-width: 7.5rem;
 }
 
-/* Settings — Help & Support */
+/* Settings - Help & Support */
 .wb-help-page {
   max-width: 980px;
   margin: 1.25rem auto 2rem;
@@ -4914,7 +4965,7 @@ a.wb-btn {
   line-height: 1.45;
 }
 
-/* Workspace — AI Assistant placeholder */
+/* Workspace - AI Assistant placeholder */
 .wb-ai-assistant {
   max-width: min(44rem, 100%);
   margin: 0;
@@ -5343,7 +5394,7 @@ button.wb-help-card__action--btn {
   font-weight: 500;
 }
 
-/* Settings — manage employees (shell spacing matches .wb-roles-page / .wb-data-page) */
+/* Settings - manage employees (shell spacing matches .wb-roles-page / .wb-data-page) */
 .wb-employees-page {
   max-width: 980px;
   margin: 1.25rem auto 2rem;
@@ -6034,7 +6085,7 @@ button.wb-help-card__action--btn {
   margin-bottom: 1.25rem;
 }
 
-/* Settings — password & security */
+/* Settings - password & security */
 .wb-security-page {
   max-width: 980px;
   margin: 1.25rem auto 2rem;
@@ -6141,7 +6192,7 @@ button.wb-help-card__action--btn {
   color: var(--wb-green-dark);
 }
 
-/* Settings — plan & billing */
+/* Settings - plan & billing */
 .wb-billing-page {
   max-width: 980px;
   margin: 1.25rem auto 2rem;
@@ -6297,7 +6348,7 @@ button.wb-help-card__action--btn {
   color: var(--wb-green-dark);
 }
 
-/* Settings — trigger notifications (page shell + hero match .wb-roles-page) */
+/* Settings - trigger notifications (page shell + hero match .wb-roles-page) */
 .wb-settings-triggers {
   padding: 0 0 0.25rem;
 }
@@ -6847,7 +6898,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   letter-spacing: 0.02em;
 }
 
-/* DNA sync finished — centered modal (portaled to body) */
+/* DNA sync finished - centered modal (portaled to body) */
 .wb-training-done {
   position: fixed;
   inset: 0;
@@ -6865,7 +6916,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  /* Flat, light scrim — no blur so the page stays calm and readable */
+  /* Flat, light scrim - no blur so the page stays calm and readable */
   background: rgba(11, 45, 34, 0.22);
 }
 
@@ -7076,7 +7127,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   box-shadow: 0 1px 0 rgba(5, 33, 22, 0.06);
 }
 
-/* Sample templates, dashboard & documents: main has no top pad — header gets combined inset so spacing matches other workspace pages */
+/* Sample templates, dashboard & documents: main has no top pad - header gets combined inset so spacing matches other workspace pages */
 .wb-dash__main.wb-dash__main--sample-templates .wb-dash__header,
 .wb-dash__main.wb-dash__main--dashboard .wb-dash__header,
 .wb-dash__main.wb-dash__main--documents .wb-dash__header {
@@ -7128,7 +7179,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   letter-spacing: -0.02em;
 }
 
-/* Create document — select template */
+/* Create document - select template */
 .wb-create-doc {
   max-width: min(52rem, 100%);
 }
@@ -7268,7 +7319,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   box-shadow: 0 4px 14px rgba(0, 209, 124, 0.35);
 }
 
-/* Create document — browse sample PDF templates by category */
+/* Create document - browse sample PDF templates by category */
 .wb-create-templates {
   max-width: min(52rem, 100%);
 }
@@ -7980,7 +8031,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   border-radius: 4px;
 }
 
-/* Create document — how to fill (AI vs manual) */
+/* Create document - how to fill (AI vs manual) */
 .wb-create-method {
   max-width: min(40rem, 100%);
 }
@@ -8172,7 +8223,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   font-size: 0.88rem;
 }
 
-/* Create document — template page review (pick pages, then continue) */
+/* Create document - template page review (pick pages, then continue) */
 .wb-template-review {
   width: 100%;
   max-width: min(56rem, 100%);
@@ -8394,7 +8445,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   min-width: 12rem;
 }
 
-/* Create document — draft step (theme-aligned with create-templates / sign-doc) */
+/* Create document - draft step (theme-aligned with create-templates / sign-doc) */
 .wb-create-draft-page {
   width: 100%;
   max-width: min(44rem, 100%);
@@ -8586,7 +8637,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   text-decoration: none;
 }
 
-/* Create document — Wizard-of-Oz AI “preview” (sample copy, no model) */
+/* Create document - Wizard-of-Oz AI “preview” (sample copy, no model) */
 .wb-ai-preview__brief {
   margin: 0 0 1.1rem;
   padding: 0.85rem 1rem;
@@ -8812,7 +8863,7 @@ a.wb-dash__btn--primary.wb-dash__btn--create-flow {
   border-top: none;
 }
 
-/* Manual template preview — highlighted inserts (shares doc-wrap grid with AI tools rail) */
+/* Manual template preview - highlighted inserts (shares doc-wrap grid with AI tools rail) */
 .wb-manual-preview__legend {
   display: flex;
   align-items: center;
@@ -9084,7 +9135,7 @@ a.wb-dash-home__btn-dark--link {
   text-decoration: none;
 }
 
-/* Dashboard — sign pending documents (aligned with create-doc / docs theme) */
+/* Dashboard - sign pending documents (aligned with create-doc / docs theme) */
 .wb-sign-doc-page {
   width: 100%;
   max-width: none;
@@ -9541,7 +9592,7 @@ a.wb-dash-home__btn-dark--link {
   outline-offset: 0;
 }
 
-/* Dashboard — modals (remind later + send nudge)
+/* Dashboard - modals (remind later + send nudge)
    Align overlay with the workspace main column (not full viewport), so dialogs
    center over the content area beside the 280px sidebar. */
 .wb-dash-reminder[hidden] {
@@ -11598,7 +11649,7 @@ body.wb-sign-reminder-modal--open {
   }
 }
 
-/* Employee portal — team cards (employees.html; reuses .wb-hiring toolbar + filter shell) */
+/* Employee portal - team cards (employees.html; reuses .wb-hiring toolbar + filter shell) */
 .wb-emp-teams__bar {
   display: flex;
   flex-wrap: wrap;
@@ -11779,7 +11830,7 @@ body.wb-sign-reminder-modal--open {
   color: var(--wb-forest);
 }
 
-/* Employee portal — individual grid (toggle with team view) */
+/* Employee portal - individual grid (toggle with team view) */
 .wb-emp-results-panel {
   min-width: 0;
 }
@@ -11974,7 +12025,7 @@ body.wb-sign-reminder-modal--open {
   display: none !important;
 }
 
-/* Document templates browse — placeholder previews + lightbox */
+/* Document templates browse - placeholder previews + lightbox */
 .wb-doc-tpl {
   max-width: min(56rem, 100%);
 }
@@ -12470,7 +12521,7 @@ body.wb-sign-reminder-modal--open {
   justify-content: center;
 }
 
-/* Manual template fill — PDF-style preview + plain text editor + short answers */
+/* Manual template fill - PDF-style preview + plain text editor + short answers */
 .wb-manual-fill {
   width: 100%;
   max-width: min(72rem, 100%);
@@ -12736,7 +12787,7 @@ body.wb-sign-reminder-modal--open {
   display: none !important;
 }
 
-/* AI draft demo — chat panel beside PDF-style preview */
+/* AI draft demo - chat panel beside PDF-style preview */
 .wb-gen-ai__preview-editor {
   cursor: default;
   opacity: 0.92;
@@ -12858,7 +12909,7 @@ body.wb-sign-reminder-modal--open {
   color: var(--wb-muted-soft);
 }
 
-/* Document review — merged preview + actions */
+/* Document review - merged preview + actions */
 .wb-doc-review {
   max-width: min(48rem, 100%);
   margin: 0 auto;
