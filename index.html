@@ -188,67 +188,132 @@
 
         <section id="platform" class="wb-platform" aria-labelledby="wb-platform-title">
           <div class="wb-platform__inner">
-            <header class="wb-platform__head">
-              <p class="wb-platform__eyebrow">Platform</p>
-              <h2 id="wb-platform-title" class="wb-platform__title">Everything your HR bench needs</h2>
-              <p class="wb-platform__lede">
-                One calm workspace for hiring, onboarding, and day-to-day people work, built for teams that are
-                growing fast.
-              </p>
-            </header>
-            <ul class="wb-platform__grid">
-              <li class="wb-platform-card">
-                <span class="wb-platform-card__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M8 7h8M8 12h5M6 3h12a2 2 0 0 1 2 2v14l-4-2.5L12 19l-4-2.5L4 19V5a2 2 0 0 1 2-2z"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <h3 class="wb-platform-card__title">Hiring &amp; pipeline</h3>
-                <p class="wb-platform-card__body">
-                  Post roles, track candidates, and keep your team aligned from first screen to signed offer.
-                </p>
-              </li>
-              <li class="wb-platform-card">
-                <span class="wb-platform-card__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M9 11.5l2 2 4-4.5M7 4h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <h3 class="wb-platform-card__title">Onboarding &amp; tasks</h3>
-                <p class="wb-platform-card__body">
-                  Structured checklists, owners, and due dates so every new hire lands smoothly.
-                </p>
-              </li>
-              <li class="wb-platform-card">
-                <span class="wb-platform-card__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M8 3h6l4 4v13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linejoin="round"
-                    />
-                    <path d="M14 3v4h4M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <h3 class="wb-platform-card__title">Policies &amp; documents</h3>
-                <p class="wb-platform-card__body">
-                  Templates, e-signatures, and reminders in one place, with less chasing and fewer gaps.
-                </p>
-              </li>
-            </ul>
+            <div class="wb-platform-showcase" data-platform-showcase>
+              <div class="wb-platform-showcase__content">
+                <header class="wb-platform__head">
+                  <p class="wb-platform__eyebrow">Features</p>
+                  <h2 id="wb-platform-title" class="wb-platform__title">Everything your HR bench needs</h2>
+                  <p class="wb-platform__lede">
+                    One calm workspace for hiring, onboarding, and day-to-day people work, built for teams that are
+                    growing fast.
+                  </p>
+                  <p class="wb-platform-showcase__hint" data-platform-hint>
+                    <span class="wb-platform-showcase__hint-desktop">Hover a feature to preview it</span>
+                    <span class="wb-platform-showcase__hint-touch">Tap a feature to preview it</span>
+                  </p>
+                </header>
+
+                <div class="wb-platform-showcase__nav" role="tablist" aria-label="Platform features">
+                  <button
+                    type="button"
+                    class="wb-platform-showcase__item is-active"
+                    role="tab"
+                    id="platform-tab-0"
+                    data-platform-item="0"
+                    aria-selected="true"
+                    aria-controls="platform-panel-0"
+                    tabindex="0"
+                  >
+                    <span class="wb-platform-showcase__index" aria-hidden="true">01</span>
+                    <span class="wb-platform-showcase__item-body">
+                      <span class="wb-platform-showcase__item-title">Stay on top of the right moments</span>
+                      <span class="wb-platform-showcase__item-lede">
+                        Surface offer letters, org health, and review reminders before they slip.
+                      </span>
+                    </span>
+                    <span class="wb-platform-showcase__arrow" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="wb-platform-showcase__item"
+                    role="tab"
+                    id="platform-tab-1"
+                    data-platform-item="1"
+                    aria-selected="false"
+                    aria-controls="platform-panel-1"
+                    tabindex="-1"
+                  >
+                    <span class="wb-platform-showcase__index" aria-hidden="true">02</span>
+                    <span class="wb-platform-showcase__item-body">
+                      <span class="wb-platform-showcase__item-title">Smarter compliance, less chase-down</span>
+                      <span class="wb-platform-showcase__item-lede">
+                        Keep policies and protecting documents in one place instead of scattered drives.
+                      </span>
+                    </span>
+                    <span class="wb-platform-showcase__arrow" aria-hidden="true"></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="wb-platform-showcase__item"
+                    role="tab"
+                    id="platform-tab-2"
+                    data-platform-item="2"
+                    aria-selected="false"
+                    aria-controls="platform-panel-2"
+                    tabindex="-1"
+                  >
+                    <span class="wb-platform-showcase__index" aria-hidden="true">03</span>
+                    <span class="wb-platform-showcase__item-body">
+                      <span class="wb-platform-showcase__item-title">Onboard with every form marked done</span>
+                      <span class="wb-platform-showcase__item-lede">
+                        Give every new hire a complete paperwork path so day one feels ready.
+                      </span>
+                    </span>
+                    <span class="wb-platform-showcase__arrow" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="wb-platform-showcase__visual">
+                <div class="wb-platform-showcase__stage" aria-live="polite">
+                  <img
+                    src="assets/snippet1.png"
+                    alt="Workbench HR activity cards showing a generated offer letter, org health score, and an upcoming review reminder"
+                    class="wb-platform-showcase__img is-active"
+                    id="platform-panel-0"
+                    role="tabpanel"
+                    aria-labelledby="platform-tab-0"
+                    data-platform-panel="0"
+                    width="720"
+                    height="900"
+                    decoding="async"
+                  />
+                  <img
+                    src="assets/snippet2.png"
+                    alt="Compliance highlight: stay compliant and save time by centralizing important documents"
+                    class="wb-platform-showcase__img"
+                    id="platform-panel-1"
+                    role="tabpanel"
+                    aria-labelledby="platform-tab-1"
+                    aria-hidden="true"
+                    data-platform-panel="1"
+                    width="960"
+                    height="420"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <img
+                    src="assets/snippet3.png"
+                    alt="Employee documents checklist with Form I-9, W-4, direct deposit, and other onboarding items marked complete"
+                    class="wb-platform-showcase__img"
+                    id="platform-panel-2"
+                    role="tabpanel"
+                    aria-labelledby="platform-tab-2"
+                    aria-hidden="true"
+                    data-platform-panel="2"
+                    width="720"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="wb-platform-showcase__dots" role="presentation">
+                  <button type="button" class="wb-platform-showcase__dot is-active" data-platform-dot="0" aria-label="Show feature 1" tabindex="-1"></button>
+                  <button type="button" class="wb-platform-showcase__dot" data-platform-dot="1" aria-label="Show feature 2" tabindex="-1"></button>
+                  <button type="button" class="wb-platform-showcase__dot" data-platform-dot="2" aria-label="Show feature 3" tabindex="-1"></button>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -352,6 +417,16 @@
                   </a>
                 </li>
               </ul>
+              <div class="wb-contact__art">
+                <img
+                  src="assets/hrillustration.png"
+                  alt=""
+                  class="wb-contact__art-img"
+                  width="640"
+                  height="480"
+                  decoding="async"
+                />
+              </div>
               <ul class="wb-contact__details">
                 <li>
                   <span class="wb-contact__details-label">Based in</span>
@@ -360,10 +435,6 @@
                 <li>
                   <span class="wb-contact__details-label">Hours</span>
                   <span class="wb-contact__details-value">Monday-Friday, 9am-5pm ET</span>
-                </li>
-                <li>
-                  <span class="wb-contact__details-label">Response</span>
-                  <span class="wb-contact__details-value">Usually within one business day</span>
                 </li>
               </ul>
             </div>
