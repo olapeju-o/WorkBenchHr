@@ -12,6 +12,13 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+      (function () {
+        var h = location.hash.replace(/^#/, "");
+        if (!h || h === "/" || h === "home") window.scrollTo(0, 0);
+      })();
+    </script>
   </head>
   <body>
     <!-- Marketing home -->
@@ -23,8 +30,8 @@
             <span class="wb-mkt-logo__text">Workbench HR</span>
           </a>
           <div class="wb-mkt-header__actions">
-            <a href="#/login" class="wb-mkt-ghost">Sign in</a>
-            <a href="#/" class="wb-mkt-cta" data-open-signup-modal>Create account</a>
+            <p class="wb-mkt-coming-soon">Coming soon: Fall 2026</p>
+            <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
           </div>
         </div>
       </header>
@@ -41,7 +48,7 @@
               >
             </p>
             <div class="wb-hero-split__actions">
-              <a href="#/" class="wb-btn wb-btn--primary wb-btn--hero" data-open-signup-modal>Create account</a>
+              <button type="button" class="wb-btn wb-btn--primary wb-btn--hero" data-open-waitlist>Get Notified</button>
               <a href="#request-demo" class="wb-btn wb-btn--muted wb-btn--hero">Request a demo</a>
             </div>
             <div class="wb-hero-split__proof">
@@ -57,7 +64,7 @@
                   ><span aria-hidden="true">★</span><span aria-hidden="true">★</span
                   ><span aria-hidden="true">★</span>
                 </div>
-                <p class="wb-hero-split__proof-text">Join early teams already exploring Workbench HR</p>
+                <p class="wb-hero-split__proof-text">Join the waitlist for early access this fall</p>
               </div>
             </div>
           </div>
@@ -74,78 +81,8 @@
           </div>
         </section>
 
-        <section id="proof" class="wb-proof" aria-label="What Workbench HR helps you do">
-          <div class="wb-proof__inner">
-            <ul class="wb-proof__grid">
-              <li class="wb-proof-card">
-                <div
-                  class="wb-proof-card__media"
-                  style="background-image: url(https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&amp;h=1100&amp;fit=crop)"
-                  role="img"
-                  aria-hidden="true"
-                ></div>
-                <div class="wb-proof-card__overlay">
-                  <p class="wb-proof-card__label">Hiring</p>
-                  <p class="wb-proof-card__metric">One pipeline</p>
-                  <p class="wb-proof-card__desc">Roles, applicants, and offers in one place</p>
-                </div>
-              </li>
-              <li class="wb-proof-card">
-                <div
-                  class="wb-proof-card__media"
-                  style="background-image: url(https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&amp;h=1100&amp;fit=crop)"
-                  role="img"
-                  aria-hidden="true"
-                ></div>
-                <div class="wb-proof-card__overlay">
-                  <p class="wb-proof-card__label">Onboarding</p>
-                  <p class="wb-proof-card__metric">Day-one ready</p>
-                  <p class="wb-proof-card__desc">Checklists, owners, and due dates that stick</p>
-                </div>
-              </li>
-              <li class="wb-proof-card">
-                <div
-                  class="wb-proof-card__media"
-                  style="background-image: url(https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&amp;h=1100&amp;fit=crop)"
-                  role="img"
-                  aria-hidden="true"
-                ></div>
-                <div class="wb-proof-card__overlay">
-                  <p class="wb-proof-card__label">Documents</p>
-                  <p class="wb-proof-card__metric">Built for you</p>
-                  <p class="wb-proof-card__desc">Offers, policies, and letters in your tone</p>
-                </div>
-              </li>
-              <li class="wb-proof-card">
-                <div
-                  class="wb-proof-card__media"
-                  style="background-image: url(https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&amp;h=1100&amp;fit=crop)"
-                  role="img"
-                  aria-hidden="true"
-                ></div>
-                <div class="wb-proof-card__overlay">
-                  <p class="wb-proof-card__label">Compliance</p>
-                  <p class="wb-proof-card__metric">Less chasing</p>
-                  <p class="wb-proof-card__desc">Signatures and reminders without the scramble</p>
-                </div>
-              </li>
-              <li class="wb-proof-card">
-                <div
-                  class="wb-proof-card__media"
-                  style="background-image: url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&amp;h=1100&amp;fit=crop)"
-                  role="img"
-                  aria-hidden="true"
-                ></div>
-                <div class="wb-proof-card__overlay">
-                  <p class="wb-proof-card__label">People ops</p>
-                  <p class="wb-proof-card__metric">Stay ahead</p>
-                  <p class="wb-proof-card__desc">Reviews and follow-ups before they slip</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="wb-built-for" aria-label="Business types Workbench HR is built for">
+        <section class="wb-proof" aria-label="Business types Workbench HR is built for">
+          <div class="wb-built-for">
             <p class="wb-built-for__label">Built for</p>
             <div class="wb-built-for__viewport">
               <div class="wb-built-for__track">
@@ -323,7 +260,7 @@
               <p class="wb-pricing__eyebrow">Pricing</p>
               <h2 id="wb-pricing-title" class="wb-pricing__title">Simple pricing. No surprises.</h2>
               <p class="wb-pricing__lede">
-                All plans include a free trial. Not sure which fits? We will help you find the right one.
+                Launch pricing for Fall 2026. Join the waitlist now, and we will help you find the right plan.
               </p>
             </header>
 
@@ -340,7 +277,7 @@
                   <li>Basic org health score</li>
                   <li>Email support</li>
                 </ul>
-                <a href="#/" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-signup-modal>Get started free</a>
+                <a href="#waitlist" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-waitlist>Get Notified</a>
               </li>
 
               <li class="wb-price-card wb-price-card--featured">
@@ -356,7 +293,7 @@
                   <li>Full org health dashboard</li>
                   <li>Priority support</li>
                 </ul>
-                <a href="#/" class="wb-btn wb-btn--primary wb-price-card__cta" data-open-signup-modal>Get started free</a>
+                <a href="#waitlist" class="wb-btn wb-btn--primary wb-price-card__cta" data-open-waitlist>Get Notified</a>
               </li>
 
               <li class="wb-price-card">
@@ -371,7 +308,7 @@
                   <li>Dedicated onboarding</li>
                   <li>SLA-backed support</li>
                 </ul>
-                <a href="#/" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-signup-modal>Get started free</a>
+                <a href="#waitlist" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-waitlist>Get Notified</a>
               </li>
             </ul>
 
@@ -442,51 +379,180 @@
             <div class="wb-contact__panel">
               <h3 class="wb-contact__panel-title">Request a demo</h3>
               <p class="wb-contact__panel-lede">
-                <em>We will show you a live walkthrough in the context of your actual business.</em>
+                <em>A short question series helps us prepare. Then a team member follows up personally.</em>
               </p>
               <div class="wb-demo__form-slot" id="demo-request-form-slot">
-                <form id="demo-request-form" class="wb-contact__form">
-                  <label class="wb-field">
-                    <span class="wb-field__label">Your name</span>
-                    <input
-                      class="wb-input wb-input--demo"
-                      name="name"
-                      required
-                      autocomplete="name"
-                      placeholder="Jane Smith"
-                    />
-                  </label>
-                  <label class="wb-field">
-                    <span class="wb-field__label">Email</span>
-                    <input
-                      class="wb-input wb-input--demo"
-                      name="email"
-                      type="email"
-                      required
-                      autocomplete="email"
-                      placeholder="jane@yourcompany.com"
-                    />
-                  </label>
-                  <label class="wb-field">
-                    <span class="wb-field__label">Business type</span>
-                    <input
-                      class="wb-input wb-input--demo"
-                      name="company"
-                      required
-                      autocomplete="organization"
-                      placeholder="e.g. dental office, plumbing company"
-                    />
-                  </label>
-                  <label class="wb-field">
-                    <span class="wb-field__label">Biggest HR challenge</span>
-                    <textarea
-                      class="wb-textarea"
-                      name="message"
-                      rows="4"
-                      placeholder="e.g. Writing offer letters, tracking reviews, handling turnover…"
-                    ></textarea>
-                  </label>
-                  <button type="submit" class="wb-btn wb-btn--primary wb-btn--block">Send demo request</button>
+                <form id="demo-request-form" class="wb-contact__form" data-demo-wizard>
+                  <p class="wb-demo-wizard__progress" data-demo-progress aria-live="polite">Step 1 of 3</p>
+
+                  <div class="wb-demo-wizard__steps">
+                    <div class="wb-demo-wizard__step is-active" data-demo-step="1">
+                      <p class="wb-demo-wizard__step-title">About you</p>
+                      <div class="wb-demo-wizard__fields">
+                        <label class="wb-field">
+                          <span class="wb-field__label">First name</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="first_name"
+                            required
+                            autocomplete="given-name"
+                            placeholder="Jane"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Last name</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="last_name"
+                            required
+                            autocomplete="family-name"
+                            placeholder="Smith"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Work email</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="email"
+                            type="email"
+                            required
+                            autocomplete="email"
+                            placeholder="jane@yourcompany.com"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Job title</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="job_title"
+                            required
+                            autocomplete="organization-title"
+                            placeholder="Owner, Office manager…"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Company name</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="company"
+                            required
+                            autocomplete="organization"
+                            placeholder="Rivera &amp; Sons"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Phone number</span>
+                          <input
+                            class="wb-input wb-input--demo"
+                            name="phone"
+                            type="tel"
+                            required
+                            autocomplete="tel"
+                            placeholder="(555) 000-0000"
+                          />
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Employee count</span>
+                          <select class="wb-input wb-input--demo" name="employee_count" required>
+                            <option value="" disabled selected>Select…</option>
+                            <option value="1-10">1-10</option>
+                            <option value="11-30">11-30</option>
+                            <option value="31-50">31-50</option>
+                            <option value="51-100">51-100</option>
+                            <option value="100+">100+</option>
+                          </select>
+                        </label>
+                        <label class="wb-field">
+                          <span class="wb-field__label">Country</span>
+                          <select class="wb-input wb-input--demo" name="country" required>
+                            <option value="" disabled selected>Select…</option>
+                            <option value="United States">United States</option>
+                            <option value="Canada">Canada</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="wb-demo-wizard__step" data-demo-step="2" hidden>
+                      <p class="wb-demo-wizard__step-title">What are your goals?</p>
+                      <p class="wb-demo-wizard__step-lede">Select all that apply.</p>
+                      <div class="wb-demo-wizard__chips" role="group" aria-label="Goals">
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="goals" value="hiring" /><span>Hiring &amp; pipeline</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="goals" value="onboarding" /><span>Onboarding</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="goals" value="documents" /><span>Documents &amp; templates</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="goals" value="compliance" /><span>Compliance</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="goals" value="people-ops" /><span>Day-to-day people ops</span></label
+                        >
+                      </div>
+
+                      <p class="wb-demo-wizard__step-title wb-demo-wizard__step-title--sub">Which plan interests you?</p>
+                      <p class="wb-demo-wizard__step-lede">Pick the tier you want to discuss on the walkthrough.</p>
+                      <div class="wb-demo-wizard__chips" role="radiogroup" aria-label="Plan interest">
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="starter" required /><span>Starter · $8/mo</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="core" /><span>Core · $15/mo</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="pro" /><span>Pro · $20/mo</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="unsure" /><span>Not sure yet</span></label
+                        >
+                      </div>
+                    </div>
+
+                    <div class="wb-demo-wizard__step" data-demo-step="3" hidden>
+                      <p class="wb-demo-wizard__step-title">What pains you most today?</p>
+                      <p class="wb-demo-wizard__step-lede">Select all that apply, then add any extra detail.</p>
+                      <div class="wb-demo-wizard__chips" role="group" aria-label="Pain points">
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="pains" value="paperwork" /><span>Too much paperwork</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="pains" value="tracking" /><span>Hard to track tasks</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="pains" value="compliance-risk" /><span>Compliance risk</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="pains" value="turnover" /><span>Turnover &amp; retention</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="checkbox" name="pains" value="tools" /><span>Scattered tools</span></label
+                        >
+                      </div>
+                      <label class="wb-field">
+                        <span class="wb-field__label">Anything else we should know?</span>
+                        <textarea
+                          class="wb-textarea"
+                          name="message"
+                          rows="3"
+                          placeholder="Optional context for your walkthrough"
+                        ></textarea>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="wb-demo-wizard__nav">
+                    <button type="button" class="wb-btn wb-btn--muted" data-demo-back disabled>Back</button>
+                    <button type="button" class="wb-btn wb-btn--primary" data-demo-next>Continue</button>
+                    <button type="submit" class="wb-btn wb-btn--primary" data-demo-submit hidden>Send demo request</button>
+                  </div>
+                  <p class="wb-form-error" data-demo-error hidden role="alert"></p>
                 </form>
                 <div
                   id="demo-request-thanks"
@@ -509,7 +575,10 @@
                   </div>
                   <h3 id="demo-success-title" class="wb-demo__success-title">Request received</h3>
                   <p class="wb-demo__success-lede">
-                    Thanks! We&apos;ve received your request and will be in touch shortly.
+                    Thanks! Check your inbox for an auto-reply from
+                    <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>. We acknowledge your request,
+                    share what happens next, and a team member will follow up after reviewing your goals, plan
+                    interest, and pain points.
                   </p>
                   <button type="button" class="wb-btn wb-btn--outline" id="demo-request-reset">
                     Submit another request
@@ -536,56 +605,98 @@
           </div>
         </footer>
       </main>
+    </div>
 
-      <div class="wb-signup-modal" data-signup-modal hidden>
+      <div class="wb-signup-modal" data-waitlist-modal hidden>
         <button
           type="button"
           class="wb-signup-modal__backdrop"
-          data-signup-modal-close
+          data-waitlist-modal-close
           tabindex="-1"
-          aria-label="Close create account dialog"
+          aria-label="Close waitlist dialog"
         ></button>
         <div
-          class="wb-signup-modal__panel"
+          class="wb-signup-modal__panel wb-signup-modal__panel--split"
           role="dialog"
           aria-modal="true"
-          aria-labelledby="wb-signup-modal-title"
+          aria-labelledby="wb-waitlist-modal-title"
         >
-          <header class="wb-signup-modal__head">
-            <div class="wb-signup-modal__brand">
-              <img src="assets/logo.png" width="36" height="36" alt="" />
-              <h2 id="wb-signup-modal-title" class="wb-signup-modal__title">Create an account</h2>
+          <button
+            type="button"
+            class="wb-signup-modal__close wb-signup-modal__close--corner"
+            data-waitlist-modal-close
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <div class="wb-signup-modal__main">
+            <header class="wb-signup-modal__head">
+              <h2 id="wb-waitlist-modal-title" class="wb-signup-modal__title">Get notified</h2>
+            </header>
+            <p class="wb-signup-modal__lede" data-waitlist-intro>
+              Workbench HR launches Fall 2026. Share a few details and we will tell you when early access opens.
+            </p>
+            <form class="wb-signup-modal__form wb-signup-modal__form--lead" data-waitlist-modal-form>
+              <label class="wb-field">
+                <span class="wb-field__label">First name</span>
+                <input class="wb-input" name="first_name" autocomplete="given-name" required />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Last name</span>
+                <input class="wb-input" name="last_name" autocomplete="family-name" required />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Work email</span>
+                <input class="wb-input" name="email" type="email" autocomplete="email" required />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Job title</span>
+                <input class="wb-input" name="job_title" autocomplete="organization-title" required />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Company name</span>
+                <input class="wb-input" name="company" autocomplete="organization" required />
+              </label>
+              <label class="wb-field">
+                <span class="wb-field__label">Employee count</span>
+                <select class="wb-input" name="employee_count" required>
+                  <option value="" disabled selected>Select…</option>
+                  <option value="1-10">1-10</option>
+                  <option value="11-30">11-30</option>
+                  <option value="31-50">31-50</option>
+                  <option value="51-100">51-100</option>
+                  <option value="100+">100+</option>
+                </select>
+              </label>
+              <button type="submit" class="wb-btn wb-btn--primary wb-btn--block">Get Notified</button>
+              <p class="wb-signup-modal__legal">
+                We’ll only use your info to send Workbench HR launch updates.
+                <a href="#/privacy" class="wb-link" data-waitlist-modal-close>Privacy Notice</a>
+              </p>
+              <p class="wb-form-error" data-waitlist-error hidden role="alert"></p>
+            </form>
+            <div class="wb-signup-modal__thanks" data-waitlist-thanks hidden>
+              <p class="wb-demo__success-title">You're on the list</p>
+              <p class="wb-signup-modal__lede">
+                Watch for a confirmation from
+                <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>. We only email about launch and early
+                access.
+              </p>
+              <button type="button" class="wb-btn wb-btn--outline wb-btn--block" data-waitlist-modal-close>Close</button>
             </div>
-            <button type="button" class="wb-signup-modal__close" data-signup-modal-close aria-label="Close">
-              ×
-            </button>
-          </header>
-          <p class="wb-signup-modal__lede">Finally, an HR tool that works as hard as you do.</p>
-          <form class="wb-signup-modal__form" data-signup-modal-form>
-            <label class="wb-field">
-              <span class="wb-field__label">Name</span>
-              <input class="wb-input" name="name" autocomplete="name" required />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Email</span>
-              <input class="wb-input" name="email" type="email" autocomplete="email" required />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Password</span>
-              <input class="wb-input" name="password" type="password" autocomplete="new-password" required />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Company name</span>
-              <input class="wb-input" name="company" autocomplete="organization" required />
-            </label>
-            <button type="submit" class="wb-btn wb-btn--primary wb-btn--block">Create account</button>
-          </form>
-          <p class="wb-signup-modal__footer">
-            Already have an account? <a href="#/login" class="wb-link" data-signup-modal-close>Sign in</a>
-          </p>
+          </div>
+          <aside class="wb-signup-modal__aside wb-signup-modal__aside--media" aria-hidden="true">
+            <img
+              class="wb-signup-modal__aside-img"
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&amp;h=1600&amp;fit=crop"
+              alt=""
+              width="600"
+              height="800"
+              decoding="async"
+            />
+          </aside>
         </div>
       </div>
-    </div>
 
     <!-- About -->
     <div class="wb-legal" data-static-view="about" hidden>
@@ -932,32 +1043,12 @@
             <span class="brand-mark__text">Workbench HR</span>
           </span>
           <p class="wb-split__tagline">
-            Welcome back! Sign in to pick up where you left off. Your team, tasks, and HR tools are right here when you
-            need them.
+            Coming soon: Fall 2026. The product dashboard is not open to the public yet. Join the waitlist and we will
+            notify you when sign-in is available.
           </p>
-          <p data-static-auth-msg class="wb-demo__thanks" hidden>
-            Static preview: there is no server. In the full app, signing in would continue to your workspace.
-          </p>
-          <form class="wb-form" data-static-auth-form>
-            <label class="wb-field">
-              <span class="wb-field__label">Email</span>
-              <input class="wb-input" name="email" type="email" autocomplete="email" />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Password</span>
-              <input class="wb-input" name="password" type="password" autocomplete="current-password" />
-            </label>
-            <div class="wb-split__form-row">
-              <label class="wb-split__remember">
-                <input type="checkbox" name="remember" checked />
-                <span>Keep me signed in</span>
-              </label>
-              <a href="#/forgot-password" class="wb-split__forgot">Forgot password?</a>
-            </div>
-            <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Sign in</button>
-          </form>
+          <button type="button" class="wb-btn wb-btn--dark wb-btn--block" data-open-waitlist>Get Notified</button>
           <p class="wb-split__footer">
-            New to Workbench HR? <a href="#/signup" class="wb-link">Create an account</a>
+            Need a walkthrough now? <a href="#request-demo" class="wb-link">Request a demo</a>
           </p>
         </div>
       </div>
@@ -978,31 +1069,13 @@
             <img src="assets/logo.png" width="44" height="44" alt="" class="brand-mark__img" />
             <span class="brand-mark__text">Workbench HR</span>
           </span>
-          <p class="wb-split__tagline">Finally, an HR tool that works as hard as you do!</p>
-          <p data-static-auth-msg class="wb-demo__thanks" hidden>
-            Static preview: there is no server. In the full app, you would continue to onboarding.
+          <p class="wb-split__tagline">
+            Account creation opens with the Fall 2026 launch. Join the waitlist for early access, or request a demo to
+            talk with the team.
           </p>
-          <form class="wb-form" data-static-auth-form>
-            <label class="wb-field">
-              <span class="wb-field__label">Name</span>
-              <input class="wb-input" name="name" autocomplete="name" />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Email</span>
-              <input class="wb-input" name="email" type="email" autocomplete="email" />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Password</span>
-              <input class="wb-input" name="password" type="password" autocomplete="new-password" />
-            </label>
-            <label class="wb-field">
-              <span class="wb-field__label">Company Name</span>
-              <input class="wb-input" name="company" autocomplete="organization" />
-            </label>
-            <button type="submit" class="wb-btn wb-btn--dark wb-btn--block">Create Account</button>
-          </form>
+          <button type="button" class="wb-btn wb-btn--dark wb-btn--block" data-open-waitlist>Get Notified</button>
           <p class="wb-split__footer">
-            Already have an account? <a href="#/login" class="wb-link">Sign in</a>
+            Prefer a walkthrough? <a href="#request-demo" class="wb-link">Request a demo</a>
           </p>
         </div>
       </div>
@@ -1392,6 +1465,7 @@
       </div>
     </div>
 
+    <script src="email-config.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

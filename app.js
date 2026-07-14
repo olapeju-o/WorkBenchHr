@@ -1,6 +1,10 @@
 (function () {
   "use strict";
 
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
   var MARKETING_SECTIONS = ["home", "platform", "request-demo"];
 
   var CAT_LABEL = {
@@ -374,7 +378,23 @@
   function scrollToId(id) {
     var el = document.getElementById(id);
     if (!el) return;
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    var target = el;
+    var gap = 12;
+    if (id === "request-demo") {
+      // Land on the contact copy, not the section's top padding / pricing bleed.
+      target =
+        el.querySelector(".wb-contact__eyebrow") ||
+        el.querySelector(".wb-contact__title") ||
+        el.querySelector(".wb-contact__inner") ||
+        el;
+      gap = 36;
+    }
+
+    var headerRaw = getComputedStyle(document.documentElement).getPropertyValue("--wb-mkt-header-h");
+    var headerH = parseFloat(headerRaw) || 68;
+    var y = target.getBoundingClientRect().top + window.pageYOffset - headerH - gap;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   }
 
   function setTitleForPath(pathname) {
@@ -2893,7 +2913,6 @@
       }
     }
 
-    var prev = window.__staticPrevView;
     var parsed = parseHash();
 
     if (isDocumentCategoryHtmlDoc() && parsed.kind === "marketing") {
@@ -2983,12 +3002,12 @@
       var mkt = document.querySelector('[data-static-view="marketing"]');
       if (mkt) mkt.hidden = false;
       document.title = "Workbench HR";
-      if (prev && prev !== "marketing") window.scrollTo(0, 0);
       window.__staticPrevView = "marketing";
       var sec = normalizeSection(parsed.section);
       setMarketingTabs(sec);
       if (parsed.section === "request-demo") setTimeout(function () { scrollToId("request-demo"); }, 80);
       else if (parsed.section === "platform") setTimeout(scrollPlatformCentered, 80);
+      else window.scrollTo(0, 0);
       return;
     }
 
@@ -3742,9 +3761,115 @@
           e.preventDefault();
           scrollPlatformCentered();
           setMarketingTabs("platform");
+        } else if (target === "request-demo") {
+          e.preventDefault();
+          if (window.location.hash !== "#request-demo") {
+            window.history.replaceState(null, "", "#request-demo");
+          }
+          setMarketingTabs("request-demo");
+          scrollToId("request-demo");
         } else if (target) {
           setMarketingTabs(target === "customers" ? "home" : target);
         }
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href="#request-demo"]') : null;
+      if (!a) return;
+      e.preventDefault();
+      if (window.location.hash !== "#request-demo") {
+        window.history.replaceState(null, "", "#request-demo");
+      }
+      setMarketingTabs("request-demo");
+      scrollToId("request-demo");
+    });
+
+    var logo = document.querySelector(".wb-mkt-logo");
+    if (logo) {
+      logo.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (window.location.hash !== "#/" && window.location.hash !== "#home" && window.location.hash !== "") {
+          window.history.replaceState(null, "", "#/");
+        }
+        setMarketingTabs("home");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  }
+
+  function getEmailConfig() {
+    return window.WB_EMAIL || {};
+  }
+
+  function checkedValues(form, name) {
+    return Array.prototype.slice
+      .call(form.querySelectorAll('input[name="' + name + '"]:checked'))
+      .map(function (el) {
+        return el.value;
+      });
+  }
+
+  function setFormBusy(button, busy, busyLabel) {
+    if (!button) return;
+    if (busy) {
+      if (!button.getAttribute("data-idle-label")) {
+        button.setAttribute("data-idle-label", button.textContent);
+      }
+      button.disabled = true;
+      button.textContent = busyLabel || "Sending…";
+    } else {
+      button.disabled = false;
+      button.textContent = button.getAttribute("data-idle-label") || button.textContent;
+    }
+  }
+
+  function showFormError(el, message) {
+    if (!el) {
+      if (message) window.alert(message);
+      return;
+    }
+    if (!message) {
+      el.hidden = true;
+      el.textContent = "";
+      return;
+    }
+    el.hidden = false;
+    el.textContent = message;
+  }
+
+  function submitWorkbenchEmail(payload) {
+    var cfg = getEmailConfig();
+    var key = (cfg.accessKey || "").trim();
+    if (!key || key.indexOf("xxxx") !== -1) {
+      return Promise.reject(
+        new Error(
+          "Email is not configured yet. Add your Web3Forms access key in email-config.js."
+        )
+      );
+    }
+
+    var body = Object.assign(
+      {
+        access_key: key,
+        from_name: cfg.fromName || "Workbench HR",
+      },
+      payload || {}
+    );
+
+    return fetch(cfg.endpoint || "https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then(function (res) {
+      return res.json().then(function (data) {
+        if (!res.ok || (data && data.success === false)) {
+          throw new Error((data && data.message) || "Could not send email. Please try again.");
+        }
+        return data;
       });
     });
   }
@@ -3755,21 +3880,284 @@
     var thanks = document.getElementById("demo-request-thanks");
     var slot = document.getElementById("demo-request-form-slot");
     var resetBtn = document.getElementById("demo-request-reset");
+    var steps = Array.prototype.slice.call(form.querySelectorAll("[data-demo-step]"));
+    var progress = form.querySelector("[data-demo-progress]");
+    var backBtn = form.querySelector("[data-demo-back]");
+    var nextBtn = form.querySelector("[data-demo-next]");
+    var submitBtn = form.querySelector("[data-demo-submit]");
+    var errorEl = form.querySelector("[data-demo-error]");
+    var current = 1;
+
+    function showStep(n) {
+      current = n;
+      steps.forEach(function (step) {
+        var id = Number(step.getAttribute("data-demo-step"));
+        var on = id === n;
+        step.classList.toggle("is-active", on);
+        step.hidden = !on;
+      });
+      if (progress) progress.textContent = "Step " + n + " of " + steps.length;
+      if (backBtn) backBtn.disabled = n <= 1;
+      if (nextBtn) nextBtn.hidden = n >= steps.length;
+      if (submitBtn) submitBtn.hidden = n < steps.length;
+      var focusable = form.querySelector(
+        '[data-demo-step="' + n + '"] input, [data-demo-step="' + n + '"] textarea'
+      );
+      if (focusable) focusable.focus();
+    }
+
+    function validateStep(n) {
+      var step = form.querySelector('[data-demo-step="' + n + '"]');
+      if (!step) return true;
+      var required = Array.prototype.slice.call(step.querySelectorAll("input[required], textarea[required], select[required]"));
+      for (var i = 0; i < required.length; i++) {
+        if (!required[i].checkValidity()) {
+          required[i].reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        showFormError(errorEl, "");
+        if (!validateStep(current)) return;
+        if (current < steps.length) showStep(current + 1);
+      });
+    }
+
+    if (backBtn) {
+      backBtn.addEventListener("click", function () {
+        showFormError(errorEl, "");
+        if (current > 1) showStep(current - 1);
+      });
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (slot) slot.classList.add("wb-demo__form-slot--success");
-      if (thanks) thanks.hidden = false;
-      if (thanks) thanks.focus();
+      showFormError(errorEl, "");
+      if (!validateStep(current)) return;
+
+      var firstName = (form.elements.first_name && form.elements.first_name.value) || "";
+      var lastName = (form.elements.last_name && form.elements.last_name.value) || "";
+      var name = (firstName + " " + lastName).trim();
+      var email = (form.elements.email && form.elements.email.value) || "";
+      var jobTitle = (form.elements.job_title && form.elements.job_title.value) || "";
+      var company = (form.elements.company && form.elements.company.value) || "";
+      var phone = (form.elements.phone && form.elements.phone.value) || "";
+      var employeeCount = (form.elements.employee_count && form.elements.employee_count.value) || "";
+      var country = (form.elements.country && form.elements.country.value) || "";
+      var message = (form.elements.message && form.elements.message.value) || "";
+      var goals = checkedValues(form, "goals");
+      var pains = checkedValues(form, "pains");
+      var plan = checkedValues(form, "plan")[0] || "";
+
+      setFormBusy(submitBtn, true, "Sending…");
+      submitWorkbenchEmail({
+        subject: "Workbench HR demo request from " + name,
+        form_type: "demo_request",
+        name: name,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        replyto: email,
+        job_title: jobTitle,
+        company: company,
+        phone: phone,
+        employee_count: employeeCount,
+        country: country,
+        plan_interest: plan,
+        goals: goals.length ? goals.join(", ") : "None selected",
+        pain_points: pains.length ? pains.join(", ") : "None selected",
+        details: message || "None",
+        message:
+          "Demo request\n\nName: " +
+          name +
+          "\nEmail: " +
+          email +
+          "\nJob title: " +
+          jobTitle +
+          "\nCompany: " +
+          company +
+          "\nPhone: " +
+          phone +
+          "\nEmployee count: " +
+          employeeCount +
+          "\nCountry: " +
+          country +
+          "\nPlan interest: " +
+          (plan || "n/a") +
+          "\nGoals: " +
+          (goals.length ? goals.join(", ") : "None") +
+          "\nPain points: " +
+          (pains.length ? pains.join(", ") : "None") +
+          "\nDetails: " +
+          (message || "None"),
+      })
+        .then(function () {
+          if (slot) slot.classList.add("wb-demo__form-slot--success");
+          if (thanks) {
+            thanks.hidden = false;
+            thanks.focus();
+          }
+        })
+        .catch(function (err) {
+          showFormError(errorEl, err.message || "Could not send your request.");
+        })
+        .then(function () {
+          setFormBusy(submitBtn, false);
+        });
     });
+
     if (resetBtn) {
       resetBtn.addEventListener("click", function () {
         form.reset();
+        showFormError(errorEl, "");
         if (thanks) thanks.hidden = true;
         if (slot) slot.classList.remove("wb-demo__form-slot--success");
-        var first = form.querySelector("input, textarea, select, button");
-        if (first) first.focus();
+        form.querySelectorAll(".wb-demo-chip").forEach(function (chip) {
+          chip.classList.remove("is-checked");
+        });
+        showStep(1);
       });
     }
+
+    form.querySelectorAll(".wb-demo-chip input").forEach(function (input) {
+      function sync() {
+        if (input.parentElement) input.parentElement.classList.toggle("is-checked", input.checked);
+      }
+      input.addEventListener("change", sync);
+      sync();
+    });
+
+    if (steps.length) showStep(1);
+  }
+
+  function bindWaitlistModal() {
+    var modal = document.querySelector("[data-waitlist-modal]");
+    if (!modal) return;
+
+    var panel = modal.querySelector(".wb-signup-modal__panel");
+    var form = modal.querySelector("[data-waitlist-modal-form]");
+    var intro = modal.querySelector("[data-waitlist-intro]");
+    var thanks = modal.querySelector("[data-waitlist-thanks]");
+    var errorEl = modal.querySelector("[data-waitlist-error]");
+    var submitBtn = form ? form.querySelector('button[type="submit"]') : null;
+    var lastFocus = null;
+
+    function openModal(e) {
+      if (e) e.preventDefault();
+      lastFocus = document.activeElement;
+      if (form) {
+        form.hidden = false;
+        form.reset();
+      }
+      if (intro) intro.hidden = false;
+      if (thanks) thanks.hidden = true;
+      showFormError(errorEl, "");
+      modal.hidden = false;
+      document.body.classList.add("wb-signup-modal--open");
+      var first = modal.querySelector("input, button, a");
+      if (first) {
+        window.setTimeout(function () {
+          first.focus();
+        }, 0);
+      }
+    }
+
+    function closeModal() {
+      if (modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("wb-signup-modal--open");
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        try {
+          lastFocus.focus();
+        } catch (err) {}
+      }
+    }
+
+    document.querySelectorAll("[data-open-waitlist]").forEach(function (el) {
+      el.addEventListener("click", openModal);
+    });
+
+    modal.querySelectorAll("[data-waitlist-modal-close]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        closeModal();
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !modal.hidden) {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        showFormError(errorEl, "");
+        var firstName = (form.elements.first_name && form.elements.first_name.value) || "";
+        var lastName = (form.elements.last_name && form.elements.last_name.value) || "";
+        var name = (firstName + " " + lastName).trim();
+        var email = (form.elements.email && form.elements.email.value) || "";
+        var jobTitle = (form.elements.job_title && form.elements.job_title.value) || "";
+        var company = (form.elements.company && form.elements.company.value) || "";
+        var employeeCount = (form.elements.employee_count && form.elements.employee_count.value) || "";
+        setFormBusy(submitBtn, true, "Joining…");
+        submitWorkbenchEmail({
+          subject: "Workbench HR waitlist signup",
+          form_type: "waitlist",
+          name: name,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          replyto: email,
+          job_title: jobTitle,
+          company: company,
+          employee_count: employeeCount,
+          message:
+            "Waitlist signup\n\nName: " +
+            name +
+            "\nEmail: " +
+            email +
+            "\nJob title: " +
+            jobTitle +
+            "\nCompany: " +
+            company +
+            "\nEmployee count: " +
+            employeeCount,
+        })
+          .then(function () {
+            form.hidden = true;
+            if (intro) intro.hidden = true;
+            if (thanks) thanks.hidden = false;
+          })
+          .catch(function (err) {
+            showFormError(errorEl, err.message || "Could not join the waitlist.");
+          })
+          .then(function () {
+            setFormBusy(submitBtn, false);
+          });
+      });
+    }
+
+    if (panel) {
+      panel.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+  }
+
+  function bindAuthForms() {
+    document.querySelectorAll("[data-static-auth-form]").forEach(function (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var msg = form.querySelector("[data-static-auth-msg]");
+        if (msg) msg.hidden = false;
+      });
+    });
   }
 
   function bindPlatformShowcase() {
@@ -3881,90 +4269,6 @@
       var thanks = document.getElementById("contact-thanks");
       form.hidden = true;
       if (thanks) thanks.hidden = false;
-    });
-  }
-
-  function bindSignupModal() {
-    var modal = document.querySelector("[data-signup-modal]");
-    if (!modal) return;
-
-    var panel = modal.querySelector(".wb-signup-modal__panel");
-    var form = modal.querySelector("[data-signup-modal-form]");
-    var lastFocus = null;
-
-    function openModal(e) {
-      if (e) e.preventDefault();
-      lastFocus = document.activeElement;
-      modal.hidden = false;
-      document.body.classList.add("wb-signup-modal--open");
-      var first = modal.querySelector("input, button, a");
-      if (first) {
-        window.setTimeout(function () {
-          first.focus();
-        }, 0);
-      }
-    }
-
-    function closeModal() {
-      if (modal.hidden) return;
-      modal.hidden = true;
-      document.body.classList.remove("wb-signup-modal--open");
-      if (lastFocus && typeof lastFocus.focus === "function") {
-        try {
-          lastFocus.focus();
-        } catch (err) {}
-      }
-    }
-
-    document.querySelectorAll("[data-open-signup-modal]").forEach(function (el) {
-      el.addEventListener("click", openModal);
-    });
-
-    modal.querySelectorAll("[data-signup-modal-close]").forEach(function (el) {
-      el.addEventListener("click", function () {
-        closeModal();
-      });
-    });
-
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !modal.hidden) {
-        e.preventDefault();
-        closeModal();
-      }
-    });
-
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        closeModal();
-        window.location.hash = "#/onboarding/goal";
-      });
-    }
-
-    if (panel) {
-      panel.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    }
-  }
-
-  function bindAuthForms() {
-    document.querySelectorAll("[data-static-auth-form]").forEach(function (form) {
-      form.addEventListener("submit", function (e) {
-        if (form.closest('[data-static-view="signup"]')) {
-          e.preventDefault();
-          window.location.hash = "#/onboarding/goal";
-          return;
-        }
-        if (form.closest('[data-static-view="login"]')) {
-          e.preventDefault();
-          window.location.replace("dashboard.html#/dashboard");
-          return;
-        }
-        e.preventDefault();
-        var msg = form.querySelector("[data-static-auth-msg]");
-        if (msg) msg.hidden = false;
-      });
     });
   }
 
@@ -5949,7 +6253,7 @@
 
   function init() {
     bindMarketingNav();
-    bindSignupModal();
+    bindWaitlistModal();
     bindDemoForm();
     bindPlatformShowcase();
     bindContactForm();
@@ -5996,8 +6300,19 @@
     if (parseHash().kind === "marketing") {
       var h = window.location.hash.replace(/^#/, "");
       var hasSection = MARKETING_SECTIONS.indexOf(h) !== -1;
-      if (!hasSection || h === "home" || h === "customers") onScrollMarketing();
+      if (!hasSection || h === "home" || h === "customers") {
+        window.scrollTo(0, 0);
+        onScrollMarketing();
+      }
     }
+
+    window.addEventListener("pageshow", function (e) {
+      if (!e.persisted) return;
+      var p = parseHash();
+      if (p.kind === "marketing" && normalizeSection(p.section) === "home") {
+        window.scrollTo(0, 0);
+      }
+    });
 
     var yEl = document.getElementById("footer-year");
     if (yEl) yEl.textContent = String(new Date().getFullYear());
