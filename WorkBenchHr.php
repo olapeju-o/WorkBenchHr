@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WorkBench HR
  * Description: Workbench HR marketing site (static front experience shipped as a plugin).
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Workbench HR
  * Text Domain: workbench-hr
  */
@@ -17,7 +17,7 @@ define('WBHR_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WBHR_PAGE_SLUG', 'workbench');
 
 /**
- * Make sure a real WP page exists at /workbench/ (more reliable than custom rewrites on WP.com).
+ * Make sure a real WP page exists (used as the site homepage).
  */
 function wbhr_ensure_landing_page() {
   $found = get_posts(array(
@@ -48,8 +48,20 @@ function wbhr_ensure_landing_page() {
   ));
 }
 
+/**
+ * Point WordPress "homepage" settings at the Workbench page.
+ */
+function wbhr_set_as_homepage() {
+  $page_id = wbhr_ensure_landing_page();
+  if ($page_id <= 0) {
+    return;
+  }
+  update_option('show_on_front', 'page');
+  update_option('page_on_front', $page_id);
+}
+
 register_activation_hook(__FILE__, function () {
-  wbhr_ensure_landing_page();
+  wbhr_set_as_homepage();
   flush_rewrite_rules();
 });
 
@@ -58,35 +70,50 @@ register_deactivation_hook(__FILE__, function () {
 });
 
 add_action('init', function () {
-  wbhr_ensure_landing_page();
+  wbhr_set_as_homepage();
 }, 20);
 
+function wbhr_request_path() {
+  if (empty($_SERVER['REQUEST_URI'])) {
+    return '';
+  }
+  $path = (string) wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+  return trim($path, '/');
+}
+
 /**
- * Serve the static marketing HTML for /workbench/ (page match or direct path match).
+ * True for the site homepage and the /workbench/ alias.
  */
 function wbhr_is_landing_request() {
+  if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+    return false;
+  }
+  if (defined('REST_REQUEST') && REST_REQUEST) {
+    return false;
+  }
+  if (defined('XMLRPC_REQUEST') && XMLRPC_REQUEST) {
+    return false;
+  }
+
+  // WordPress front page (after page_on_front is set).
+  if (!is_feed() && (is_front_page() || (is_page(WBHR_PAGE_SLUG) && is_front_page()))) {
+    return true;
+  }
+
   if (is_page(WBHR_PAGE_SLUG)) {
     return true;
   }
 
-  if (empty($_SERVER['REQUEST_URI'])) {
-    return false;
-  }
+  $path = wbhr_request_path();
 
-  $path = (string) wp_parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-  $path = trim($path, '/');
-
-  // Handles /workbench and /workbench/
-  if ($path === WBHR_PAGE_SLUG) {
+  // https://workbenchhr.com/
+  if ($path === '') {
     return true;
   }
 
-  // Handles subdirectory installs like /blog/workbench
-  if (substr($path, -strlen(WBHR_PAGE_SLUG)) === WBHR_PAGE_SLUG) {
-    $before = substr($path, 0, -strlen(WBHR_PAGE_SLUG));
-    if ($before === '' || substr($before, -1) === '/') {
-      return true;
-    }
+  // https://workbenchhr.com/workbench/
+  if ($path === WBHR_PAGE_SLUG) {
+    return true;
   }
 
   return false;
@@ -130,15 +157,20 @@ function wbhr_serve_landing() {
 }
 
 add_action('template_redirect', function () {
+  // Keep /workbench/ working, but send people to the real homepage.
+  $path = wbhr_request_path();
+  if ($path === WBHR_PAGE_SLUG) {
+    wp_safe_redirect(home_url('/'), 301);
+    exit;
+  }
+
   if (!wbhr_is_landing_request()) {
     return;
   }
+
   wbhr_serve_landing();
 }, 0);
 
-/**
- * Admin helper so it’s obvious where to look.
- */
 add_action('admin_notices', function () {
   if (!current_user_can('activate_plugins')) {
     return;
@@ -147,8 +179,8 @@ add_action('admin_notices', function () {
   if (!$screen || $screen->id !== 'plugins') {
     return;
   }
-  $url = home_url('/' . WBHR_PAGE_SLUG . '/');
+  $url = home_url('/');
   echo '<div class="notice notice-success"><p>';
-  echo 'WorkBench HR is active. Open the marketing page at <a href="' . esc_url($url) . '"><strong>' . esc_html($url) . '</strong></a>';
+  echo 'WorkBench HR is active and set as the homepage: <a href="' . esc_url($url) . '"><strong>' . esc_html($url) . '</strong></a>';
   echo '</p></div>';
 });
