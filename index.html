@@ -15,6 +15,13 @@
     <script>
       if ("scrollRestoration" in history) history.scrollRestoration = "manual";
       (function () {
+        // Never stay on the raw plugin file URL.
+        if (/\/wp-content\/plugins\/WorkBenchHr\/?/i.test(location.pathname)) {
+          var next = "/";
+          if (location.hash === "#demo" || location.hash === "#request-demo") next = "/demo";
+          location.replace(next + location.search + (next === "/demo" ? "" : location.hash));
+          return;
+        }
         var h = location.hash.replace(/^#/, "");
         if (!h || h === "/" || h === "home") window.scrollTo(0, 0);
       })();
@@ -25,7 +32,7 @@
     <div class="wb-marketing" data-static-view="marketing">
       <header class="wb-mkt-header">
         <div class="wb-mkt-header__inner">
-          <a href="#/" class="wb-mkt-logo">
+          <a href="/" class="wb-mkt-logo">
             <img src="assets/logo.png" width="36" height="36" alt="" />
             <span class="wb-mkt-logo__text">Workbench HR</span>
           </a>
@@ -49,7 +56,7 @@
             </p>
             <div class="wb-hero-split__actions">
               <button type="button" class="wb-btn wb-btn--primary wb-btn--hero" data-open-waitlist>Get Notified</button>
-              <a href="#request-demo" class="wb-btn wb-btn--muted wb-btn--hero">Request a demo</a>
+              <a href="/demo" class="wb-btn wb-btn--muted wb-btn--hero">Request a demo</a>
             </div>
             <div class="wb-hero-split__proof">
               <div class="wb-hero-split__avatars" aria-hidden="true">
@@ -319,12 +326,12 @@
                   Request a quote or schedule a walkthrough. We will match you to the right fit.
                 </p>
               </div>
-              <a href="#request-demo" class="wb-btn wb-btn--primary wb-pricing__quote-cta">Get a quote →</a>
+              <a href="/demo" class="wb-btn wb-btn--primary wb-pricing__quote-cta">Get a quote →</a>
             </div>
           </div>
         </section>
 
-        <section id="request-demo" class="wb-contact" aria-labelledby="wb-contact-title">
+        <section id="demo" class="wb-contact" aria-labelledby="wb-contact-title">
           <div class="wb-contact__inner">
             <div class="wb-contact__people">
               <p class="wb-contact__eyebrow">Contact us</p>
@@ -744,7 +751,7 @@
             <p>
               For product questions or partnership inquiries, reach out here (demo form - connect your backend when
               ready). For a guided tour, you can also
-              <a href="#request-demo" class="wb-link wb-link--underline">request a demo</a>
+              <a href="/demo" class="wb-link wb-link--underline">request a demo</a>
               from the home page.
             </p>
             <form id="contact-form" class="wb-demo__form wb-demo__form--contact">
@@ -1048,7 +1055,7 @@
           </p>
           <button type="button" class="wb-btn wb-btn--dark wb-btn--block" data-open-waitlist>Get Notified</button>
           <p class="wb-split__footer">
-            Need a walkthrough now? <a href="#request-demo" class="wb-link">Request a demo</a>
+            Need a walkthrough now? <a href="/demo" class="wb-link">Request a demo</a>
           </p>
         </div>
       </div>
@@ -1075,7 +1082,7 @@
           </p>
           <button type="button" class="wb-btn wb-btn--dark wb-btn--block" data-open-waitlist>Get Notified</button>
           <p class="wb-split__footer">
-            Prefer a walkthrough? <a href="#request-demo" class="wb-link">Request a demo</a>
+            Prefer a walkthrough? <a href="/demo" class="wb-link">Request a demo</a>
           </p>
         </div>
       </div>

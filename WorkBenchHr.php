@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WorkBench HR
  * Description: Workbench HR marketing site (static front experience shipped as a plugin).
- * Version: 1.2.0
+ * Version: 1.3.0
  * Author: Workbench HR
  * Text Domain: workbench-hr
  */
@@ -14,43 +14,58 @@ if (!defined('ABSPATH')) {
 define('WBHR_PLUGIN_FILE', __FILE__);
 define('WBHR_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WBHR_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('WBHR_PAGE_SLUG', 'workbench');
+define('WBHR_PAGE_SLUG', 'demo');
 
 /**
- * Make sure a real WP page exists (used as the site homepage).
+ * Make sure a real WP page exists at /demo/ (and keep homepage pointed at it).
  */
 function wbhr_ensure_landing_page() {
+  // Prefer the new /demo slug; migrate an old /workbench page if present.
   $found = get_posts(array(
-    'name'           => WBHR_PAGE_SLUG,
+    'name'           => 'demo',
     'post_type'      => 'page',
     'post_status'    => array('publish', 'draft', 'private'),
     'posts_per_page' => 1,
     'fields'         => 'ids',
   ));
 
-  if (!empty($found)) {
-    $id = (int) $found[0];
-    if (get_post_status($id) !== 'publish') {
+  if (empty($found)) {
+    $legacy = get_posts(array(
+      'name'           => 'workbench',
+      'post_type'      => 'page',
+      'post_status'    => array('publish', 'draft', 'private'),
+      'posts_per_page' => 1,
+      'fields'         => 'ids',
+    ));
+    if (!empty($legacy)) {
       wp_update_post(array(
-        'ID'          => $id,
+        'ID'        => (int) $legacy[0],
+        'post_name' => 'demo',
+        'post_title'=> 'Workbench HR Demo',
         'post_status' => 'publish',
       ));
+      return (int) $legacy[0];
     }
-    return $id;
+
+    return (int) wp_insert_post(array(
+      'post_title'   => 'Workbench HR Demo',
+      'post_name'    => 'demo',
+      'post_status'  => 'publish',
+      'post_type'    => 'page',
+      'post_content' => '<!-- Workbench HR landing is rendered by the WorkBench HR plugin. -->',
+    ));
   }
 
-  return (int) wp_insert_post(array(
-    'post_title'   => 'Workbench HR',
-    'post_name'    => WBHR_PAGE_SLUG,
-    'post_status'  => 'publish',
-    'post_type'    => 'page',
-    'post_content' => '<!-- Workbench HR landing is rendered by the WorkBench HR plugin. -->',
-  ));
+  $id = (int) $found[0];
+  if (get_post_status($id) !== 'publish') {
+    wp_update_post(array(
+      'ID'          => $id,
+      'post_status' => 'publish',
+    ));
+  }
+  return $id;
 }
 
-/**
- * Point WordPress "homepage" settings at the Workbench page.
- */
 function wbhr_set_as_homepage() {
   $page_id = wbhr_ensure_landing_page();
   if ($page_id <= 0) {
@@ -81,9 +96,6 @@ function wbhr_request_path() {
   return trim($path, '/');
 }
 
-/**
- * True for the site homepage and the /workbench/ alias.
- */
 function wbhr_is_landing_request() {
   if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
     return false;
@@ -95,28 +107,45 @@ function wbhr_is_landing_request() {
     return false;
   }
 
-  // WordPress front page (after page_on_front is set).
-  if (!is_feed() && (is_front_page() || (is_page(WBHR_PAGE_SLUG) && is_front_page()))) {
+  if (!is_feed() && is_front_page()) {
     return true;
   }
 
-  if (is_page(WBHR_PAGE_SLUG)) {
+  if (is_page(array('demo', 'workbench'))) {
     return true;
   }
 
   $path = wbhr_request_path();
+  return ($path === '' || $path === 'demo' || $path === 'workbench');
+}
 
-  // https://workbenchhr.com/
-  if ($path === '') {
-    return true;
+/**
+ * Serve landing HTML with a clean site base URL, while assets still load from the plugin folder.
+ */
+function wbhr_prepare_landing_html($html) {
+  $plugin_base = esc_url(trailingslashit(WBHR_PLUGIN_URL));
+  $site_base   = esc_url(trailingslashit(home_url('/')));
+
+  // Point relative CSS/JS/images at the plugin directory.
+  $html = preg_replace_callback(
+    '#\s(href|src)=([\'"])(?!https?:|//|/|#|mailto:|tel:|data:|javascript:)([^\'"]+)\2#i',
+    function ($m) use ($plugin_base) {
+      return ' ' . $m[1] . '=' . $m[2] . $plugin_base . ltrim($m[3], './') . $m[2];
+    },
+    $html
+  );
+
+  // Keep the address bar on the real site domain (not /wp-content/plugins/...).
+  if (stripos($html, '<base ') === false) {
+    $html = preg_replace(
+      '#<head([^>]*)>#i',
+      '<head$1><base href="' . $site_base . '">',
+      $html,
+      1
+    );
   }
 
-  // https://workbenchhr.com/workbench/
-  if ($path === WBHR_PAGE_SLUG) {
-    return true;
-  }
-
-  return false;
+  return $html;
 }
 
 function wbhr_serve_landing() {
@@ -134,15 +163,7 @@ function wbhr_serve_landing() {
     exit('Unable to read Workbench HR landing page.');
   }
 
-  $base = esc_url(trailingslashit(WBHR_PLUGIN_URL));
-  if (stripos($html, '<base ') === false) {
-    $html = preg_replace(
-      '#<head([^>]*)>#i',
-      '<head$1><base href="' . $base . '">',
-      $html,
-      1
-    );
-  }
+  $html = wbhr_prepare_landing_html($html);
 
   global $wp_query;
   if ($wp_query instanceof WP_Query) {
@@ -157,10 +178,11 @@ function wbhr_serve_landing() {
 }
 
 add_action('template_redirect', function () {
-  // Keep /workbench/ working, but send people to the real homepage.
   $path = wbhr_request_path();
-  if ($path === WBHR_PAGE_SLUG) {
-    wp_safe_redirect(home_url('/'), 301);
+
+  // Old pretty path → /demo
+  if ($path === 'workbench') {
+    wp_safe_redirect(home_url('/demo'), 301);
     exit;
   }
 
@@ -179,8 +201,8 @@ add_action('admin_notices', function () {
   if (!$screen || $screen->id !== 'plugins') {
     return;
   }
-  $url = home_url('/');
   echo '<div class="notice notice-success"><p>';
-  echo 'WorkBench HR is active and set as the homepage: <a href="' . esc_url($url) . '"><strong>' . esc_html($url) . '</strong></a>';
+  echo 'WorkBench HR homepage: <a href="' . esc_url(home_url('/')) . '"><strong>' . esc_html(home_url('/')) . '</strong></a>';
+  echo ' · Demo: <a href="' . esc_url(home_url('/demo')) . '"><strong>' . esc_html(home_url('/demo')) . '</strong></a>';
   echo '</p></div>';
 });
