@@ -10,16 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Sync files via SFTP
+      - name: Sync files via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Uploads your HTML/CSS/JS files directly into your primary site folder
-          server-dir: /htdocs/
+          protocol: ftps
+          # Uploads your HTML/CSS/JS files into your site folder
+          # GoDaddy is often /public_html/ — change if your host shows a different root
+          server-dir: /public_html/
           exclude: |
             **/.git*
             **/.git*/**
