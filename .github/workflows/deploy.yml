@@ -1,0 +1,29 @@
+name: Deploy WorkBenchHr to WordPress
+
+on:
+  push:
+    branches:
+      - main # Triggers the deployment every time you push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync files via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Uploads your HTML/CSS/JS files directly into your primary site folder
+          server-dir: /htdocs/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/WorkBenchHR-feat-doc-generation-maanav/**
+            **/.github/**
