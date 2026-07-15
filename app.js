@@ -5,7 +5,7 @@
     history.scrollRestoration = "manual";
   }
 
-  var MARKETING_SECTIONS = ["home", "platform", "demo", "request-demo"];
+  var MARKETING_SECTIONS = ["home", "platform", "request-demo"];
 
   var CAT_LABEL = {
     company: "Company Documents",
@@ -339,7 +339,6 @@
 
   function normalizeSection(section) {
     if (section === "customers") return "home";
-    if (section === "request-demo") return "demo";
     return section || "home";
   }
 
@@ -347,7 +346,7 @@
     var headerEl = document.querySelector(".wb-mkt-header");
     var headerH = headerEl ? headerEl.getBoundingClientRect().height : 68;
     var activationY = headerH + 20;
-    var order = ["home", "platform", "demo"];
+    var order = ["home", "platform", "request-demo"];
     var current = "home";
     for (var i = 0; i < order.length; i++) {
       var el = document.getElementById(order[i]);
@@ -377,13 +376,12 @@
   }
 
   function scrollToId(id) {
-    var sectionId = id === "request-demo" ? "demo" : id;
-    var el = document.getElementById(sectionId);
+    var el = document.getElementById(id);
     if (!el) return;
 
     var target = el;
     var gap = 12;
-    if (sectionId === "demo") {
+    if (id === "request-demo") {
       // Land on the contact copy, not the section's top padding / pricing bleed.
       target =
         el.querySelector(".wb-contact__eyebrow") ||
@@ -3007,9 +3005,7 @@
       window.__staticPrevView = "marketing";
       var sec = normalizeSection(parsed.section);
       setMarketingTabs(sec);
-      if (parsed.section === "demo" || parsed.section === "request-demo") {
-        setTimeout(function () { scrollToId("demo"); }, 80);
-      }
+      if (parsed.section === "request-demo") setTimeout(function () { scrollToId("request-demo"); }, 80);
       else if (parsed.section === "platform") setTimeout(scrollPlatformCentered, 80);
       else window.scrollTo(0, 0);
       return;
@@ -3753,7 +3749,7 @@
     if (parseHash().kind !== "marketing") return;
     var h = window.location.hash.replace(/^#/, "");
     if (h.charAt(0) === "/" || h.charAt(0) === "!") return;
-    if (h === "platform" || h === "demo" || h === "request-demo") return;
+    if (h === "platform" || h === "request-demo") return;
     setMarketingTabs(getScrollSpySection());
   }
 
@@ -3765,9 +3761,13 @@
           e.preventDefault();
           scrollPlatformCentered();
           setMarketingTabs("platform");
-        } else if (target === "demo" || target === "request-demo") {
+        } else if (target === "request-demo") {
           e.preventDefault();
-          goToDemo();
+          if (window.location.hash !== "#request-demo") {
+            window.history.replaceState(null, "", "#request-demo");
+          }
+          setMarketingTabs("request-demo");
+          scrollToId("request-demo");
         } else if (target) {
           setMarketingTabs(target === "customers" ? "home" : target);
         }
@@ -3775,43 +3775,27 @@
     });
 
     document.addEventListener("click", function (e) {
-      var a = e.target && e.target.closest ? e.target.closest('a[href="/demo"], a[href="#demo"], a[href="#request-demo"]') : null;
+      var a = e.target && e.target.closest ? e.target.closest('a[href="#request-demo"]') : null;
       if (!a) return;
       e.preventDefault();
-      goToDemo();
+      if (window.location.hash !== "#request-demo") {
+        window.history.replaceState(null, "", "#request-demo");
+      }
+      setMarketingTabs("request-demo");
+      scrollToId("request-demo");
     });
 
     var logo = document.querySelector(".wb-mkt-logo");
     if (logo) {
       logo.addEventListener("click", function (e) {
         e.preventDefault();
-        if (window.location.pathname !== "/" || window.location.hash) {
-          window.history.pushState(null, "", "/");
+        if (window.location.hash !== "#/" && window.location.hash !== "#home" && window.location.hash !== "") {
+          window.history.replaceState(null, "", "#/");
         }
         setMarketingTabs("home");
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
     }
-
-    window.addEventListener("popstate", function () {
-      if (parseHash().kind !== "marketing") return;
-      var pathName = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
-      if (pathName === "/demo") {
-        setMarketingTabs("demo");
-        scrollToId("demo");
-      } else if (pathName === "/") {
-        setMarketingTabs("home");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
-  }
-
-  function goToDemo() {
-    if (window.location.pathname !== "/demo") {
-      window.history.pushState(null, "", "/demo");
-    }
-    setMarketingTabs("demo");
-    scrollToId("demo");
   }
 
   function getEmailConfig() {
@@ -6314,19 +6298,11 @@
 
     applyRoute();
     if (parseHash().kind === "marketing") {
-      var pathName = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
-      if (pathName === "/demo") {
-        setMarketingTabs("demo");
-        setTimeout(function () { scrollToId("demo"); }, 80);
-      } else {
-        var h = window.location.hash.replace(/^#/, "");
-        var hasSection = MARKETING_SECTIONS.indexOf(h) !== -1;
-        if (!hasSection || h === "home" || h === "customers") {
-          window.scrollTo(0, 0);
-          onScrollMarketing();
-        } else if (h === "demo" || h === "request-demo") {
-          setTimeout(function () { scrollToId("demo"); }, 80);
-        }
+      var h = window.location.hash.replace(/^#/, "");
+      var hasSection = MARKETING_SECTIONS.indexOf(h) !== -1;
+      if (!hasSection || h === "home" || h === "customers") {
+        window.scrollTo(0, 0);
+        onScrollMarketing();
       }
     }
 
