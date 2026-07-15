@@ -3,7 +3,7 @@ name: Deploy WorkBenchHr to WordPress
 on:
   push:
     branches:
-      - main # Triggers the deployment every time you push to main
+      - main
 
 jobs:
   deploy:
@@ -12,20 +12,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Sync files via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+      # GoDaddy Managed WordPress uses SFTP (port 22), NOT FTP (port 21).
+      - name: Sync files via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          # Uploads your HTML/CSS/JS files into your site folder
-          # GoDaddy is often /public_html/ — change if your host shows a different root
-          server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
-            **/WorkBenchHR-feat-doc-generation-maanav/**
-            **/.github/**
+          port: 22
+          sftp_only: true
+          # Confirm this path in FileZilla after connecting — often /html/ on GoDaddy MWP
+          remote_path: /html/
+          local_path: ./*
+          sftpArgs: "-o StrictHostKeyChecking=no"
+          delete_remote_files: false
+          rsyncArgs: "--exclude=.git --exclude=.github --exclude=node_modules --exclude=.DS_Store --exclude=WorkBenchHR-feat-doc-generation-maanav"
