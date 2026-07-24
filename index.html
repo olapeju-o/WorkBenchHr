@@ -29,8 +29,14 @@
             <img src="assets/logo.png" width="36" height="36" alt="" />
             <span class="wb-mkt-logo__text">Workbench HR</span>
           </a>
+          <nav class="wb-mkt-nav" aria-label="Site">
+            <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
+            <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
+            <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
+            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
+            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
+          </nav>
           <div class="wb-mkt-header__actions">
-            <p class="wb-mkt-coming-soon">Coming soon: Fall 2026</p>
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
           </div>
         </div>
@@ -595,7 +601,7 @@
 
         <footer class="wb-mkt-footer">
           <div class="wb-mkt-footer__inner">
-            <span class="wb-mkt-footer__brand">© <span id="footer-year"></span> Workbench HR</span>
+            <span class="wb-mkt-footer__brand">© <span class="wb-footer-year"></span> Workbench HR</span>
             <nav class="wb-mkt-footer__links" aria-label="Site">
               <a href="#/about">About</a>
               <a href="#/contact">Contact</a>
@@ -699,90 +705,341 @@
       </div>
 
     <!-- About -->
-    <div class="wb-legal" data-static-view="about" hidden>
-      <header class="wb-legal__top">
-        <div class="wb-legal__top-inner">
-          <a href="#/" class="wb-legal__back">← Back to home</a>
-          <a href="#/" class="brand-mark">
-            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
-            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+    <div class="wb-about" data-static-view="about" hidden>
+      <header class="wb-mkt-header">
+        <div class="wb-mkt-header__inner">
+          <a href="#/" class="wb-mkt-logo wb-logo-home" aria-label="Workbench HR, back to home">
+            <img src="assets/logo.png" width="36" height="36" alt="" />
+            <span class="wb-mkt-logo__text">Workbench HR</span>
+            <span class="wb-logo-home__tip" aria-hidden="true">Back to home</span>
           </a>
+          <nav class="wb-mkt-nav" aria-label="Site">
+            <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
+            <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
+            <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
+            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
+            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
+          </nav>
+          <div class="wb-mkt-header__actions">
+            <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
+          </div>
         </div>
       </header>
-      <main class="wb-legal__main">
-        <article class="wb-legal__article">
-          <h1 class="wb-legal__title">About Workbench HR</h1>
-          <section class="wb-legal__section">
-            <p>
-              Workbench HR helps small businesses run people operations in one place - from hiring and onboarding to
-              policies, documents, and day-to-day HR workflows - without losing the nuance of how your team works.
+
+      <main class="wb-about__main">
+        <section class="wb-about__intro" aria-labelledby="wb-about-title">
+          <div class="wb-about__intro-inner">
+            <div class="wb-about__intro-copy">
+              <p class="wb-about__eyebrow">Our story</p>
+              <h1 id="wb-about-title" class="wb-about__title">
+                About <span class="wb-about__title-accent">Workbench</span>
+              </h1>
+              <p class="wb-about__lede">
+                Workbench HR was built specifically for the businesses that keep Main Street running.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="wb-about__chapter" aria-labelledby="wb-about-story-title">
+          <div class="wb-about__chapter-inner">
+            <p class="wb-about__kicker">Main Street</p>
+            <h2 id="wb-about-story-title" class="wb-about__section-title">
+              The backbone of the American economy
+            </h2>
+            <div class="wb-about__prose">
+              <p>
+                Before there were global corporations, there were small businesses. Local shops, family-owned companies,
+                skilled trades, and entrepreneurs built the communities we live in today. They created jobs, served their
+                neighbors, and became the backbone of the American economy.
+              </p>
+              <p>
+                Today, more than 34 million small businesses continue that legacy, yet many are still expected to manage
+                their people with spreadsheets, disconnected software, or enterprise HR systems designed for companies
+                hundreds of times their size.
+              </p>
+            </div>
+            <blockquote class="wb-about__pullquote">
+              <p>We believe they deserve better.</p>
+            </blockquote>
+            <div class="wb-about__prose">
+              <p>Workbench HR was built specifically for the businesses that keep Main Street running.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="wb-about__chapter wb-about__chapter--panel" aria-labelledby="wb-about-why-title">
+          <div class="wb-about__chapter-inner">
+            <div class="wb-about__chapter-index" aria-hidden="true">01</div>
+            <p class="wb-about__kicker">Our story</p>
+            <h2 id="wb-about-why-title" class="wb-about__section-title">Why we built Workbench HR</h2>
+            <div class="wb-about__prose">
+              <p>
+                After years of working alongside business owners through consulting engagements, one challenge appeared
+                over and over again.
+              </p>
+              <p class="wb-about__prose-emphasis">
+                Owners were spending more time managing HR paperwork than growing their businesses.
+              </p>
+              <p>
+                Hiring a new employee meant searching for templates online. Performance conversations were documented in
+                Word documents. Compliance deadlines lived on sticky notes, spreadsheets, or someone’s memory. Every new
+                regulation created uncertainty, and many businesses simply could not justify the cost or complexity of
+                enterprise HR platforms.
+              </p>
+              <p>The problem wasn’t that these businesses didn’t care about their people.</p>
+              <p class="wb-about__prose-emphasis">The problem was that they didn’t have an HR department.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="wb-about__chapter" aria-labelledby="wb-about-approach-title">
+          <div class="wb-about__chapter-inner">
+            <div class="wb-about__chapter-index" aria-hidden="true">02</div>
+            <p class="wb-about__kicker">A new approach</p>
+            <h2 id="wb-about-approach-title" class="wb-about__section-title">
+              Enterprise-quality HR without enterprise complexity
+            </h2>
+            <div class="wb-about__prose">
+              <p>
+                Workbench HR was created to bring enterprise-quality HR capabilities to small businesses without
+                enterprise complexity.
+              </p>
+              <p>
+                Instead of disconnected tools, we built a single workbench where business owners can hire employees,
+                generate documents, manage compliance, track performance, organize employee records, and receive
+                intelligent guidance from an AI-powered HR Generalist.
+              </p>
+              <p class="wb-about__prose-emphasis">Everything works together because that’s how HR actually works.</p>
+            </div>
+            <ul class="wb-about__pill-list" aria-label="What Workbench includes">
+              <li>Hiring</li>
+              <li>Documents</li>
+              <li>Compliance</li>
+              <li>Performance</li>
+              <li>Employee records</li>
+              <li>AI HR Generalist</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="wb-about__chapter wb-about__chapter--panel" aria-labelledby="wb-about-operate-title">
+          <div class="wb-about__chapter-inner">
+            <div class="wb-about__chapter-index" aria-hidden="true">03</div>
+            <p class="wb-about__kicker">Built for owners</p>
+            <h2 id="wb-about-operate-title" class="wb-about__section-title">
+              Built for the way small businesses actually operate
+            </h2>
+            <div class="wb-about__prose">
+              <p>Most HR software was designed for large organizations with dedicated HR teams.</p>
+              <p class="wb-about__prose-emphasis">Workbench HR was designed for business owners.</p>
+              <p>
+                Whether you’re running a cleaning company, HVAC business, construction firm, healthcare practice, law
+                firm, real estate company, financial services firm, or growing technology startup, the goal is the same.
+              </p>
+            </div>
+            <div class="wb-about__goal-pair">
+              <p>Spend less time managing paperwork.</p>
+              <p>Spend more time building your business.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="wb-about__chapter" aria-labelledby="wb-about-future-title">
+          <div class="wb-about__chapter-inner">
+            <div class="wb-about__chapter-index" aria-hidden="true">04</div>
+            <p class="wb-about__kicker">The future of HR</p>
+            <h2 id="wb-about-future-title" class="wb-about__section-title">People first. AI as support.</h2>
+            <div class="wb-about__prose">
+              <p>Artificial intelligence should not replace people.</p>
+              <p class="wb-about__prose-emphasis">It should make people better.</p>
+              <p>
+                Our vision is to create the first AI-powered HR Generalist built specifically for Main Street businesses.
+                One that helps owners navigate compliance, answer HR questions, generate documentation, recommend next
+                steps, and reduce administrative work while keeping people at the center of every decision.
+              </p>
+              <p>
+                We believe every small business deserves access to the same quality HR support once reserved for large
+                corporations.
+              </p>
+              <p class="wb-about__prose-emphasis">That’s the future we’re building.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="wb-about__cta" aria-labelledby="wb-about-cta-title">
+          <div class="wb-about__cta-inner">
+            <p class="wb-about__kicker">Say hello</p>
+            <h2 id="wb-about-cta-title" class="wb-about__cta-title">Ready to join the waitlist?</h2>
+            <p class="wb-about__cta-lede">
+              We launch Fall 2026. Get early access updates, request a walkthrough, or email
+              <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>.
             </p>
-            <p>
-              We&apos;re building toward a future where HR specialists spend less time chasing paperwork and more time
-              supporting managers and employees.
-            </p>
-          </section>
-        </article>
+            <div class="wb-about__cta-actions">
+              <button type="button" class="wb-btn wb-btn--primary" data-open-waitlist>Get Notified</button>
+              <a href="#request-demo" class="wb-btn wb-btn--muted">Request a demo</a>
+            </div>
+          </div>
+        </section>
       </main>
+      <footer class="wb-mkt-footer">
+        <div class="wb-mkt-footer__inner">
+          <span class="wb-mkt-footer__brand">© <span class="wb-footer-year"></span> Workbench HR</span>
+          <nav class="wb-mkt-footer__links" aria-label="Site">
+            <a href="#/about">About</a>
+            <a href="#/contact">Contact</a>
+            <a href="#/privacy">Privacy</a>
+            <a href="#/terms">Terms</a>
+          </nav>
+        </div>
+      </footer>
     </div>
 
     <!-- Contact -->
-    <div class="wb-legal" data-static-view="contact" hidden>
-      <header class="wb-legal__top">
-        <div class="wb-legal__top-inner">
-          <a href="#/" class="wb-legal__back">← Back to home</a>
-          <a href="#/" class="brand-mark">
-            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
-            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+    <div class="wb-contact-page" data-static-view="contact" hidden>
+      <header class="wb-mkt-header">
+        <div class="wb-mkt-header__inner">
+          <a href="#/" class="wb-mkt-logo wb-logo-home" aria-label="Workbench HR, back to home">
+            <img src="assets/logo.png" width="36" height="36" alt="" />
+            <span class="wb-mkt-logo__text">Workbench HR</span>
+            <span class="wb-logo-home__tip" aria-hidden="true">Back to home</span>
           </a>
+          <nav class="wb-mkt-nav" aria-label="Site">
+            <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
+            <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
+            <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
+            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
+            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
+          </nav>
+          <div class="wb-mkt-header__actions">
+            <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
+          </div>
         </div>
       </header>
-      <main class="wb-legal__main">
-        <article class="wb-legal__article">
-          <h1 class="wb-legal__title">Contact</h1>
-          <section class="wb-legal__section">
-            <p>
-              For product questions or partnership inquiries, reach out here (demo form - connect your backend when
-              ready). For a guided tour, you can also
-              <a href="#request-demo" class="wb-link wb-link--underline">request a demo</a>
-              from the home page.
-            </p>
-            <form id="contact-form" class="wb-demo__form wb-demo__form--contact">
+
+      <main class="wb-contact-page__main">
+        <section class="wb-contact-page__hero" aria-labelledby="wb-contact-page-title">
+          <p class="wb-contact-page__eyebrow">Contact</p>
+          <h1 id="wb-contact-page-title" class="wb-contact-page__title">
+            We’d love to hear from <span class="wb-contact-page__title-accent">you</span>
+          </h1>
+          <p class="wb-contact-page__lede">
+            Questions, partnerships, or a quick hello — send a note and a real person on the Workbench team will get
+            back to you.
+          </p>
+        </section>
+
+        <section class="wb-contact-page__layout" aria-label="Contact options and form">
+          <aside class="wb-contact-page__aside">
+            <div class="wb-contact-page__bubble">
+              <h2 class="wb-contact-page__info-title">Reach us directly</h2>
+              <p class="wb-contact-page__info-text">
+                Prefer email? We read every message. For a guided walkthrough, you can also
+                <a href="#request-demo" class="wb-link">request a demo</a>.
+              </p>
+            </div>
+
+            <div class="wb-contact-page__bubble">
+              <span class="wb-contact-page__channel-label">Email</span>
+              <a class="wb-contact-page__channel-value" href="mailto:info@workbenchhr.com"
+                >info@workbenchhr.com</a
+              >
+            </div>
+
+            <div class="wb-contact-page__bubble">
+              <span class="wb-contact-page__channel-label">Based in</span>
+              <span class="wb-contact-page__channel-value">Pittsburgh, PA</span>
+            </div>
+
+            <div class="wb-contact-page__bubble">
+              <span class="wb-contact-page__channel-label">Hours</span>
+              <span class="wb-contact-page__channel-value">Monday–Friday, 9am–5pm ET</span>
+            </div>
+          </aside>
+
+          <div class="wb-contact-page__panel">
+            <h2 class="wb-contact-page__panel-title">Send a message</h2>
+            <p class="wb-contact-page__panel-lede">Fill out the form and we’ll follow up shortly.</p>
+
+            <form id="contact-form" class="wb-contact-page__form">
               <label class="wb-field">
                 <span class="wb-field__label">Name</span>
-                <input class="wb-input wb-input--demo" name="name" required autocomplete="name" />
+                <input
+                  class="wb-input"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  placeholder="Jane Smith"
+                />
               </label>
               <label class="wb-field">
                 <span class="wb-field__label">Email</span>
-                <input class="wb-input wb-input--demo" name="email" type="email" required autocomplete="email" />
+                <input
+                  class="wb-input"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                  placeholder="jane@yourcompany.com"
+                />
               </label>
               <label class="wb-field wb-field--full">
                 <span class="wb-field__label">Message</span>
-                <textarea class="wb-textarea" name="message" rows="4" required></textarea>
+                <textarea
+                  class="wb-textarea"
+                  name="message"
+                  rows="5"
+                  required
+                  placeholder="How can we help?"
+                ></textarea>
               </label>
-              <div class="wb-demo__submit">
+              <div class="wb-contact-page__submit">
                 <button type="submit" class="wb-btn wb-btn--primary">Send message</button>
               </div>
             </form>
-            <p id="contact-thanks" class="wb-demo__thanks" role="status" hidden>Thanks - we&apos;ll get back to you shortly.</p>
-          </section>
-        </article>
+            <p id="contact-thanks" class="wb-contact-page__thanks" role="status" hidden>
+              Thanks — we’ll get back to you shortly.
+            </p>
+          </div>
+        </section>
       </main>
+
+      <footer class="wb-mkt-footer">
+        <div class="wb-mkt-footer__inner">
+          <span class="wb-mkt-footer__brand">© <span class="wb-footer-year"></span> Workbench HR</span>
+          <nav class="wb-mkt-footer__links" aria-label="Site">
+            <a href="#/about">About</a>
+            <a href="#/contact">Contact</a>
+            <a href="#/privacy">Privacy</a>
+            <a href="#/terms">Terms</a>
+          </nav>
+        </div>
+      </footer>
     </div>
 
     <!-- Privacy -->
     <div class="wb-legal" data-static-view="privacy" hidden>
-      <header class="wb-legal__top">
-        <div class="wb-legal__top-inner">
-          <a href="#/" class="wb-legal__back">← Back to home</a>
-          <a href="#/" class="brand-mark">
-            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
-            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+      <header class="wb-mkt-header">
+        <div class="wb-mkt-header__inner">
+          <a href="#/" class="wb-mkt-logo wb-logo-home" aria-label="Workbench HR, back to home">
+            <img src="assets/logo.png" width="36" height="36" alt="" />
+            <span class="wb-mkt-logo__text">Workbench HR</span>
+            <span class="wb-logo-home__tip" aria-hidden="true">Back to home</span>
           </a>
+          <nav class="wb-mkt-nav" aria-label="Site">
+            <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
+            <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
+            <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
+            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
+            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
+          </nav>
+          <div class="wb-mkt-header__actions">
+            <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
+          </div>
         </div>
       </header>
       <main class="wb-legal__main">
-        <article class="wb-legal__article">
+        <article class="wb-legal__article wb-legal__article--wide">
           <h1 class="wb-legal__title">Privacy Policy</h1>
           <p class="wb-legal__meta">Last updated: April 12, 2026</p>
           <section class="wb-legal__section">
@@ -891,21 +1148,42 @@
           </section>
         </article>
       </main>
+      <footer class="wb-mkt-footer">
+        <div class="wb-mkt-footer__inner">
+          <span class="wb-mkt-footer__brand">© <span class="wb-footer-year"></span> Workbench HR</span>
+          <nav class="wb-mkt-footer__links" aria-label="Site">
+            <a href="#/about">About</a>
+            <a href="#/contact">Contact</a>
+            <a href="#/privacy">Privacy</a>
+            <a href="#/terms">Terms</a>
+          </nav>
+        </div>
+      </footer>
     </div>
 
     <!-- Terms -->
     <div class="wb-legal" data-static-view="terms" hidden>
-      <header class="wb-legal__top">
-        <div class="wb-legal__top-inner">
-          <a href="#/" class="wb-legal__back">← Back to home</a>
-          <a href="#/" class="brand-mark">
-            <img src="assets/logo.png" width="36" height="36" alt="" class="brand-mark__img" />
-            <span class="brand-mark__text wb-legal__brand-text">Workbench HR</span>
+      <header class="wb-mkt-header">
+        <div class="wb-mkt-header__inner">
+          <a href="#/" class="wb-mkt-logo wb-logo-home" aria-label="Workbench HR, back to home">
+            <img src="assets/logo.png" width="36" height="36" alt="" />
+            <span class="wb-mkt-logo__text">Workbench HR</span>
+            <span class="wb-logo-home__tip" aria-hidden="true">Back to home</span>
           </a>
+          <nav class="wb-mkt-nav" aria-label="Site">
+            <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
+            <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
+            <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
+            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
+            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
+          </nav>
+          <div class="wb-mkt-header__actions">
+            <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
+          </div>
         </div>
       </header>
       <main class="wb-legal__main">
-        <article class="wb-legal__article">
+        <article class="wb-legal__article wb-legal__article--wide">
           <h1 class="wb-legal__title">Terms of Service</h1>
           <p class="wb-legal__meta">Last updated: April 12, 2026</p>
           <section class="wb-legal__section">
@@ -1020,11 +1298,22 @@
             <h2>14. Contact</h2>
             <p>
               Questions about these Terms:
-              <a href="mailto:legal@workbenchhr.example">legal@workbenchhr.example</a>.
+              <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>.
             </p>
           </section>
         </article>
       </main>
+      <footer class="wb-mkt-footer">
+        <div class="wb-mkt-footer__inner">
+          <span class="wb-mkt-footer__brand">© <span class="wb-footer-year"></span> Workbench HR</span>
+          <nav class="wb-mkt-footer__links" aria-label="Site">
+            <a href="#/about">About</a>
+            <a href="#/contact">Contact</a>
+            <a href="#/privacy">Privacy</a>
+            <a href="#/terms">Terms</a>
+          </nav>
+        </div>
+      </footer>
     </div>
 
     <!-- Login -->

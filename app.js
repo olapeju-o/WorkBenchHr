@@ -367,6 +367,15 @@
     });
   }
 
+  function setSiteNavActive(page) {
+    document.querySelectorAll("[data-site-nav]").forEach(function (link) {
+      var on = page && link.getAttribute("data-site-nav") === page;
+      link.classList.toggle("wb-mkt-nav__link--active", !!on);
+      if (on) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
   function scrollPlatformCentered() {
     var el = document.getElementById("platform");
     if (!el) return;
@@ -3005,6 +3014,7 @@
       window.__staticPrevView = "marketing";
       var sec = normalizeSection(parsed.section);
       setMarketingTabs(sec);
+      setSiteNavActive("home");
       if (parsed.section === "request-demo") setTimeout(function () { scrollToId("request-demo"); }, 80);
       else if (parsed.section === "platform") setTimeout(scrollPlatformCentered, 80);
       else window.scrollTo(0, 0);
@@ -3649,31 +3659,44 @@
     if (pathname === "/about") {
       showRoot("about");
       document.title = DOC_TITLES["/about"];
+      setSiteNavActive("about");
+      window.scrollTo(0, 0);
     } else if (pathname === "/contact") {
       showRoot("contact");
       document.title = DOC_TITLES["/contact"];
+      setSiteNavActive("contact");
+      window.scrollTo(0, 0);
     } else if (pathname === "/privacy") {
       showRoot("privacy");
       document.title = DOC_TITLES["/privacy"];
+      setSiteNavActive("privacy");
+      window.scrollTo(0, 0);
     } else if (pathname === "/terms") {
       showRoot("terms");
       document.title = DOC_TITLES["/terms"];
+      setSiteNavActive("terms");
+      window.scrollTo(0, 0);
     } else if (pathname === "/login") {
       showRoot("login");
       document.title = DOC_TITLES["/login"];
+      setSiteNavActive("");
     } else if (pathname === "/signup") {
       showRoot("signup");
       document.title = DOC_TITLES["/signup"];
+      setSiteNavActive("");
     } else if (pathname === "/forgot-password") {
       showRoot("forgot-password");
       document.title = DOC_TITLES["/forgot-password"];
+      setSiteNavActive("");
       resetForgot();
     } else if (pathname.indexOf("/onboarding/") === 0) {
       showOnboardingPage(pathname);
+      setSiteNavActive("");
       window.scrollTo(0, 0);
     } else if (pathname === "/design-reference") {
       showRoot("design-reference");
       document.title = DOC_TITLES["/design-reference"];
+      setSiteNavActive("");
       window.scrollTo(0, 0);
     } else if (pathname === "/settings" || pathname === "/settings/") {
       window.location.replace("settings.html#/settings/profile");
@@ -6314,8 +6337,10 @@
       }
     });
 
-    var yEl = document.getElementById("footer-year");
-    if (yEl) yEl.textContent = String(new Date().getFullYear());
+    var year = String(new Date().getFullYear());
+    document.querySelectorAll(".wb-footer-year").forEach(function (yEl) {
+      yEl.textContent = year;
+    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
