@@ -4183,6 +4183,82 @@
     });
   }
 
+  function bindAboutSlideshow() {
+    var root = document.querySelector("[data-about-slideshow]");
+    if (!root) return;
+
+    var slides = Array.prototype.slice.call(root.querySelectorAll("[data-about-slide]"));
+    var dots = Array.prototype.slice.call(root.querySelectorAll("[data-about-dot]"));
+    if (!slides.length) return;
+
+    var active = 0;
+    var timer = null;
+    var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var intervalMs = 5200;
+
+    function show(index) {
+      if (index === active) return;
+      active = (index + slides.length) % slides.length;
+
+      slides.forEach(function (slide, i) {
+        var on = i === active;
+        slide.classList.toggle("is-active", on);
+        slide.setAttribute("aria-hidden", on ? "false" : "true");
+      });
+
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === active);
+      });
+    }
+
+    function next() {
+      show(active + 1);
+    }
+
+    function start() {
+      if (reduceMotion || timer) return;
+      timer = setInterval(next, intervalMs);
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () {
+        show(i);
+        stop();
+        start();
+      });
+    });
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+    root.addEventListener("focusin", stop);
+    root.addEventListener("focusout", function (e) {
+      if (!root.contains(e.relatedTarget)) start();
+    });
+
+    var pin = root.closest(".wb-about__intro") || root;
+    if (typeof IntersectionObserver === "function") {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) start();
+            else stop();
+          });
+        },
+        { threshold: 0.15 }
+      );
+      observer.observe(pin);
+    } else {
+      start();
+    }
+  }
+
   function bindPlatformShowcase() {
     var root = document.querySelector("[data-platform-showcase]");
     if (!root) return;
@@ -6279,6 +6355,7 @@
     bindWaitlistModal();
     bindDemoForm();
     bindPlatformShowcase();
+    bindAboutSlideshow();
     bindContactForm();
     bindAuthForms();
     bindForgotForm();

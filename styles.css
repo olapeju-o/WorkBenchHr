@@ -907,17 +907,171 @@ body.wb-signup-modal--open {
 }
 
 .wb-about__intro {
-  padding: clamp(2.25rem, 6vw, 3.75rem) 0 clamp(2rem, 5vw, 3rem);
+  position: relative;
+  display: block;
+  padding: 0;
+  background: var(--wb-forest);
+}
+
+.wb-about__intro-panel {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100dvh - var(--wb-mkt-header-h));
+  min-height: calc(100vh - var(--wb-mkt-header-h));
+  display: flex;
+  align-items: center;
+  padding: clamp(2.25rem, 6vw, 3.75rem) 0 5.5rem;
 }
 
 .wb-about__intro-inner {
-  max-width: min(72rem, 100%);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: min(76rem, 100%);
   margin: 0 auto;
   padding: 0 var(--wb-mkt-inline-end) 0 var(--wb-mkt-inline-start);
+  pointer-events: none;
 }
 
 .wb-about__intro-copy {
+  max-width: 38rem;
+  padding: 1.35rem 1.5rem 1.5rem 0;
+  pointer-events: auto;
+}
+
+.wb-about__intro-copy--story {
   max-width: 42rem;
+}
+
+.wb-about__slideshow {
+  position: sticky;
+  top: var(--wb-mkt-header-h);
+  z-index: 0;
+  height: calc(100dvh - var(--wb-mkt-header-h));
+  height: calc(100vh - var(--wb-mkt-header-h));
+  margin-bottom: calc(var(--wb-mkt-header-h) - 100dvh);
+  margin-bottom: calc(var(--wb-mkt-header-h) - 100vh);
+  overflow: hidden;
+}
+
+.wb-about__slideshow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      105deg,
+      rgba(7, 28, 22, 0.92) 0%,
+      rgba(7, 28, 22, 0.82) 28%,
+      rgba(7, 28, 22, 0.55) 52%,
+      rgba(7, 28, 22, 0.28) 100%
+    ),
+    linear-gradient(180deg, rgba(7, 28, 22, 0.28) 0%, transparent 36%, rgba(7, 28, 22, 0.55) 100%);
+}
+
+.wb-about__slideshow-stage {
+  position: absolute;
+  inset: 0;
+}
+
+.wb-about__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.9s var(--ease-out), visibility 0.9s var(--ease-out);
+}
+
+.wb-about__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.wb-about__slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+}
+
+.wb-about__slide.is-active img {
+  animation: wb-about-kenburns 8s ease-out both;
+}
+
+.wb-about__slide figcaption {
+  position: absolute;
+  z-index: 3;
+  left: var(--wb-mkt-inline-start);
+  right: auto;
+  bottom: 1.35rem;
+  max-width: 22rem;
+  padding: 0;
+  background: none;
+  color: #fff;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+}
+
+.wb-about__slide figcaption span {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b7f5d4;
+}
+
+.wb-about__slideshow-dots {
+  position: absolute;
+  z-index: 3;
+  top: auto;
+  right: var(--wb-mkt-inline-end);
+  bottom: 1.5rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.wb-about__slideshow-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+}
+
+.wb-about__slideshow-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.wb-about__slideshow-dot.is-active {
+  background: #fff;
+  width: 1.15rem;
+}
+
+.wb-about__slideshow-dot:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@keyframes wb-about-kenburns {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.12);
+  }
 }
 
 .wb-about__eyebrow {
@@ -926,8 +1080,8 @@ body.wb-signup-modal--open {
   margin: 0 0 0.9rem;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
-  background: var(--wb-forest);
-  color: #fff;
+  background: #fff;
+  color: var(--wb-forest);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -940,11 +1094,12 @@ body.wb-signup-modal--open {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.05;
-  color: var(--wb-forest);
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 
 .wb-about__title-accent {
-  color: var(--wb-green);
+  color: #7dffc0;
 }
 
 .wb-about__lede {
@@ -952,15 +1107,20 @@ body.wb-signup-modal--open {
   max-width: 34rem;
   font-size: clamp(1.05rem, 1.7vw, 1.2rem);
   line-height: 1.6;
-  color: var(--wb-muted);
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
 .wb-about__chapter {
+  position: relative;
+  z-index: 3;
   padding: clamp(2.25rem, 5vw, 3.5rem) 0;
+  background: #f3f7f4;
 }
 
 .wb-about__chapter--panel {
-  background: rgba(255, 255, 255, 0.72);
+  background: #fff;
   border-top: 1px solid var(--wb-border);
   border-bottom: 1px solid var(--wb-border);
 }
@@ -980,7 +1140,7 @@ body.wb-signup-modal--open {
   font-weight: 800;
   letter-spacing: -0.06em;
   line-height: 1;
-  color: rgba(0, 200, 117, 0.14);
+  color: rgba(0, 200, 117, 0.32);
   pointer-events: none;
   user-select: none;
 }
@@ -1015,6 +1175,26 @@ body.wb-signup-modal--open {
   font-size: clamp(1.02rem, 1.5vw, 1.12rem);
   line-height: 1.7;
   color: var(--wb-muted);
+}
+
+.wb-about__kicker--on-photo {
+  color: #7dffc0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+}
+
+.wb-about__section-title--on-photo {
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+.wb-about__prose--on-photo {
+  max-width: 42rem;
+}
+
+.wb-about__prose--on-photo p {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
 .wb-about__prose-emphasis {
@@ -1078,6 +1258,23 @@ body.wb-signup-modal--open {
   letter-spacing: -0.015em;
   color: var(--wb-forest);
   line-height: 1.4;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.wb-about__goal-pair p::before {
+  content: "";
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.08rem;
+  border-radius: 50%;
+  background-color: var(--wb-green);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.3 6.4 11.2 12.5 4.8' stroke='%23fff' stroke-width='2.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 0.78rem;
 }
 
 .wb-about__cta {
@@ -1091,7 +1288,7 @@ body.wb-signup-modal--open {
   padding: clamp(1.75rem, 4vw, 2.5rem);
   border-radius: calc(var(--wb-radius-xl) + 4px);
   background: #fff;
-  border: 1.5px solid var(--wb-forest);
+  border: 1.5px solid var(--wb-border-strong);
 }
 
 .wb-about__cta-title {
@@ -1164,6 +1361,10 @@ body.wb-signup-modal--open {
 }
 
 @media (max-width: 900px) {
+  .wb-about__slide figcaption {
+    max-width: 70%;
+  }
+
   .wb-about__goal-pair {
     grid-template-columns: 1fr;
   }
@@ -1175,8 +1376,12 @@ body.wb-signup-modal--open {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wb-about__intro-copy > * {
+  .wb-about__intro-copy > *,
+  .wb-about__slide,
+  .wb-about__slide.is-active img {
     animation: none !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
 
@@ -1194,12 +1399,15 @@ body.wb-signup-modal--open {
 .wb-about .wb-mkt-footer,
 .wb-contact-page .wb-mkt-footer {
   margin-top: auto;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 4;
 }
 
 /* Contact page */
 .wb-contact-page {
-  min-height: 100dvh;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: #f3f7f4;
@@ -1208,11 +1416,11 @@ body.wb-signup-modal--open {
 }
 
 .wb-contact-page__main {
-  flex: 1;
+  flex: 1 1 auto;
   width: 100%;
   max-width: min(72rem, 100%);
   margin: 0 auto;
-  padding: clamp(2rem, 5vw, 3.25rem) var(--wb-mkt-inline-end) clamp(3rem, 7vw, 4.5rem)
+  padding: clamp(1.5rem, 4vw, 2.5rem) var(--wb-mkt-inline-end) 1.5rem
     var(--wb-mkt-inline-start);
 }
 
@@ -1257,30 +1465,30 @@ body.wb-signup-modal--open {
 
 .wb-contact-page__layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
-  gap: clamp(1.25rem, 3.5vw, 2.5rem);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.18fr);
+  gap: clamp(1.15rem, 2.5vw, 1.75rem);
+  align-items: stretch;
+  align-content: start;
 }
 
 .wb-contact-page__aside {
   display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+  min-height: 0;
 }
 
-.wb-contact-page__bubble {
-  display: grid;
-  gap: 0.35rem;
-  padding: 1.15rem 1.25rem;
+.wb-contact-page__card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: clamp(1.5rem, 3.5vw, 2rem);
   border-radius: var(--wb-radius-lg);
   background: #fff;
-  border: 1px solid var(--wb-border);
-  box-shadow: var(--wb-shadow-xs);
+  border: 1px solid var(--wb-border-strong);
 }
 
 .wb-contact-page__info-title {
-  margin: 0 0 0.35rem;
-  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.4rem);
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--wb-forest);
@@ -1291,6 +1499,27 @@ body.wb-signup-modal--open {
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--wb-muted);
+}
+
+.wb-contact-page__details {
+  margin: auto 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.wb-contact-page__detail {
+  margin: 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--wb-border);
+}
+
+.wb-contact-page__detail:last-child {
+  padding-bottom: 0;
+}
+
+.wb-contact-page__detail dd {
+  margin: 0.3rem 0 0;
 }
 
 .wb-contact-page__channel-label {
@@ -1313,10 +1542,12 @@ a.wb-contact-page__channel-value:hover {
 }
 
 .wb-contact-page__panel {
+  display: flex;
+  flex-direction: column;
   padding: clamp(1.5rem, 3.5vw, 2rem);
   border-radius: var(--wb-radius-lg);
   background: #fff;
-  border: 1.5px solid var(--wb-forest);
+  border: 1px solid var(--wb-border-strong);
 }
 
 .wb-contact-page__panel-title {
@@ -1338,6 +1569,8 @@ a.wb-contact-page__channel-value:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.9rem 1rem;
+  flex: 1;
+  align-content: start;
 }
 
 .wb-contact-page__form .wb-field--full,
@@ -1345,10 +1578,21 @@ a.wb-contact-page__channel-value:hover {
   grid-column: 1 / -1;
 }
 
+.wb-contact-page__form .wb-field--full {
+  display: flex;
+  flex-direction: column;
+}
+
+.wb-contact-page__form .wb-textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
 .wb-contact-page__submit {
   display: flex;
   justify-content: flex-start;
-  margin-top: 0.25rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
 }
 
 .wb-contact-page__thanks {

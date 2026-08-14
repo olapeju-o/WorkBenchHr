@@ -33,8 +33,6 @@
             <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
             <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
             <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
-            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
-            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
           </nav>
           <div class="wb-mkt-header__actions">
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
@@ -717,8 +715,6 @@
             <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
             <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
             <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
-            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
-            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
           </nav>
           <div class="wb-mkt-header__actions">
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
@@ -728,44 +724,86 @@
 
       <main class="wb-about__main">
         <section class="wb-about__intro" aria-labelledby="wb-about-title">
-          <div class="wb-about__intro-inner">
-            <div class="wb-about__intro-copy">
-              <p class="wb-about__eyebrow">Our story</p>
-              <h1 id="wb-about-title" class="wb-about__title">
-                About <span class="wb-about__title-accent">Workbench</span>
-              </h1>
-              <p class="wb-about__lede">
-                Workbench HR was built specifically for the businesses that keep Main Street running.
-              </p>
+          <div class="wb-about__slideshow" data-about-slideshow>
+            <div class="wb-about__slideshow-stage" aria-live="polite">
+              <figure class="wb-about__slide is-active" data-about-slide="0">
+                <img
+                  src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=2400&amp;h=1400&amp;fit=crop"
+                  alt="A local shop floor with racks of goods and a welcoming aisle"
+                  width="2400"
+                  height="1400"
+                  decoding="async"
+                />
+              </figure>
+              <figure class="wb-about__slide" data-about-slide="1" aria-hidden="true">
+                <img
+                  src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=2400&amp;h=1400&amp;fit=crop"
+                  alt="A neighborhood cafe with warm lighting and a marble counter"
+                  width="2400"
+                  height="1400"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="wb-about__slide" data-about-slide="2" aria-hidden="true">
+                <img
+                  src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=2400&amp;h=1400&amp;fit=crop"
+                  alt="A skilled trades workshop with tools and workbenches"
+                  width="2400"
+                  height="1400"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="wb-about__slide" data-about-slide="3" aria-hidden="true">
+                <img
+                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=2400&amp;h=1400&amp;fit=crop"
+                  alt="A small-business owner helping a customer at the counter"
+                  width="2400"
+                  height="1400"
+                  decoding="async"
+                  loading="lazy"
+                />
+              </figure>
             </div>
           </div>
-        </section>
 
-        <section class="wb-about__chapter" aria-labelledby="wb-about-story-title">
-          <div class="wb-about__chapter-inner">
-            <p class="wb-about__kicker">Main Street</p>
-            <h2 id="wb-about-story-title" class="wb-about__section-title">
-              The backbone of the American economy
-            </h2>
-            <div class="wb-about__prose">
-              <p>
-                Before there were global corporations, there were small businesses. Local shops, family-owned companies,
-                skilled trades, and entrepreneurs built the communities we live in today. They created jobs, served their
-                neighbors, and became the backbone of the American economy.
-              </p>
-              <p>
-                Today, more than 34 million small businesses continue that legacy, yet many are still expected to manage
-                their people with spreadsheets, disconnected software, or enterprise HR systems designed for companies
-                hundreds of times their size.
-              </p>
-            </div>
-            <blockquote class="wb-about__pullquote">
-              <p>We believe they deserve better.</p>
-            </blockquote>
-            <div class="wb-about__prose">
-              <p>Workbench HR was built specifically for the businesses that keep Main Street running.</p>
+          <div class="wb-about__intro-panel">
+            <div class="wb-about__intro-inner">
+              <div class="wb-about__intro-copy">
+                <p class="wb-about__eyebrow">Our story</p>
+                <h1 id="wb-about-title" class="wb-about__title">
+                  About <span class="wb-about__title-accent">Workbench</span>
+                </h1>
+                <p class="wb-about__lede">
+                  Workbench HR was built specifically for the businesses that keep Main Street running.
+                </p>
+              </div>
             </div>
           </div>
+
+          <section class="wb-about__intro-panel" aria-labelledby="wb-about-story-title">
+            <div class="wb-about__intro-inner">
+              <div class="wb-about__intro-copy wb-about__intro-copy--story">
+                <p class="wb-about__kicker wb-about__kicker--on-photo">Main Street</p>
+                <h2 id="wb-about-story-title" class="wb-about__section-title wb-about__section-title--on-photo">
+                  The backbone of the American economy
+                </h2>
+                <div class="wb-about__prose wb-about__prose--on-photo">
+                  <p>
+                    Before there were global corporations, there were small businesses. Local shops, family-owned
+                    companies, skilled trades, and entrepreneurs built the communities we live in today. They created
+                    jobs, served their neighbors, and became the backbone of the American economy.
+                  </p>
+                  <p>
+                    Today, more than 34 million small businesses continue that legacy, yet many are still expected to
+                    manage their people with spreadsheets, disconnected software, or enterprise HR systems designed for
+                    companies hundreds of times their size.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </section>
 
         <section class="wb-about__chapter wb-about__chapter--panel" aria-labelledby="wb-about-why-title">
@@ -866,21 +904,6 @@
             </div>
           </div>
         </section>
-
-        <section class="wb-about__cta" aria-labelledby="wb-about-cta-title">
-          <div class="wb-about__cta-inner">
-            <p class="wb-about__kicker">Say hello</p>
-            <h2 id="wb-about-cta-title" class="wb-about__cta-title">Ready to join the waitlist?</h2>
-            <p class="wb-about__cta-lede">
-              We launch Fall 2026. Get early access updates, request a walkthrough, or email
-              <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>.
-            </p>
-            <div class="wb-about__cta-actions">
-              <button type="button" class="wb-btn wb-btn--primary" data-open-waitlist>Get Notified</button>
-              <a href="#request-demo" class="wb-btn wb-btn--muted">Request a demo</a>
-            </div>
-          </div>
-        </section>
       </main>
       <footer class="wb-mkt-footer">
         <div class="wb-mkt-footer__inner">
@@ -908,8 +931,6 @@
             <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
             <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
             <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
-            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
-            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
           </nav>
           <div class="wb-mkt-header__actions">
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
@@ -923,37 +944,38 @@
           <h1 id="wb-contact-page-title" class="wb-contact-page__title">
             We’d love to hear from <span class="wb-contact-page__title-accent">you</span>
           </h1>
-          <p class="wb-contact-page__lede">
-            Questions, partnerships, or a quick hello — send a note and a real person on the Workbench team will get
-            back to you.
-          </p>
         </section>
 
         <section class="wb-contact-page__layout" aria-label="Contact options and form">
           <aside class="wb-contact-page__aside">
-            <div class="wb-contact-page__bubble">
+            <div class="wb-contact-page__card">
               <h2 class="wb-contact-page__info-title">Reach us directly</h2>
               <p class="wb-contact-page__info-text">
                 Prefer email? We read every message. For a guided walkthrough, you can also
                 <a href="#request-demo" class="wb-link">request a demo</a>.
               </p>
-            </div>
-
-            <div class="wb-contact-page__bubble">
-              <span class="wb-contact-page__channel-label">Email</span>
-              <a class="wb-contact-page__channel-value" href="mailto:info@workbenchhr.com"
-                >info@workbenchhr.com</a
-              >
-            </div>
-
-            <div class="wb-contact-page__bubble">
-              <span class="wb-contact-page__channel-label">Based in</span>
-              <span class="wb-contact-page__channel-value">Pittsburgh, PA</span>
-            </div>
-
-            <div class="wb-contact-page__bubble">
-              <span class="wb-contact-page__channel-label">Hours</span>
-              <span class="wb-contact-page__channel-value">Monday–Friday, 9am–5pm ET</span>
+              <dl class="wb-contact-page__details">
+                <div class="wb-contact-page__detail">
+                  <dt class="wb-contact-page__channel-label">Email</dt>
+                  <dd>
+                    <a class="wb-contact-page__channel-value" href="mailto:info@workbenchhr.com"
+                      >info@workbenchhr.com</a
+                    >
+                  </dd>
+                </div>
+                <div class="wb-contact-page__detail">
+                  <dt class="wb-contact-page__channel-label">Based in</dt>
+                  <dd>
+                    <span class="wb-contact-page__channel-value">Pittsburgh, PA</span>
+                  </dd>
+                </div>
+                <div class="wb-contact-page__detail">
+                  <dt class="wb-contact-page__channel-label">Hours</dt>
+                  <dd>
+                    <span class="wb-contact-page__channel-value">Monday–Friday, 9am–5pm ET</span>
+                  </dd>
+                </div>
+              </dl>
             </div>
           </aside>
 
@@ -988,7 +1010,7 @@
                 <textarea
                   class="wb-textarea"
                   name="message"
-                  rows="5"
+                  rows="6"
                   required
                   placeholder="How can we help?"
                 ></textarea>
@@ -1030,8 +1052,6 @@
             <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
             <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
             <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
-            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
-            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
           </nav>
           <div class="wb-mkt-header__actions">
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
@@ -1174,8 +1194,6 @@
             <a href="#/" class="wb-mkt-nav__link" data-site-nav="home">Home</a>
             <a href="#/about" class="wb-mkt-nav__link" data-site-nav="about">About</a>
             <a href="#/contact" class="wb-mkt-nav__link" data-site-nav="contact">Contact</a>
-            <a href="#/privacy" class="wb-mkt-nav__link" data-site-nav="privacy">Privacy</a>
-            <a href="#/terms" class="wb-mkt-nav__link" data-site-nav="terms">Terms</a>
           </nav>
           <div class="wb-mkt-header__actions">
             <button type="button" class="wb-mkt-cta" data-open-waitlist>Get Notified</button>
