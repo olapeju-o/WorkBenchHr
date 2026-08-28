@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WorkBench HR
  * Description: Workbench HR marketing site (static front experience shipped as a plugin).
- * Version: 1.3.0
+ * Version: 1.3.1
  * Author: Workbench HR
  * Text Domain: workbench-hr
  */
