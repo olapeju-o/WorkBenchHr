@@ -2026,17 +2026,22 @@ a.wb-contact-page__channel-value:hover {
 .wb-hero-split {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
   min-height: calc(100dvh - var(--wb-mkt-header-h));
   min-height: calc(100vh - var(--wb-mkt-header-h));
+  max-height: calc(100dvh - var(--wb-mkt-header-h));
+  max-height: calc(100vh - var(--wb-mkt-header-h));
   scroll-margin-top: var(--wb-mkt-header-h);
   background: #f5f8f6;
 }
 
 .wb-hero-split__copy {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: clamp(0.65rem, 2vh, 1.25rem) clamp(1.5rem, 3.5vw, 2.75rem) clamp(3rem, 6vw, 4.5rem)
+  justify-content: flex-start;
+  padding: clamp(2.35rem, 5.5vh, 4rem) clamp(1.5rem, 3.5vw, 2.75rem) clamp(1.75rem, 3.5vw, 2.5rem)
     var(--wb-mkt-inline-start);
   max-width: none;
   width: 100%;
@@ -2167,6 +2172,8 @@ a.wb-contact-page__channel-value:hover {
 }
 
 .wb-hero-split__stage {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -2176,12 +2183,18 @@ a.wb-contact-page__channel-value:hover {
   position: relative;
   align-self: stretch;
   height: 100%;
-  min-height: 100%;
+  min-height: 0;
   background:
     radial-gradient(ellipse 80% 55% at 70% 20%, rgba(0, 200, 117, 0.16), transparent 55%),
     linear-gradient(165deg, var(--wb-forest-mid) 0%, var(--wb-forest) 48%, var(--wb-sidebar-top) 100%);
   color: #fff;
   overflow: hidden;
+}
+
+.wb-hero-split__ribbon {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  flex-shrink: 0;
 }
 
 .wb-hero-split__stage-img {
@@ -2231,19 +2244,30 @@ a.wb-contact-page__channel-value:hover {
 @media (max-width: 960px) {
   .wb-hero-split {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
     min-height: 0;
+    max-height: none;
   }
 
   .wb-hero-split__copy {
+    grid-column: 1;
+    grid-row: 1;
     max-width: none;
     margin: 0;
-    padding-bottom: 2.5rem;
+    padding-bottom: 2rem;
   }
 
   .wb-hero-split__stage {
+    grid-column: 1;
+    grid-row: 2;
     min-height: min(72vw, 34rem);
     aspect-ratio: 3 / 4;
     max-height: 40rem;
+  }
+
+  .wb-hero-split__ribbon {
+    grid-column: 1;
+    grid-row: 3;
   }
 }
 
@@ -2849,6 +2873,110 @@ a.wb-contact-page__channel-value:hover {
   font-weight: 500;
 }
 
+.wb-pricing__table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid var(--wb-border-strong);
+  background: #fff;
+  box-shadow: var(--wb-shadow-xs);
+}
+
+.wb-pricing__table {
+  width: 100%;
+  min-width: 38rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.wb-pricing__table thead {
+  background: var(--wb-surface-muted);
+  border-bottom: 1px solid var(--wb-border);
+}
+
+.wb-pricing__table th,
+.wb-pricing__table td {
+  padding: 1rem 1.15rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.wb-pricing__table thead th {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wb-muted-soft);
+}
+
+.wb-pricing__table tbody th {
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--wb-forest);
+  white-space: nowrap;
+}
+
+.wb-pricing__table tbody td {
+  color: var(--wb-muted);
+  font-weight: 600;
+}
+
+.wb-pricing__table tbody tr + tr {
+  border-top: 1px solid var(--wb-border);
+}
+
+.wb-pricing__table-row--featured {
+  background: linear-gradient(90deg, rgba(0, 200, 117, 0.08) 0%, rgba(0, 200, 117, 0.03) 100%);
+}
+
+.wb-pricing__table-row--featured th,
+.wb-pricing__table-row--featured td {
+  color: var(--wb-forest);
+}
+
+.wb-pricing__badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--wb-green);
+  color: var(--wb-forest);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.wb-pricing__fee {
+  color: var(--wb-forest) !important;
+  white-space: nowrap;
+}
+
+.wb-pricing__fee strong {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.wb-pricing__note {
+  margin: 0.85rem 0 0;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--wb-muted-soft);
+  text-align: center;
+}
+
+.wb-pricing__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
 .wb-pricing__grid {
   list-style: none;
   margin: 0;
@@ -3043,6 +3171,21 @@ a.wb-contact-page__channel-value:hover {
 }
 
 @media (max-width: 900px) {
+  .wb-pricing__table th,
+  .wb-pricing__table td {
+    padding: 0.85rem 0.9rem;
+  }
+
+  .wb-pricing__table tbody th {
+    white-space: normal;
+  }
+
+  .wb-pricing__badge {
+    display: block;
+    width: fit-content;
+    margin: 0.35rem 0 0;
+  }
+
   .wb-pricing__grid {
     grid-template-columns: 1fr;
     max-width: 26rem;

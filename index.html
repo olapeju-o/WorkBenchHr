@@ -83,10 +83,8 @@
               decoding="async"
             />
           </div>
-        </section>
 
-        <section class="wb-proof" aria-label="Business types Workbench HR is built for">
-          <div class="wb-built-for">
+          <div class="wb-built-for wb-hero-split__ribbon" aria-label="Business types Workbench HR is built for">
             <p class="wb-built-for__label">Built for</p>
             <div class="wb-built-for__viewport">
               <div class="wb-built-for__track">
@@ -264,57 +262,65 @@
               <p class="wb-pricing__eyebrow">Pricing</p>
               <h2 id="wb-pricing-title" class="wb-pricing__title">Simple pricing. No surprises.</h2>
               <p class="wb-pricing__lede">
-                Launch pricing for Fall 2026. Join the waitlist now, and we will help you find the right plan.
+                Flat monthly pricing by team size. Launching Fall 2026 — join the waitlist for early access.
               </p>
             </header>
 
-            <ul class="wb-pricing__grid">
-              <li class="wb-price-card">
-                <p class="wb-price-card__tier">Starter</p>
-                <p class="wb-price-card__price"><span class="wb-price-card__amount">$8</span> <span class="wb-price-card__period">/mo</span></p>
-                <p class="wb-price-card__blurb"><em>For very small teams getting started.</em></p>
-                <ul class="wb-price-card__features">
-                  <li>Up to 10 employees</li>
-                  <li>AI document generation</li>
-                  <li>HR policy library</li>
-                  <li>Reminders &amp; compliance alerts</li>
-                  <li>Basic org health score</li>
-                  <li>Email support</li>
-                </ul>
-                <a href="#waitlist" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-waitlist>Get Notified</a>
-              </li>
+            <div class="wb-pricing__table-wrap">
+              <table class="wb-pricing__table">
+                <caption class="visually-hidden">Workbench HR plan pricing</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Plan</th>
+                    <th scope="col">Employees</th>
+                    <th scope="col">Monthly flat fee</th>
+                    <th scope="col">Annual contract value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Workbench Essential</th>
+                    <td>1 to 10</td>
+                    <td class="wb-pricing__fee"><strong>$149</strong></td>
+                    <td>$1,788</td>
+                  </tr>
+                  <tr class="wb-pricing__table-row--featured">
+                    <th scope="row">
+                      Workbench Core
+                      <span class="wb-pricing__badge">Most popular</span>
+                    </th>
+                    <td>11 to 25</td>
+                    <td class="wb-pricing__fee"><strong>$249</strong></td>
+                    <td>$2,988</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Workbench Growth</th>
+                    <td>26 to 50</td>
+                    <td class="wb-pricing__fee"><strong>$399</strong></td>
+                    <td>$4,788</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Workbench Business</th>
+                    <td>51 to 100</td>
+                    <td class="wb-pricing__fee"><strong>$599</strong></td>
+                    <td>$7,188</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">101+</th>
+                    <td>Custom</td>
+                    <td class="wb-pricing__fee"><strong>Starting at $799</strong></td>
+                    <td>$9,588+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-              <li class="wb-price-card wb-price-card--featured">
-                <span class="wb-price-card__badge">Most popular</span>
-                <p class="wb-price-card__tier">Core</p>
-                <p class="wb-price-card__price"><span class="wb-price-card__amount">$15</span> <span class="wb-price-card__period">/mo</span></p>
-                <p class="wb-price-card__blurb"><em>For growing teams that need real HR.</em></p>
-                <ul class="wb-price-card__features">
-                  <li>Up to 30 employees</li>
-                  <li>Everything in Starter</li>
-                  <li>Virtual HR assistant</li>
-                  <li>Performance management tools</li>
-                  <li>Full org health dashboard</li>
-                  <li>Priority support</li>
-                </ul>
-                <a href="#waitlist" class="wb-btn wb-btn--primary wb-price-card__cta" data-open-waitlist>Get Notified</a>
-              </li>
+            <p class="wb-pricing__note">All plans are billed as a flat monthly fee. Annual contract value shown for reference.</p>
 
-              <li class="wb-price-card">
-                <p class="wb-price-card__tier">Pro</p>
-                <p class="wb-price-card__price"><span class="wb-price-card__amount">$20</span> <span class="wb-price-card__period">/mo</span></p>
-                <p class="wb-price-card__blurb"><em>For teams that want the full picture.</em></p>
-                <ul class="wb-price-card__features">
-                  <li>Unlimited employees</li>
-                  <li>Everything in Core</li>
-                  <li>Projections &amp; scenario planning</li>
-                  <li>Custom AI model training</li>
-                  <li>Dedicated onboarding</li>
-                  <li>SLA-backed support</li>
-                </ul>
-                <a href="#waitlist" class="wb-btn wb-btn--outline wb-price-card__cta" data-open-waitlist>Get Notified</a>
-              </li>
-            </ul>
+            <div class="wb-pricing__actions">
+              <button type="button" class="wb-btn wb-btn--primary" data-open-waitlist>Get Notified</button>
+              <a href="#request-demo" class="wb-btn wb-btn--muted">Request a demo</a>
+            </div>
 
             <div class="wb-pricing__quote">
               <div class="wb-pricing__quote-copy">
@@ -505,13 +511,19 @@
                       <p class="wb-demo-wizard__step-lede">Pick the tier you want to discuss on the walkthrough.</p>
                       <div class="wb-demo-wizard__chips" role="radiogroup" aria-label="Plan interest">
                         <label class="wb-demo-chip"
-                          ><input type="radio" name="plan" value="starter" required /><span>Starter · $8/mo</span></label
+                          ><input type="radio" name="plan" value="essential" required /><span>Essential · $149/mo</span></label
                         >
                         <label class="wb-demo-chip"
-                          ><input type="radio" name="plan" value="core" /><span>Core · $15/mo</span></label
+                          ><input type="radio" name="plan" value="core" /><span>Core · $249/mo</span></label
                         >
                         <label class="wb-demo-chip"
-                          ><input type="radio" name="plan" value="pro" /><span>Pro · $20/mo</span></label
+                          ><input type="radio" name="plan" value="growth" /><span>Growth · $399/mo</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="business" /><span>Business · $599/mo</span></label
+                        >
+                        <label class="wb-demo-chip"
+                          ><input type="radio" name="plan" value="enterprise" /><span>101+ · Custom</span></label
                         >
                         <label class="wb-demo-chip"
                           ><input type="radio" name="plan" value="unsure" /><span>Not sure yet</span></label
@@ -1163,7 +1175,7 @@
             <h2>11. Contact</h2>
             <p>
               For privacy-related questions or requests, contact:
-              <a href="mailto:privacy@workbenchhr.example">privacy@workbenchhr.example</a>.
+              <a href="mailto:info@workbenchhr.com">info@workbenchhr.com</a>.
             </p>
           </section>
         </article>
